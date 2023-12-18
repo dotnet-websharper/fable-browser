@@ -12,12 +12,14 @@ module private rec Proxies
     | [<Constant("gamepadconnected")>] GamepadConnected
     | [<Constant("gamepaddisconnected")>] GamepadDisconnected
 
-    type [<Proxy(typeof<Browser.Types.GamepadEvent>)>] GamepadEventProxy =
+    [<Proxy(typeof<Browser.Types.GamepadEvent>)>]
+    type GamepadEventProxy =
         inherit Browser.Types.Event
         [<Inline("new GamepadEvent($typeArg, $options)")>] abstract Create: typeArg: Browser.Types.GamepadEventType * ?options: Browser.Types.Gamepad
-        [<Inline>] abstract gamepad: Browser.Types.Gamepad
+        [<Inline>] abstract gamepad: Browser.Types.Gamepad with get
     
-    type [<Proxy(typeof<Browser.Types.AddEventListenerOptions>)>] AddEventListenerOptionsProxy =
+    [<Proxy(typeof<Browser.Types.AddEventListenerOptions>)>]
+    type AddEventListenerOptionsProxy =
         [<Inline>] abstract capture: bool with get, set
         default this.capture
             with [<Inline>] get () = (this |> As<Dom.AddEventListenerOptions>).Capture
@@ -30,9 +32,10 @@ module private rec Proxies
         default this.passive
             with [<Inline>] get () = (this |> As<Dom.AddEventListenerOptions>).Passive
             and [<Inline>] set (v) = (this |> As<Dom.AddEventListenerOptions>).Passive <- v
-        
+    
 
-    type [<Proxy(typeof<Browser.Types.RemoveEventListenerOptions>)>] RemoveEventListenerOptionsProxy =
+    [<Proxy(typeof<Browser.Types.RemoveEventListenerOptions>)>]
+    type internal RemoveEventListenerOptionsProxy =
         [<Inline>] abstract capture: bool with get, set
         default this.capture
             with [<Inline>] get () = (this |> As<Dom.EventListenerOptions>).Capture
@@ -150,8 +153,8 @@ module private rec Proxies
             and [<Inline>] set (v: float): unit = 
                 ()
     
-
-    type [<Proxy(typeof<Browser.Types.EventInit>)>] EventInitProxy =
+    [<Proxy(typeof<Browser.Types.EventInit>)>]
+    type EventInitProxy =
         [<Inline>] abstract bubbles: bool with get, set
         default this.bubbles
             with [<Inline>] get () = (this |> As<Dom.EventInit>).Bubbles
@@ -167,11 +170,12 @@ module private rec Proxies
             with [<Inline>] get () = (this |> As<Dom.EventInit>).Composed
             and [<Inline>] set (v) = (this |> As<Dom.EventInit>).Composed <- v
 
-    type [<Proxy(typeof<Browser.Types.EventType>)>] EventTypeProxy =
+    [<Proxy(typeof<Browser.Types.EventType>)>]
+    type EventTypeProxy =
         [<Inline("new Event($type,$eventInitDict)")>] abstract Create: ``type``: string * ?eventInitDict: Browser.Types.EventInit -> Browser.Types.Event
         [<Inline>] abstract AT_TARGET: float with get, set
         [<Inline>] abstract BUBBLING_PHASE: float with get, set
-        [<Inline>] abstract CAPTURING_PHASE: float with get, set   
+        [<Inline>] abstract CAPTURING_PHASE: float with get, set
     [<Proxy(typeof<Browser.Types.CustomEvent>);AbstractClass>]
     type CustomEventProxy =
         inherit EventProxy

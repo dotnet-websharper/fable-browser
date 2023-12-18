@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Readme.md" />
+    <None Include="wsconfig.json" />
+    <Compile Include="../../Dom/Browser.DomException.fs" />
+    <Compile Include="../../Dom/Browser.File.fs" />
+    <Compile Include="../../Dom/Browser.History.fs" />
+    <Compile Include="../../Dom/Browser.Dom.fs" />
+    <Compile Include="../../Dom/Browser.Dom.Ext.fs" />
+    <Compile Include="../../Dom/Browser.Dom.Api.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WebSharper" Version="7.0.6.386-beta4" />
+    <PackageReference Include="WebSharper.Browser.Event" Version="1.0.1" />    
+    <PackageReference Include="WebSharper.FSharp" Version="7.0.6.386-beta4" />
+  </ItemGroup>
+
+</Project>

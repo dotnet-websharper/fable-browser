@@ -48,6 +48,6 @@ type [<Proxy(typeof<Browser.Types.WebSocket>)>] WebSocket =
 type [<Proxy(typeof<Browser.Types.WebSocketType>)>] WebSocketType =
     [<Inline("new WebSocket($url, $protocols)")>] abstract Create: url: string * ?protocols: Fable.Core.U2<string, string[]> -> Browser.Types.WebSocket
 
-[<AutoOpen>]
+[<Proxy("Browser.WebSocket, Browser.WebSocket")>]
 module WebSocket =
     let [<Inline>] WebSocket: Browser.Types.WebSocketType = jsNative

@@ -13,5 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WebStorage\Browser.WebStorage.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Gamepad\WebSharper.Browser.Gamepad.fsproj" />
   </ItemGroup>
 </Project>

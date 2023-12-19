@@ -3,7 +3,7 @@ module private Proxies
 open WebSharper
 open WebSharper.JavaScript
 
-[<InternalProxy("Fable.Core.Util, Fable.Core")>]
+[<AutoOpen;InternalProxy("Fable.Core.Util, Fable.Core")>]
 module private UtilProxy =
     let [<Inline>] jsNative<'a> = Unchecked.defaultof<'a>
 [<Proxy(typeof<Browser.Types.Storage>)>]
@@ -66,3 +66,7 @@ type StorageEventProxy =
     // default this.newValue = (this |> As<StorageEvent>).NewValue
     // default this.storageArea = (this |> As<StorageEvent>).StorageArea |> As
 
+[<Proxy("Browser.WebStorage, Browser.WebStorage")>]
+module WebStorageProxy =
+    let [<Inline>] localStorage : Browser.Types.Storage = jsNative
+    let [<Inline>] sessionStorage : Browser.Types.Storage = jsNative

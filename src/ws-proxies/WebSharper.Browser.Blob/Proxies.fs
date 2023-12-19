@@ -2,7 +2,7 @@ module private Proxies
     open WebSharper
     open WebSharper.JavaScript
 
-    [<Proxy("Fable.Core.Util, Fable.Core")>]
+    [<AutoOpen;InternalProxy("Fable.Core.Util, Fable.Core")>]
     module private UtilProxy =
         let [<Inline>] inline jsNative<'a> = Unchecked.defaultof<'a>
 
@@ -67,8 +67,8 @@ module private Proxies
         [<Inline "new FormData()">]
         member _.Create() = Unchecked.defaultof<FormData>
 
-    [<Proxy("Browser.Types.BlobModule, Browser.Blob")>]
+    [<Proxy("Browser.Blob, Browser.Blob")>]
     module BlobModuleProxy =
         
-        let [<Inline>] FormData = Unchecked.defaultof<FormDataType>
-        let [<Inline>] Blob = Unchecked.defaultof<BlobType>
+        let [<Inline>] FormData : Browser.Types.FormDataType = jsNative
+        let [<Inline>] Blob : Browser.Types.BlobType = jsNative

@@ -22,6 +22,7 @@ open WebSharper
         abstract mapping: string
         abstract timestamp: float
     
-    [<Proxy("Browser.Types.GamepadModule, Browser.Gamepad")>]
+    [<Proxy("Browser.Gamepad, Browser.Gamepad")>]
     module private Gamepad =
         let [<Inline>] gamepad : Browser.Types.Gamepad = jsNative
+        

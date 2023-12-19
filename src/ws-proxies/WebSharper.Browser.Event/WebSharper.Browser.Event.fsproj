@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Event\Browser.Event.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Gamepad\WebSharper.Browser.Gamepad.fsproj" />
   </ItemGroup>
 </Project>

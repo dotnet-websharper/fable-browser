@@ -101,7 +101,7 @@ type [<Proxy(typeof<Browser.Types.URL>)>] URLProxy =
     [<Inline>]
     default this.toJSON () = Json.Stringify(this |> As<URL>)
 
-[<Proxy("Browser.Types.UrlModule, Browser.Url")>]
+[<Proxy("Browser.Url, Browser.Url")>]
 module UrlModuleProxy =
     let [<Inline>] URL : Browser.Types.URLType = jsNative
     let [<Inline>] URLSearchParams: Browser.Types.URLSearchParamsType = jsNative

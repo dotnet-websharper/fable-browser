@@ -97,6 +97,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.Browser.WebSocke
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.Browser.Worker", "src\ws-proxies\WebSharper.Browser.Worker\WebSharper.Browser.Worker.fsproj", "{F45AAD5E-465E-4FA8-94FF-F6C5D69CD519}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.Browser.XMLHttpRequest", "src\ws-proxies\WebSharper.Browser.XMLHttpRequest\WebSharper.Browser.XMLHttpRequest.fsproj", "{61AC3621-547B-4F46-A079-5ABA74BC5B79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -647,6 +649,18 @@ Global
 		{F45AAD5E-465E-4FA8-94FF-F6C5D69CD519}.Release|x64.Build.0 = Release|Any CPU
 		{F45AAD5E-465E-4FA8-94FF-F6C5D69CD519}.Release|x86.ActiveCfg = Release|Any CPU
 		{F45AAD5E-465E-4FA8-94FF-F6C5D69CD519}.Release|x86.Build.0 = Release|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Debug|x64.Build.0 = Debug|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Debug|x86.Build.0 = Debug|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Release|x64.ActiveCfg = Release|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Release|x64.Build.0 = Release|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Release|x86.ActiveCfg = Release|Any CPU
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -697,6 +711,7 @@ Global
 		{7380FD13-7426-4A7A-9E82-B843A41A7DF9} = {56C447A5-E689-472E-9077-E9EB63B66D97}
 		{D024B0D1-F486-4913-B05E-F97BD8A97789} = {56C447A5-E689-472E-9077-E9EB63B66D97}
 		{F45AAD5E-465E-4FA8-94FF-F6C5D69CD519} = {56C447A5-E689-472E-9077-E9EB63B66D97}
+		{61AC3621-547B-4F46-A079-5ABA74BC5B79} = {56C447A5-E689-472E-9077-E9EB63B66D97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F62BBD2A-9074-44FF-8208-43DA064745DE}

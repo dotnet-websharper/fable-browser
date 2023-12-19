@@ -45,20 +45,20 @@ type [<AllowNullLiteral>] URLSearchParamsTypeProxy =
 
 
 type [<Proxy(typeof<Browser.Types.URL>)>] URLProxy =
-    abstract hash: string with get, set
-    abstract host: string with get, set
-    abstract hostname: string with get, set
-    abstract href: string with get, set
-    abstract origin: string
-    abstract password: string with get, set
-    abstract pathname: string with get, set
-    abstract port: string with get, set
-    abstract protocol: string with get, set
-    abstract search: string with get, set
-    abstract username: string with get, set
-    abstract searchParams: Browser.Types.URLSearchParams
-    abstract toString: unit -> string
-    abstract toJSON: unit -> string
+    [<Inline>] abstract hash: string with get, set
+    [<Inline>] abstract host: string with get, set
+    [<Inline>] abstract hostname: string with get, set
+    [<Inline>] abstract href: string with get, set
+    [<Inline>] abstract origin: string
+    [<Inline>] abstract password: string with get, set
+    [<Inline>] abstract pathname: string with get, set
+    [<Inline>] abstract port: string with get, set
+    [<Inline>] abstract protocol: string with get, set
+    [<Inline>] abstract search: string with get, set
+    [<Inline>] abstract username: string with get, set
+    [<Inline>] abstract searchParams: Browser.Types.URLSearchParams
+    [<Inline>] abstract toString: unit -> string
+    [<Inline>] abstract toJSON: unit -> string
 
     default this.hash
         with [<Inline>] get () = (this |> As<URL>).Hash

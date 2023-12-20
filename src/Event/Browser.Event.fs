@@ -28,10 +28,10 @@ type [<AllowNullLiteral;WebSharper.Stub>] EventInit =
     abstract composed: bool with get, set
 
 type [<AllowNullLiteral;WebSharper.Stub>] EventType =
-    [<WebSharper.Inline("new $0($1...)")>] abstract Create: ``type``: string * ?eventInitDict: EventInit -> Event
-    abstract AT_TARGET: float with get, set
-    abstract BUBBLING_PHASE: float with get, set
-    abstract CAPTURING_PHASE: float with get, set
+    [<WebSharper.Inline("new EventType($typ, $eventInitDict)")>] member this.Create(typ: string, ?eventInitDict: EventInit): Event = jsNative
+    member this.AT_TARGET: float = 2
+    member this.BUBBLING_PHASE: float = 3
+    member this.CAPTURING_PHASE: float = 1
 
 type [<AllowNullLiteral;WebSharper.Stub>] AddEventListenerOptions =
     abstract capture: bool with get, set

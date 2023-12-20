@@ -1,8 +1,8 @@
 namespace Browser.Types
 
 open System
-open Fable.Core
 
+[<WebSharper.Stub>]
 type Coordinates =
     /// Returns a double representing the position's latitude in decimal degrees.
     abstract latitude: float
@@ -19,6 +19,7 @@ type Coordinates =
     /// Returns a double representing the velocity of the device in meters per second. This value can be null.
     abstract speed: float option
 
+[<WebSharper.Stub>]
 type Position =
     abstract coords: Coordinates
     abstract timestamp: float
@@ -28,16 +29,18 @@ type PositionErrorCode =
     | POSITION_UNAVAILABLE = 2
     | TIMEOUT = 3
 
+[<WebSharper.Stub>]
 type PositionError =
     abstract code: PositionErrorCode
     abstract message: string
 
+[<WebSharper.Stub>]
 type PositionOptions =
     abstract enableHighAccuracy: bool option with get, set
     abstract timeout: int option with get, set
     abstract maximumAge: int option with get, set
 
-type [<Global>] Geolocation =
+type [<WebSharper.Stub>] Geolocation =
     abstract clearWatch: watchId: float -> unit
     abstract getCurrentPosition: successCallback: (Position->unit) * ?errorCallback: (PositionError->unit) * ?options: PositionOptions -> unit
     abstract watchPosition: successCallback: (Position->unit) * ?errorCallback: (PositionError->unit) * ?options: PositionOptions -> float

@@ -7,7 +7,7 @@ type [<AllowNullLiteral; WebSharper.Stub>] Storage =
     
     member this.Item
         with [<WebSharper.Inline("$this[$key]")>] get(key: string): string = jsNative
-        and [<WebSharper.Inline("$this[$key]=$v")>] set(key:string, v:obj) : unit = jsNative
+        and [<WebSharper.Inline("$this[$key]=$v")>] set(key:string) (v:obj) : unit = jsNative
     member this.Item
         with [<WebSharper.Inline("$this[$idx]")>] get(idx: int): string = jsNative
         and [<WebSharper.Inline("$this[$idx]=$v")>] set (idx:int) (v:obj) : unit = jsNative

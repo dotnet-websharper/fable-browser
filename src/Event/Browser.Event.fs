@@ -28,7 +28,7 @@ type [<AllowNullLiteral;WebSharper.Stub>] EventInit =
     abstract composed: bool with get, set
 
 type [<AllowNullLiteral;WebSharper.Stub>] EventType =
-    [<WebSharper.Inline("new EventType($typ, $eventInitDict)")>] member this.Create(typ: string, ?eventInitDict: EventInit): Event = jsNative
+    [<WebSharper.Inline("new Event($typ, $eventInitDict)")>] member this.Create(typ: string, ?eventInitDict: EventInit): Event = jsNative
     member this.AT_TARGET: float = 2
     member this.BUBBLING_PHASE: float = 3
     member this.CAPTURING_PHASE: float = 1

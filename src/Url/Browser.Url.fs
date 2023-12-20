@@ -1,9 +1,8 @@
 namespace Browser.Types
 
 open System
-open Fable.Core
 
-type [<AllowNullLiteral; Global>] URLSearchParams =
+type [<AllowNullLiteral; WebSharper.Stub>] URLSearchParams =
     /// Appends a specified key/value pair as a new search parameter.
     abstract append: name: string * value: string -> unit
     /// Deletes the given search parameter, and its associated value, from the list of all search parameters.
@@ -18,9 +17,9 @@ type [<AllowNullLiteral; Global>] URLSearchParams =
     abstract set: name: string * value: string -> unit
 
 type [<AllowNullLiteral>] URLSearchParamsType =
-    [<Emit("new $0($1...)")>] abstract Create: arg: obj -> URLSearchParams
+    [<WebSharper.Inline("new new URLSearchParams($arg)")>] member this.Create(arg: obj): URLSearchParams = jsNative
 
-type [<AllowNullLiteral; Global>] URL =
+type [<AllowNullLiteral; WebSharper.Stub>] URL =
     abstract hash: string with get, set
     abstract host: string with get, set
     abstract hostname: string with get, set
@@ -37,7 +36,7 @@ type [<AllowNullLiteral; Global>] URL =
     abstract toJSON: unit -> string
 
 type [<AllowNullLiteral>] URLType =
-    [<Emit("new $0($1...)")>] abstract Create: url: string * ?``base``: string -> URL
+    [<WebSharper.Inline("new URL($url, $b)")>] abstract Create: url: string * ?b: string -> URL
     /// Returns a DOMString containing a unique blob URL, that is a URL with blob: as its scheme, followed by an opaque string uniquely identifying the object in the browser.
     abstract createObjectURL: obj -> string
     /// Revokes an object URL previously created using URL.createObjectURL().
@@ -45,10 +44,9 @@ type [<AllowNullLiteral>] URLType =
 
 namespace Browser
 
-open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module Url =
-    let [<Global>] URL: URLType = jsNative
-    let [<Global>] URLSearchParams: URLSearchParamsType = jsNative
+    let [<WebSharper.Inline>] URL: URLType = jsNative
+    let [<WebSharper.Inline>] URLSearchParams: URLSearchParamsType = jsNative

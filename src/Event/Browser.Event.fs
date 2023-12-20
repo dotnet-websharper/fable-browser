@@ -2,7 +2,7 @@ namespace rec Browser.Types
 
 open System
 
-type [<AllowNullLiteral>] Event =
+type [<AllowNullLiteral;WebSharper.Stub>] Event =
     abstract bubbles: bool with get, set
     abstract cancelBubble: bool with get, set
     abstract cancelable: bool with get, set
@@ -22,26 +22,26 @@ type [<AllowNullLiteral>] Event =
     abstract stopImmediatePropagation: unit -> unit
     abstract stopPropagation: unit -> unit
 
-type [<AllowNullLiteral>] EventInit =
+type [<AllowNullLiteral;WebSharper.Stub>] EventInit =
     abstract bubbles: bool with get, set
     abstract cancelable: bool with get, set
     abstract composed: bool with get, set
 
-type [<AllowNullLiteral>] EventType =
+type [<AllowNullLiteral;WebSharper.Stub>] EventType =
     [<WebSharper.Inline("new $0($1...)")>] abstract Create: ``type``: string * ?eventInitDict: EventInit -> Event
     abstract AT_TARGET: float with get, set
     abstract BUBBLING_PHASE: float with get, set
     abstract CAPTURING_PHASE: float with get, set
 
-type [<AllowNullLiteral>] AddEventListenerOptions =
+type [<AllowNullLiteral;WebSharper.Stub>] AddEventListenerOptions =
     abstract capture: bool with get, set
     abstract once: bool with get, set
     abstract passive: bool with get, set
 
-type [<AllowNullLiteral>] RemoveEventListenerOptions =
+type [<AllowNullLiteral;WebSharper.Stub>] RemoveEventListenerOptions =
     abstract capture: bool with get, set
 
-type [<AllowNullLiteral>] EventTarget =
+type [<AllowNullLiteral;WebSharper.Stub>] EventTarget =
     abstract addEventListener: ``type``: string * listener: (Event->unit) -> unit
     abstract addEventListener: ``type``: string * listener: (Event->unit) * useCapture: bool -> unit
     abstract addEventListener: ``type``: string * listener: (Event->unit) * options: AddEventListenerOptions -> unit
@@ -50,30 +50,30 @@ type [<AllowNullLiteral>] EventTarget =
     abstract removeEventListener: ``type``: string * listener: (Event->unit) * useCapture: bool -> unit
     abstract removeEventListener: ``type``: string * listener: (Event->unit) * options: RemoveEventListenerOptions -> unit
 
-type [<AllowNullLiteral>] EventTargetType =
+type [<AllowNullLiteral;WebSharper.Stub>] EventTargetType =
     [<WebSharper.Inline("new EventTarget()")>] member this.Create (): EventTarget = jsNative
 
-type [<AllowNullLiteral>] CustomEvent =
+type [<AllowNullLiteral;WebSharper.Stub>] CustomEvent =
     inherit Event
     abstract detail: obj
 
-type [<AllowNullLiteral>] CustomEventInit =
+type [<AllowNullLiteral;WebSharper.Stub>] CustomEventInit =
     inherit EventInit
     abstract detail: obj with get, set
 
-type [<AllowNullLiteral>] CustomEvent<'T> =
+type [<AllowNullLiteral;WebSharper.Stub>] CustomEvent<'T> =
     inherit Event
     abstract detail: 'T option
 
-type [<AllowNullLiteral>] CustomEventInit<'T> =
+type [<AllowNullLiteral;WebSharper.Stub>] CustomEventInit<'T> =
     inherit EventInit
     abstract detail: 'T option with get, set
 
-type [<AllowNullLiteral>] CustomEventType =
+type [<AllowNullLiteral;WebSharper.Stub>] CustomEventType =
     [<WebSharper.Inline("new CustomEventType($typeArg, $eventInitDict)")>] member this.Create(typeArg: string, ?eventInitDict: CustomEventInit): CustomEvent = jsNative
     [<WebSharper.Inline("new CustomEventType($typeArg, $eventInitDict)")>] member this.Create(typeArg: string, ?eventInitDict: CustomEventInit<'T>): CustomEvent<'T> = jsNative
 
-type [<AllowNullLiteral>] ErrorEvent =
+type [<AllowNullLiteral;WebSharper.Stub>] ErrorEvent =
     inherit Event
     abstract colno: int
     abstract error: obj
@@ -82,7 +82,7 @@ type [<AllowNullLiteral>] ErrorEvent =
     abstract message: string
 
 // MessageEvent is used by several packages (WebSockets, Dom)
-type [<AllowNullLiteral>] MessageEvent =
+type [<AllowNullLiteral;WebSharper.Stub>] MessageEvent =
     inherit Event
     abstract data: obj
     abstract origin: string
@@ -94,7 +94,7 @@ type GamepadEventType =
     | [<WebSharper.Constant("gamepadconnected")>] GamepadConnected
     | [<WebSharper.Constant("gamepaddisconnected")>] GamepadDisconnected
 
-type [<AllowNullLiteral>] GamepadEvent =
+type [<AllowNullLiteral;WebSharper.Stub>] GamepadEvent =
     inherit Event
     [<WebSharper.Inline("new GamepadEvent($typeArg, $options)")>] abstract Create: typeArg: GamepadEventType * ?options: Gamepad
     abstract gamepad: Gamepad

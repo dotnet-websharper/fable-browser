@@ -1,4 +1,4 @@
-module private Proxies
+namespace Browser.Types
 
 open WebSharper
 open WebSharper.JavaScript
@@ -13,20 +13,19 @@ type U2Proxy<'a,'b> =
 | [<Inline>] Case1 of 'a
 | [<Inline>] Case2 of 'b
 
-[<Proxy(typeof<Browser.Types.WebSocketState>)>]
 type WebSocketState =
     | CONNECTING = 0
     | OPEN = 1
     | CLOSING = 2
     | CLOSED = 3
 
-type [<Proxy(typeof<Browser.Types.CloseEvent>)>] CloseEvent =
+type [<Stub>] CloseEvent =
     inherit Browser.Types.Event
     [<Inline>] abstract code: int
     [<Inline>] abstract reason: string
     [<Inline>] abstract wasClean: bool
 
-type [<Proxy(typeof<Browser.Types.WebSocket>)>] WebSocket =
+type [<Stub>] WebSocket =
     inherit Browser.Types.EventTarget
     [<Inline>] abstract binaryType: string with get, set
     [<Inline>] abstract bufferedAmount: float
@@ -45,9 +44,9 @@ type [<Proxy(typeof<Browser.Types.WebSocket>)>] WebSocket =
     [<Inline("$0.addEventListener('message', $listener, $useCapture)")>] abstract addEventListener_message: listener: (Browser.Types.MessageEvent -> unit) * ?useCapture: bool -> unit
     [<Inline("$0.addEventListener('open', $listener, $useCapture)")>] abstract addEventListener_open: listener: (Browser.Types.Event -> unit) * ?useCapture: bool -> unit
 
-type [<Proxy(typeof<Browser.Types.WebSocketType>)>] WebSocketType =
-    [<Inline("new WebSocket($url, $protocols)")>] abstract Create: url: string * ?protocols: Fable.Core.U2<string, string[]> -> Browser.Types.WebSocket
+type WebSocketType =
+    [<Inline("new WebSocket($url, $protocols)")>] 
+    member _.Create(url: string, ?protocols: Fable.Core.U2<string, string[]>): Browser.Types.WebSocket = jsNative
 
-[<Proxy("Browser.WebSocket, Browser.WebSocket")>]
 module WebSocket =
     let [<Inline>] WebSocket: Browser.Types.WebSocketType = jsNative

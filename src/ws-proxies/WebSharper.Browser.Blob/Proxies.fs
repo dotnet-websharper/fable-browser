@@ -6,21 +6,21 @@ module private Proxies
     module private UtilProxy =
         let [<Inline>] inline jsNative<'a> = Unchecked.defaultof<'a>
 
-    [<Proxy(typeof<Browser.Types.BlobEndings>)>]
+    [<Stub>]
     type BlobEndings =
         /// Endings are stored in the blob without change
         | [<Constant("transparent")>] Transparent
         /// Line ending characters are changed to match host OS filesystem convention
         | [<Constant("native")>] Native
 
-    [<AbstractClass; Proxy(typeof<Browser.Types.BlobPropertyBag>)>]
+    [<Stub>]
     type BlobPropertyBag =
         [<Inline>] 
         abstract ``type``: string with get, set
         [<Inline>] 
         abstract endings: Browser.Types.BlobEndings with get, set
 
-    [<AbstractClass; Stub; Proxy(typeof<Browser.Types.Blob>)>]
+    [<Stub>]
     type Blob =
         [<Inline>] 
         abstract arrayBuffer: unit -> Promise<ArrayBuffer>
@@ -33,12 +33,11 @@ module private Proxies
         [<Inline>] 
         abstract text: unit -> Promise<string>
 
-    [<Proxy(typeof<Browser.Types.BlobType>)>]
     type BlobType =
-        [<Inline("new Blob($blobParts, $options)")>] abstract Create: ?blobParts: obj[] * ?options: BlobPropertyBag -> Blob
+        [<Inline("new Blob($blobParts, $options)")>] member this.Create(?blobParts: obj[], ?options: BlobPropertyBag): Blob = jsNative
     
-    [<AbstractClass; Stub; Proxy(typeof<Browser.Types.FormData>)>]
-    type FormDataProxy =
+    [<Stub>]
+    type FormData =
         [<Inline>] 
         abstract append: name: string * value: string -> unit
         [<Inline>] 
@@ -62,7 +61,6 @@ module private Proxies
         [<Inline>] 
         abstract values: unit -> obj seq
 
-    [<Proxy(typeof<Browser.Types.FormDataType>)>]
     type FormDataType =
         [<Inline "new FormData()">]
         member _.Create() = Unchecked.defaultof<FormData>

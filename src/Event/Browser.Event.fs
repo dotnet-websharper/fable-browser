@@ -1,9 +1,8 @@
 namespace rec Browser.Types
 
 open System
-open Fable.Core
 
-type [<AllowNullLiteral; Global>] Event =
+type [<AllowNullLiteral>] Event =
     abstract bubbles: bool with get, set
     abstract cancelBubble: bool with get, set
     abstract cancelable: bool with get, set
@@ -29,7 +28,7 @@ type [<AllowNullLiteral>] EventInit =
     abstract composed: bool with get, set
 
 type [<AllowNullLiteral>] EventType =
-    [<Emit("new $0($1...)")>] abstract Create: ``type``: string * ?eventInitDict: EventInit -> Event
+    [<WebSharper.Inline("new $0($1...)")>] abstract Create: ``type``: string * ?eventInitDict: EventInit -> Event
     abstract AT_TARGET: float with get, set
     abstract BUBBLING_PHASE: float with get, set
     abstract CAPTURING_PHASE: float with get, set
@@ -42,7 +41,7 @@ type [<AllowNullLiteral>] AddEventListenerOptions =
 type [<AllowNullLiteral>] RemoveEventListenerOptions =
     abstract capture: bool with get, set
 
-type [<AllowNullLiteral; Global>] EventTarget =
+type [<AllowNullLiteral>] EventTarget =
     abstract addEventListener: ``type``: string * listener: (Event->unit) -> unit
     abstract addEventListener: ``type``: string * listener: (Event->unit) * useCapture: bool -> unit
     abstract addEventListener: ``type``: string * listener: (Event->unit) * options: AddEventListenerOptions -> unit
@@ -52,9 +51,9 @@ type [<AllowNullLiteral; Global>] EventTarget =
     abstract removeEventListener: ``type``: string * listener: (Event->unit) * options: RemoveEventListenerOptions -> unit
 
 type [<AllowNullLiteral>] EventTargetType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> EventTarget
+    [<WebSharper.Inline("new EventTarget()")>] member this.Create (): EventTarget = jsNative
 
-type [<AllowNullLiteral; Global>] CustomEvent =
+type [<AllowNullLiteral>] CustomEvent =
     inherit Event
     abstract detail: obj
 
@@ -62,7 +61,7 @@ type [<AllowNullLiteral>] CustomEventInit =
     inherit EventInit
     abstract detail: obj with get, set
 
-type [<AllowNullLiteral; Global>] CustomEvent<'T> =
+type [<AllowNullLiteral>] CustomEvent<'T> =
     inherit Event
     abstract detail: 'T option
 
@@ -71,10 +70,10 @@ type [<AllowNullLiteral>] CustomEventInit<'T> =
     abstract detail: 'T option with get, set
 
 type [<AllowNullLiteral>] CustomEventType =
-    [<Emit("new $0($1...)")>] abstract Create : typeArg: string * ?eventInitDict: CustomEventInit -> CustomEvent
-    [<Emit("new $0($1...)")>] abstract Create : typeArg: string * ?eventInitDict: CustomEventInit<'T> -> CustomEvent<'T>
+    [<WebSharper.Inline("new CustomEventType($typeArg, $eventInitDict)")>] member this.Create(typeArg: string, ?eventInitDict: CustomEventInit): CustomEvent = jsNative
+    [<WebSharper.Inline("new CustomEventType($typeArg, $eventInitDict)")>] member this.Create(typeArg: string, ?eventInitDict: CustomEventInit<'T>): CustomEvent<'T> = jsNative
 
-type [<AllowNullLiteral; Global>] ErrorEvent =
+type [<AllowNullLiteral>] ErrorEvent =
     inherit Event
     abstract colno: int
     abstract error: obj
@@ -83,7 +82,7 @@ type [<AllowNullLiteral; Global>] ErrorEvent =
     abstract message: string
 
 // MessageEvent is used by several packages (WebSockets, Dom)
-type [<AllowNullLiteral; Global>] MessageEvent =
+type [<AllowNullLiteral>] MessageEvent =
     inherit Event
     abstract data: obj
     abstract origin: string
@@ -91,23 +90,21 @@ type [<AllowNullLiteral; Global>] MessageEvent =
     // abstract ports: MessagePort[]
     abstract source: obj
 
-[<StringEnum>]
 type GamepadEventType =
-    | [<CompiledName("gamepadconnected")>] GamepadConnected
-    | [<CompiledName("gamepaddisconnected")>] GamepadDisconnected
+    | [<WebSharper.Constant("gamepadconnected")>] GamepadConnected
+    | [<WebSharper.Constant("gamepaddisconnected")>] GamepadDisconnected
 
-type [<AllowNullLiteral; Global>] GamepadEvent =
+type [<AllowNullLiteral>] GamepadEvent =
     inherit Event
-    [<Emit("new $0($1...)")>] abstract Create: typeArg: GamepadEventType * ?options: Gamepad
+    [<WebSharper.Inline("new GamepadEvent($typeArg, $options)")>] abstract Create: typeArg: GamepadEventType * ?options: Gamepad
     abstract gamepad: Gamepad
 
 namespace Browser
 
-open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module Event =
-    let [<Global>] Event: EventType = jsNative
-    let [<Global>] EventTarget: EventTargetType = jsNative
-    let [<Global>] CustomEvent : CustomEventType = jsNative
+    let [<WebSharper.Inline>] Event: EventType = jsNative
+    let [<WebSharper.Inline>] EventTarget: EventTargetType = jsNative
+    let [<WebSharper.Inline>] CustomEvent : CustomEventType = jsNative

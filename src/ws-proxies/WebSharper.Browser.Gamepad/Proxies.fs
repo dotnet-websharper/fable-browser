@@ -7,12 +7,12 @@ open WebSharper
         let [<Inline>] jsNative<'a> = Unchecked.defaultof<'a>
 
     
-    [<AbstractClass; Stub; Proxy(typeof<Browser.Types.GamepadButton>)>]
+    [<Stub; Proxy(typeof<Browser.Types.GamepadButton>)>]
     type private GamepadButton =
         abstract value: float
         abstract pressed: bool
 
-    [<AbstractClass; Stub; Proxy(typeof<Browser.Types.Gamepad>)>]
+    [<Stub; Proxy(typeof<Browser.Types.Gamepad>)>]
     type private Gamepad =
         abstract axes: ResizeArray<float>
         abstract buttons: ResizeArray<GamepadButton>

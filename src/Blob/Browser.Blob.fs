@@ -1,31 +1,29 @@
 namespace Browser.Types
 
 open System
-open Fable.Core
-open Fable.Core.JS
 
-[<StringEnum; RequireQualifiedAccess>]
+[<RequireQualifiedAccess>]
 type BlobEndings =
     /// Endings are stored in the blob without change
-    | [<CompiledName("transparent")>] Transparent
+    | [<WebSharper.Constant("transparent")>] Transparent
     /// Line ending characters are changed to match host OS filesystem convention
-    | [<CompiledName("native")>] Native
+    | [<WebSharper.Constant("native")>] Native
 
-type [<AllowNullLiteral>] BlobPropertyBag =
+type [<AllowNullLiteral; WebSharper.Stub>] BlobPropertyBag =
     abstract ``type``: string with get, set
     abstract endings: BlobEndings with get, set
 
-type [<AllowNullLiteral; Global>] Blob =
-    abstract arrayBuffer: unit -> Promise<ArrayBuffer>
+type [<AllowNullLiteral; WebSharper.Stub>] Blob =
+    abstract arrayBuffer: unit -> WebSharper.JavaScript.Promise<WebSharper.JavaScript.ArrayBuffer>
     abstract size: int
     abstract ``type``: string
     abstract slice: ?start: int * ?``end``: int * ?contentType: string -> Blob
-    abstract text: unit -> Promise<string>
+    abstract text: unit -> WebSharper.JavaScript.Promise<string>
 
 type [<AllowNullLiteral>] BlobType =
-    [<Emit("new $0($1...)")>] abstract Create: ?blobParts: obj[] * ?options: BlobPropertyBag -> Blob
+    [<WebSharper.Inline("new Blob($blobParts, $options)")>] member this.Create(?blobParts: obj[], ?options: BlobPropertyBag): Blob = jsNative
 
-type [<AllowNullLiteral; Global>] FormData =
+type [<AllowNullLiteral; WebSharper.Stub>] FormData =
     abstract append: name: string * value: string -> unit
     abstract append: name: string * value: Blob * ?filename: string -> unit
     abstract delete: name: string -> unit
@@ -39,14 +37,13 @@ type [<AllowNullLiteral; Global>] FormData =
     abstract values: unit -> obj seq
 
 type [<AllowNullLiteral>] FormDataType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> FormData
+    [<WebSharper.Inline("new FormData()")>] member this.Create(): FormData = jsNative
 
 namespace Browser
 
-open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module Blob =
-    let [<Global>] Blob: BlobType = jsNative
-    let [<Global>] FormData: FormDataType = jsNative
+    let [<WebSharper.Inline>] Blob: BlobType = jsNative
+    let [<WebSharper.Inline>] FormData: FormDataType = jsNative

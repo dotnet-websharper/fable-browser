@@ -1,19 +1,23 @@
 namespace Browser.Types
 
 open System
-open Fable.Core
 
-type [<AllowNullLiteral; Global>] Storage =
-    abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: key: string -> string with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> string with get, set
-    abstract clear: unit -> unit
-    abstract getItem: key: string -> string
-    abstract key: index: float -> string
-    abstract removeItem: key: string -> unit
-    abstract setItem: key: string * data: string -> unit
+type [<AllowNullLiteral; WebSharper.Stub>] Storage =
+    member this.length: int = jsNative
+    
+    member this.Item
+        with [<WebSharper.Inline("$this[$key]")>] get(key: string): string = jsNative
+        and [<WebSharper.Inline("$this[$key]=$v")>] set(key:string, v:obj) : unit = jsNative
+    member this.Item
+        with [<WebSharper.Inline("$this[$idx]")>] get(idx: int): string = jsNative
+        and [<WebSharper.Inline("$this[$idx]=$v")>] set (idx:int) (v:obj) : unit = jsNative
+    [<WebSharper.Inline>] member this.clear() = jsNative
+    [<WebSharper.Inline>] member this.getItem(key: string): string = jsNative
+    [<WebSharper.Inline>] member this.key(index: float): string = jsNative
+    [<WebSharper.Inline>] member this.removeItem(key: string): unit = jsNative
+    [<WebSharper.Inline>] member this.setItem(key: string, data: string) : unit = jsNative
 
-type [<AllowNullLiteral; Global>] StorageEvent =
+type [<AllowNullLiteral; WebSharper.Stub>] StorageEvent =
     inherit Event
     abstract url: string
     abstract key: string
@@ -23,10 +27,9 @@ type [<AllowNullLiteral; Global>] StorageEvent =
 
 namespace Browser
 
-open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module WebStorage =
-    let [<Global>] localStorage: Storage = jsNative
-    let [<Global>] sessionStorage: Storage = jsNative
+    let [<WebSharper.Inline>] localStorage: Storage = jsNative
+    let [<WebSharper.Inline>] sessionStorage: Storage = jsNative

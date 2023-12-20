@@ -1,12 +1,11 @@
 ﻿namespace Browser.Types
 
-open Fable.Core
 
-type [<Global>] GamepadButton =
+type [<WebSharper.Stub>] GamepadButton =
     abstract value: float
     abstract pressed: bool
 
-type [<Global>] Gamepad =
+type [<WebSharper.Stub>] Gamepad =
     abstract axes: ResizeArray<float>
     abstract buttons: ResizeArray<GamepadButton>
     abstract connected: bool
@@ -17,9 +16,9 @@ type [<Global>] Gamepad =
 
 namespace Browser
 
-open Fable.Core
+// open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module Gamepad =
-    let [<Global>] gamepad: Gamepad = jsNative
+    let [<WebSharper.Inline>] gamepad: Gamepad = jsNative

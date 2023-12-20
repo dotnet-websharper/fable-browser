@@ -21,7 +21,8 @@ type [<AllowNullLiteral; WebSharper.Stub>] Blob =
     abstract text: unit -> WebSharper.JavaScript.Promise<string>
 
 type [<AllowNullLiteral>] BlobType =
-    [<WebSharper.Inline("new Blob($blobParts, $options)")>] member this.Create(?blobParts: obj[], ?options: BlobPropertyBag): Blob = jsNative
+    [<WebSharper.Inline("new Blob($blobParts, $options)")>] 
+    member this.Create(?blobParts: obj[], ?options: BlobPropertyBag): Blob = jsNative
 
 type [<AllowNullLiteral; WebSharper.Stub>] FormData =
     abstract append: name: string * value: string -> unit
@@ -37,7 +38,8 @@ type [<AllowNullLiteral; WebSharper.Stub>] FormData =
     abstract values: unit -> obj seq
 
 type [<AllowNullLiteral>] FormDataType =
-    [<WebSharper.Inline("new FormData()")>] member this.Create(): FormData = jsNative
+    [<WebSharper.Inline("new FormData()")>] 
+    member this.Create(): FormData = jsNative
 
 namespace Browser
 

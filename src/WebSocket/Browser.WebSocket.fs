@@ -1,7 +1,7 @@
 namespace rec Browser.Types
 
 open System
-open Fable.Core
+// open Fable.Core
 
 type WebSocketState =
     | CONNECTING = 0
@@ -9,39 +9,52 @@ type WebSocketState =
     | CLOSING = 2
     | CLOSED = 3
 
-type [<AllowNullLiteral; Global>] CloseEvent =
+type [<AllowNullLiteral; WebSharper.Stub>] CloseEvent =
     inherit Event
     abstract code: int
     abstract reason: string
     abstract wasClean: bool
 
-type [<AllowNullLiteral; Global>] WebSocket =
+type [<AllowNullLiteral; AbstractClass; WebSharper.Stub>] WebSocket =
     inherit EventTarget
-    abstract binaryType: string with get, set
-    abstract bufferedAmount: float
-    abstract extensions: string
-    abstract onclose: (CloseEvent -> unit) with get, set
-    abstract onerror: (Event -> unit) with get, set
-    abstract onmessage: (MessageEvent -> unit) with get, set
-    abstract onopen: (Event -> unit) with get, set
-    abstract protocol: string
-    abstract readyState: WebSocketState
-    abstract url: string
-    abstract close: ?code: int * ?reason: string -> unit
-    abstract send: data: obj -> unit
-    [<Emit("$0.addEventListener('close',$1...)")>] abstract addEventListener_close: listener: (CloseEvent -> unit) * ?useCapture: bool -> unit
-    [<Emit("$0.addEventListener('error',$1...)")>] abstract addEventListener_error: listener: (ErrorEvent -> unit) * ?useCapture: bool -> unit
-    [<Emit("$0.addEventListener('message',$1...)")>] abstract addEventListener_message: listener: (MessageEvent -> unit) * ?useCapture: bool -> unit
-    [<Emit("$0.addEventListener('open',$1...)")>] abstract addEventListener_open: listener: (Event -> unit) * ?useCapture: bool -> unit
+    member this.binaryType
+        with [<WebSharper.Inline>] get () : string = jsNative
+        and [<WebSharper.Inline>] set (v:string): unit = jsNative
+    member this.bufferedAmount: float = jsNative
+    member this.extensions: string = jsNative
+    member this.onclose
+        with [<WebSharper.Inline>] get () : (CloseEvent -> unit) = jsNative
+        and [<WebSharper.Inline>] set (v:  (CloseEvent -> unit) ) : unit = jsNative
+    member this.onerror 
+        with [<WebSharper.Inline>] get () : (Event -> unit) = jsNative
+        and [<WebSharper.Inline>] set (v: (Event -> unit)) = jsNative
+    member this.onmessage
+        with get(): (MessageEvent -> unit) = jsNative
+        and set (v: (MessageEvent -> unit)) = jsNative
+    member this.onopen
+        with get(): (Event -> unit) = jsNative
+        and set (v: (Event -> unit)) = jsNative
+    member this.protocol: string = jsNative
+    member this.readyState: WebSocketState = jsNative
+    member this.url: string = jsNative
+    member this.close(?code: int, ?reason: string): unit = jsNnative
+    member this.send(data: obj -> unit) = jsNative
+    [<WebSharper.Inline("$this.addEventListener('close',$listener, $useCapture)")>] 
+    member this.addEventListener_close(listener: CloseEvent -> unit, ?useCapture: bool): unit = jsNative
+    [<WebSharper.Inline("$this.addEventListener('error',$listener, $useCapture)")>] 
+    member this.addEventListener_error(listener: ErrorEvent -> unit, ?useCapture: bool): unit = jsNative
+    [<WebSharper.Inline("$this.addEventListener('message',$listener, $useCapture)")>] 
+    member this.addEventListener_message(listener: MessageEvent -> unit, ?useCapture: bool): unit = jsNative
+    [<WebSharper.Inline("$this.addEventListener('open',$listener, $useCapture)")>] 
+    member this.addEventListener_open(listener: Event -> unit, ?useCapture: bool): unit = jsNative
 
 type [<AllowNullLiteral>] WebSocketType =
-    [<Emit("new $0($1...)")>] abstract Create: url: string * ?protocols: U2<string, string[]> -> WebSocket
+    [<WebSharper.Inline("new $0($1...)")>] abstract Create: url: string * ?protocols: U2<string, string[]> -> WebSocket
 
 namespace Browser
 
-open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module WebSocket =
-    let [<Global>] WebSocket: WebSocketType = jsNative
+    let [<WebSharper.Inline>] WebSocket: WebSocketType = jsNative

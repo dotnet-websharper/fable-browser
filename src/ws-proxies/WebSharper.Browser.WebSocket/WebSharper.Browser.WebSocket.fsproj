@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Proxies.fs" />
+    <Compile Include="../../WebSocket/Browser.WebSocket.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -12,9 +13,6 @@
     <PackageReference Include="WebSharper.FSharp" Version="7.0.5.389-beta3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Event\Browser.Event.fsproj" />
-    <ProjectReference Include="..\..\Gamepad\Browser.Gamepad.fsproj" />
-    <ProjectReference Include="..\..\WebSocket\Browser.WebSocket.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Gamepad\WebSharper.Browser.Gamepad.fsproj" />
   </ItemGroup>

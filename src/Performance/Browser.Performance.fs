@@ -1,9 +1,8 @@
 namespace Browser.Types
 
 open System
-open Fable.Core
 
-type [<AllowNullLiteral; Global>] Performance =
+type [<AllowNullLiteral; WebSharper.Stub>] Performance =
     abstract clearMarks: ?markName: string -> unit
     abstract clearMeasures: ?measureName: string -> unit
     abstract clearResourceTimings: unit -> unit
@@ -20,9 +19,8 @@ type [<AllowNullLiteral; Global>] Performance =
 
 namespace Browser
 
-open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module Performance =
-    let [<Global>] performance: Performance = jsNative
+    let [<WebSharper.Inline>] performance: Performance = jsNative

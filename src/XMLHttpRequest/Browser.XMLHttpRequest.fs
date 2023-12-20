@@ -1,7 +1,7 @@
 namespace Browser.Types
 
 open System
-open Fable.Core
+// open Fable.Core
 
 type ReadyState =
   /// Client has been created. `open()` was not yet called.
@@ -15,10 +15,10 @@ type ReadyState =
   /// The operation is complete.
   | Done = 4
 
-type [<AllowNullLiteral; Global>] XMLHttpRequestUpload =
+type [<AllowNullLiteral; WebSharper.Stub>] XMLHttpRequestUpload =
     inherit EventTarget
 
-type [<AllowNullLiteral; Global>] XMLHttpRequest =
+type [<AllowNullLiteral; WebSharper.Stub>] XMLHttpRequest =
     inherit EventTarget
     abstract onreadystatechange: (unit -> unit) with get, set
     abstract readyState: ReadyState
@@ -41,13 +41,12 @@ type [<AllowNullLiteral; Global>] XMLHttpRequest =
     abstract setRequestHeader: header: string * value: string -> unit
 
 type [<AllowNullLiteral>] XMLHttpRequestType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> XMLHttpRequest
+    [<WebSharper.Inline("new XMLHttpRequest()")>] member this.Create(): XMLHttpRequest = jsNative
 
 namespace Browser
 
-open Fable.Core
 open Browser.Types
 
 [<AutoOpen>]
 module XMLHttpRequest =
-    let [<Global>] XMLHttpRequest: XMLHttpRequestType = jsNative
+    let [<WebSharper.Inline>] XMLHttpRequest: XMLHttpRequestType = jsNative

@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Proxies.fs" />
+    <Compile Include="../../XMLHttpRequest/Browser.XMLHttpRequest.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -15,9 +16,5 @@
     <ProjectReference Include="..\WebSharper.Browser.Blob\WebSharper.Browser.Blob.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Gamepad\WebSharper.Browser.Gamepad.fsproj" />
-    <ProjectReference Include="..\..\Gamepad\Browser.Gamepad.fsproj" />
-    <ProjectReference Include="..\..\Event\Browser.Event.fsproj" />
-    <ProjectReference Include="..\..\Blob\Browser.Blob.fsproj" />
-    <ProjectReference Include="..\..\XMLHttpRequest\Browser.XMLHttpRequest.fsproj" />
   </ItemGroup>
 </Project>

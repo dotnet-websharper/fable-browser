@@ -34,7 +34,7 @@ type IDBCursorDirection =
 
 type [<AllowNullLiteral>] DatabasesType =
     abstract name: string
-    abstract version: string
+    abstract version: int64
 
 type [<AllowNullLiteral; Global>] IDBIndex =
     abstract isAutoLocale: bool with get
@@ -141,7 +141,7 @@ type [<AllowNullLiteral; Global>] IDBObjectStore =
     abstract count: ?query: IDBKeyRange -> IDBRequest
     abstract createIndex: indexName: string * keyPath: string * ?options: IDBCreateIndexOptions -> IDBRequest
     abstract delete: key: obj -> IDBRequest
-    abstract deleteIndex: unit -> IDBRequest
+    abstract deleteIndex: string -> IDBRequest
     abstract get: key: obj -> IDBRequest
     abstract getKey: key: obj -> IDBRequest
     abstract getAll: ?query: IDBKeyRange * ?count: int -> IDBRequest

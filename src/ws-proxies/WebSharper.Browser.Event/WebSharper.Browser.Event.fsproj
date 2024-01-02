@@ -4,6 +4,7 @@
     <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../Event/Browser.Event.fs" />
     <Compile Include="Proxies.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />

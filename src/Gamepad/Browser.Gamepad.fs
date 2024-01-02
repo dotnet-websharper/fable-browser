@@ -1,12 +1,27 @@
 ﻿namespace Browser.Types
 
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+open WebSharper.JavaScript
+#endif
 
-type [<Global>] GamepadButton =
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<WebSharper.Stub>]
+#endif
+type GamepadButton =
     abstract value: float
     abstract pressed: bool
 
-type [<Global>] Gamepad =
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<WebSharper.Stub>]
+#endif
+type Gamepad =
     abstract axes: ResizeArray<float>
     abstract buttons: ResizeArray<GamepadButton>
     abstract connected: bool
@@ -17,9 +32,23 @@ type [<Global>] Gamepad =
 
 namespace Browser
 
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+#endif
 open Browser.Types
 
 [<AutoOpen>]
 module Gamepad =
-    let [<Global>] gamepad: Gamepad = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #elif JAVASCRIPT
+    [<WebSharper.Inline>]
+    #endif
+    let gamepad: Gamepad = 
+        #if FABLE_COMPILER
+        jsNative
+        #else
+        Unchecked.defaultof<Gamepad>
+        #endif

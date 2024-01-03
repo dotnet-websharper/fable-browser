@@ -1,13 +1,25 @@
 namespace Fable.Import
-
+#if FABLE_COMPILER || JAVASCRIPT
 [<System.Obsolete("Use Browser")>]
 module Browser =
     /// Use Browser
     let obsolete<'T> : 'T = failwith "Use Browser"
+#endif
 
 namespace Browser
-
+#if FABLE_COMPILER || JAVASCRIPT
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+type internal GlobalAttribute = InlineAttribute
+[<AutoOpen>]
+module internal JsUtil =
+    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
+
+module internal JS =
+    type Console = WebSharper.JavaScript.Console
+#endif
 open Browser.Types
 
 [<AutoOpen>]
@@ -123,3 +135,4 @@ module Dom =
     let [<Global>] SourceBufferList: SourceBufferListType = jsNative
     let [<Global>] Worker: WorkerType = jsNative
     let [<Global>] XMLDocument: XMLDocumentType = jsNative
+#endif

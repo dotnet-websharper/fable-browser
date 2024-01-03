@@ -1,10 +1,10 @@
 namespace Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
 #if FABLE_COMPILER
 open Fable.Core
 open Fable.Core.JS
-#elif JAVASCRIPT
+#else
 open WebSharper
 open WebSharper.JavaScript
 #endif
@@ -33,30 +33,16 @@ type [<AllowNullLiteral>] BlobPropertyBag =
 [<Stub>]
 #endif
 type [<AllowNullLiteral>] Blob =
-    abstract arrayBuffer: unit -> 
-        #if FABLE_COMPILER
-        Promise<ArrayBuffer>
-        #elif JAVASCRIPT
-        WebSharper.JavaScript.Promise<WebSharper.JavaScript.ArrayBuffer>
-        #else
-        unit
-        #endif
+    abstract arrayBuffer: unit -> Promise<ArrayBuffer>
     abstract size: int
     abstract ``type``: string
     abstract slice: ?start: int * ?``end``: int * ?contentType: string -> Blob
-    abstract text: unit -> 
-        #if FABLE_COMPILER
-        Promise<string>
-        #elif JAVASCRIPT
-        WebSharper.JavaScript.Promise<string>
-        #else
-        unit
-        #endif
+    abstract text: unit -> Promise<string>
 
 type [<AllowNullLiteral>] BlobType =
     #if FABLE_COMPILER
     [<Emit("new $0($1...)")>] 
-    #elif JAVASCRIPT
+    #else
     [<Inline("new Blob($blobParts, $options)")>]
     #endif
     abstract Create: ?blobParts: obj[] * ?options: BlobPropertyBag -> Blob
@@ -82,7 +68,7 @@ type [<AllowNullLiteral>] FormData =
 type [<AllowNullLiteral>] FormDataType =
     #if FABLE_COMPILER
     [<Emit("new $0($1...)")>] 
-    #elif JAVASCRIPT
+    #else
     [<Inline("new FormData()")>]
     #endif
     abstract Create: unit -> FormData
@@ -91,6 +77,8 @@ namespace Browser
 
 #if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
 #endif
 open Browser.Types
 
@@ -98,7 +86,7 @@ open Browser.Types
 module Blob =
     #if FABLE_COMPILER
     [<Global>]
-    #elif JAVASCRIPT
+    #else
     [<Inline>]
     #endif
     let Blob: BlobType = 
@@ -109,7 +97,7 @@ module Blob =
         #endif
     #if FABLE_COMPILER
     [<Global>]
-    #elif JAVASCRIPT
+    #else
     [<Inline>]
     #endif
     let FormData: FormDataType = 
@@ -118,3 +106,4 @@ module Blob =
         #else
         Unchecked.defaultof<_>
         #endif
+#endif

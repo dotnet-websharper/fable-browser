@@ -1,9 +1,24 @@
 namespace rec Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
 
-type [<AllowNullLiteral; Global>] Attr =
+type internal U2<'A,'B> = WebSharper.JavaScript.Union<'A,'B>
+type internal U3<'A,'B,'C> = WebSharper.JavaScript.Union<'A,'B,'C>
+
+module internal JS =
+    type Promise<'A> = WebSharper.JavaScript.Promise<'A>
+#endif
+
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Attr =
     inherit Node
     abstract name: string with get, set
     abstract ownerElement: Element with get, set
@@ -11,15 +26,35 @@ type [<AllowNullLiteral; Global>] Attr =
     abstract value: string with get, set
 
 type [<AllowNullLiteral>] AttrType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Attr
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Attr()")>]
+    #endif
+    abstract Create: unit -> Attr
 
-type [<AllowNullLiteral; Global>] CDATASection =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CDATASection =
     inherit Text
 
 type [<AllowNullLiteral>] CDATASectionType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CDATASection
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new CDATASection()")>]
+    #endif
+    abstract Create: unit -> CDATASection
 
-type [<AllowNullLiteral; Global>] CharacterData =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CharacterData =
     inherit Node
     inherit ChildNode
     abstract data: string with get, set
@@ -31,19 +66,39 @@ type [<AllowNullLiteral; Global>] CharacterData =
     abstract substringData: offset: float * count: float -> string
 
 type [<AllowNullLiteral>] CharacterDataType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CharacterData
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new CharacterData()")>]
+    #endif
+    abstract Create: unit -> CharacterData
 
 type [<AllowNullLiteral>] ChildNode =
     abstract remove: unit -> unit
 
-type [<AllowNullLiteral; Global>] Comment =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Comment =
     inherit CharacterData
     abstract text: string with get, set
 
 type [<AllowNullLiteral>] CommentType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Comment
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Comment()")>]
+    #endif
+    abstract Create: unit -> Comment
 
-type [<AllowNullLiteral; Global>] Document =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Document =
     inherit Node
     inherit GlobalEventHandlers
     inherit NodeSelector
@@ -364,7 +419,12 @@ type [<AllowNullLiteral; Global>] Document =
     /// <param name="content">The text and HTML tags to write.</param>
     abstract writeln: [<ParamArray>] content: string[] -> unit
 
-type [<AllowNullLiteral; Global>] DocumentType =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DocumentType =
     inherit Node
     abstract entities: NamedNodeMap with get, set
     abstract internalSubset: string with get, set
@@ -372,45 +432,115 @@ type [<AllowNullLiteral; Global>] DocumentType =
     abstract notations: NamedNodeMap with get, set
     abstract publicId: string with get, set
     abstract systemId: string with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Document
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Document()")>]
+    #endif
+    abstract Create: unit -> Document
 
-type [<AllowNullLiteral; Global>] DocumentFragment =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DocumentFragment =
     inherit Node
     inherit NodeSelector
 
 type [<AllowNullLiteral>] DocumentFragmentType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> DocumentFragment
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new DocumentFragment()")>]
+    #endif
+    abstract Create: unit -> DocumentFragment
 
 type [<AllowNullLiteral>] DocumentTypeType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> DocumentType
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new DocumentType()")>]
+    #endif
+    abstract Create: unit -> DocumentType
 
-type [<AllowNullLiteral; Global>] DOMImplementation =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DOMImplementation =
     abstract createDocument: namespaceURI: string * qualifiedName: string * doctype: DocumentType -> Document
     abstract createDocumentType: qualifiedName: string * publicId: string * systemId: string -> DocumentType
     abstract createHTMLDocument: title: string -> Document
     abstract hasFeature: feature: string * version: string -> bool
 
 type [<AllowNullLiteral>] DOMImplementationType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> DOMImplementation
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new DOMImplementation()")>]
+    #endif
+    abstract Create: unit -> DOMImplementation
 
-type [<AllowNullLiteral; Global>] DOMStringList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DOMStringList =
     abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> string with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif 
+    abstract Item: index: int -> string with get, set
     abstract contains: str: string -> bool
     abstract item: index: float -> string
 
 type [<AllowNullLiteral>] DOMStringListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> DOMStringList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new DOMStringList()")>]
+    #endif
+    abstract Create: unit -> DOMStringList
 
-type [<AllowNullLiteral; Global>] DOMStringMap =
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: name: string -> string with get, set
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DOMStringMap =
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif 
+     abstract Item: name: string -> string with get, set
 
 type [<AllowNullLiteral>] DOMStringMapType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> DOMStringMap
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new DOMStringMap()")>]
+    #endif
+     abstract Create: unit -> DOMStringMap
 
-type [<AllowNullLiteral; Global>] DOMTokenList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DOMTokenList =
     abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> string with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif 
+    abstract Item: index: int -> string with get, set
     abstract add: [<ParamArray>] token: string[] -> unit
     abstract contains: token: string -> bool
     abstract item: index: float -> string
@@ -419,9 +549,19 @@ type [<AllowNullLiteral; Global>] DOMTokenList =
     abstract toggle: token: string * ?force: bool -> bool
 
 type [<AllowNullLiteral>] DOMTokenListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> DOMTokenList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new DOMTokenList()")>]
+    #endif
+     abstract Create: unit -> DOMTokenList
 
-type [<AllowNullLiteral; Global>] Element =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Element =
     inherit Node
     inherit GlobalEventHandlers
     inherit NodeSelector
@@ -483,18 +623,33 @@ type [<AllowNullLiteral; Global>] Element =
     abstract scroll: ?x: float * ?y: float -> unit
     abstract scrollBy: ?x: float * ?y: float -> unit
     abstract scrollTo: ?x: float * ?y: float -> unit
+    #if FABLE_COMPILER
     [<Emit("$0.scroll({ top: $1, left: $2, behavior: $3 })")>]
+    #else
+    [<Inline("$this.scroll({top: $top, left: $left, behavior: $behavior})")>]
+    #endif
     abstract scroll: top: float * left: float * behavior: ScrollBehavior -> unit
+    #if FABLE_COMPILER
     [<Emit("$0.scrollBy({ top: $1, left: $2, behavior: $3 })")>]
+    #else
+    [<Inline("$this.scrollBy({top: $top, left: $left, behavior: $behavior})")>]
+    #endif
     abstract scrollBy: top: float * left: float * behavior: ScrollBehavior -> unit
+    #if FABLE_COMPILER
     [<Emit("$0.scrollTo({ top: $1, left: $2, behavior: $3 })")>]
+    #else
+    [<Inline("$this.scrollTo({top: $top, left: $left, behavior: $behavior})")>]
+    #endif
     abstract scrollTo: top: float * left: float * behavior: ScrollBehavior -> unit
     /// Returns the open shadow root that is hosted by the element, or null if no open shadow root is present.
     abstract shadowRoot: ShadowRoot
     /// Attaches a shadow DOM tree to the specified element and returns a reference to its ShadowRoot.
     abstract attachShadow: ShadowRootInit -> ShadowRoot
 
-[<StringEnum; RequireQualifiedAccess>]
+#if FABLE_COMPILER
+[<StringEnum>]
+#endif
+[<RequireQualifiedAccess>]
 type EncapsulationMode =
     /// Elements of the shadow root are accessible from JavaScript outside the root
     | Open
@@ -514,7 +669,12 @@ type [<AllowNullLiteral>] ShadowRootInit =
 /// that is rendered separately from a document's main DOM tree.
 /// You can retrieve a reference to an element's shadow root using its Element.shadowRoot property,
 /// provided it was created using Element.attachShadow() with the mode option set to open.
-type [<AllowNullLiteral; Global>] ShadowRoot =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] ShadowRoot =
     inherit DocumentFragment
     inherit Element
     /// Returns the Element within the shadow tree that has focus.
@@ -533,12 +693,27 @@ type [<AllowNullLiteral; Global>] ShadowRoot =
     abstract pointerLockElement: Element
 
 type [<AllowNullLiteral>] ElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Element
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Element()")>]
+    #endif
+     abstract Create: unit -> Element
 
-type [<AllowNullLiteral; Global>] HTMLCollection =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLCollection =
     /// Sets or retrieves the number of objects in a collection.
     abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> Element with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif 
+    abstract Item: index: int -> Element with get, set
     /// Retrieves an object from various collections.
     abstract item: ?nameOrIndex: obj * ?optionalIndex: obj -> Element
     /// Retrieves a form object or an object from an elements collection.
@@ -546,11 +721,26 @@ type [<AllowNullLiteral; Global>] HTMLCollection =
     abstract namedItem: name: string -> Element
 
 type [<AllowNullLiteral>] HTMLCollectionType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLCollection
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLCollection()")>]
+    #endif
+    abstract Create: unit -> HTMLCollection
 
-type [<AllowNullLiteral; Global>] NamedNodeMap =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] NamedNodeMap =
     abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> Attr with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> Attr with get, set
     abstract getNamedItem: name: string -> Attr
     abstract getNamedItemNS: namespaceURI: string * localName: string -> Attr
     abstract item: index: float -> Attr
@@ -560,9 +750,19 @@ type [<AllowNullLiteral; Global>] NamedNodeMap =
     abstract setNamedItemNS: arg: Attr -> Attr
 
 type [<AllowNullLiteral>] NamedNodeMapType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> NamedNodeMap
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new NamedNodeMapType()")>]
+    #endif
+     abstract Create: unit -> NamedNodeMap
 
-type [<AllowNullLiteral; Global>] Node =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Node =
     inherit EventTarget
     abstract attributes: NamedNodeMap with get, set
     abstract baseURI: string with get, set
@@ -636,13 +836,23 @@ type [<AllowNullLiteral>] NodeType =
     abstract NOTATION_NODE: float with get, set
     abstract PROCESSING_INSTRUCTION_NODE: float with get, set
     abstract TEXT_NODE: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Node
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Node()")>]
+    #endif
+    abstract Create: unit -> Node
 
 type [<AllowNullLiteral>] NodeSelector =
     abstract querySelector: selectors: string -> Element
     abstract querySelectorAll: selectors: string -> NodeListOf<Element>
 
-type [<AllowNullLiteral; Global>] NodeFilter =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] NodeFilter =
     abstract acceptNode: n: Node -> float
 
 type [<AllowNullLiteral>] NodeFilterType =
@@ -663,7 +873,12 @@ type [<AllowNullLiteral>] NodeFilterType =
     abstract SHOW_PROCESSING_INSTRUCTION: float with get, set
     abstract SHOW_TEXT: float with get, set
 
-type [<AllowNullLiteral; Global>] NodeIterator =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] NodeIterator =
     abstract filter: NodeFilter with get, set
     abstract root: Node with get, set
     abstract whatToShow: float with get, set
@@ -672,30 +887,68 @@ type [<AllowNullLiteral; Global>] NodeIterator =
     abstract previousNode: unit -> Node
 
 type [<AllowNullLiteral>] NodeIteratorType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> NodeIterator
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new NodeIterator()")>]
+    #endif
+    abstract Create: unit -> NodeIterator
 
-type [<AllowNullLiteral; Global>] NodeList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] NodeList =
     abstract length: int
+    #if FABLE_COMPILER
     [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> Node with get, set
+    #else
+    // TODO
+    #endif
     abstract item: index: float -> Node
 
 type [<AllowNullLiteral>] NodeListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> NodeList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new NodeList()")>]
+    #endif
+    abstract Create: unit -> NodeList
 
 type [<AllowNullLiteral>] NodeListOf<'TNode> =
     inherit NodeList
     abstract length: int
+    #if FABLE_COMPILER
     [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> 'TNode with get, set
+    #else
+    // TODO
+    #endif
     abstract item: index: float -> 'TNode
 
-type [<AllowNullLiteral; Global>] ProcessingInstruction =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] ProcessingInstruction =
     inherit CharacterData
     abstract target: string with get, set
 
 type [<AllowNullLiteral>] ProcessingInstructionType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> ProcessingInstruction
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new ProcessingInstruction()")>]
+    #endif
+    abstract Create: unit -> ProcessingInstruction
 
-type [<AllowNullLiteral; Global>] Selection =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Selection =
     abstract anchorNode: Node with get, set
     abstract anchorOffset: float with get, set
     abstract focusNode: Node with get, set
@@ -719,9 +972,19 @@ type [<AllowNullLiteral; Global>] Selection =
     abstract toString: unit -> string
 
 type [<AllowNullLiteral>] SelectionType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Selection
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Selection()")>]
+    #endif
+    abstract Create: unit -> Selection
 
-type [<AllowNullLiteral; Global>] ClientRect =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] ClientRect =
     abstract bottom: float with get, set
     abstract height: float with get, set
     abstract left: float with get, set
@@ -730,9 +993,19 @@ type [<AllowNullLiteral; Global>] ClientRect =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] ClientRectType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> ClientRect
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new ClientRect()")>]
+    #endif
+    abstract Create: unit -> ClientRect
 
-type [<AllowNullLiteral; Global>] Range =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Range =
     abstract collapsed: bool with get, set
     abstract commonAncestorContainer: Node with get, set
     abstract endContainer: Node with get, set
@@ -771,26 +1044,56 @@ type [<AllowNullLiteral>] RangeType =
     abstract END_TO_START: float with get, set
     abstract START_TO_END: float with get, set
     abstract START_TO_START: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Range
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Range()")>]
+    #endif
+    abstract Create: unit -> Range
 
-type [<AllowNullLiteral; Global>] Text =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Text =
     inherit CharacterData
     abstract wholeText: string with get, set
     abstract replaceWholeText: content: string -> Text
     abstract splitText: offset: float -> Text
 
 type [<AllowNullLiteral>] TextType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> Text
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Text()")>]
+    #endif
+    abstract Create: unit -> Text
 
-type [<AllowNullLiteral; Global>] TimeRanges =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TimeRanges =
     abstract length: int
     abstract ``end``: index: float -> float
     abstract start: index: float -> float
 
 type [<AllowNullLiteral>] TimeRangesType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> TimeRanges
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new TimeRanges()")>]
+    #endif
+    abstract Create: unit -> TimeRanges
 
-type [<AllowNullLiteral; Global>] TreeWalker =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TreeWalker =
     abstract currentNode: Node with get, set
     abstract filter: NodeFilter with get, set
     abstract root: Node with get, set
@@ -804,11 +1107,17 @@ type [<AllowNullLiteral; Global>] TreeWalker =
     abstract previousSibling: unit -> Node
 
 type [<AllowNullLiteral>] TreeWalkerType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> TreeWalker
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new TreeWalker()")>]
+    #endif
+    abstract Create: unit -> TreeWalker
 
 type [<AllowNullLiteral>] BarProp =
     abstract visible: bool with get, set
 
+#if FABLE_COMPILER
 [<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
 type ScreenOrientationType =
     | PortraitPrimary
@@ -826,6 +1135,25 @@ type OrientationLockType =
     | PortraitSecondary
     | LandscapePrimary
     | LandscapeSecondary
+#else
+[<RequireQualifiedAccess>]
+type ScreenOrientationType =
+    | [<Constant "portrait-primary">] PortraitPrimary
+    | [<Constant "portrait-secondary">] PortraitSecondary
+    | [<Constant "landscape-primary">] LandscapePrimary
+    | [<Constant "landscape-secondary">] LandscapeSecondary
+
+[<RequireQualifiedAccess>]
+type OrientationLockType =
+    | [<Constant "any">] Any
+    | [<Constant "natural">] Natural
+    | [<Constant "landscape">] Landscape
+    | [<Constant "portrait">] Portrait
+    | [<Constant "portrait-primary">] PortraitPrimary
+    | [<Constant "portrait-secondary">] PortraitSecondary
+    | [<Constant "landscape-primary">] LandscapePrimary
+    | [<Constant "landscape-secondary">] LandscapeSecondary
+#endif
 
 type [<AllowNullLiteral>] ScreenOrientation =
     inherit EventTarget
@@ -835,7 +1163,12 @@ type [<AllowNullLiteral>] ScreenOrientation =
     abstract lock: OrientationLockType -> JS.Promise<unit>
     abstract unlock: unit -> unit
 
-type [<AllowNullLiteral; Global>] Screen =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Screen =
     inherit EventTarget
     abstract availHeight: float with get, set
     abstract availWidth: float with get, set
@@ -853,7 +1186,12 @@ type [<AllowNullLiteral; Global>] Screen =
     abstract width: float with get, set
     abstract orientation: ScreenOrientation with get, set
 
-type [<AllowNullLiteral; Global>] Location =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Location =
     abstract hash: string with get, set
     abstract host: string with get, set
     abstract hostname: string with get, set
@@ -897,7 +1235,12 @@ type [<AllowNullLiteral>] WindowURI =
     abstract decodeURIComponent: encodedUri: string -> string
     abstract encodeURIComponent: str: string -> string
 
-type [<AllowNullLiteral; Global>] Window =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Window =
     inherit EventTarget
     inherit WindowTimers
     inherit WindowSessionStorage
@@ -1030,7 +1373,12 @@ type [<AllowNullLiteral; Global>] Window =
     abstract toolbar: BarProp with get, set
     abstract top: Window with get, set
     abstract window: Window with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> Window with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> Window with get, set
     abstract alert: ?message: obj -> unit
     abstract blur: unit -> unit
     abstract cancelAnimationFrame: handle: float -> unit
@@ -1052,17 +1400,34 @@ type [<AllowNullLiteral; Global>] Window =
     abstract scroll: ?x: float * ?y: float -> unit
     abstract scrollBy: ?x: float * ?y: float -> unit
     abstract scrollTo: ?x: float * ?y: float -> unit
+    #if FABLE_COMPILER
     [<Emit("$0.scroll({ top: $1, left: $2, behavior: $3 })")>]
+    #else
+    [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
+    #endif
     abstract scroll: top: float * left: float * behavior: ScrollBehavior -> unit
+    #if FABLE_COMPILER
     [<Emit("$0.scrollBy({ top: $1, left: $2, behavior: $3 })")>]
+    #else
+    [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
+    #endif
     abstract scrollBy: top: float * left: float * behavior: ScrollBehavior -> unit
+    #if FABLE_COMPILER
     [<Emit("$0.scrollTo({ top: $1, left: $2, behavior: $3 })")>]
+    #else
+    [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
+    #endif
     abstract scrollTo: top: float * left: float * behavior: ScrollBehavior -> unit
 
 type [<AllowNullLiteral>] AbstractWorker =
     abstract onerror: (Event -> unit) with get, set
 
-type [<AllowNullLiteral; Global>] Worker =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Worker =
     inherit EventTarget
     inherit AbstractWorker
     abstract onmessage: (MessageEvent -> unit) with get, set
@@ -1070,13 +1435,28 @@ type [<AllowNullLiteral; Global>] Worker =
     abstract terminate: unit -> unit
 
 type [<AllowNullLiteral>] WorkerType =
-    [<Emit("new $0($1...)")>] abstract Create: stringUrl: string -> Worker
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new Worker()")>]
+    #endif
+    abstract Create: stringUrl: string -> Worker
 
-type [<AllowNullLiteral; Global>] XMLDocument =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] XMLDocument =
     inherit Document
 
 type [<AllowNullLiteral>] XMLDocumentType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> XMLDocument
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new XMLDocument()")>]
+    #endif
+    abstract Create: unit -> XMLDocument
 
 // ## HTML
 
@@ -1094,16 +1474,31 @@ type [<AllowNullLiteral>] GlobalEventHandlers =
     abstract onpointerup: (PointerEvent -> unit) with get, set
     abstract onwheel: (WheelEvent -> unit) with get, set
 
-type [<AllowNullLiteral; Global>] HTMLAllCollection =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLAllCollection =
     inherit HTMLCollection
     /// Sets or retrieves the shape of the object.
     /// Retrieves a select object or an object from an options collection.
     abstract namedItem: name: string -> Element
 
 type [<AllowNullLiteral>] HTMLAllCollectionType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLAllCollection
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLAllCollection()")>]
+    #endif
+    abstract Create: unit -> HTMLAllCollection
 
-type [<AllowNullLiteral; Global>] HTMLAnchorElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLAnchorElement =
     inherit HTMLElement
     abstract Methods: string with get, set
     /// Sets or retrieves the character set used to encode the object.
@@ -1154,9 +1549,19 @@ type [<AllowNullLiteral; Global>] HTMLAnchorElement =
     abstract toString: unit -> string
 
 type [<AllowNullLiteral>] HTMLAnchorElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLAnchorElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLAnchorElement()")>]
+    #endif
+    abstract Create: unit -> HTMLAnchorElement
 
-type [<AllowNullLiteral; Global>] HTMLAreaElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLAreaElement =
     inherit HTMLElement
     /// Sets or retrieves a text alternative to the graphic.
     abstract alt: string with get, set
@@ -1188,9 +1593,19 @@ type [<AllowNullLiteral; Global>] HTMLAreaElement =
     abstract toString: unit -> string
 
 type [<AllowNullLiteral>] HTMLAreaElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLAreaElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLAreaElement()")>]
+    #endif
+    abstract Create: unit -> HTMLAreaElement
 
-type [<AllowNullLiteral; Global>] HTMLAreasCollection =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLAreasCollection =
     inherit HTMLCollection
     /// <summary>Adds an element to the areas, controlRange, or options collection.</summary>
     /// <param name="element">Variant of type Number that specifies the index position in the collection where the element is placed. If no value is given, the method places the element at the end of the collection.</param>
@@ -1201,23 +1616,53 @@ type [<AllowNullLiteral; Global>] HTMLAreasCollection =
     abstract remove: ?index: float -> unit
 
 type [<AllowNullLiteral>] HTMLAreasCollectionType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLAreasCollection
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLAreasCollection()")>]
+    #endif
+    abstract Create: unit -> HTMLAreasCollection
 
-type [<AllowNullLiteral; Global>] HTMLAudioElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLAudioElement =
     inherit HTMLMediaElement
 
 type [<AllowNullLiteral>] HTMLAudioElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLAudioElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLAudioElement()")>]
+    #endif
+    abstract Create: unit -> HTMLAudioElement
 
-type [<AllowNullLiteral; Global>] HTMLBRElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLBRElement =
     inherit HTMLElement
     /// Sets or retrieves the side on which floating objects are not to be positioned when any IHTMLBlockElement is inserted into the document.
     abstract clear: string with get, set
 
 type [<AllowNullLiteral>] HTMLBRElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLBRElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLBRElement()")>]
+    #endif
+    abstract Create: unit -> HTMLBRElement
 
-type [<AllowNullLiteral; Global>] HTMLBaseElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLBaseElement =
     inherit HTMLElement
     /// Sets or retrieves a destination URL or an anchor point.
     abstract href: string with get, set
@@ -1225,9 +1670,19 @@ type [<AllowNullLiteral; Global>] HTMLBaseElement =
     abstract target: string with get, set
 
 type [<AllowNullLiteral>] HTMLBaseElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLBaseElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLBaseElement()")>]
+    #endif
+    abstract Create: unit -> HTMLBaseElement
 
-type [<AllowNullLiteral; Global>] HTMLBlockElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLBlockElement =
     inherit HTMLElement
     /// Sets or retrieves reference information about the object.
     abstract cite: string with get, set
@@ -1236,9 +1691,19 @@ type [<AllowNullLiteral; Global>] HTMLBlockElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLBlockElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLBlockElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLBlockElement()")>]
+    #endif
+    abstract Create: unit -> HTMLBlockElement
 
-type [<AllowNullLiteral; Global>] HTMLBodyElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLBodyElement =
     inherit HTMLElement
     abstract aLink: obj with get, set
     abstract background: string with get, set
@@ -1269,9 +1734,19 @@ type [<AllowNullLiteral; Global>] HTMLBodyElement =
     abstract vLink: obj with get, set
 
 type [<AllowNullLiteral>] HTMLBodyElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLBodyElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLBodyElement()")>]
+    #endif
+    abstract Create: unit -> HTMLBodyElement
 
-type [<AllowNullLiteral; Global>] HTMLButtonElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLButtonElement =
     inherit HTMLElement
     /// Provides a way to direct a user to a specific field when a document loads. This can provide both direction and convenience for a user, reducing the need to click or tab to a field when a page opens. This attribute is true when present on an element, and false when missing.
     abstract autofocus: bool with get, set
@@ -1314,15 +1789,31 @@ type [<AllowNullLiteral; Global>] HTMLButtonElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLButtonElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLButtonElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLButtonElement()")>]
+    #endif
+    abstract Create: unit -> HTMLButtonElement
 
-type [<AllowNullLiteral; Global>] HTMLCanvasElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLCanvasElement =
     inherit HTMLElement
     /// Gets or sets the height of a canvas element on a document.
     abstract height: float with get, set
     /// Sets or retrieves the width of the object.
     abstract width: float with get, set
-    [<Emit("$0.getContext('2d'{{, $1}})")>]  abstract getContext_2d: ?contextAttributes: obj -> CanvasRenderingContext2D
+    #if FABLE_COMPILER
+    [<Emit("$0.getContext('2d'{{, $1}})")>]
+    #else 
+    // TODO
+    [<Inline("$this.getContext('2d'{{, $contextAttributes}})")>]
+    #endif
+    abstract getContext_2d: ?contextAttributes: obj -> CanvasRenderingContext2D
     /// Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document. A context object includes information about colors, line widths, fonts, and other graphic parameters that can be drawn on a canvas.
     abstract getContext: contextId: string * ?contextAttributes: obj -> obj
     /// <summary>Returns the content of the current canvas as an image that you can use as a source for another canvas or an HTML element.</summary>
@@ -1333,38 +1824,88 @@ type [<AllowNullLiteral; Global>] HTMLCanvasElement =
     abstract toBlob : (Blob -> unit) * ?mimeType:string * ?quality: float -> unit
 
 type [<AllowNullLiteral>] HTMLCanvasElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLCanvasElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLCanvasElement()")>]
+    #endif
+    abstract Create: unit -> HTMLCanvasElement
 
-type [<AllowNullLiteral; Global>] HTMLDDElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDDElement =
     inherit HTMLElement
     /// Sets or retrieves whether the browser automatically performs wordwrap.
     abstract noWrap: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDDElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLDDElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLDDElement()")>]
+    #endif
+    abstract Create: unit -> HTMLDDElement
 
-type [<AllowNullLiteral; Global>] HTMLDListElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDListElement =
     inherit HTMLElement
     abstract compact: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDListElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLDListElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLDListElement()")>]
+    #endif
+    abstract Create: unit -> HTMLDListElement
 
-type [<AllowNullLiteral; Global>] HTMLDTElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDTElement =
     inherit HTMLElement
     abstract noWrap: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDTElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLDTElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLDTElement()")>]
+    #endif
+    abstract Create: unit -> HTMLDTElement
 
-type [<AllowNullLiteral; Global>] HTMLDataListElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDataListElement =
     inherit HTMLElement
     abstract options: HTMLCollection with get, set
 
 type [<AllowNullLiteral>] HTMLDataListElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLDataListElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLDataListElement()")>]
+    #endif
+    abstract Create: unit -> HTMLDataListElement
 
-type [<AllowNullLiteral; Global>] HTMLDialogElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDialogElement =
     inherit HTMLElement
     abstract ``open``: bool with get, set
     abstract returnValue: string with get, set
@@ -1372,26 +1913,56 @@ type [<AllowNullLiteral; Global>] HTMLDialogElement =
     abstract show: unit -> unit
     abstract showModal: unit -> unit
 
-type [<AllowNullLiteral; Global>] HTMLDirectoryElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDirectoryElement =
     inherit HTMLElement
     abstract compact: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDirectoryElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLDirectoryElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLDirectoryElement()")>]
+    #endif
+    abstract Create: unit -> HTMLDirectoryElement
 
-type [<AllowNullLiteral; Global>] HTMLDivElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDivElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
     abstract noWrap: bool with get, set
 
-type [<AllowNullLiteral; Global>] HTMLDocument =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLDocument =
     inherit Document
 
 type [<AllowNullLiteral>] HTMLDocumentType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLDocument
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLDocument()")>]
+    #endif
+    abstract Create: unit -> HTMLDocument
 
-type [<AllowNullLiteral; Global>] HTMLElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLElement =
     inherit Element
     abstract accessKey: string with get, set
     abstract children: HTMLCollection with get, set
@@ -1493,12 +2064,18 @@ type [<AllowNullLiteral; Global>] HTMLElement =
     abstract scrollIntoView: scrollIntoViewOptions: ScrollIntoViewOptions -> unit
     abstract setActive: unit -> unit
 
-[<StringEnum; RequireQualifiedAccess>]
+#if FABLE_COMPILER
+[<StringEnum>]
+#endif
+[<RequireQualifiedAccess>]
 type ScrollBehavior =
     | Auto
     | Smooth
 
-[<StringEnum; RequireQualifiedAccess>]
+#if FABLE_COMPILER
+[<StringEnum>]
+#endif
+[<RequireQualifiedAccess>]
 type ScrollAlignment =
     | Start
     | Center
@@ -1517,9 +2094,19 @@ type ScrollIntoViewOptions =
     abstract ``inline`` : ScrollAlignment with get, set
 
 type [<AllowNullLiteral>] HTMLElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLElement()")>]
+    #endif
+    abstract Create: unit -> HTMLElement
 
-type [<AllowNullLiteral; Global>] HTMLEmbedElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLEmbedElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Sets or retrieves the height of the object.
@@ -1540,9 +2127,19 @@ type [<AllowNullLiteral; Global>] HTMLEmbedElement =
     abstract width: string with get, set
 
 type [<AllowNullLiteral>] HTMLEmbedElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLEmbedElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLEmbedElement()")>]
+    #endif
+    abstract Create: unit -> HTMLEmbedElement
 
-type [<AllowNullLiteral; Global>] HTMLFieldSetElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLFieldSetElement =
     inherit HTMLElement
     /// Sets or retrieves a value that indicates the table alignment.
     abstract align: string with get, set
@@ -1561,17 +2158,37 @@ type [<AllowNullLiteral; Global>] HTMLFieldSetElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLFieldSetElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLFieldSetElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLFieldSetElement()")>]
+    #endif
+    abstract Create: unit -> HTMLFieldSetElement
 
-type [<AllowNullLiteral; Global>] HTMLFontElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLFontElement =
     inherit HTMLElement
     /// Sets or retrieves the current typeface family.
     abstract face: string with get, set
 
 type [<AllowNullLiteral>] HTMLFontElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLFontElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLFontElementElement()")>]
+    #endif
+    abstract Create: unit -> HTMLFontElement
 
-type [<AllowNullLiteral; Global>] HTMLFormElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLFormElement =
     inherit HTMLElement
     /// Sets or retrieves a list of character encodings for input data that must be accepted by the server processing the form.
     /// Sets or retrieves a comma-separated list of content types.
@@ -1596,7 +2213,12 @@ type [<AllowNullLiteral; Global>] HTMLFormElement =
     abstract noValidate: bool with get, set
     /// Sets or retrieves the window or frame at which to target content.
     abstract target: string with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: name: string -> obj with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif
+    abstract Item: name: string -> obj with get, set
     /// Returns whether a form will validate when it is submitted, without having to submit it.
     abstract checkValidity: unit -> bool
     /// Performs the same validity checking steps as the checkValidity function. If the value is invalid, this method also fires the invalid event on the element, and (if the event isn't canceled) reports the problem to the user.
@@ -1615,9 +2237,19 @@ type [<AllowNullLiteral; Global>] HTMLFormElement =
     abstract submit: unit -> unit
 
 type [<AllowNullLiteral>] HTMLFormElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLFormElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLFormElement()")>]
+    #endif
+    abstract Create: unit -> HTMLFormElement
 
-type [<AllowNullLiteral; Global>] HTMLFrameElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLFrameElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Specifies the properties of a border drawn around an object.
@@ -1656,9 +2288,19 @@ type [<AllowNullLiteral; Global>] HTMLFrameElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLFrameElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLFrameElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLFrameElement()")>]
+    #endif
+    abstract Create: unit -> HTMLFrameElement
 
-type [<AllowNullLiteral; Global>] HTMLHRElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLHRElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
@@ -1668,33 +2310,73 @@ type [<AllowNullLiteral; Global>] HTMLHRElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLHRElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLHRElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLHRElement()")>]
+    #endif
+    abstract Create: unit -> HTMLHRElement
 
-type [<AllowNullLiteral; Global>] HTMLHeadElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLHeadElement =
     inherit HTMLElement
     abstract profile: string with get, set
 
 type [<AllowNullLiteral>] HTMLHeadElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLHeadElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLHeadElement()")>]
+    #endif
+    abstract Create: unit -> HTMLHeadElement
 
-type [<AllowNullLiteral; Global>] HTMLHeadingElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLHeadingElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
     abstract clear: string with get, set
 
 type [<AllowNullLiteral>] HTMLHeadingElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLHeadingElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLHeadingElement()")>]
+    #endif
+    abstract Create: unit -> HTMLHeadingElement
 
-type [<AllowNullLiteral; Global>] HTMLHtmlElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLHtmlElement =
     inherit HTMLElement
     /// Sets or retrieves the DTD version that governs the current document.
     abstract version: string with get, set
 
 type [<AllowNullLiteral>] HTMLHtmlElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLHtmlElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLHtmlElement()")>]
+    #endif
+    abstract Create: unit -> HTMLHtmlElement
 
-type [<AllowNullLiteral; Global>] HTMLIFrameElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLIFrameElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Sets or retrieves how the object is aligned with adjacent text.
@@ -1735,9 +2417,19 @@ type [<AllowNullLiteral; Global>] HTMLIFrameElement =
     abstract width: string with get, set
 
 type [<AllowNullLiteral>] HTMLIFrameElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLIFrameElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLIFrameElement()")>]
+    #endif
+    abstract Create: unit -> HTMLIFrameElement
 
-type [<AllowNullLiteral; Global>] HTMLImageElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLImageElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
@@ -1778,9 +2470,19 @@ type [<AllowNullLiteral; Global>] HTMLImageElement =
 
 type [<AllowNullLiteral>] ImageType =
     // Constructor must be Image, see #25
-    [<Emit("new Image($1...)")>] abstract Create: ?width: float * ?height: float -> HTMLImageElement
+    #if FABLE_COMPILER
+    [<Emit("new Image($1...)")>] 
+    #else
+    [<Inline("new Image($width, $height)")>]
+    #endif
+    abstract Create: ?width: float * ?height: float -> HTMLImageElement
 
-type [<AllowNullLiteral; Global>] HTMLInputElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLInputElement =
     inherit HTMLElement
     /// Returns a FileList object on a file type input object.
     abstract files: FileList with get, set
@@ -1894,9 +2596,19 @@ type [<AllowNullLiteral; Global>] HTMLInputElement =
     abstract stepUp: ?n: float -> unit
 
 type [<AllowNullLiteral>] HTMLInputElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLInputElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLInputElement()")>]
+    #endif
+    abstract Create: unit -> HTMLInputElement
 
-type [<AllowNullLiteral; Global>] HTMLLIElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLLIElement =
     inherit HTMLElement
     /// Sets or retrieves the MIME type of the object.
     abstract ``type``: string with get, set
@@ -1904,27 +2616,57 @@ type [<AllowNullLiteral; Global>] HTMLLIElement =
     abstract value: float with get, set
 
 type [<AllowNullLiteral>] HTMLLIElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLLIElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLLIElement()")>]
+    #endif
+    abstract Create: unit -> HTMLLIElement
 
-type [<AllowNullLiteral; Global>] HTMLLabelElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLLabelElement =
     inherit HTMLElement
     abstract form: HTMLFormElement with get, set
     /// Sets or retrieves the object to which the given label object is assigned.
     abstract htmlFor: string with get, set
 
 type [<AllowNullLiteral>] HTMLLabelElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLLabelElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLLabelElement()")>]
+    #endif
+    abstract Create: unit -> HTMLLabelElement
 
-type [<AllowNullLiteral; Global>] HTMLLegendElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLLegendElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
     abstract form: HTMLFormElement with get, set
 
 type [<AllowNullLiteral>] HTMLLegendElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLLegendElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLLegendElement()")>]
+    #endif
+    abstract Create: unit -> HTMLLegendElement
 
-type [<AllowNullLiteral; Global>] HTMLLinkElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLLinkElement =
     inherit HTMLElement
     // TODO
     // inherit LinkStyle
@@ -1945,9 +2687,19 @@ type [<AllowNullLiteral; Global>] HTMLLinkElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLLinkElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLLinkElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLLinkElement()")>]
+    #endif
+    abstract Create: unit -> HTMLLinkElement
 
-type [<AllowNullLiteral; Global>] HTMLMapElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLMapElement =
     inherit HTMLElement
     /// Retrieves a collection of the area objects defined for the given map object.
     abstract areas: HTMLAreasCollection with get, set
@@ -1955,9 +2707,19 @@ type [<AllowNullLiteral; Global>] HTMLMapElement =
     abstract name: string with get, set
 
 type [<AllowNullLiteral>] HTMLMapElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLMapElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLMapElement()")>]
+    #endif
+    abstract Create: unit -> HTMLMapElement
 
-type [<AllowNullLiteral; Global>] HTMLMediaElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLMediaElement =
     inherit HTMLElement
     /// Returns an AudioTrackList object with the audio tracks for a given video element.
     abstract audioTracks: AudioTrackList with get, set
@@ -2033,18 +2795,38 @@ type [<AllowNullLiteral>] HTMLMediaElementType =
     abstract NETWORK_IDLE: float with get, set
     abstract NETWORK_LOADING: float with get, set
     abstract NETWORK_NO_SOURCE: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLMediaElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLMediaElement()")>]
+    #endif
+    abstract Create: unit -> HTMLMediaElement
 
-type [<AllowNullLiteral; Global>] HTMLMenuElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLMenuElement =
     inherit HTMLElement
     abstract compact: bool with get, set
     /// Sets or retrieves the MIME type for the associated scripting engine.
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLMenuElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLMenuElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLMenuElement()")>]
+    #endif
+    abstract Create: unit -> HTMLMenuElement
 
-type [<AllowNullLiteral; Global>] HTMLMetaElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLMetaElement =
     inherit HTMLElement
     /// Sets or retrieves the character set used to encode the object.
     abstract charset: string with get, set
@@ -2058,9 +2840,19 @@ type [<AllowNullLiteral; Global>] HTMLMetaElement =
     abstract url: string with get, set
 
 type [<AllowNullLiteral>] HTMLMetaElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLMetaElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLMetaElement()")>]
+    #endif
+    abstract Create: unit -> HTMLMetaElement
 
-type [<AllowNullLiteral; Global>] HTMLModElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLModElement =
     inherit HTMLElement
     /// Sets or retrieves reference information about the object.
     abstract cite: string with get, set
@@ -2068,16 +2860,36 @@ type [<AllowNullLiteral; Global>] HTMLModElement =
     abstract dateTime: string with get, set
 
 type [<AllowNullLiteral>] HTMLModElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLModElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLModElement()")>]
+    #endif
+    abstract Create: unit -> HTMLModElement
 
-type [<AllowNullLiteral; Global>] HTMLNextIdElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLNextIdElement =
     inherit HTMLElement
     abstract n: string with get, set
 
 type [<AllowNullLiteral>] HTMLNextIdElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLNextIdElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLNextIdElement()")>]
+    #endif
+    abstract Create: unit -> HTMLNextIdElement
 
-type [<AllowNullLiteral; Global>] HTMLOListElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLOListElement =
     inherit HTMLElement
     abstract compact: bool with get, set
     abstract start: float with get, set
@@ -2085,9 +2897,19 @@ type [<AllowNullLiteral; Global>] HTMLOListElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLOListElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLOListElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLOListElement()")>]
+    #endif
+    abstract Create: unit -> HTMLOListElement
 
-type [<AllowNullLiteral; Global>] HTMLObjectElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLObjectElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Retrieves a string of the URL where the object tag can be found. This is often the href of the document that the object is in, or the value set by a base element.
@@ -2137,9 +2959,19 @@ type [<AllowNullLiteral; Global>] HTMLObjectElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLObjectElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLObjectElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLObjectElement()")>]
+    #endif
+    abstract Create: unit -> HTMLObjectElement
 
-type [<AllowNullLiteral; Global>] HTMLOptGroupElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLOptGroupElement =
     inherit HTMLElement
     /// Sets or retrieves the status of an option.
     abstract defaultSelected: bool with get, set
@@ -2157,9 +2989,19 @@ type [<AllowNullLiteral; Global>] HTMLOptGroupElement =
     abstract value: string with get, set
 
 type [<AllowNullLiteral>] HTMLOptGroupElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLOptGroupElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLOptGroupElement()")>]
+    #endif
+    abstract Create: unit -> HTMLOptGroupElement
 
-type [<AllowNullLiteral; Global>] HTMLOptionElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLOptionElement =
     inherit HTMLElement
     /// Sets or retrieves the status of an option.
     abstract defaultSelected: bool with get, set
@@ -2177,19 +3019,39 @@ type [<AllowNullLiteral; Global>] HTMLOptionElement =
     abstract value: string with get, set
 
 type [<AllowNullLiteral>] HTMLOptionElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLOptionElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLOptionElement()")>]
+    #endif
+    abstract Create: unit -> HTMLOptionElement
     abstract create: unit -> HTMLOptionElement
 
-type [<AllowNullLiteral; Global>] HTMLParagraphElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLParagraphElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
     abstract clear: string with get, set
 
 type [<AllowNullLiteral>] HTMLParagraphElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLParagraphElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLParagraphElement()")>]
+    #endif
+    abstract Create: unit -> HTMLParagraphElement
 
-type [<AllowNullLiteral; Global>] HTMLParamElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLParamElement =
     inherit HTMLElement
     abstract name: string with get, set
     /// Retrieves the CSS language in which the style sheet is written.
@@ -2201,17 +3063,37 @@ type [<AllowNullLiteral; Global>] HTMLParamElement =
     abstract valueType: string with get, set
 
 type [<AllowNullLiteral>] HTMLParamElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLParamElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLParamElement()")>]
+    #endif
+    abstract Create: unit -> HTMLParamElement
 
-type [<AllowNullLiteral; Global>] HTMLPhraseElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLPhraseElement =
     inherit HTMLElement
     abstract cite: string with get, set
     abstract dateTime: string with get, set
 
 type [<AllowNullLiteral>] HTMLPhraseElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLPhraseElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLPhraseElement()")>]
+    #endif
+    abstract Create: unit -> HTMLPhraseElement
 
-type [<AllowNullLiteral; Global>] HTMLPreElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLPreElement =
     inherit HTMLElement
     abstract cite: string with get, set
     abstract clear: string with get, set
@@ -2219,9 +3101,19 @@ type [<AllowNullLiteral; Global>] HTMLPreElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLPreElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLPreElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLPreElement()")>]
+    #endif
+    abstract Create: unit -> HTMLPreElement
 
-type [<AllowNullLiteral; Global>] HTMLProgressElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLProgressElement =
     inherit HTMLElement
     abstract form: HTMLFormElement with get, set
     abstract max: float with get, set
@@ -2230,17 +3122,37 @@ type [<AllowNullLiteral; Global>] HTMLProgressElement =
     abstract value: float with get, set
 
 type [<AllowNullLiteral>] HTMLProgressElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLProgressElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLProgressElement()")>]
+    #endif
+    abstract Create: unit -> HTMLProgressElement
 
-type [<AllowNullLiteral; Global>] HTMLQuoteElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLQuoteElement =
     inherit HTMLElement
     abstract cite: string with get, set
     abstract dateTime: string with get, set
 
 type [<AllowNullLiteral>] HTMLQuoteElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLQuoteElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLQuoteElement()")>]
+    #endif
+    abstract Create: unit -> HTMLQuoteElement
 
-type [<AllowNullLiteral; Global>] HTMLScriptElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLScriptElement =
     inherit HTMLElement
     abstract async: bool with get, set
     /// Sets or retrieves the character set used to encode the object.
@@ -2258,9 +3170,19 @@ type [<AllowNullLiteral; Global>] HTMLScriptElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLScriptElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLScriptElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLScriptElement()")>]
+    #endif
+    abstract Create: unit -> HTMLScriptElement
 
-type [<AllowNullLiteral; Global>] HTMLSelectElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLSelectElement =
     inherit HTMLElement
     /// Provides a way to direct a user to a specific field when a document loads. This can provide both direction and convenience for a user, reducing the need to click or tab to a field when a page opens. This attribute is true when present on an element, and false when missing.
     abstract autofocus: bool with get, set
@@ -2286,7 +3208,12 @@ type [<AllowNullLiteral; Global>] HTMLSelectElement =
     /// Returns whether an element will successfully validate based on forms validation rules and constraints.
     abstract willValidate: bool with get, set
     abstract selectedOptions: HTMLCollection with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: name: string -> obj with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>] 
+    #else
+    // TODO
+    #endif
+    abstract Item: name: string -> obj with get, set
     abstract add: element: HTMLElement * ?before: U2<HTMLElement, float> -> unit
     /// Returns whether a form will validate when it is submitted, without having to submit it.
     abstract checkValidity: unit -> bool
@@ -2301,9 +3228,19 @@ type [<AllowNullLiteral; Global>] HTMLSelectElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLSelectElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLSelectElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLSelectElement()")>]
+    #endif
+    abstract Create: unit -> HTMLSelectElement
 
-type [<AllowNullLiteral; Global>] HTMLSourceElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLSourceElement =
     inherit HTMLElement
     /// Gets or sets the intended media type of the media source.
     abstract media: string with get, set
@@ -2311,16 +3248,36 @@ type [<AllowNullLiteral; Global>] HTMLSourceElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLSourceElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLSourceElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLSourceElement()")>]
+    #endif
+    abstract Create: unit -> HTMLSourceElement
 
-type [<AllowNullLiteral; Global>] HTMLSpanElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLSpanElement =
     inherit HTMLElement
 
 
 type [<AllowNullLiteral>] HTMLSpanElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLSpanElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLSpanElement()")>]
+    #endif
+    abstract Create: unit -> HTMLSpanElement
 
-type [<AllowNullLiteral; Global>] HTMLStyleElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLStyleElement =
     inherit HTMLElement
     // TODO
     // inherit LinkStyle
@@ -2329,9 +3286,19 @@ type [<AllowNullLiteral; Global>] HTMLStyleElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLStyleElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLStyleElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLStyleElement()")>]
+    #endif
+    abstract Create: unit -> HTMLStyleElement
 
-type [<AllowNullLiteral; Global>] HTMLTableCaptionElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableCaptionElement =
     inherit HTMLElement
     /// Sets or retrieves the alignment of the object relative to the display or table.
     abstract align: string with get, set
@@ -2339,9 +3306,19 @@ type [<AllowNullLiteral; Global>] HTMLTableCaptionElement =
     abstract vAlign: string with get, set
 
 type [<AllowNullLiteral>] HTMLTableCaptionElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableCaptionElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableCaptionElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableCaptionElement
 
-type [<AllowNullLiteral; Global>] HTMLTableCellElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableCellElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     /// Sets or retrieves abbreviated text for the object.
@@ -2368,9 +3345,19 @@ type [<AllowNullLiteral; Global>] HTMLTableCellElement =
     abstract width: string with get, set
 
 type [<AllowNullLiteral>] HTMLTableCellElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableCellElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableCellElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableCellElement
 
-type [<AllowNullLiteral; Global>] HTMLTableColElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableColElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     /// Sets or retrieves how the object is aligned with adjacent text.
@@ -2380,16 +3367,36 @@ type [<AllowNullLiteral; Global>] HTMLTableColElement =
     abstract width: obj with get, set
 
 type [<AllowNullLiteral>] HTMLTableColElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableColElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableColElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableColElement
 
-type [<AllowNullLiteral; Global>] HTMLTableDataCellElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableDataCellElement =
     inherit HTMLTableCellElement
 
 
 type [<AllowNullLiteral>] HTMLTableDataCellElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableDataCellElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableDataCellElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableDataCellElement
 
-type [<AllowNullLiteral; Global>] HTMLTableElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableElement =
     inherit HTMLElement
     /// Sets or retrieves a value that indicates the table alignment.
     abstract align: string with get, set
@@ -2443,17 +3450,37 @@ type [<AllowNullLiteral; Global>] HTMLTableElement =
     abstract insertRow: ?index: float -> HTMLTableRowElement
 
 type [<AllowNullLiteral>] HTMLTableElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableElementElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableElement
 
-type [<AllowNullLiteral; Global>] HTMLTableHeaderCellElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableHeaderCellElement =
     inherit HTMLTableCellElement
     /// Sets or retrieves the group of cells in a table to which the object's information applies.
     abstract scope: string with get, set
 
 type [<AllowNullLiteral>] HTMLTableHeaderCellElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableHeaderCellElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableHeaderCellElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableHeaderCellElement
 
-type [<AllowNullLiteral; Global>] HTMLTableRowElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableRowElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     abstract align: string with get, set
@@ -2474,9 +3501,19 @@ type [<AllowNullLiteral; Global>] HTMLTableRowElement =
     abstract insertCell: ?index: float -> HTMLTableCellElement
 
 type [<AllowNullLiteral>] HTMLTableRowElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableRowElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableRowElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableRowElement
 
-type [<AllowNullLiteral; Global>] HTMLTableSectionElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTableSectionElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     abstract align: string with get, set
@@ -2488,9 +3525,19 @@ type [<AllowNullLiteral; Global>] HTMLTableSectionElement =
     abstract insertRow: ?index: float -> HTMLTableRowElement
 
 type [<AllowNullLiteral>] HTMLTableSectionElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTableSectionElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTableSectionElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTableSectionElement
 
-type [<AllowNullLiteral; Global>] HTMLTextAreaElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTextAreaElement =
     inherit HTMLElement
     /// Provides a way to direct a user to a specific field when a document loads. This can provide both direction and convenience for a user, reducing the need to click or tab to a field when a page opens. This attribute is true when present on an element, and false when missing.
     abstract autofocus: bool with get, set
@@ -2535,16 +3582,36 @@ type [<AllowNullLiteral; Global>] HTMLTextAreaElement =
     abstract setSelectionRange: start: int * ``end``: int -> unit
 
 type [<AllowNullLiteral>] HTMLTextAreaElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTextAreaElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTextAreaElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTextAreaElement
 
-type [<AllowNullLiteral; Global>] HTMLTitleElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTitleElement =
     inherit HTMLElement
     abstract text: string with get, set
 
 type [<AllowNullLiteral>] HTMLTitleElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTitleElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTitleElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTitleElement
 
-type [<AllowNullLiteral; Global>] HTMLTrackElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLTrackElement =
     inherit HTMLElement
     abstract ``default``: bool with get, set
     abstract kind: string with get, set
@@ -2563,23 +3630,53 @@ type [<AllowNullLiteral>] HTMLTrackElementType =
     abstract LOADED: float with get, set
     abstract LOADING: float with get, set
     abstract NONE: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLTrackElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLTrackElement()")>]
+    #endif
+    abstract Create: unit -> HTMLTrackElement
 
-type [<AllowNullLiteral; Global>] HTMLUListElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLUListElement =
     inherit HTMLElement
     abstract compact: bool with get, set
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLUListElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLUListElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLUListElement()")>]
+    #endif
+    abstract Create: unit -> HTMLUListElement
 
-type [<AllowNullLiteral; Global>] HTMLUnknownElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLUnknownElement =
     inherit HTMLElement
 
 type [<AllowNullLiteral>] HTMLUnknownElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLUnknownElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLUnknownElement()")>]
+    #endif
+    abstract Create: unit -> HTMLUnknownElement
 
-type [<AllowNullLiteral; Global>] HTMLVideoElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HTMLVideoElement =
     inherit HTMLMediaElement
     abstract height: float with get, set
     /// Gets or sets a URL of an image to display, for example, like a movie poster. This can be a still frame from the video, or another image if no video data is available.
@@ -2592,9 +3689,19 @@ type [<AllowNullLiteral; Global>] HTMLVideoElement =
     abstract getVideoPlaybackQuality: unit -> VideoPlaybackQuality
 
 type [<AllowNullLiteral>] HTMLVideoElementType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> HTMLVideoElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLVideoElement()")>]
+    #endif
+    abstract Create: unit -> HTMLVideoElement
 
-type [<AllowNullLiteral; Global>] VideoPlaybackQuality =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] VideoPlaybackQuality =
     abstract corruptedVideoFrames: float with get, set
     abstract creationTime: float with get, set
     abstract droppedVideoFrames: float with get, set
@@ -2602,9 +3709,19 @@ type [<AllowNullLiteral; Global>] VideoPlaybackQuality =
     abstract totalVideoFrames: float with get, set
 
 type [<AllowNullLiteral>] VideoPlaybackQualityType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> VideoPlaybackQuality
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new HTMLVideoPlaybackQuality()")>]
+    #endif
+    abstract Create: unit -> VideoPlaybackQuality
 
-type [<AllowNullLiteral; Global>] VideoTrack =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] VideoTrack =
     abstract id: string with get, set
     abstract kind: string with get, set
     abstract label: string with get, set
@@ -2613,23 +3730,48 @@ type [<AllowNullLiteral; Global>] VideoTrack =
     abstract sourceBuffer: SourceBuffer with get, set
 
 type [<AllowNullLiteral>] VideoTrackType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> VideoTrack
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new VideoTrack()")>]
+    #endif
+    abstract Create: unit -> VideoTrack
 
-type [<AllowNullLiteral; Global>] VideoTrackList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] VideoTrackList =
     inherit EventTarget
     abstract length: int
     abstract onaddtrack: (TrackEvent -> unit) with get, set
     abstract onchange: (Event -> unit) with get, set
     abstract onremovetrack: (TrackEvent -> unit) with get, set
     abstract selectedIndex: int with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> VideoTrack with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> VideoTrack with get, set
     abstract getTrackById: id: string -> VideoTrack
     abstract item: index: float -> VideoTrack
 
 type [<AllowNullLiteral>] VideoTrackListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> VideoTrackList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new VideoTrackList()")>]
+    #endif
+    abstract Create: unit -> VideoTrackList
 
-type [<AllowNullLiteral; Global>] SourceBuffer =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] SourceBuffer =
     inherit EventTarget
     abstract appendWindowEnd: float with get, set
     abstract appendWindowStart: float with get, set
@@ -2644,18 +3786,43 @@ type [<AllowNullLiteral; Global>] SourceBuffer =
     abstract remove: start: float * ``end``: float -> unit
 
 type [<AllowNullLiteral>] SourceBufferType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SourceBuffer
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new SourceBuffer()")>]
+    #endif
+    abstract Create: unit -> SourceBuffer
 
-type [<AllowNullLiteral; Global>] SourceBufferList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] SourceBufferList =
     inherit EventTarget
     abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> SourceBuffer with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>] 
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> SourceBuffer with get, set
     abstract item: index: float -> SourceBuffer
 
 type [<AllowNullLiteral>] SourceBufferListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SourceBufferList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new SourceBufferList()")>]
+    #endif
+    abstract Create: unit -> SourceBufferList
 
-type [<AllowNullLiteral; Global>] AudioTrack =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] AudioTrack =
     abstract enabled: bool with get, set
     abstract id: string with get, set
     abstract kind: string with get, set
@@ -2664,22 +3831,47 @@ type [<AllowNullLiteral; Global>] AudioTrack =
     abstract sourceBuffer: SourceBuffer with get, set
 
 type [<AllowNullLiteral>] AudioTrackType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> AudioTrack
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new AudioTrack()")>]
+    #endif
+    abstract Create: unit -> AudioTrack
 
-type [<AllowNullLiteral; Global>] AudioTrackList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] AudioTrackList =
     inherit EventTarget
     abstract length: int
     abstract onaddtrack: (TrackEvent -> unit) with get, set
     abstract onchange: (Event -> unit) with get, set
     abstract onremovetrack: (TrackEvent -> unit) with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> AudioTrack with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>] 
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> AudioTrack with get, set
     abstract getTrackById: id: string -> AudioTrack
     abstract item: index: float -> AudioTrack
 
 type [<AllowNullLiteral>] AudioTrackListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> AudioTrackList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new AudioTrackList()")>]
+    #endif
+    abstract Create: unit -> AudioTrackList
 
-type [<AllowNullLiteral; Global>] TextTrack =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TextTrack =
     inherit EventTarget
     abstract activeCues: TextTrackCueList with get, set
     abstract cues: TextTrackCueList with get, set
@@ -2710,9 +3902,19 @@ type [<AllowNullLiteral>] TextTrackType =
     abstract LOADING: float with get, set
     abstract NONE: float with get, set
     abstract SHOWING: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> TextTrack
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new TextTrack()")>]
+    #endif
+    abstract Create: unit -> TextTrack
 
-type [<AllowNullLiteral; Global>] TextTrackCue =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TextTrackCue =
     inherit EventTarget
     abstract endTime: float with get, set
     abstract id: string with get, set
@@ -2725,26 +3927,61 @@ type [<AllowNullLiteral; Global>] TextTrackCue =
     abstract getCueAsHTML: unit -> DocumentFragment
 
 type [<AllowNullLiteral>] TextTrackCueType =
-    [<Emit("new $0($1...)")>] abstract Create: startTime: float * endTime: float * text: string -> TextTrackCue
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new TextTrackCueType($startTime,$endTime,$text)")>]
+    #endif
+    abstract Create: startTime: float * endTime: float * text: string -> TextTrackCue
 
-type [<AllowNullLiteral; Global>] TextTrackCueList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TextTrackCueList =
     abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> TextTrackCue with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> TextTrackCue with get, set
     abstract getCueById: id: string -> TextTrackCue
     abstract item: index: float -> TextTrackCue
 
 type [<AllowNullLiteral>] TextTrackCueListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> TextTrackCueList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new TextTrackCueList()")>]
+    #endif
+    abstract Create: unit -> TextTrackCueList
 
-type [<AllowNullLiteral; Global>] TextTrackList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TextTrackList =
     inherit EventTarget
     abstract length: int
     abstract onaddtrack: (TrackEvent -> unit) with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> TextTrack with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> TextTrack with get, set
     abstract item: index: float -> TextTrack
 
 type [<AllowNullLiteral>] TextTrackListType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> TextTrackList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new TextTrackList()")>]
+    #endif
+    abstract Create: unit -> TextTrackList
 
 type [<AllowNullLiteral>] HTMLTableAlignment =
     /// Sets or retrieves a value that you can use to implement your own ch functionality for the object.
@@ -2756,19 +3993,44 @@ type [<AllowNullLiteral>] HTMLTableAlignment =
 
 // ## CANVAS
 
-type [<AllowNullLiteral; Global>] CanvasGradient =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CanvasGradient =
     abstract addColorStop: offset: float * color: string -> unit
 
 type [<AllowNullLiteral>] CanvasGradientType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CanvasGradient
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new CanvasGradient()")>]
+    #endif
+    abstract Create: unit -> CanvasGradient
 
-type [<AllowNullLiteral; Global>] CanvasPattern =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CanvasPattern =
     interface end
 
 type [<AllowNullLiteral>] CanvasPatternType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CanvasPattern
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new CanvasPattern()")>]
+    #endif
+    abstract Create: unit -> CanvasPattern
 
-type [<AllowNullLiteral; Global>] CanvasRenderingContext2D =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CanvasRenderingContext2D =
     abstract canvas: HTMLCanvasElement with get, set
     abstract fillStyle: U3<string, CanvasGradient, CanvasPattern> with get, set
     abstract font: string with get, set
@@ -2830,26 +4092,61 @@ type [<AllowNullLiteral; Global>] CanvasRenderingContext2D =
     abstract imageSmoothingEnabled: bool with get, set
 
 type [<AllowNullLiteral>] CanvasRenderingContext2DType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CanvasRenderingContext2D
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new CanvasRenderingContext2D()")>]
+    #endif
+    abstract Create: unit -> CanvasRenderingContext2D
 
-type [<AllowNullLiteral; Global>] ImageData =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] ImageData =
     abstract data: uint8[] with get, set
     abstract height: float with get, set
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] ImageDataType =
-    [<Emit("new $0($1...)")>] abstract Create: width: float * height: float -> ImageData
-    [<Emit("new $0($1...)")>] abstract Create: array: uint8[] * width: float * height: float -> ImageData
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new ImageData($width,$height)")>]
+    #endif
+    abstract Create: width: float * height: float -> ImageData
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new ImageData($array,$width,$height)")>]
+    #endif
+    abstract Create: array: uint8[] * width: float * height: float -> ImageData
 
 // ## OTHER HTML INTERFACES
 
-type [<AllowNullLiteral; Global>] TextMetrics =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TextMetrics =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] TextMetricsType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> TextMetrics
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new TextMetrics()")>]
+    #endif
+    abstract Create: unit -> TextMetrics
 
-type [<AllowNullLiteral; Global>] MediaError =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] MediaError =
     abstract code: float with get, set
     abstract MEDIA_ERR_ABORTED: float with get, set
     abstract MEDIA_ERR_DECODE: float with get, set
@@ -2861,9 +4158,19 @@ type [<AllowNullLiteral>] MediaErrorType =
     abstract MEDIA_ERR_DECODE: float with get, set
     abstract MEDIA_ERR_NETWORK: float with get, set
     abstract MEDIA_ERR_SRC_NOT_SUPPORTED: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> MediaError
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new MediaError()")>]
+    #endif
+    abstract Create: unit -> MediaError
 
-type [<AllowNullLiteral; Global>] ValidityState =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] ValidityState =
     abstract badInput: bool with get, set
     abstract customError: bool with get, set
     abstract patternMismatch: bool with get, set
@@ -2877,21 +4184,41 @@ type [<AllowNullLiteral; Global>] ValidityState =
     abstract valueMissing: bool with get, set
 
 type [<AllowNullLiteral>] ValidityStateType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> ValidityState
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new ValidityState()")>]
+    #endif
+    abstract Create: unit -> ValidityState
 
 // ## EVENTS
 
-type [<AllowNullLiteral; Global>] UIEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] UIEvent =
     inherit Event
     abstract detail: float
     abstract view: Window
 
-type [<AllowNullLiteral; Global>] AnimationEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] AnimationEvent =
     inherit Event
     abstract animationName: string with get, set
     abstract elapsedTime: float with get, set
 
-type [<AllowNullLiteral; Global>] MouseEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] MouseEvent =
     inherit UIEvent
     abstract altKey: bool
     abstract button: float
@@ -2919,29 +4246,59 @@ type [<AllowNullLiteral; Global>] MouseEvent =
     abstract y: float
     abstract getModifierState: keyArg: string -> bool
 
-type [<AllowNullLiteral; Global>] MouseWheelEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] MouseWheelEvent =
     inherit MouseEvent
     abstract wheelDelta: float
     abstract wheelDeltaX: float
     abstract wheelDeltaY: float
 
-type [<AllowNullLiteral; Global>] DocumentEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DocumentEvent =
     abstract createEvent: eventInterface: string -> Event
 
-type [<AllowNullLiteral; Global>] DragEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DragEvent =
     inherit MouseEvent
     abstract dataTransfer: DataTransfer
 
-type [<AllowNullLiteral; Global>] ClipboardEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] ClipboardEvent =
     inherit Event
     abstract clipboardData: DataTransfer
 
-type [<AllowNullLiteral; Global>] CompositionEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CompositionEvent =
     inherit UIEvent
     abstract data: string
     abstract locale: string
 
-type [<AllowNullLiteral; Global>] DataTransfer =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DataTransfer =
     abstract dropEffect: string with get, set
     abstract effectAllowed: string with get, set
     abstract files: FileList with get, set
@@ -2951,25 +4308,50 @@ type [<AllowNullLiteral; Global>] DataTransfer =
     abstract getData: format: string -> string
     abstract setData: format: string * data: string -> bool
 
-type [<AllowNullLiteral; Global>] DataTransferItem =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DataTransferItem =
     abstract kind: string
     abstract ``type``: string
     abstract getAsFile: unit -> File
     abstract getAsString: _callback: (string -> unit) -> unit
 
-type [<AllowNullLiteral; Global>] DataTransferItemList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DataTransferItemList =
     abstract length: int
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> DataTransferItem
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    // TODO
+    #endif
+    abstract Item: index: int -> DataTransferItem
     abstract add: data: File -> DataTransferItem
     abstract clear: unit -> unit
     abstract item: index: float -> DataTransferItem
     abstract remove: index: float -> unit
 
-type [<AllowNullLiteral; Global>] FocusEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] FocusEvent =
     inherit UIEvent
     abstract relatedTarget: EventTarget
 
-type [<AllowNullLiteral; Global>] PointerEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] PointerEvent =
     inherit MouseEvent
     abstract currentPoint: obj
     abstract height: float
@@ -2986,11 +4368,21 @@ type [<AllowNullLiteral; Global>] PointerEvent =
     abstract getCurrentPoint: element: Element -> unit
     abstract getIntermediatePoints: element: Element -> unit
 
-type [<AllowNullLiteral; Global>] PopStateEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] PopStateEvent =
     inherit Event
     abstract state: obj
 
-type [<AllowNullLiteral; Global>] KeyboardEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] KeyboardEvent =
     inherit UIEvent
     abstract altKey: bool
     abstract char: string
@@ -3014,13 +4406,23 @@ type [<AllowNullLiteral; Global>] KeyboardEvent =
     abstract DOM_KEY_LOCATION_STANDARD: float
     abstract getModifierState: keyArg: string -> bool
 
-type [<AllowNullLiteral; Global>] ProgressEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] ProgressEvent =
     inherit Event
     abstract lengthComputable: bool
     abstract loaded: float
     abstract total: float
 
-type [<AllowNullLiteral; Global>] Touch =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] Touch =
     abstract clientX: float
     abstract clientY: float
     abstract identifier: float
@@ -3030,7 +4432,12 @@ type [<AllowNullLiteral; Global>] Touch =
     abstract screenY: float
     abstract target: EventTarget
 
-type [<AllowNullLiteral; Global>] TouchEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TouchEvent =
     inherit UIEvent
     abstract altKey: bool
     abstract changedTouches: Touch[]
@@ -3040,28 +4447,53 @@ type [<AllowNullLiteral; Global>] TouchEvent =
     abstract targetTouches: Touch[]
     abstract touches: Touch[]
 
-type [<AllowNullLiteral; Global>] AriaRequestEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] AriaRequestEvent =
     inherit Event
     abstract attributeName: string
     abstract attributeValue: string
 
-type [<AllowNullLiteral; Global>] CommandEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CommandEvent =
     inherit Event
     abstract commandName: string
     abstract detail: string
 
-type [<AllowNullLiteral; Global>] BeforeUnloadEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] BeforeUnloadEvent =
     inherit Event
     abstract returnValue: obj
 
-type [<AllowNullLiteral; Global>] DeviceMotionEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DeviceMotionEvent =
     inherit Event
     abstract acceleration: DeviceAcceleration
     abstract accelerationIncludingGravity: DeviceAcceleration
     abstract interval: float
     abstract rotationRate: DeviceRotationRate
 
-type [<AllowNullLiteral; Global>] DeviceOrientationEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] DeviceOrientationEvent =
     inherit Event
     abstract absolute: bool
     abstract alpha: float
@@ -3078,25 +4510,50 @@ type [<AllowNullLiteral>] DeviceRotationRate =
     abstract beta: float
     abstract gamma: float
 
-type [<AllowNullLiteral; Global>] TransitionEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TransitionEvent =
     inherit Event
     abstract elapsedTime: float with get, set
     abstract propertyName: string with get, set
 
-type [<AllowNullLiteral; Global>] PageTransitionEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] PageTransitionEvent =
     inherit Event
     abstract persisted: bool
 
-type [<AllowNullLiteral; Global>] HashChangeEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] HashChangeEvent =
     inherit Event
     abstract newURL: string
     abstract oldURL: string
 
-type [<AllowNullLiteral; Global>] TrackEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] TrackEvent =
     inherit Event
     abstract track: obj
 
-type [<AllowNullLiteral; Global>] WheelEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] WheelEvent =
     inherit MouseEvent
     abstract deltaMode: float
     abstract deltaX: float
@@ -3112,3 +4569,4 @@ type [<AllowNullLiteral; Global>] WheelEvent =
 //     abstract DOM_DELTA_PAGE: float
 //     abstract DOM_DELTA_PIXEL: float
 //     [<Emit("new $0($1...)")>] abstract Create: typeArg: string * ?eventInitDict: WheelEventInit -> WheelEvent
+#endif

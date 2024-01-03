@@ -1,14 +1,26 @@
 namespace Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+#endif
 
-[<StringEnum; RequireQualifiedAccess>]
+#if FABLE_COMPILER
+StringEnum
+#endif
+[<RequireQualifiedAccess>]
 type ScrollRestoration =
     | Auto
     | Manual
 
-type [<AllowNullLiteral; Global>] History =
+#if FABLE_COMPILER
+[<Global>]
+#else
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] History =
     abstract length: int
     abstract scrollRestoration : ScrollRestoration with get, set
     abstract state: obj with get, set
@@ -22,3 +34,4 @@ type [<AllowNullLiteral; Global>] History =
     abstract pushState: statedata: obj * ?title: string * ?url: string -> unit
     /// Updates the most recent entry on the history stack to have the specified data, title, and, if provided, URL. The data is treated as opaque by the DOM; you may specify any JavaScript object that can be serialized.
     abstract replaceState: statedata: obj * ?title: string * ?url: string -> unit
+#endif

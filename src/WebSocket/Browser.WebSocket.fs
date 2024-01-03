@@ -1,9 +1,10 @@
 namespace rec Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
+
 #if FABLE_COMPILER
 open Fable.Core
-#elif JAVASCRIPT
+#else
 open WebSharper
 #endif
 
@@ -16,7 +17,7 @@ type WebSocketState =
 
 #if FABLE_COMPILER
 [<Global>]
-#elif JAVASCRIPT
+#else
 [<Stub>]
 #endif
 type [<AllowNullLiteral>] CloseEvent =
@@ -28,7 +29,7 @@ type [<AllowNullLiteral>] CloseEvent =
 
 #if FABLE_COMPILER
 [<Global>]
-#elif JAVASCRIPT
+#else
 [<Stub>]
 #endif
 type [<AllowNullLiteral>] WebSocket =
@@ -47,33 +48,37 @@ type [<AllowNullLiteral>] WebSocket =
     abstract send: data: obj -> unit
     #if FABLE_COMPILER
     [<Emit("$0.addEventListener('close',$1...)")>] 
-    #elif JAVASCRIPT
+    #else
     [<Inline("$this.addEventListener('close',$listener,$useCapture)")>]
     #endif
     abstract addEventListener_close: listener: (CloseEvent -> unit) * ?useCapture: bool -> unit
     #if FABLE_COMPILER
     [<Emit("$0.addEventListener('error',$1...)")>] 
-    #elif JAVASCRIPT
+    #else
     [<Inline("$this.addEventListener('error',$listener,$useCapture)")>]
     #endif
     abstract addEventListener_error: listener: (ErrorEvent -> unit) * ?useCapture: bool -> unit
     #if FABLE_COMPILER
     [<Emit("$0.addEventListener('message',$1...)")>] 
-    #elif JAVASCRIPT
+    #else
     [<Inline("$this.addEventListener('message',$listener,$useCapture)")>]
     #endif
     abstract addEventListener_message: listener: (MessageEvent -> unit) * ?useCapture: bool -> unit
     #if FABLE_COMPILER
     [<Emit("$0.addEventListener('open',$1...)")>] 
-    #elif JAVASCRIPT
+    #else
     [<Inline("$this.addEventListener('open',$listener,$useCapture)")>]
     #endif
     abstract addEventListener_open: listener: (Event -> unit) * ?useCapture: bool -> unit
 
+#if JAVASCRIPT
+type U2<'A,'B> = JavaScript.Union<'A,'B>
+#endif
+
 type [<AllowNullLiteral>] WebSocketType =
     #if FABLE_COMPILER
     [<Emit("new $0($1...)")>]
-    #elif JAVASCRIPT
+    #else
     [<Inline("")>]
     #endif 
     abstract Create: url: string * ?protocols: U2<string, string[]> -> WebSocket
@@ -82,7 +87,7 @@ namespace Browser
 
 #if FABLE_COMPILER
 open Fable.Core
-#elif JAVASCRIPT
+#else
 open WebSharper
 #endif
 
@@ -92,7 +97,7 @@ open Browser.Types
 module WebSocket =
     #if FABLE_COMPILER
     [<Global>]
-    #elif JAVASCRIPT
+    #else
     [<Inline>]
     #endif 
     let WebSocket: WebSocketType = 
@@ -101,3 +106,5 @@ module WebSocket =
         #else
         Unchecked.defaultof<_>
         #endif
+
+#endif

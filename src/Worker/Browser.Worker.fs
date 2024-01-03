@@ -1,11 +1,16 @@
 namespace Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
 #if FABLE_COMPILER
 open Fable.Core
-#elif JAVASCRIPT
+
+type EnumNameAttribute = CompiledNameAttribute
+#else
 open WebSharper
-module JS = WebSharper.JavaScript
+
+type EnumNameAttribute = ConstantAttribute
+module internal JS =
+    type Promise<'A> = WebSharper.JavaScript.Promise<'A>
 #endif
 
 type AbstractWorker =
@@ -14,7 +19,7 @@ type AbstractWorker =
 
 #if FABLE_COMPILER
 [<Global>]
-#elif JAVASCRIPT
+#else
 [<Stub>]
 #endif
 type Worker =
@@ -36,7 +41,7 @@ type WorkerType =
 #endif 
 type WorkerCredentials =
     | Omit
-    | [<CompiledName("same-origin")>] SameOrigin
+    | [<EnumName("same-origin")>] SameOrigin
     | Include
 
 type WorkerOptions =
@@ -50,7 +55,7 @@ type WorkerOptions =
 type WorkerConstructor =
     #if FABLE_COMPILER
     [<Emit("new $0($1...)")>]
-    #elif JAVASCRIPT
+    #else
     [<Inline("new Worker($url,$options)")>]
     #endif 
     abstract Create: url: string * ?options: WorkerOptions -> Worker
@@ -69,7 +74,7 @@ type ServiceWorkerState =
 
 #if FABLE_COMPILER
 [<Global>]
-#elif JAVASCRIPT
+#else
 [<Stub>]
 #endif
 type ServiceWorker =
@@ -81,7 +86,7 @@ type ServiceWorker =
 
 #if FABLE_COMPILER
 [<Global>]
-#elif JAVASCRIPT
+#else
 [<Stub>]
 #endif
 type ServiceWorkerRegistration =
@@ -104,7 +109,7 @@ type ServiceWorkerRegistrationOptions =
 
 #if FABLE_COMPILER
 [<Global>]
-#elif JAVASCRIPT
+#else
 [<Stub>]
 #endif
 type ServiceWorkerContainer =
@@ -123,7 +128,7 @@ namespace Browser
 open Browser.Types
 #if FABLE_COMPILER
 open Fable.Core
-#elif JAVASCRIPT
+#else
 open WebSharper
 #endif
 
@@ -131,7 +136,7 @@ open WebSharper
 module Worker =
     #if FABLE_COMPILER
     [<Global>]
-    #elif JAVASCRIPT
+    #else
     [<Inline>]
     #endif
     let  Worker: WorkerConstructor = 
@@ -140,3 +145,4 @@ module Worker =
         #else
         Unchecked.defaultof<_>
         #endif
+#endif

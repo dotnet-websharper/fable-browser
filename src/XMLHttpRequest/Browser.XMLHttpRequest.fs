@@ -1,7 +1,11 @@
 namespace Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+#endif
 
 type ReadyState =
   /// Client has been created. `open()` was not yet called.
@@ -15,10 +19,22 @@ type ReadyState =
   /// The operation is complete.
   | Done = 4
 
-type [<AllowNullLiteral; Global>] XMLHttpRequestUpload =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] XMLHttpRequestUpload =
     inherit EventTarget
 
-type [<AllowNullLiteral; Global>] XMLHttpRequest =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] XMLHttpRequest =
     inherit EventTarget
     abstract onreadystatechange: (unit -> unit) with get, set
     abstract readyState: ReadyState
@@ -41,13 +57,33 @@ type [<AllowNullLiteral; Global>] XMLHttpRequest =
     abstract setRequestHeader: header: string * value: string -> unit
 
 type [<AllowNullLiteral>] XMLHttpRequestType =
-    [<Emit("new $0($1...)")>] abstract Create: unit -> XMLHttpRequest
+#if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+#else
+    [<Inline("new XMLHttpRequest()")>] 
+#endif
+    abstract Create: unit -> XMLHttpRequest
 
 namespace Browser
 
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+#endif
 open Browser.Types
 
 [<AutoOpen>]
 module XMLHttpRequest =
-    let [<Global>] XMLHttpRequest: XMLHttpRequestType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let XMLHttpRequest: XMLHttpRequestType = 
+        #if FABLE_COMPILER
+        jsNative
+        #else
+        Unchecked.defaultof<_>
+        #endif
+#endif

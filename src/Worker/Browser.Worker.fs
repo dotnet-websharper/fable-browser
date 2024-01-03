@@ -1,24 +1,39 @@
 namespace Browser.Types
 
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+module JS = WebSharper.JavaScript
+#endif
 
 type AbstractWorker =
     abstract onerror: (ErrorEvent -> unit) with get, set
 
-type [<Global>] Worker =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type Worker =
     inherit EventTarget
     inherit AbstractWorker
     abstract onmessage: (MessageEvent -> unit) with get, set
     abstract postMessage: message: obj * ?transfer: obj -> unit
     abstract terminate: unit -> unit
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif 
 type WorkerType =
     | Classic
     | Module
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif 
 type WorkerCredentials =
     | Omit
     | [<CompiledName("same-origin")>] SameOrigin
@@ -33,9 +48,17 @@ type WorkerOptions =
     abstract name: string with get, set
 
 type WorkerConstructor =
-    [<Emit("new $0($1...)")>] abstract Create: url: string * ?options: WorkerOptions -> Worker
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #elif JAVASCRIPT
+    [<Inline("new Worker($url,$options)")>]
+    #endif 
+    abstract Create: url: string * ?options: WorkerOptions -> Worker
 
-[<StringEnum; RequireQualifiedAccess>]
+#if FABLE_COMPILER
+[<StringEnum>]
+#endif
+[<RequireQualifiedAccess>]
 type ServiceWorkerState =
     | Installing
     | Installed
@@ -43,13 +66,25 @@ type ServiceWorkerState =
     | Activated
     | Redundant
 
-type [<Global>] ServiceWorker =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type ServiceWorker =
     inherit Worker
     abstract scriptURL: string
     abstract state: ServiceWorkerState
     abstract onstatechange: (Event -> unit) option with get, set
 
-type [<Global>] ServiceWorkerRegistration =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type ServiceWorkerRegistration =
     abstract scope: string
     abstract installing: ServiceWorker option
     abstract waiting: ServiceWorker option
@@ -66,7 +101,13 @@ type ServiceWorkerRegistrationOptions =
     /// A USVString representing a URL that defines a service worker's registration scope; that is, what range of URLs a service worker can control. This is usually a relative URL. It is relative to the base URL of the application. By default, the scope value for a service worker registration is set to the directory where the service worker script is located.
     abstract scope: string with get, set
 
-type [<Global>] ServiceWorkerContainer =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type ServiceWorkerContainer =
     abstract controller: ServiceWorker option
     abstract ready: JS.Promise<ServiceWorkerRegistration>
     abstract oncontrollerchange: (Event -> unit) with get, set
@@ -80,8 +121,22 @@ type [<Global>] ServiceWorkerContainer =
 namespace Browser
 
 open Browser.Types
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+#endif
 
 [<AutoOpen>]
 module Worker =
-    let [<Global>] Worker: WorkerConstructor = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #elif JAVASCRIPT
+    [<Inline>]
+    #endif
+    let  Worker: WorkerConstructor = 
+        #if FABLE_COMPILER
+        jsNative
+        #else
+        Unchecked.defaultof<_>
+        #endif

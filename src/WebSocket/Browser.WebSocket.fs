@@ -1,7 +1,11 @@
 namespace rec Browser.Types
 
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+#endif
 
 type WebSocketState =
     | CONNECTING = 0
@@ -9,13 +13,25 @@ type WebSocketState =
     | CLOSING = 2
     | CLOSED = 3
 
-type [<AllowNullLiteral; Global>] CloseEvent =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] CloseEvent =
     inherit Event
     abstract code: int
     abstract reason: string
     abstract wasClean: bool
 
-type [<AllowNullLiteral; Global>] WebSocket =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] WebSocket =
     inherit EventTarget
     abstract binaryType: string with get, set
     abstract bufferedAmount: float
@@ -29,19 +45,59 @@ type [<AllowNullLiteral; Global>] WebSocket =
     abstract url: string
     abstract close: ?code: int * ?reason: string -> unit
     abstract send: data: obj -> unit
-    [<Emit("$0.addEventListener('close',$1...)")>] abstract addEventListener_close: listener: (CloseEvent -> unit) * ?useCapture: bool -> unit
-    [<Emit("$0.addEventListener('error',$1...)")>] abstract addEventListener_error: listener: (ErrorEvent -> unit) * ?useCapture: bool -> unit
-    [<Emit("$0.addEventListener('message',$1...)")>] abstract addEventListener_message: listener: (MessageEvent -> unit) * ?useCapture: bool -> unit
-    [<Emit("$0.addEventListener('open',$1...)")>] abstract addEventListener_open: listener: (Event -> unit) * ?useCapture: bool -> unit
+    #if FABLE_COMPILER
+    [<Emit("$0.addEventListener('close',$1...)")>] 
+    #elif JAVASCRIPT
+    [<Inline("$this.addEventListener('close',$listener,$useCapture)")>]
+    #endif
+    abstract addEventListener_close: listener: (CloseEvent -> unit) * ?useCapture: bool -> unit
+    #if FABLE_COMPILER
+    [<Emit("$0.addEventListener('error',$1...)")>] 
+    #elif JAVASCRIPT
+    [<Inline("$this.addEventListener('error',$listener,$useCapture)")>]
+    #endif
+    abstract addEventListener_error: listener: (ErrorEvent -> unit) * ?useCapture: bool -> unit
+    #if FABLE_COMPILER
+    [<Emit("$0.addEventListener('message',$1...)")>] 
+    #elif JAVASCRIPT
+    [<Inline("$this.addEventListener('message',$listener,$useCapture)")>]
+    #endif
+    abstract addEventListener_message: listener: (MessageEvent -> unit) * ?useCapture: bool -> unit
+    #if FABLE_COMPILER
+    [<Emit("$0.addEventListener('open',$1...)")>] 
+    #elif JAVASCRIPT
+    [<Inline("$this.addEventListener('open',$listener,$useCapture)")>]
+    #endif
+    abstract addEventListener_open: listener: (Event -> unit) * ?useCapture: bool -> unit
 
 type [<AllowNullLiteral>] WebSocketType =
-    [<Emit("new $0($1...)")>] abstract Create: url: string * ?protocols: U2<string, string[]> -> WebSocket
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #elif JAVASCRIPT
+    [<Inline("")>]
+    #endif 
+    abstract Create: url: string * ?protocols: U2<string, string[]> -> WebSocket
 
 namespace Browser
 
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+#endif
+
 open Browser.Types
 
 [<AutoOpen>]
 module WebSocket =
-    let [<Global>] WebSocket: WebSocketType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #elif JAVASCRIPT
+    [<Inline>]
+    #endif 
+    let WebSocket: WebSocketType = 
+        #if FABLE_COMPILER
+        jsNative
+        #else
+        Unchecked.defaultof<_>
+        #endif

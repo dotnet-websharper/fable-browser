@@ -1,9 +1,19 @@
 namespace Browser.Types
 
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+#endif
 
-type [<AllowNullLiteral; Global>] URLSearchParams =
+
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] URLSearchParams =
     /// Appends a specified key/value pair as a new search parameter.
     abstract append: name: string * value: string -> unit
     /// Deletes the given search parameter, and its associated value, from the list of all search parameters.
@@ -18,9 +28,19 @@ type [<AllowNullLiteral; Global>] URLSearchParams =
     abstract set: name: string * value: string -> unit
 
 type [<AllowNullLiteral>] URLSearchParamsType =
-    [<Emit("new $0($1...)")>] abstract Create: arg: obj -> URLSearchParams
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #elif JAVASCRIPT
+    [<Inline("new URLSearchParams($arg)")>] 
+    #endif
+    abstract Create: arg: obj -> URLSearchParams
 
-type [<AllowNullLiteral; Global>] URL =
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Stub>]
+#endif
+type [<AllowNullLiteral>] URL =
     abstract hash: string with get, set
     abstract host: string with get, set
     abstract hostname: string with get, set
@@ -37,7 +57,12 @@ type [<AllowNullLiteral; Global>] URL =
     abstract toJSON: unit -> string
 
 type [<AllowNullLiteral>] URLType =
-    [<Emit("new $0($1...)")>] abstract Create: url: string * ?``base``: string -> URL
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #elif JAVASCRIPT
+    [<Inline("new URL($url,$base)")>] 
+    #endif
+    abstract Create: url: string * ?``base``: string -> URL
     /// Returns a DOMString containing a unique blob URL, that is a URL with blob: as its scheme, followed by an opaque string uniquely identifying the object in the browser.
     abstract createObjectURL: obj -> string
     /// Revokes an object URL previously created using URL.createObjectURL().
@@ -45,10 +70,33 @@ type [<AllowNullLiteral>] URLType =
 
 namespace Browser
 
+#if FABLE_COMPILER
 open Fable.Core
+#endif
 open Browser.Types
 
 [<AutoOpen>]
 module Url =
-    let [<Global>] URL: URLType = jsNative
-    let [<Global>] URLSearchParams: URLSearchParamsType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #elif JAVASCRIPT
+    [<WebSharper.Inline>]
+    #endif
+    let URL: URLType = 
+        #if FABLE_COMPILER
+        jsNative
+        #else
+        Unchecked.defaultof<_>
+        #endif
+
+    #if FABLE_COMPILER
+    [<Global>]
+    #elif JAVASCRIPT
+    [<WebSharper.Inline>]
+    #endif
+    let URLSearchParams: URLSearchParamsType = 
+        #if FABLE_COMPILER
+        jsNative
+        #else
+        Unchecked.defaultof<_>
+        #endif

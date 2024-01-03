@@ -1,7 +1,11 @@
 namespace Browser.Types
 
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#elif JAVASCRIPT
+open WebSharper
+#endif
 
 type Coordinates =
     /// Returns a double representing the position's latitude in decimal degrees.
@@ -37,7 +41,12 @@ type PositionOptions =
     abstract timeout: int option with get, set
     abstract maximumAge: int option with get, set
 
-type [<Global>] Geolocation =
+#if FABLE_COMPILER
+[<Global>]
+#elif JAVASCRIPT
+[<Inline>]
+#endif
+type Geolocation =
     abstract clearWatch: watchId: float -> unit
     abstract getCurrentPosition: successCallback: (Position->unit) * ?errorCallback: (PositionError->unit) * ?options: PositionOptions -> unit
     abstract watchPosition: successCallback: (Position->unit) * ?errorCallback: (PositionError->unit) * ?options: PositionOptions -> float

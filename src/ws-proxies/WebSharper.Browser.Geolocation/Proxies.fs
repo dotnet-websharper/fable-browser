@@ -2,14 +2,14 @@ module private Proxies
 open WebSharper
 open WebSharper.JavaScript
 
-type WindowOrWorkerGlobalScope with
-    [<Inline>] 
-    static member Geolocation = Unchecked.defaultof<Browser.Types.Geolocation>
+// type WindowOrWorkerGlobalScope with
+//     [<Inline>] 
+//     static member Geolocation = Unchecked.defaultof<Browser.Types.Geolocation>
 
-type GeolocationProxy =
-    abstract clearWatch: watchId: float -> unit
-    abstract getCurrentPosition: successCallback: (Browser.Types.Position->unit) * ?errorCallback: (Browser.Types.PositionError->unit) * ?options: Browser.Types.PositionOptions -> unit
-    abstract watchPosition: successCallback: (Browser.Types.Position->unit) * ?errorCallback: (Browser.Types.PositionError->unit) * ?options: Browser.Types.PositionOptions -> float
+// type GeolocationProxy =
+//     abstract clearWatch: watchId: float -> unit
+//     abstract getCurrentPosition: successCallback: (Browser.Types.Position->unit) * ?errorCallback: (Browser.Types.PositionError->unit) * ?options: Browser.Types.PositionOptions -> unit
+//     abstract watchPosition: successCallback: (Browser.Types.Position->unit) * ?errorCallback: (Browser.Types.PositionError->unit) * ?options: Browser.Types.PositionOptions -> float
 
 // type Coordinates =
 //     /// Returns a double representing the position's latitude in decimal degrees.

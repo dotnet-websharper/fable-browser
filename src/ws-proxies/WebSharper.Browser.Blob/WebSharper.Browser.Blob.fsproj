@@ -3,6 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../Blob/Browser.Blob.fs" />
     <Compile Include="Proxies.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />

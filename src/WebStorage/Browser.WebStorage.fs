@@ -11,7 +11,7 @@ open WebSharper
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Storage =
     abstract length: int
@@ -37,7 +37,7 @@ type [<AllowNullLiteral>] Storage =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] StorageEvent =
     inherit Event

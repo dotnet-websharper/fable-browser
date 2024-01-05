@@ -10,7 +10,7 @@ open WebSharper
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMException =
     abstract code: float with get, set

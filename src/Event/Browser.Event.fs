@@ -11,7 +11,7 @@ open WebSharper.JavaScript
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Event =
     abstract bubbles: bool with get, set
@@ -60,7 +60,7 @@ type [<AllowNullLiteral>] RemoveEventListenerOptions =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] EventTarget =
     abstract addEventListener: ``type``: string * listener: (Event->unit) -> unit
@@ -74,7 +74,7 @@ type [<AllowNullLiteral>] EventTarget =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] EventTargetType =
     #if FABLE_COMPILER
@@ -87,7 +87,7 @@ type [<AllowNullLiteral>] EventTargetType =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CustomEvent =
     inherit Event
@@ -100,7 +100,7 @@ type [<AllowNullLiteral>] CustomEventInit =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CustomEvent<'T> =
     inherit Event
@@ -127,7 +127,7 @@ type [<AllowNullLiteral>] CustomEventType =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ErrorEvent =
     inherit Event
@@ -141,7 +141,7 @@ type [<AllowNullLiteral>] ErrorEvent =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MessageEvent =
     inherit Event
@@ -161,7 +161,7 @@ type GamepadEventType =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] GamepadEvent =
     inherit Event

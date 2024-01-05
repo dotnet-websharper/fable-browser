@@ -18,7 +18,7 @@ type WebSocketState =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CloseEvent =
     inherit Event
@@ -30,7 +30,7 @@ type [<AllowNullLiteral>] CloseEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] WebSocket =
     inherit EventTarget

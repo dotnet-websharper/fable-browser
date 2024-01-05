@@ -21,7 +21,7 @@ type [<AllowNullLiteral>] FilePropertyBag =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] File =
     inherit Blob
@@ -39,7 +39,7 @@ type [<AllowNullLiteral>] FileType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] FileList =
     abstract length: int
@@ -54,7 +54,7 @@ type [<AllowNullLiteral>] FileList =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] FileReader =
     inherit EventTarget

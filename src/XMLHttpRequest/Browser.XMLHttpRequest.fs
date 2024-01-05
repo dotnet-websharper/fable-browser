@@ -23,7 +23,7 @@ type ReadyState =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] XMLHttpRequestUpload =
     inherit EventTarget
@@ -32,7 +32,7 @@ type [<AllowNullLiteral>] XMLHttpRequestUpload =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] XMLHttpRequest =
     inherit EventTarget

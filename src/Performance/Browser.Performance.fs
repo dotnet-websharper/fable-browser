@@ -11,7 +11,7 @@ open WebSharper
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Performance =
     abstract clearMarks: ?markName: string -> unit

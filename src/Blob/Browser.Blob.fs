@@ -30,7 +30,7 @@ type [<AllowNullLiteral>] BlobPropertyBag =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Blob =
     abstract arrayBuffer: unit -> Promise<ArrayBuffer>
@@ -50,7 +50,7 @@ type [<AllowNullLiteral>] BlobType =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] FormData =
     abstract append: name: string * value: string -> unit

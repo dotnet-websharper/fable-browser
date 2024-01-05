@@ -16,7 +16,7 @@ module internal JS =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Attr =
     inherit Node
@@ -36,7 +36,7 @@ type [<AllowNullLiteral>] AttrType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CDATASection =
     inherit Text
@@ -52,7 +52,7 @@ type [<AllowNullLiteral>] CDATASectionType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CharacterData =
     inherit Node
@@ -79,7 +79,7 @@ type [<AllowNullLiteral>] ChildNode =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Comment =
     inherit CharacterData
@@ -96,7 +96,7 @@ type [<AllowNullLiteral>] CommentType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Document =
     inherit Node
@@ -422,7 +422,7 @@ type [<AllowNullLiteral>] Document =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DocumentType =
     inherit Node
@@ -442,7 +442,7 @@ type [<AllowNullLiteral>] DocumentType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DocumentFragment =
     inherit Node
@@ -467,7 +467,7 @@ type [<AllowNullLiteral>] DocumentTypeType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMImplementation =
     abstract createDocument: namespaceURI: string * qualifiedName: string * doctype: DocumentType -> Document
@@ -486,7 +486,7 @@ type [<AllowNullLiteral>] DOMImplementationType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMStringList =
     abstract length: int
@@ -510,7 +510,7 @@ type [<AllowNullLiteral>] DOMStringListType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMStringMap =
     #if FABLE_COMPILER
@@ -531,7 +531,7 @@ type [<AllowNullLiteral>] DOMStringMapType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMTokenList =
     abstract length: int
@@ -559,7 +559,7 @@ type [<AllowNullLiteral>] DOMTokenListType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Element =
     inherit Node
@@ -672,7 +672,7 @@ type [<AllowNullLiteral>] ShadowRootInit =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ShadowRoot =
     inherit DocumentFragment
@@ -703,7 +703,7 @@ type [<AllowNullLiteral>] ElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLCollection =
     /// Sets or retrieves the number of objects in a collection.
@@ -731,7 +731,7 @@ type [<AllowNullLiteral>] HTMLCollectionType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NamedNodeMap =
     abstract length: int
@@ -760,7 +760,7 @@ type [<AllowNullLiteral>] NamedNodeMapType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Node =
     inherit EventTarget
@@ -850,7 +850,7 @@ type [<AllowNullLiteral>] NodeSelector =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NodeFilter =
     abstract acceptNode: n: Node -> float
@@ -876,7 +876,7 @@ type [<AllowNullLiteral>] NodeFilterType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NodeIterator =
     abstract filter: NodeFilter with get, set
@@ -897,7 +897,7 @@ type [<AllowNullLiteral>] NodeIteratorType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NodeList =
     abstract length: int
@@ -929,7 +929,7 @@ type [<AllowNullLiteral>] NodeListOf<'TNode> =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ProcessingInstruction =
     inherit CharacterData
@@ -946,7 +946,7 @@ type [<AllowNullLiteral>] ProcessingInstructionType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Selection =
     abstract anchorNode: Node with get, set
@@ -982,7 +982,7 @@ type [<AllowNullLiteral>] SelectionType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ClientRect =
     abstract bottom: float with get, set
@@ -1003,7 +1003,7 @@ type [<AllowNullLiteral>] ClientRectType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Range =
     abstract collapsed: bool with get, set
@@ -1054,7 +1054,7 @@ type [<AllowNullLiteral>] RangeType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Text =
     inherit CharacterData
@@ -1073,7 +1073,7 @@ type [<AllowNullLiteral>] TextType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TimeRanges =
     abstract length: int
@@ -1091,7 +1091,7 @@ type [<AllowNullLiteral>] TimeRangesType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TreeWalker =
     abstract currentNode: Node with get, set
@@ -1166,7 +1166,7 @@ type [<AllowNullLiteral>] ScreenOrientation =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Screen =
     inherit EventTarget
@@ -1189,7 +1189,7 @@ type [<AllowNullLiteral>] Screen =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Location =
     abstract hash: string with get, set
@@ -1238,7 +1238,7 @@ type [<AllowNullLiteral>] WindowURI =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Window =
     inherit EventTarget
@@ -1425,7 +1425,7 @@ type [<AllowNullLiteral>] AbstractWorker =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Worker =
     inherit EventTarget
@@ -1445,7 +1445,7 @@ type [<AllowNullLiteral>] WorkerType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] XMLDocument =
     inherit Document
@@ -1477,7 +1477,7 @@ type [<AllowNullLiteral>] GlobalEventHandlers =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAllCollection =
     inherit HTMLCollection
@@ -1496,7 +1496,7 @@ type [<AllowNullLiteral>] HTMLAllCollectionType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAnchorElement =
     inherit HTMLElement
@@ -1559,7 +1559,7 @@ type [<AllowNullLiteral>] HTMLAnchorElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAreaElement =
     inherit HTMLElement
@@ -1603,7 +1603,7 @@ type [<AllowNullLiteral>] HTMLAreaElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAreasCollection =
     inherit HTMLCollection
@@ -1626,7 +1626,7 @@ type [<AllowNullLiteral>] HTMLAreasCollectionType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAudioElement =
     inherit HTMLMediaElement
@@ -1642,7 +1642,7 @@ type [<AllowNullLiteral>] HTMLAudioElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBRElement =
     inherit HTMLElement
@@ -1660,7 +1660,7 @@ type [<AllowNullLiteral>] HTMLBRElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBaseElement =
     inherit HTMLElement
@@ -1680,7 +1680,7 @@ type [<AllowNullLiteral>] HTMLBaseElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBlockElement =
     inherit HTMLElement
@@ -1701,7 +1701,7 @@ type [<AllowNullLiteral>] HTMLBlockElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBodyElement =
     inherit HTMLElement
@@ -1744,7 +1744,7 @@ type [<AllowNullLiteral>] HTMLBodyElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLButtonElement =
     inherit HTMLElement
@@ -1799,7 +1799,7 @@ type [<AllowNullLiteral>] HTMLButtonElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLCanvasElement =
     inherit HTMLElement
@@ -1834,7 +1834,7 @@ type [<AllowNullLiteral>] HTMLCanvasElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDDElement =
     inherit HTMLElement
@@ -1852,7 +1852,7 @@ type [<AllowNullLiteral>] HTMLDDElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDListElement =
     inherit HTMLElement
@@ -1869,7 +1869,7 @@ type [<AllowNullLiteral>] HTMLDListElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDTElement =
     inherit HTMLElement
@@ -1886,7 +1886,7 @@ type [<AllowNullLiteral>] HTMLDTElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDataListElement =
     inherit HTMLElement
@@ -1903,7 +1903,7 @@ type [<AllowNullLiteral>] HTMLDataListElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDialogElement =
     inherit HTMLElement
@@ -1916,7 +1916,7 @@ type [<AllowNullLiteral>] HTMLDialogElement =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDirectoryElement =
     inherit HTMLElement
@@ -1933,7 +1933,7 @@ type [<AllowNullLiteral>] HTMLDirectoryElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDivElement =
     inherit HTMLElement
@@ -1944,7 +1944,7 @@ type [<AllowNullLiteral>] HTMLDivElement =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDocument =
     inherit Document
@@ -1960,7 +1960,7 @@ type [<AllowNullLiteral>] HTMLDocumentType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLElement =
     inherit Element
@@ -2104,7 +2104,7 @@ type [<AllowNullLiteral>] HTMLElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLEmbedElement =
     inherit HTMLElement
@@ -2137,7 +2137,7 @@ type [<AllowNullLiteral>] HTMLEmbedElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFieldSetElement =
     inherit HTMLElement
@@ -2168,7 +2168,7 @@ type [<AllowNullLiteral>] HTMLFieldSetElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFontElement =
     inherit HTMLElement
@@ -2186,7 +2186,7 @@ type [<AllowNullLiteral>] HTMLFontElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFormElement =
     inherit HTMLElement
@@ -2247,7 +2247,7 @@ type [<AllowNullLiteral>] HTMLFormElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFrameElement =
     inherit HTMLElement
@@ -2298,7 +2298,7 @@ type [<AllowNullLiteral>] HTMLFrameElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHRElement =
     inherit HTMLElement
@@ -2320,7 +2320,7 @@ type [<AllowNullLiteral>] HTMLHRElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHeadElement =
     inherit HTMLElement
@@ -2337,7 +2337,7 @@ type [<AllowNullLiteral>] HTMLHeadElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHeadingElement =
     inherit HTMLElement
@@ -2356,7 +2356,7 @@ type [<AllowNullLiteral>] HTMLHeadingElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHtmlElement =
     inherit HTMLElement
@@ -2374,7 +2374,7 @@ type [<AllowNullLiteral>] HTMLHtmlElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLIFrameElement =
     inherit HTMLElement
@@ -2427,7 +2427,7 @@ type [<AllowNullLiteral>] HTMLIFrameElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLImageElement =
     inherit HTMLElement
@@ -2480,7 +2480,7 @@ type [<AllowNullLiteral>] ImageType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLInputElement =
     inherit HTMLElement
@@ -2606,7 +2606,7 @@ type [<AllowNullLiteral>] HTMLInputElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLIElement =
     inherit HTMLElement
@@ -2626,7 +2626,7 @@ type [<AllowNullLiteral>] HTMLLIElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLabelElement =
     inherit HTMLElement
@@ -2645,7 +2645,7 @@ type [<AllowNullLiteral>] HTMLLabelElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLegendElement =
     inherit HTMLElement
@@ -2664,7 +2664,7 @@ type [<AllowNullLiteral>] HTMLLegendElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLinkElement =
     inherit HTMLElement
@@ -2697,7 +2697,7 @@ type [<AllowNullLiteral>] HTMLLinkElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMapElement =
     inherit HTMLElement
@@ -2717,7 +2717,7 @@ type [<AllowNullLiteral>] HTMLMapElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMediaElement =
     inherit HTMLElement
@@ -2805,7 +2805,7 @@ type [<AllowNullLiteral>] HTMLMediaElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMenuElement =
     inherit HTMLElement
@@ -2824,7 +2824,7 @@ type [<AllowNullLiteral>] HTMLMenuElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMetaElement =
     inherit HTMLElement
@@ -2850,7 +2850,7 @@ type [<AllowNullLiteral>] HTMLMetaElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLModElement =
     inherit HTMLElement
@@ -2870,7 +2870,7 @@ type [<AllowNullLiteral>] HTMLModElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLNextIdElement =
     inherit HTMLElement
@@ -2887,7 +2887,7 @@ type [<AllowNullLiteral>] HTMLNextIdElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLOListElement =
     inherit HTMLElement
@@ -2907,7 +2907,7 @@ type [<AllowNullLiteral>] HTMLOListElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLObjectElement =
     inherit HTMLElement
@@ -2969,7 +2969,7 @@ type [<AllowNullLiteral>] HTMLObjectElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLOptGroupElement =
     inherit HTMLElement
@@ -2999,7 +2999,7 @@ type [<AllowNullLiteral>] HTMLOptGroupElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLOptionElement =
     inherit HTMLElement
@@ -3030,7 +3030,7 @@ type [<AllowNullLiteral>] HTMLOptionElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLParagraphElement =
     inherit HTMLElement
@@ -3049,7 +3049,7 @@ type [<AllowNullLiteral>] HTMLParagraphElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLParamElement =
     inherit HTMLElement
@@ -3073,7 +3073,7 @@ type [<AllowNullLiteral>] HTMLParamElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLPhraseElement =
     inherit HTMLElement
@@ -3091,7 +3091,7 @@ type [<AllowNullLiteral>] HTMLPhraseElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLPreElement =
     inherit HTMLElement
@@ -3111,7 +3111,7 @@ type [<AllowNullLiteral>] HTMLPreElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLProgressElement =
     inherit HTMLElement
@@ -3132,7 +3132,7 @@ type [<AllowNullLiteral>] HTMLProgressElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLQuoteElement =
     inherit HTMLElement
@@ -3150,7 +3150,7 @@ type [<AllowNullLiteral>] HTMLQuoteElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLScriptElement =
     inherit HTMLElement
@@ -3180,7 +3180,7 @@ type [<AllowNullLiteral>] HTMLScriptElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLSelectElement =
     inherit HTMLElement
@@ -3238,7 +3238,7 @@ type [<AllowNullLiteral>] HTMLSelectElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLSourceElement =
     inherit HTMLElement
@@ -3258,7 +3258,7 @@ type [<AllowNullLiteral>] HTMLSourceElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLSpanElement =
     inherit HTMLElement
@@ -3275,7 +3275,7 @@ type [<AllowNullLiteral>] HTMLSpanElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLStyleElement =
     inherit HTMLElement
@@ -3296,7 +3296,7 @@ type [<AllowNullLiteral>] HTMLStyleElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableCaptionElement =
     inherit HTMLElement
@@ -3316,7 +3316,7 @@ type [<AllowNullLiteral>] HTMLTableCaptionElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableCellElement =
     inherit HTMLElement
@@ -3355,7 +3355,7 @@ type [<AllowNullLiteral>] HTMLTableCellElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableColElement =
     inherit HTMLElement
@@ -3377,7 +3377,7 @@ type [<AllowNullLiteral>] HTMLTableColElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableDataCellElement =
     inherit HTMLTableCellElement
@@ -3394,7 +3394,7 @@ type [<AllowNullLiteral>] HTMLTableDataCellElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableElement =
     inherit HTMLElement
@@ -3460,7 +3460,7 @@ type [<AllowNullLiteral>] HTMLTableElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableHeaderCellElement =
     inherit HTMLTableCellElement
@@ -3478,7 +3478,7 @@ type [<AllowNullLiteral>] HTMLTableHeaderCellElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableRowElement =
     inherit HTMLElement
@@ -3511,7 +3511,7 @@ type [<AllowNullLiteral>] HTMLTableRowElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableSectionElement =
     inherit HTMLElement
@@ -3535,7 +3535,7 @@ type [<AllowNullLiteral>] HTMLTableSectionElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTextAreaElement =
     inherit HTMLElement
@@ -3592,7 +3592,7 @@ type [<AllowNullLiteral>] HTMLTextAreaElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTitleElement =
     inherit HTMLElement
@@ -3609,7 +3609,7 @@ type [<AllowNullLiteral>] HTMLTitleElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTrackElement =
     inherit HTMLElement
@@ -3640,7 +3640,7 @@ type [<AllowNullLiteral>] HTMLTrackElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLUListElement =
     inherit HTMLElement
@@ -3658,7 +3658,7 @@ type [<AllowNullLiteral>] HTMLUListElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLUnknownElement =
     inherit HTMLElement
@@ -3674,7 +3674,7 @@ type [<AllowNullLiteral>] HTMLUnknownElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLVideoElement =
     inherit HTMLMediaElement
@@ -3699,7 +3699,7 @@ type [<AllowNullLiteral>] HTMLVideoElementType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] VideoPlaybackQuality =
     abstract corruptedVideoFrames: float with get, set
@@ -3719,7 +3719,7 @@ type [<AllowNullLiteral>] VideoPlaybackQualityType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] VideoTrack =
     abstract id: string with get, set
@@ -3740,7 +3740,7 @@ type [<AllowNullLiteral>] VideoTrackType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] VideoTrackList =
     inherit EventTarget
@@ -3769,7 +3769,7 @@ type [<AllowNullLiteral>] VideoTrackListType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] SourceBuffer =
     inherit EventTarget
@@ -3796,7 +3796,7 @@ type [<AllowNullLiteral>] SourceBufferType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] SourceBufferList =
     inherit EventTarget
@@ -3820,7 +3820,7 @@ type [<AllowNullLiteral>] SourceBufferListType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AudioTrack =
     abstract enabled: bool with get, set
@@ -3841,7 +3841,7 @@ type [<AllowNullLiteral>] AudioTrackType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AudioTrackList =
     inherit EventTarget
@@ -3869,7 +3869,7 @@ type [<AllowNullLiteral>] AudioTrackListType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrack =
     inherit EventTarget
@@ -3912,7 +3912,7 @@ type [<AllowNullLiteral>] TextTrackType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrackCue =
     inherit EventTarget
@@ -3937,7 +3937,7 @@ type [<AllowNullLiteral>] TextTrackCueType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrackCueList =
     abstract length: int
@@ -3961,7 +3961,7 @@ type [<AllowNullLiteral>] TextTrackCueListType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrackList =
     inherit EventTarget
@@ -3996,7 +3996,7 @@ type [<AllowNullLiteral>] HTMLTableAlignment =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CanvasGradient =
     abstract addColorStop: offset: float * color: string -> unit
@@ -4012,7 +4012,7 @@ type [<AllowNullLiteral>] CanvasGradientType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CanvasPattern =
     interface end
@@ -4028,7 +4028,7 @@ type [<AllowNullLiteral>] CanvasPatternType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CanvasRenderingContext2D =
     abstract canvas: HTMLCanvasElement with get, set
@@ -4102,7 +4102,7 @@ type [<AllowNullLiteral>] CanvasRenderingContext2DType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ImageData =
     abstract data: uint8[] with get, set
@@ -4128,7 +4128,7 @@ type [<AllowNullLiteral>] ImageDataType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextMetrics =
     abstract width: float with get, set
@@ -4144,7 +4144,7 @@ type [<AllowNullLiteral>] TextMetricsType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MediaError =
     abstract code: float with get, set
@@ -4168,7 +4168,7 @@ type [<AllowNullLiteral>] MediaErrorType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ValidityState =
     abstract badInput: bool with get, set
@@ -4196,7 +4196,7 @@ type [<AllowNullLiteral>] ValidityStateType =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] UIEvent =
     inherit Event
@@ -4206,7 +4206,7 @@ type [<AllowNullLiteral>] UIEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AnimationEvent =
     inherit Event
@@ -4216,7 +4216,7 @@ type [<AllowNullLiteral>] AnimationEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MouseEvent =
     inherit UIEvent
@@ -4249,7 +4249,7 @@ type [<AllowNullLiteral>] MouseEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MouseWheelEvent =
     inherit MouseEvent
@@ -4260,7 +4260,7 @@ type [<AllowNullLiteral>] MouseWheelEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DocumentEvent =
     abstract createEvent: eventInterface: string -> Event
@@ -4268,7 +4268,7 @@ type [<AllowNullLiteral>] DocumentEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DragEvent =
     inherit MouseEvent
@@ -4277,7 +4277,7 @@ type [<AllowNullLiteral>] DragEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ClipboardEvent =
     inherit Event
@@ -4286,7 +4286,7 @@ type [<AllowNullLiteral>] ClipboardEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CompositionEvent =
     inherit UIEvent
@@ -4296,7 +4296,7 @@ type [<AllowNullLiteral>] CompositionEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DataTransfer =
     abstract dropEffect: string with get, set
@@ -4311,7 +4311,7 @@ type [<AllowNullLiteral>] DataTransfer =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DataTransferItem =
     abstract kind: string
@@ -4322,7 +4322,7 @@ type [<AllowNullLiteral>] DataTransferItem =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DataTransferItemList =
     abstract length: int
@@ -4340,7 +4340,7 @@ type [<AllowNullLiteral>] DataTransferItemList =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] FocusEvent =
     inherit UIEvent
@@ -4349,7 +4349,7 @@ type [<AllowNullLiteral>] FocusEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] PointerEvent =
     inherit MouseEvent
@@ -4371,7 +4371,7 @@ type [<AllowNullLiteral>] PointerEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] PopStateEvent =
     inherit Event
@@ -4380,7 +4380,7 @@ type [<AllowNullLiteral>] PopStateEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] KeyboardEvent =
     inherit UIEvent
@@ -4409,7 +4409,7 @@ type [<AllowNullLiteral>] KeyboardEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ProgressEvent =
     inherit Event
@@ -4420,7 +4420,7 @@ type [<AllowNullLiteral>] ProgressEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Touch =
     abstract clientX: float
@@ -4435,7 +4435,7 @@ type [<AllowNullLiteral>] Touch =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TouchEvent =
     inherit UIEvent
@@ -4450,7 +4450,7 @@ type [<AllowNullLiteral>] TouchEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AriaRequestEvent =
     inherit Event
@@ -4460,7 +4460,7 @@ type [<AllowNullLiteral>] AriaRequestEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CommandEvent =
     inherit Event
@@ -4470,7 +4470,7 @@ type [<AllowNullLiteral>] CommandEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] BeforeUnloadEvent =
     inherit Event
@@ -4479,7 +4479,7 @@ type [<AllowNullLiteral>] BeforeUnloadEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DeviceMotionEvent =
     inherit Event
@@ -4491,7 +4491,7 @@ type [<AllowNullLiteral>] DeviceMotionEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DeviceOrientationEvent =
     inherit Event
@@ -4513,7 +4513,7 @@ type [<AllowNullLiteral>] DeviceRotationRate =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TransitionEvent =
     inherit Event
@@ -4523,7 +4523,7 @@ type [<AllowNullLiteral>] TransitionEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] PageTransitionEvent =
     inherit Event
@@ -4532,7 +4532,7 @@ type [<AllowNullLiteral>] PageTransitionEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HashChangeEvent =
     inherit Event
@@ -4542,7 +4542,7 @@ type [<AllowNullLiteral>] HashChangeEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TrackEvent =
     inherit Event
@@ -4551,7 +4551,7 @@ type [<AllowNullLiteral>] TrackEvent =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] WheelEvent =
     inherit MouseEvent

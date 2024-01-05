@@ -20,7 +20,7 @@ type AbstractWorker =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type Worker =
     inherit EventTarget
@@ -75,7 +75,7 @@ type ServiceWorkerState =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type ServiceWorker =
     inherit Worker
@@ -87,7 +87,7 @@ type ServiceWorker =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type ServiceWorkerRegistration =
     abstract scope: string
@@ -110,7 +110,7 @@ type ServiceWorkerRegistrationOptions =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type ServiceWorkerContainer =
     abstract controller: ServiceWorker option

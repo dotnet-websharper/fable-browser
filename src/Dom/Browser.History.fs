@@ -18,7 +18,7 @@ type ScrollRestoration =
 #if FABLE_COMPILER
 [<Global>]
 #else
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] History =
     abstract length: int

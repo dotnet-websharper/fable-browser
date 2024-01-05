@@ -11,7 +11,7 @@ open WebSharper
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] URLSearchParams =
     /// Appends a specified key/value pair as a new search parameter.
@@ -38,7 +38,7 @@ type [<AllowNullLiteral>] URLSearchParamsType =
 #if FABLE_COMPILER
 [<Global>]
 #elif JAVASCRIPT
-[<Stub>]
+//[<Stub>]
 #endif
 type [<AllowNullLiteral>] URL =
     abstract hash: string with get, set

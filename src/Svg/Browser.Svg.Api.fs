@@ -1,6 +1,12 @@
 namespace Browser
-
+#if FABLE_COMPILER || JAVASCRIPT
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+type GlobalAttribute = InlineAttribute
+#endif
+
 open Browser.Types
 
 [<AutoOpen>]
@@ -119,3 +125,5 @@ module Svg =
     let [<Global>] SVGViewElement: SVGViewElementType = jsNative
     let [<Global>] SVGZoomAndPan: SVGZoomAndPanType = jsNative
     let [<Global>] SVGZoomEvent: SVGZoomEventType = jsNative
+
+#endif

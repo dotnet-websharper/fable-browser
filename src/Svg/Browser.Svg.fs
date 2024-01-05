@@ -1,11 +1,20 @@
 namespace rec Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+#endif
 
 // ## SVG Elements
 
-type [<AllowNullLiteral; Global>] SVGAElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -17,9 +26,19 @@ type [<AllowNullLiteral; Global>] SVGAElement =
 
 type [<AllowNullLiteral>] SVGAElementType =
     abstract prototype: SVGAElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAElement()")>]
+    #endif
+    abstract Create: unit -> SVGAElement
 
-type [<AllowNullLiteral; Global>] SVGAngle =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAngle =
     abstract unitType: float with get, set
     abstract value: float with get, set
     abstract valueAsString: string with get, set
@@ -39,105 +58,235 @@ type [<AllowNullLiteral>] SVGAngleType =
     abstract SVG_ANGLETYPE_RAD: float with get, set
     abstract SVG_ANGLETYPE_UNKNOWN: float with get, set
     abstract SVG_ANGLETYPE_UNSPECIFIED: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAngle
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAngle()")>]
+    #endif
+    abstract Create: unit -> SVGAngle
 
-type [<AllowNullLiteral; Global>] SVGAnimatedAngle =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedAngle =
     abstract animVal: SVGAngle with get, set
     abstract baseVal: SVGAngle with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedAngleType =
     abstract prototype: SVGAnimatedAngle with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedAngle
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedAngle()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedAngle
 
-type [<AllowNullLiteral; Global>] SVGAnimatedBoolean =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedBoolean =
     abstract animVal: bool with get, set
     abstract baseVal: bool with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedBooleanType =
     abstract prototype: SVGAnimatedBoolean with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedBoolean
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedBoolean()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedBoolean
 
-type [<AllowNullLiteral; Global>] SVGAnimatedEnumeration =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedEnumeration =
     abstract animVal: float with get, set
     abstract baseVal: float with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedEnumerationType =
     abstract prototype: SVGAnimatedEnumeration with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedEnumeration
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedEnumeration()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedEnumeration
 
-type [<AllowNullLiteral; Global>] SVGAnimatedInteger =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedInteger =
     abstract animVal: float with get, set
     abstract baseVal: float with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedIntegerType =
     abstract prototype: SVGAnimatedInteger with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedInteger
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedInteger()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedInteger
 
-type [<AllowNullLiteral; Global>] SVGAnimatedLength =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedLength =
     abstract animVal: SVGLength with get, set
     abstract baseVal: SVGLength with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedLengthType =
     abstract prototype: SVGAnimatedLength with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedLength
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedLength()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedLength
 
-type [<AllowNullLiteral; Global>] SVGAnimatedLengthList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedLengthList =
     abstract animVal: SVGLengthList with get, set
     abstract baseVal: SVGLengthList with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedLengthListType =
     abstract prototype: SVGAnimatedLengthList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedLengthList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedLengthList()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedLengthList
 
-type [<AllowNullLiteral; Global>] SVGAnimatedNumber =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedNumber =
     abstract animVal: float with get, set
     abstract baseVal: float with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedNumberType =
     abstract prototype: SVGAnimatedNumber with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedNumber
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedNumber()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedNumber
 
-type [<AllowNullLiteral; Global>] SVGAnimatedNumberList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedNumberList =
     abstract animVal: SVGNumberList with get, set
     abstract baseVal: SVGNumberList with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedNumberListType =
     abstract prototype: SVGAnimatedNumberList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedNumberList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedNumberList()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedNumberList
 
-type [<AllowNullLiteral; Global>] SVGAnimatedPreserveAspectRatio =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedPreserveAspectRatio =
     abstract animVal: SVGPreserveAspectRatio with get, set
     abstract baseVal: SVGPreserveAspectRatio with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedPreserveAspectRatioType =
     abstract prototype: SVGAnimatedPreserveAspectRatio with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedPreserveAspectRatio
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedPreserveAspectRatio()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedPreserveAspectRatio
 
-type [<AllowNullLiteral; Global>] SVGAnimatedRect =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedRect =
     abstract animVal: SVGRect with get, set
     abstract baseVal: SVGRect with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedRectType =
     abstract prototype: SVGAnimatedRect with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedRect
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedRect()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedRect
 
-type [<AllowNullLiteral; Global>] SVGAnimatedString =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedString =
     abstract animVal: string with get, set
     abstract baseVal: string with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedStringType =
     abstract prototype: SVGAnimatedString with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedString
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedString()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedString
 
-type [<AllowNullLiteral; Global>] SVGAnimatedTransformList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedTransformList =
     abstract animVal: SVGTransformList with get, set
     abstract baseVal: SVGTransformList with get, set
 
 type [<AllowNullLiteral>] SVGAnimatedTransformListType =
     abstract prototype: SVGAnimatedTransformList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGAnimatedTransformList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGAnimatedTransformList()")>]
+    #endif
+    abstract Create: unit -> SVGAnimatedTransformList
 
-type [<AllowNullLiteral; Global>] SVGCircleElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGCircleElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -150,9 +299,19 @@ type [<AllowNullLiteral; Global>] SVGCircleElement =
 
 type [<AllowNullLiteral>] SVGCircleElementType =
     abstract prototype: SVGCircleElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGCircleElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGCircleElement()")>]
+    #endif
+    abstract Create: unit -> SVGCircleElement
 
-type [<AllowNullLiteral; Global>] SVGClipPathElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGClipPathElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -164,9 +323,19 @@ type [<AllowNullLiteral; Global>] SVGClipPathElement =
 
 type [<AllowNullLiteral>] SVGClipPathElementType =
     abstract prototype: SVGClipPathElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGClipPathElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGClipPathElement()")>]
+    #endif
+    abstract Create: unit -> SVGClipPathElement
 
-type [<AllowNullLiteral; Global>] SVGComponentTransferFunctionElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGComponentTransferFunctionElement =
     inherit SVGElement
     abstract amplitude: SVGAnimatedNumber with get, set
     abstract exponent: SVGAnimatedNumber with get, set
@@ -190,9 +359,19 @@ type [<AllowNullLiteral>] SVGComponentTransferFunctionElementType =
     abstract SVG_FECOMPONENTTRANSFER_TYPE_LINEAR: float with get, set
     abstract SVG_FECOMPONENTTRANSFER_TYPE_TABLE: float with get, set
     abstract SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGComponentTransferFunctionElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGComponentTransferFunctionElement()")>]
+    #endif
+    abstract Create: unit -> SVGComponentTransferFunctionElement
 
-type [<AllowNullLiteral; Global>] SVGDefsElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGDefsElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -202,18 +381,38 @@ type [<AllowNullLiteral; Global>] SVGDefsElement =
 
 type [<AllowNullLiteral>] SVGDefsElementType =
     abstract prototype: SVGDefsElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGDefsElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGDefsElement()")>]
+    #endif
+    abstract Create: unit -> SVGDefsElement
 
-type [<AllowNullLiteral; Global>] SVGDescElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGDescElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGLangSpace
 
 type [<AllowNullLiteral>] SVGDescElementType =
     abstract prototype: SVGDescElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGDescElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGDescElement()")>]
+    #endif
+    abstract Create: unit -> SVGDescElement
 
-type [<AllowNullLiteral; Global>] SVGElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGElement =
     inherit Element
     abstract id: string with get, set
     abstract onclick: (MouseEvent -> unit) with get, set
@@ -233,9 +432,19 @@ type [<AllowNullLiteral; Global>] SVGElement =
 
 type [<AllowNullLiteral>] SVGElementType =
     abstract prototype: SVGElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGElement()")>]
+    #endif
+    abstract Create: unit -> SVGElement
 
-type [<AllowNullLiteral; Global>] SVGElementInstance =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGElementInstance =
     inherit EventTarget
     abstract childNodes: SVGElementInstanceList with get, set
     abstract correspondingElement: SVGElement with get, set
@@ -248,17 +457,37 @@ type [<AllowNullLiteral; Global>] SVGElementInstance =
 
 type [<AllowNullLiteral>] SVGElementInstanceType =
     abstract prototype: SVGElementInstance with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGElementInstance
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGElementInstance()")>]
+    #endif
+    abstract Create: unit -> SVGElementInstance
 
-type [<AllowNullLiteral; Global>] SVGElementInstanceList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGElementInstanceList =
     abstract length: float with get, set
     abstract item: index: float -> SVGElementInstance
 
 type [<AllowNullLiteral>] SVGElementInstanceListType =
     abstract prototype: SVGElementInstanceList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGElementInstanceList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGElementInstanceList()")>]
+    #endif
+    abstract Create: unit -> SVGElementInstanceList
 
-type [<AllowNullLiteral; Global>] SVGEllipseElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGEllipseElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -272,9 +501,19 @@ type [<AllowNullLiteral; Global>] SVGEllipseElement =
 
 type [<AllowNullLiteral>] SVGEllipseElementType =
     abstract prototype: SVGEllipseElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGEllipseElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGEllipseElement()")>]
+    #endif
+    abstract Create: unit -> SVGEllipseElement
 
-type [<AllowNullLiteral; Global>] SVGFEBlendElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEBlendElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -318,9 +557,19 @@ type [<AllowNullLiteral>] SVGFEBlendElementType =
     abstract SVG_FEBLEND_MODE_SCREEN: float with get, set
     abstract SVG_FEBLEND_MODE_SOFT_LIGHT: float with get, set
     abstract SVG_FEBLEND_MODE_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEBlendElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEBlendElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEBlendElement
 
-type [<AllowNullLiteral; Global>] SVGFEColorMatrixElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEColorMatrixElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -340,9 +589,19 @@ type [<AllowNullLiteral>] SVGFEColorMatrixElementType =
     abstract SVG_FECOLORMATRIX_TYPE_MATRIX: float with get, set
     abstract SVG_FECOLORMATRIX_TYPE_SATURATE: float with get, set
     abstract SVG_FECOLORMATRIX_TYPE_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEColorMatrixElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEColorMatrixElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEColorMatrixElement
 
-type [<AllowNullLiteral; Global>] SVGFEComponentTransferElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEComponentTransferElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -350,9 +609,19 @@ type [<AllowNullLiteral; Global>] SVGFEComponentTransferElement =
 
 type [<AllowNullLiteral>] SVGFEComponentTransferElementType =
     abstract prototype: SVGFEComponentTransferElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEComponentTransferElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEComponentTransferElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEComponentTransferElement
 
-type [<AllowNullLiteral; Global>] SVGFECompositeElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFECompositeElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -380,9 +649,19 @@ type [<AllowNullLiteral>] SVGFECompositeElementType =
     abstract SVG_FECOMPOSITE_OPERATOR_OVER: float with get, set
     abstract SVG_FECOMPOSITE_OPERATOR_UNKNOWN: float with get, set
     abstract SVG_FECOMPOSITE_OPERATOR_XOR: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFECompositeElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFECompositeElement()")>]
+    #endif
+    abstract Create: unit -> SVGFECompositeElement
 
-type [<AllowNullLiteral; Global>] SVGFEConvolveMatrixElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEConvolveMatrixElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract bias: SVGAnimatedNumber with get, set
@@ -409,9 +688,19 @@ type [<AllowNullLiteral>] SVGFEConvolveMatrixElementType =
     abstract SVG_EDGEMODE_NONE: float with get, set
     abstract SVG_EDGEMODE_UNKNOWN: float with get, set
     abstract SVG_EDGEMODE_WRAP: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEConvolveMatrixElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEConvolveMatrixElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEConvolveMatrixElement
 
-type [<AllowNullLiteral; Global>] SVGFEDiffuseLightingElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEDiffuseLightingElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract diffuseConstant: SVGAnimatedNumber with get, set
@@ -423,9 +712,19 @@ type [<AllowNullLiteral; Global>] SVGFEDiffuseLightingElement =
 
 type [<AllowNullLiteral>] SVGFEDiffuseLightingElementType =
     abstract prototype: SVGFEDiffuseLightingElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEDiffuseLightingElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEDiffuseLightingElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEDiffuseLightingElement
 
-type [<AllowNullLiteral; Global>] SVGFEDisplacementMapElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEDisplacementMapElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -447,59 +746,129 @@ type [<AllowNullLiteral>] SVGFEDisplacementMapElementType =
     abstract SVG_CHANNEL_G: float with get, set
     abstract SVG_CHANNEL_R: float with get, set
     abstract SVG_CHANNEL_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEDisplacementMapElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEDisplacementMapElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEDisplacementMapElement
 
-type [<AllowNullLiteral; Global>] SVGFEDistantLightElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEDistantLightElement =
     inherit SVGElement
     abstract azimuth: SVGAnimatedNumber with get, set
     abstract elevation: SVGAnimatedNumber with get, set
 
 type [<AllowNullLiteral>] SVGFEDistantLightElementType =
     abstract prototype: SVGFEDistantLightElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEDistantLightElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEDistantLightElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEDistantLightElement
 
-type [<AllowNullLiteral; Global>] SVGFEFloodElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEFloodElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
 
 
 type [<AllowNullLiteral>] SVGFEFloodElementType =
     abstract prototype: SVGFEFloodElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEFloodElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEFloodElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEFloodElement
 
-type [<AllowNullLiteral; Global>] SVGFEFuncAElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEFuncAElement =
     inherit SVGComponentTransferFunctionElement
 
 
 type [<AllowNullLiteral>] SVGFEFuncAElementType =
     abstract prototype: SVGFEFuncAElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEFuncAElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEFuncAElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEFuncAElement
 
-type [<AllowNullLiteral; Global>] SVGFEFuncBElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEFuncBElement =
     inherit SVGComponentTransferFunctionElement
 
 
 type [<AllowNullLiteral>] SVGFEFuncBElementType =
     abstract prototype: SVGFEFuncBElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEFuncBElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEFuncBElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEFuncBElement
 
-type [<AllowNullLiteral; Global>] SVGFEFuncGElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEFuncGElement =
     inherit SVGComponentTransferFunctionElement
 
 
 type [<AllowNullLiteral>] SVGFEFuncGElementType =
     abstract prototype: SVGFEFuncGElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEFuncGElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEFuncGElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEFuncGElement
 
-type [<AllowNullLiteral; Global>] SVGFEFuncRElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEFuncRElement =
     inherit SVGComponentTransferFunctionElement
 
 
 type [<AllowNullLiteral>] SVGFEFuncRElementType =
     abstract prototype: SVGFEFuncRElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEFuncRElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEFuncRElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEFuncRElement
 
-type [<AllowNullLiteral; Global>] SVGFEGaussianBlurElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEGaussianBlurElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -510,9 +879,19 @@ type [<AllowNullLiteral; Global>] SVGFEGaussianBlurElement =
 
 type [<AllowNullLiteral>] SVGFEGaussianBlurElementType =
     abstract prototype: SVGFEGaussianBlurElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEGaussianBlurElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEGaussianBlurElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEGaussianBlurElement
 
-type [<AllowNullLiteral; Global>] SVGFEImageElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEImageElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     inherit SVGLangSpace
@@ -523,26 +902,56 @@ type [<AllowNullLiteral; Global>] SVGFEImageElement =
 
 type [<AllowNullLiteral>] SVGFEImageElementType =
     abstract prototype: SVGFEImageElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEImageElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEImageElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEImageElement
 
-type [<AllowNullLiteral; Global>] SVGFEMergeElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEMergeElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
 
 
 type [<AllowNullLiteral>] SVGFEMergeElementType =
     abstract prototype: SVGFEMergeElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEMergeElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEMergeElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEMergeElement
 
-type [<AllowNullLiteral; Global>] SVGFEMergeNodeElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEMergeNodeElement =
     inherit SVGElement
     abstract in1: SVGAnimatedString with get, set
 
 type [<AllowNullLiteral>] SVGFEMergeNodeElementType =
     abstract prototype: SVGFEMergeNodeElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEMergeNodeElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEMergeNodeElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEMergeNodeElement
 
-type [<AllowNullLiteral; Global>] SVGFEMorphologyElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEMorphologyElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -559,9 +968,19 @@ type [<AllowNullLiteral>] SVGFEMorphologyElementType =
     abstract SVG_MORPHOLOGY_OPERATOR_DILATE: float with get, set
     abstract SVG_MORPHOLOGY_OPERATOR_ERODE: float with get, set
     abstract SVG_MORPHOLOGY_OPERATOR_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEMorphologyElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEMorphologyElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEMorphologyElement
 
-type [<AllowNullLiteral; Global>] SVGFEOffsetElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEOffsetElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract dx: SVGAnimatedNumber with get, set
@@ -571,9 +990,19 @@ type [<AllowNullLiteral; Global>] SVGFEOffsetElement =
 
 type [<AllowNullLiteral>] SVGFEOffsetElementType =
     abstract prototype: SVGFEOffsetElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEOffsetElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEOffsetElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEOffsetElement
 
-type [<AllowNullLiteral; Global>] SVGFEPointLightElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFEPointLightElement =
     inherit SVGElement
     abstract x: SVGAnimatedNumber with get, set
     abstract y: SVGAnimatedNumber with get, set
@@ -581,9 +1010,19 @@ type [<AllowNullLiteral; Global>] SVGFEPointLightElement =
 
 type [<AllowNullLiteral>] SVGFEPointLightElementType =
     abstract prototype: SVGFEPointLightElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFEPointLightElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFEPointLightElement()")>]
+    #endif
+    abstract Create: unit -> SVGFEPointLightElement
 
-type [<AllowNullLiteral; Global>] SVGFESpecularLightingElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFESpecularLightingElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -596,9 +1035,19 @@ type [<AllowNullLiteral; Global>] SVGFESpecularLightingElement =
 
 type [<AllowNullLiteral>] SVGFESpecularLightingElementType =
     abstract prototype: SVGFESpecularLightingElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFESpecularLightingElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFESpecularLightingElement()")>]
+    #endif
+    abstract Create: unit -> SVGFESpecularLightingElement
 
-type [<AllowNullLiteral; Global>] SVGFESpotLightElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFESpotLightElement =
     inherit SVGElement
     abstract limitingConeAngle: SVGAnimatedNumber with get, set
     abstract pointsAtX: SVGAnimatedNumber with get, set
@@ -611,9 +1060,19 @@ type [<AllowNullLiteral; Global>] SVGFESpotLightElement =
 
 type [<AllowNullLiteral>] SVGFESpotLightElementType =
     abstract prototype: SVGFESpotLightElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFESpotLightElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFESpotLightElement()")>]
+    #endif
+    abstract Create: unit -> SVGFESpotLightElement
 
-type [<AllowNullLiteral; Global>] SVGFETileElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFETileElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract in1: SVGAnimatedString with get, set
@@ -621,9 +1080,19 @@ type [<AllowNullLiteral; Global>] SVGFETileElement =
 
 type [<AllowNullLiteral>] SVGFETileElementType =
     abstract prototype: SVGFETileElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFETileElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFETileElement()")>]
+    #endif
+    abstract Create: unit -> SVGFETileElement
 
-type [<AllowNullLiteral; Global>] SVGFETurbulenceElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFETurbulenceElement =
     inherit SVGElement
     inherit SVGFilterPrimitiveStandardAttributes
     abstract baseFrequencyX: SVGAnimatedNumber with get, set
@@ -648,9 +1117,19 @@ type [<AllowNullLiteral>] SVGFETurbulenceElementType =
     abstract SVG_TURBULENCE_TYPE_FRACTALNOISE: float with get, set
     abstract SVG_TURBULENCE_TYPE_TURBULENCE: float with get, set
     abstract SVG_TURBULENCE_TYPE_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFETurbulenceElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFETurbulenceElement()")>]
+    #endif
+    abstract Create: unit -> SVGFETurbulenceElement
 
-type [<AllowNullLiteral; Global>] SVGFilterElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFilterElement =
     inherit SVGElement
     inherit SVGUnitTypes
     inherit SVGStylable
@@ -670,9 +1149,19 @@ type [<AllowNullLiteral; Global>] SVGFilterElement =
 
 type [<AllowNullLiteral>] SVGFilterElementType =
     abstract prototype: SVGFilterElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGFilterElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGFilterElement()")>]
+    #endif
+    abstract Create: unit -> SVGFilterElement
 
-type [<AllowNullLiteral; Global>] SVGForeignObjectElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGForeignObjectElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -687,9 +1176,19 @@ type [<AllowNullLiteral; Global>] SVGForeignObjectElement =
 
 type [<AllowNullLiteral>] SVGForeignObjectElementType =
     abstract prototype: SVGForeignObjectElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGForeignObjectElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGForeignObjectElement()")>]
+    #endif
+    abstract Create: unit -> SVGForeignObjectElement
 
-type [<AllowNullLiteral; Global>] SVGGElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGGElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -700,9 +1199,19 @@ type [<AllowNullLiteral; Global>] SVGGElement =
 
 type [<AllowNullLiteral>] SVGGElementType =
     abstract prototype: SVGGElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGGElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGGElement()")>]
+    #endif
+    abstract Create: unit -> SVGGElement
 
-type [<AllowNullLiteral; Global>] SVGGradientElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGGradientElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGExternalResourcesRequired
@@ -723,9 +1232,19 @@ type [<AllowNullLiteral>] SVGGradientElementType =
     abstract SVG_SPREADMETHOD_REFLECT: float with get, set
     abstract SVG_SPREADMETHOD_REPEAT: float with get, set
     abstract SVG_SPREADMETHOD_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGGradientElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGGradientElement()")>]
+    #endif
+    abstract Create: unit -> SVGGradientElement
 
-type [<AllowNullLiteral; Global>] SVGImageElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGImageElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -742,9 +1261,19 @@ type [<AllowNullLiteral; Global>] SVGImageElement =
 
 type [<AllowNullLiteral>] SVGImageElementType =
     abstract prototype: SVGImageElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGImageElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGImageElement()")>]
+    #endif
+    abstract Create: unit -> SVGImageElement
 
-type [<AllowNullLiteral; Global>] SVGLength =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGLength =
     abstract unitType: float with get, set
     abstract value: float with get, set
     abstract valueAsString: string with get, set
@@ -776,9 +1305,19 @@ type [<AllowNullLiteral>] SVGLengthType =
     abstract SVG_LENGTHTYPE_PT: float with get, set
     abstract SVG_LENGTHTYPE_PX: float with get, set
     abstract SVG_LENGTHTYPE_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGLength
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGLength()")>]
+    #endif
+    abstract Create: unit -> SVGLength
 
-type [<AllowNullLiteral; Global>] SVGLengthList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGLengthList =
     abstract numberOfItems: float with get, set
     abstract appendItem: newItem: SVGLength -> SVGLength
     abstract clear: unit -> unit
@@ -790,9 +1329,19 @@ type [<AllowNullLiteral; Global>] SVGLengthList =
 
 type [<AllowNullLiteral>] SVGLengthListType =
     abstract prototype: SVGLengthList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGLengthList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGLengthList()")>]
+    #endif
+    abstract Create: unit -> SVGLengthList
 
-type [<AllowNullLiteral; Global>] SVGLineElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGLineElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -807,9 +1356,19 @@ type [<AllowNullLiteral; Global>] SVGLineElement =
 
 type [<AllowNullLiteral>] SVGLineElementType =
     abstract prototype: SVGLineElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGLineElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGLineElement()")>]
+    #endif
+    abstract Create: unit -> SVGLineElement
 
-type [<AllowNullLiteral; Global>] SVGLinearGradientElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGLinearGradientElement =
     inherit SVGGradientElement
     abstract x1: SVGAnimatedLength with get, set
     abstract x2: SVGAnimatedLength with get, set
@@ -818,9 +1377,19 @@ type [<AllowNullLiteral; Global>] SVGLinearGradientElement =
 
 type [<AllowNullLiteral>] SVGLinearGradientElementType =
     abstract prototype: SVGLinearGradientElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGLinearGradientElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGLinearGradientElement()")>]
+    #endif
+    abstract Create: unit -> SVGLinearGradientElement
 
-type [<AllowNullLiteral; Global>] SVGMarkerElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGMarkerElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGLangSpace
@@ -851,9 +1420,19 @@ type [<AllowNullLiteral>] SVGMarkerElementType =
     abstract SVG_MARKER_ORIENT_ANGLE: float with get, set
     abstract SVG_MARKER_ORIENT_AUTO: float with get, set
     abstract SVG_MARKER_ORIENT_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGMarkerElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGMarkerElement()")>]
+    #endif
+    abstract Create: unit -> SVGMarkerElement
 
-type [<AllowNullLiteral; Global>] SVGMaskElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGMaskElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTests
@@ -870,9 +1449,19 @@ type [<AllowNullLiteral; Global>] SVGMaskElement =
 
 type [<AllowNullLiteral>] SVGMaskElementType =
     abstract prototype: SVGMaskElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGMaskElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGMaskElement()")>]
+    #endif
+    abstract Create: unit -> SVGMaskElement
 
-type [<AllowNullLiteral; Global>] SVGMatrix =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGMatrix =
     abstract a: float with get, set
     abstract b: float with get, set
     abstract c: float with get, set
@@ -893,24 +1482,54 @@ type [<AllowNullLiteral; Global>] SVGMatrix =
 
 type [<AllowNullLiteral>] SVGMatrixType =
     abstract prototype: SVGMatrix with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGMatrix
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGMatrix()")>]
+    #endif
+    abstract Create: unit -> SVGMatrix
 
-type [<AllowNullLiteral; Global>] SVGMetadataElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGMetadataElement =
     inherit SVGElement
 
 
 type [<AllowNullLiteral>] SVGMetadataElementType =
     abstract prototype: SVGMetadataElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGMetadataElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGMetadataElement()")>]
+    #endif
+    abstract Create: unit -> SVGMetadataElement
 
-type [<AllowNullLiteral; Global>] SVGNumber =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGNumber =
     abstract value: float with get, set
 
 type [<AllowNullLiteral>] SVGNumberType =
     abstract prototype: SVGNumber with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGNumber
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGNumber()")>]
+    #endif
+    abstract Create: unit -> SVGNumber
 
-type [<AllowNullLiteral; Global>] SVGNumberList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGNumberList =
     abstract numberOfItems: float with get, set
     abstract appendItem: newItem: SVGNumber -> SVGNumber
     abstract clear: unit -> unit
@@ -922,9 +1541,19 @@ type [<AllowNullLiteral; Global>] SVGNumberList =
 
 type [<AllowNullLiteral>] SVGNumberListType =
     abstract prototype: SVGNumberList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGNumberList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGNumberList()")>]
+    #endif
+    abstract Create: unit -> SVGNumberList
 
-type [<AllowNullLiteral; Global>] SVGPathElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -958,9 +1587,19 @@ type [<AllowNullLiteral; Global>] SVGPathElement =
 
 type [<AllowNullLiteral>] SVGPathElementType =
     abstract prototype: SVGPathElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathElement()")>]
+    #endif
+    abstract Create: unit -> SVGPathElement
 
-type [<AllowNullLiteral; Global>] SVGPathSeg =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSeg =
     abstract pathSegType: float with get, set
     abstract pathSegTypeAsLetter: string with get, set
     abstract PATHSEG_ARC_ABS: float with get, set
@@ -1006,9 +1645,19 @@ type [<AllowNullLiteral>] SVGPathSegType =
     abstract PATHSEG_MOVETO_ABS: float with get, set
     abstract PATHSEG_MOVETO_REL: float with get, set
     abstract PATHSEG_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSeg
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSeg()")>]
+    #endif
+    abstract Create: unit -> SVGPathSeg
 
-type [<AllowNullLiteral; Global>] SVGPathSegArcAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegArcAbs =
     inherit SVGPathSeg
     abstract angle: float with get, set
     abstract largeArcFlag: bool with get, set
@@ -1020,9 +1669,19 @@ type [<AllowNullLiteral; Global>] SVGPathSegArcAbs =
 
 type [<AllowNullLiteral>] SVGPathSegArcAbsType =
     abstract prototype: SVGPathSegArcAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegArcAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegArcAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegArcAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegArcRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegArcRel =
     inherit SVGPathSeg
     abstract angle: float with get, set
     abstract largeArcFlag: bool with get, set
@@ -1034,17 +1693,37 @@ type [<AllowNullLiteral; Global>] SVGPathSegArcRel =
 
 type [<AllowNullLiteral>] SVGPathSegArcRelType =
     abstract prototype: SVGPathSegArcRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegArcRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegArcRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegArcRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegClosePath =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegClosePath =
     inherit SVGPathSeg
 
 
 type [<AllowNullLiteral>] SVGPathSegClosePathType =
     abstract prototype: SVGPathSegClosePath with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegClosePath
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegClosePath()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegClosePath
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoCubicAbs =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract x1: float with get, set
@@ -1055,9 +1734,19 @@ type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicAbs =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicAbsType =
     abstract prototype: SVGPathSegCurvetoCubicAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoCubicAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoCubicAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoCubicAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoCubicRel =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract x1: float with get, set
@@ -1068,9 +1757,19 @@ type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicRel =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicRelType =
     abstract prototype: SVGPathSegCurvetoCubicRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoCubicRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoCubicRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoCubicRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicSmoothAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothAbs =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract x2: float with get, set
@@ -1079,9 +1778,19 @@ type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicSmoothAbs =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothAbsType =
     abstract prototype: SVGPathSegCurvetoCubicSmoothAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoCubicSmoothAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoCubicSmoothAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoCubicSmoothAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicSmoothRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothRel =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract x2: float with get, set
@@ -1090,9 +1799,19 @@ type [<AllowNullLiteral; Global>] SVGPathSegCurvetoCubicSmoothRel =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothRelType =
     abstract prototype: SVGPathSegCurvetoCubicSmoothRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoCubicSmoothRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoCubicSmoothRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoCubicSmoothRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoQuadraticAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticAbs =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract x1: float with get, set
@@ -1101,9 +1820,19 @@ type [<AllowNullLiteral; Global>] SVGPathSegCurvetoQuadraticAbs =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticAbsType =
     abstract prototype: SVGPathSegCurvetoQuadraticAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoQuadraticAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoQuadraticAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoQuadraticAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoQuadraticRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticRel =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract x1: float with get, set
@@ -1112,77 +1841,167 @@ type [<AllowNullLiteral; Global>] SVGPathSegCurvetoQuadraticRel =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticRelType =
     abstract prototype: SVGPathSegCurvetoQuadraticRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoQuadraticRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoQuadraticRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoQuadraticRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoQuadraticSmoothAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothAbs =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothAbsType =
     abstract prototype: SVGPathSegCurvetoQuadraticSmoothAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoQuadraticSmoothAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoQuadraticSmoothAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoQuadraticSmoothAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegCurvetoQuadraticSmoothRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothRel =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothRelType =
     abstract prototype: SVGPathSegCurvetoQuadraticSmoothRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegCurvetoQuadraticSmoothRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegCurvetoQuadraticSmoothRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegCurvetoQuadraticSmoothRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegLinetoAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegLinetoAbs =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegLinetoAbsType =
     abstract prototype: SVGPathSegLinetoAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegLinetoAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegLinetoAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegLinetoAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegLinetoHorizontalAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegLinetoHorizontalAbs =
     inherit SVGPathSeg
     abstract x: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegLinetoHorizontalAbsType =
     abstract prototype: SVGPathSegLinetoHorizontalAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegLinetoHorizontalAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegLinetoHorizontalAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegLinetoHorizontalAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegLinetoHorizontalRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegLinetoHorizontalRel =
     inherit SVGPathSeg
     abstract x: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegLinetoHorizontalRelType =
     abstract prototype: SVGPathSegLinetoHorizontalRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegLinetoHorizontalRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegLinetoHorizontalRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegLinetoHorizontalRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegLinetoRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegLinetoRel =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegLinetoRelType =
     abstract prototype: SVGPathSegLinetoRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegLinetoRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegLinetoRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegLinetoRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegLinetoVerticalAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegLinetoVerticalAbs =
     inherit SVGPathSeg
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegLinetoVerticalAbsType =
     abstract prototype: SVGPathSegLinetoVerticalAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegLinetoVerticalAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegLinetoVerticalAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegLinetoVerticalAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegLinetoVerticalRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegLinetoVerticalRel =
     inherit SVGPathSeg
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegLinetoVerticalRelType =
     abstract prototype: SVGPathSegLinetoVerticalRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegLinetoVerticalRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegLinetoVerticalRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegLinetoVerticalRel
 
-type [<AllowNullLiteral; Global>] SVGPathSegList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegList =
     abstract numberOfItems: float with get, set
     abstract appendItem: newItem: SVGPathSeg -> SVGPathSeg
     abstract clear: unit -> unit
@@ -1194,27 +2013,57 @@ type [<AllowNullLiteral; Global>] SVGPathSegList =
 
 type [<AllowNullLiteral>] SVGPathSegListType =
     abstract prototype: SVGPathSegList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegList()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegList
 
-type [<AllowNullLiteral; Global>] SVGPathSegMovetoAbs =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegMovetoAbs =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegMovetoAbsType =
     abstract prototype: SVGPathSegMovetoAbs with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegMovetoAbs
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegMovetoAbs()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegMovetoAbs
 
-type [<AllowNullLiteral; Global>] SVGPathSegMovetoRel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPathSegMovetoRel =
     inherit SVGPathSeg
     abstract x: float with get, set
     abstract y: float with get, set
 
 type [<AllowNullLiteral>] SVGPathSegMovetoRelType =
     abstract prototype: SVGPathSegMovetoRel with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPathSegMovetoRel
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPathSegMovetoRel()")>]
+    #endif
+    abstract Create: unit -> SVGPathSegMovetoRel
 
-type [<AllowNullLiteral; Global>] SVGPatternElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPatternElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTests
@@ -1234,18 +2083,38 @@ type [<AllowNullLiteral; Global>] SVGPatternElement =
 
 type [<AllowNullLiteral>] SVGPatternElementType =
     abstract prototype: SVGPatternElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPatternElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPatternElement()")>]
+    #endif
+    abstract Create: unit -> SVGPatternElement
 
-type [<AllowNullLiteral; Global>] SVGPoint =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPoint =
     abstract x: float with get, set
     abstract y: float with get, set
     abstract matrixTransform: matrix: SVGMatrix -> SVGPoint
 
 type [<AllowNullLiteral>] SVGPointType =
     abstract prototype: SVGPoint with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPoint
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPoint()")>]
+    #endif
+    abstract Create: unit -> SVGPoint
 
-type [<AllowNullLiteral; Global>] SVGPointList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPointList =
     abstract numberOfItems: float with get, set
     abstract appendItem: newItem: SVGPoint -> SVGPoint
     abstract clear: unit -> unit
@@ -1257,9 +2126,19 @@ type [<AllowNullLiteral; Global>] SVGPointList =
 
 type [<AllowNullLiteral>] SVGPointListType =
     abstract prototype: SVGPointList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPointList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPointList()")>]
+    #endif
+    abstract Create: unit -> SVGPointList
 
-type [<AllowNullLiteral; Global>] SVGPolygonElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPolygonElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -1271,9 +2150,19 @@ type [<AllowNullLiteral; Global>] SVGPolygonElement =
 
 type [<AllowNullLiteral>] SVGPolygonElementType =
     abstract prototype: SVGPolygonElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPolygonElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPolygonElement()")>]
+    #endif
+    abstract Create: unit -> SVGPolygonElement
 
-type [<AllowNullLiteral; Global>] SVGPolylineElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPolylineElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -1285,9 +2174,19 @@ type [<AllowNullLiteral; Global>] SVGPolylineElement =
 
 type [<AllowNullLiteral>] SVGPolylineElementType =
     abstract prototype: SVGPolylineElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPolylineElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPolylineElement()")>]
+    #endif
+    abstract Create: unit -> SVGPolylineElement
 
-type [<AllowNullLiteral; Global>] SVGPreserveAspectRatio =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGPreserveAspectRatio =
     abstract align: float with get, set
     abstract meetOrSlice: float with get, set
     abstract SVG_MEETORSLICE_MEET: float with get, set
@@ -1321,9 +2220,19 @@ type [<AllowNullLiteral>] SVGPreserveAspectRatioType =
     abstract SVG_PRESERVEASPECTRATIO_XMINYMAX: float with get, set
     abstract SVG_PRESERVEASPECTRATIO_XMINYMID: float with get, set
     abstract SVG_PRESERVEASPECTRATIO_XMINYMIN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGPreserveAspectRatio
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGPreserveAspectRatio()")>]
+    #endif
+    abstract Create: unit -> SVGPreserveAspectRatio
 
-type [<AllowNullLiteral; Global>] SVGRadialGradientElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGRadialGradientElement =
     inherit SVGGradientElement
     abstract cx: SVGAnimatedLength with get, set
     abstract cy: SVGAnimatedLength with get, set
@@ -1333,9 +2242,19 @@ type [<AllowNullLiteral; Global>] SVGRadialGradientElement =
 
 type [<AllowNullLiteral>] SVGRadialGradientElementType =
     abstract prototype: SVGRadialGradientElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGRadialGradientElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGRadialGradientElement()")>]
+    #endif
+    abstract Create: unit -> SVGRadialGradientElement
 
-type [<AllowNullLiteral; Global>] SVGRect =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGRect =
     abstract height: float with get, set
     abstract width: float with get, set
     abstract x: float with get, set
@@ -1343,9 +2262,19 @@ type [<AllowNullLiteral; Global>] SVGRect =
 
 type [<AllowNullLiteral>] SVGRectType =
     abstract prototype: SVGRect with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGRect
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGRect()")>]
+    #endif
+    abstract Create: unit -> SVGRect
 
-type [<AllowNullLiteral; Global>] SVGRectElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGRectElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -1362,9 +2291,19 @@ type [<AllowNullLiteral; Global>] SVGRectElement =
 
 type [<AllowNullLiteral>] SVGRectElementType =
     abstract prototype: SVGRectElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGRectElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGRectElement()")>]
+    #endif
+    abstract Create: unit -> SVGRectElement
 
-type [<AllowNullLiteral; Global>] SVGSVGElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGSVGElement =
     inherit SVGElement
     inherit DocumentEvent
     inherit SVGLocatable
@@ -1420,9 +2359,19 @@ type [<AllowNullLiteral; Global>] SVGSVGElement =
 
 type [<AllowNullLiteral>] SVGSVGElementType =
     abstract prototype: SVGSVGElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGSVGElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGSVGElement()")>]
+    #endif
+    abstract Create: unit -> SVGSVGElement
 
-type [<AllowNullLiteral; Global>] SVGScriptElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGScriptElement =
     inherit SVGElement
     inherit SVGExternalResourcesRequired
     inherit SVGURIReference
@@ -1431,9 +2380,19 @@ type [<AllowNullLiteral; Global>] SVGScriptElement =
 
 type [<AllowNullLiteral>] SVGScriptElementType =
     abstract prototype: SVGScriptElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGScriptElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGScriptElement()")>]
+    #endif
+    abstract Create: unit -> SVGScriptElement
 
-type [<AllowNullLiteral; Global>] SVGStopElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGStopElement =
     inherit SVGElement
     inherit SVGStylable
     abstract offset: SVGAnimatedNumber with get, set
@@ -1441,9 +2400,19 @@ type [<AllowNullLiteral; Global>] SVGStopElement =
 
 type [<AllowNullLiteral>] SVGStopElementType =
     abstract prototype: SVGStopElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGStopElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGStopElement()")>]
+    #endif
+    abstract Create: unit -> SVGStopElement
 
-type [<AllowNullLiteral; Global>] SVGStringList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGStringList =
     abstract numberOfItems: float with get, set
     abstract appendItem: newItem: string -> string
     abstract clear: unit -> unit
@@ -1455,9 +2424,19 @@ type [<AllowNullLiteral; Global>] SVGStringList =
 
 type [<AllowNullLiteral>] SVGStringListType =
     abstract prototype: SVGStringList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGStringList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGStringList()")>]
+    #endif
+    abstract Create: unit -> SVGStringList
 
-type [<AllowNullLiteral; Global>] SVGStyleElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGStyleElement =
     inherit SVGElement
     inherit SVGLangSpace
     abstract media: string with get, set
@@ -1467,9 +2446,19 @@ type [<AllowNullLiteral; Global>] SVGStyleElement =
 
 type [<AllowNullLiteral>] SVGStyleElementType =
     abstract prototype: SVGStyleElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGStyleElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGStyleElement()")>]
+    #endif
+    abstract Create: unit -> SVGStyleElement
 
-type [<AllowNullLiteral; Global>] SVGSwitchElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGSwitchElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -1480,9 +2469,19 @@ type [<AllowNullLiteral; Global>] SVGSwitchElement =
 
 type [<AllowNullLiteral>] SVGSwitchElementType =
     abstract prototype: SVGSwitchElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGSwitchElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGSwitchElement()")>]
+    #endif
+    abstract Create: unit -> SVGSwitchElement
 
-type [<AllowNullLiteral; Global>] SVGSymbolElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGSymbolElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGLangSpace
@@ -1492,17 +2491,37 @@ type [<AllowNullLiteral; Global>] SVGSymbolElement =
 
 type [<AllowNullLiteral>] SVGSymbolElementType =
     abstract prototype: SVGSymbolElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGSymbolElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGSymbolElement()")>]
+    #endif
+    abstract Create: unit -> SVGSymbolElement
 
-type [<AllowNullLiteral; Global>] SVGTSpanElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTSpanElement =
     inherit SVGTextPositioningElement
 
 
 type [<AllowNullLiteral>] SVGTSpanElementType =
     abstract prototype: SVGTSpanElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTSpanElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTSpanElement()")>]
+    #endif
+    abstract Create: unit -> SVGTSpanElement
 
-type [<AllowNullLiteral; Global>] SVGTextContentElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTextContentElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTests
@@ -1529,18 +2548,38 @@ type [<AllowNullLiteral>] SVGTextContentElementType =
     abstract LENGTHADJUST_SPACING: float with get, set
     abstract LENGTHADJUST_SPACINGANDGLYPHS: float with get, set
     abstract LENGTHADJUST_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTextContentElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTextContentElement()")>]
+    #endif
+    abstract Create: unit -> SVGTextContentElement
 
-type [<AllowNullLiteral; Global>] SVGTextElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTextElement =
     inherit SVGTextPositioningElement
     inherit SVGTransformable
 
 
 type [<AllowNullLiteral>] SVGTextElementType =
     abstract prototype: SVGTextElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTextElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTextElement()")>]
+    #endif
+    abstract Create: unit -> SVGTextElement
 
-type [<AllowNullLiteral; Global>] SVGTextPathElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTextPathElement =
     inherit SVGTextContentElement
     inherit SVGURIReference
     abstract ``method``: SVGAnimatedEnumeration with get, set
@@ -1562,9 +2601,19 @@ type [<AllowNullLiteral>] SVGTextPathElementType =
     abstract TEXTPATH_SPACINGTYPE_AUTO: float with get, set
     abstract TEXTPATH_SPACINGTYPE_EXACT: float with get, set
     abstract TEXTPATH_SPACINGTYPE_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTextPathElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTextPathElement()")>]
+    #endif
+    abstract Create: unit -> SVGTextPathElement
 
-type [<AllowNullLiteral; Global>] SVGTextPositioningElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTextPositioningElement =
     inherit SVGTextContentElement
     abstract dx: SVGAnimatedLengthList with get, set
     abstract dy: SVGAnimatedLengthList with get, set
@@ -1574,9 +2623,19 @@ type [<AllowNullLiteral; Global>] SVGTextPositioningElement =
 
 type [<AllowNullLiteral>] SVGTextPositioningElementType =
     abstract prototype: SVGTextPositioningElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTextPositioningElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTextPositioningElement()")>]
+    #endif
+    abstract Create: unit -> SVGTextPositioningElement
 
-type [<AllowNullLiteral; Global>] SVGTitleElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTitleElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGLangSpace
@@ -1584,9 +2643,19 @@ type [<AllowNullLiteral; Global>] SVGTitleElement =
 
 type [<AllowNullLiteral>] SVGTitleElementType =
     abstract prototype: SVGTitleElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTitleElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTitleElement()")>]
+    #endif
+    abstract Create: unit -> SVGTitleElement
 
-type [<AllowNullLiteral; Global>] SVGTransform =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTransform =
     abstract angle: float with get, set
     abstract matrix: SVGMatrix with get, set
     abstract ``type``: float with get, set
@@ -1613,9 +2682,19 @@ type [<AllowNullLiteral>] SVGTransformType =
     abstract SVG_TRANSFORM_SKEWY: float with get, set
     abstract SVG_TRANSFORM_TRANSLATE: float with get, set
     abstract SVG_TRANSFORM_UNKNOWN: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTransform
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTransform()")>]
+    #endif
+    abstract Create: unit -> SVGTransform
 
-type [<AllowNullLiteral; Global>] SVGTransformList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTransformList =
     abstract numberOfItems: float with get, set
     abstract appendItem: newItem: SVGTransform -> SVGTransform
     abstract clear: unit -> unit
@@ -1629,14 +2708,29 @@ type [<AllowNullLiteral; Global>] SVGTransformList =
 
 type [<AllowNullLiteral>] SVGTransformListType =
     abstract prototype: SVGTransformList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGTransformList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGTransformList()")>]
+    #endif
+    abstract Create: unit -> SVGTransformList
 
-type [<AllowNullLiteral; Global>] SVGUnitTypes =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGUnitTypes =
     abstract SVG_UNIT_TYPE_OBJECTBOUNDINGBOX: float with get, set
     abstract SVG_UNIT_TYPE_UNKNOWN: float with get, set
     abstract SVG_UNIT_TYPE_USERSPACEONUSE: float with get, set
 
-type [<AllowNullLiteral; Global>] SVGUseElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGUseElement =
     inherit SVGElement
     inherit SVGStylable
     inherit SVGTransformable
@@ -1654,9 +2748,19 @@ type [<AllowNullLiteral; Global>] SVGUseElement =
 
 type [<AllowNullLiteral>] SVGUseElementType =
     abstract prototype: SVGUseElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGUseElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGUseElement()")>]
+    #endif
+    abstract Create: unit -> SVGUseElement
 
-type [<AllowNullLiteral; Global>] SVGViewElement =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGViewElement =
     inherit SVGElement
     inherit SVGExternalResourcesRequired
     inherit SVGFitToViewBox
@@ -1666,9 +2770,19 @@ type [<AllowNullLiteral; Global>] SVGViewElement =
 
 type [<AllowNullLiteral>] SVGViewElementType =
     abstract prototype: SVGViewElement with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGViewElement
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGViewElement()")>]
+    #endif
+    abstract Create: unit -> SVGViewElement
 
-type [<AllowNullLiteral; Global>] SVGZoomAndPan =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGZoomAndPan =
     abstract zoomAndPan: float with get, set
 
 type [<AllowNullLiteral>] SVGZoomAndPanType =
@@ -1676,7 +2790,12 @@ type [<AllowNullLiteral>] SVGZoomAndPanType =
     abstract SVG_ZOOMANDPAN_MAGNIFY: float with get, set
     abstract SVG_ZOOMANDPAN_UNKNOWN: float with get, set
 
-type [<AllowNullLiteral; Global>] SVGZoomEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGZoomEvent =
     inherit UIEvent
     abstract newScale: float with get, set
     abstract newTranslate: SVGPoint with get, set
@@ -1686,19 +2805,44 @@ type [<AllowNullLiteral; Global>] SVGZoomEvent =
 
 type [<AllowNullLiteral>] SVGZoomEventType =
     abstract prototype: SVGZoomEvent with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> SVGZoomEvent
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new SVGZoomEvent()")>]
+    #endif
+    abstract Create: unit -> SVGZoomEvent
 
-type [<AllowNullLiteral; Global>] SVGAnimatedPathData =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedPathData =
         abstract pathSegList: SVGPathSegList with get, set
 
-type [<AllowNullLiteral; Global>] SVGAnimatedPoints =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGAnimatedPoints =
     abstract animatedPoints: SVGPointList with get, set
     abstract points: SVGPointList with get, set
 
-type [<AllowNullLiteral; Global>] SVGExternalResourcesRequired =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGExternalResourcesRequired =
     abstract externalResourcesRequired: SVGAnimatedBoolean with get, set
 
-type [<AllowNullLiteral; Global>] SVGFilterPrimitiveStandardAttributes =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFilterPrimitiveStandardAttributes =
     inherit SVGStylable
     abstract height: SVGAnimatedLength with get, set
     abstract result: SVGAnimatedString with get, set
@@ -1706,15 +2850,30 @@ type [<AllowNullLiteral; Global>] SVGFilterPrimitiveStandardAttributes =
     abstract x: SVGAnimatedLength with get, set
     abstract y: SVGAnimatedLength with get, set
 
-type [<AllowNullLiteral; Global>] SVGFitToViewBox =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGFitToViewBox =
     abstract preserveAspectRatio: SVGAnimatedPreserveAspectRatio with get, set
     abstract viewBox: SVGAnimatedRect with get, set
 
-type [<AllowNullLiteral; Global>] SVGLangSpace =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGLangSpace =
     abstract xmllang: string with get, set
     abstract xmlspace: string with get, set
 
-type [<AllowNullLiteral; Global>] SVGLocatable =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGLocatable =
     abstract farthestViewportElement: SVGElement with get, set
     abstract nearestViewportElement: SVGElement with get, set
     abstract getBBox: unit -> SVGRect
@@ -1722,19 +2881,41 @@ type [<AllowNullLiteral; Global>] SVGLocatable =
     abstract getScreenCTM: unit -> SVGMatrix
     abstract getTransformToElement: element: SVGElement -> SVGMatrix
 
-type [<AllowNullLiteral; Global>] SVGStylable =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGStylable =
     abstract className: obj with get, set
     // abstract style: CSSStyleDeclaration with get, set
 
-type [<AllowNullLiteral; Global>] SVGTests =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTests =
     abstract requiredExtensions: SVGStringList with get, set
     abstract requiredFeatures: SVGStringList with get, set
     abstract systemLanguage: SVGStringList with get, set
     abstract hasExtension: extension: string -> bool
 
-type [<AllowNullLiteral; Global>] SVGTransformable =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGTransformable =
     inherit SVGLocatable
     abstract transform: SVGAnimatedTransformList with get, set
 
-type [<AllowNullLiteral; Global>] SVGURIReference =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] SVGURIReference =
     abstract href: SVGAnimatedString with get, set
+
+#endif

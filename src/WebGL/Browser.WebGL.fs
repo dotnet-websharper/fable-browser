@@ -1,8 +1,20 @@
 namespace Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
+#if FABLE_COMPILER
 open Fable.Core
 open Fable.Core.JS
+#else
+open WebSharper
+open WebSharper.JavaScript
+
+[<AutoOpen>]
+module internal JsUtil =
+    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
+    type U2<'a,'b> = Union<'a,'b>
+    type U3<'a,'b,'c> = Union<'a,'b,'c>
+
+#endif
 
 type [<AllowNullLiteral>] WebGLContextAttributes =
     abstract alpha: bool option with get, set
@@ -16,14 +28,29 @@ type [<AllowNullLiteral>] WebGLContextEventInit =
     inherit EventInit
     abstract statusMessage: string option with get, set
 
-type [<AllowNullLiteral; Global>] WebGLObject =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLObject =
     interface end
 
 type [<AllowNullLiteral>] WebGLObjectType =
     abstract prototype: WebGLObject with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLObject
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLObject()")>]
+    #endif
+    abstract Create: unit -> WebGLObject
 
-type [<AllowNullLiteral; Global>] WEBGL_compressed_texture_s3tc =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WEBGL_compressed_texture_s3tc =
     abstract COMPRESSED_RGBA_S3TC_DXT1_EXT: float with get, set
     abstract COMPRESSED_RGBA_S3TC_DXT3_EXT: float with get, set
     abstract COMPRESSED_RGBA_S3TC_DXT5_EXT: float with get, set
@@ -35,9 +62,19 @@ type [<AllowNullLiteral>] WEBGL_compressed_texture_s3tcType =
     abstract COMPRESSED_RGBA_S3TC_DXT3_EXT: float with get, set
     abstract COMPRESSED_RGBA_S3TC_DXT5_EXT: float with get, set
     abstract COMPRESSED_RGB_S3TC_DXT1_EXT: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WEBGL_compressed_texture_s3tc
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WEBGL()")>]
+    #endif
+    abstract Create: unit -> WEBGL_compressed_texture_s3tc
 
-type [<AllowNullLiteral; Global>] WEBGL_debug_renderer_info =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WEBGL_debug_renderer_info =
     abstract UNMASKED_RENDERER_WEBGL: float with get, set
     abstract UNMASKED_VENDOR_WEBGL: float with get, set
 
@@ -45,93 +82,213 @@ type [<AllowNullLiteral>] WEBGL_debug_renderer_infoType =
     abstract prototype: WEBGL_debug_renderer_info with get, set
     abstract UNMASKED_RENDERER_WEBGL: float with get, set
     abstract UNMASKED_VENDOR_WEBGL: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WEBGL_debug_renderer_info
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WEBGL()")>]
+    #endif
+    abstract Create: unit -> WEBGL_debug_renderer_info
 
-type [<AllowNullLiteral; Global>] WEBGL_depth_texture =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WEBGL_depth_texture =
     abstract UNSIGNED_INT_24_8_WEBGL: float with get, set
 
 type [<AllowNullLiteral>] WEBGL_depth_textureType =
     abstract prototype: WEBGL_depth_texture with get, set
     abstract UNSIGNED_INT_24_8_WEBGL: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WEBGL_depth_texture
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WEBGL()")>]
+    #endif
+    abstract Create: unit -> WEBGL_depth_texture
 
-type [<AllowNullLiteral; Global>] WebGLActiveInfo =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLActiveInfo =
     abstract name: string with get, set
     abstract size: float with get, set
     abstract ``type``: float with get, set
 
 type [<AllowNullLiteral>] WebGLActiveInfoType =
     abstract prototype: WebGLActiveInfo with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLActiveInfo
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLActiveInfo()")>]
+    #endif
+    abstract Create: unit -> WebGLActiveInfo
 
-type [<AllowNullLiteral; Global>] WebGLBuffer =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLBuffer =
     inherit WebGLObject
 
 type [<AllowNullLiteral>] WebGLBufferType =
     abstract prototype: WebGLBuffer with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLBuffer
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLBuffer()")>]
+    #endif
+    abstract Create: unit -> WebGLBuffer
 
-type [<AllowNullLiteral; Global>] WebGLContextEvent =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLContextEvent =
     inherit Event
     abstract statusMessage: string with get, set
 
 type [<AllowNullLiteral>] WebGLContextEventType =
     abstract prototype: WebGLContextEvent with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLContextEvent
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLContextEvent()")>]
+    #endif
+    abstract Create: unit -> WebGLContextEvent
 
-type [<AllowNullLiteral; Global>] WebGLFramebuffer =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLFramebuffer =
     inherit WebGLObject
 
 
 type [<AllowNullLiteral>] WebGLFramebufferType =
     abstract prototype: WebGLFramebuffer with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLFramebuffer
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLFramebuffer()")>]
+    #endif
+    abstract Create: unit -> WebGLFramebuffer
 
-type [<AllowNullLiteral; Global>] WebGLProgram =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLProgram =
     inherit WebGLObject
 
 type [<AllowNullLiteral>] WebGLProgramType =
     abstract prototype: WebGLProgram with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLProgram
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLProgram()")>]
+    #endif
+    abstract Create: unit -> WebGLProgram
 
-type [<AllowNullLiteral; Global>] WebGLRenderbuffer =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLRenderbuffer =
     inherit WebGLObject
 
 type [<AllowNullLiteral>] WebGLRenderbufferType =
     abstract prototype: WebGLRenderbuffer with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLRenderbuffer
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLRenderbuffer()")>]
+    #endif
+    abstract Create: unit -> WebGLRenderbuffer
 
-type [<AllowNullLiteral; Global>] WebGLShader =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLShader =
     inherit WebGLObject
 
 type [<AllowNullLiteral>] WebGLShaderType =
     abstract prototype: WebGLShader with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLShader
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLShader()")>]
+    #endif
+    abstract Create: unit -> WebGLShader
 
-type [<AllowNullLiteral; Global>] WebGLShaderPrecisionFormat =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLShaderPrecisionFormat =
     abstract precision: float with get, set
     abstract rangeMax: float with get, set
     abstract rangeMin: float with get, set
 
 type [<AllowNullLiteral>] WebGLShaderPrecisionFormatType =
     abstract prototype: WebGLShaderPrecisionFormat with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLShaderPrecisionFormat
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLShaderPrecisionFormat()")>]
+    #endif
+    abstract Create: unit -> WebGLShaderPrecisionFormat
 
-type [<AllowNullLiteral; Global>] WebGLTexture =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLTexture =
     inherit WebGLObject
 
 type [<AllowNullLiteral>] WebGLTextureType =
     abstract prototype: WebGLTexture with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLTexture
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLTexture()")>]
+    #endif
+    abstract Create: unit -> WebGLTexture
 
-type [<AllowNullLiteral; Global>] WebGLUniformLocation =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLUniformLocation =
     interface end
 
 type [<AllowNullLiteral>] WebGLUniformLocationType =
     abstract prototype: WebGLUniformLocation with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLUniformLocation
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLUniformLocation()")>]
+    #endif
+    abstract Create: unit -> WebGLUniformLocation
 
-type [<AllowNullLiteral; Global>] WebGLRenderingContext =
+#if FABLE_COMPILER
+    [<Global>]
+    #else
+    //[<Stub>]
+    #endif
+type [<AllowNullLiteral>] WebGLRenderingContext =
     abstract canvas: HTMLCanvasElement with get, set
     abstract drawingBufferHeight: float with get, set
     abstract drawingBufferWidth: float with get, set
@@ -876,32 +1033,122 @@ type [<AllowNullLiteral>] WebGLRenderingContextType =
     abstract VERTEX_SHADER: float with get, set
     abstract VIEWPORT: float with get, set
     abstract ZERO: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> WebGLRenderingContext
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new WebGLRenderingContext()")>]
+    #endif
+    abstract Create: unit -> WebGLRenderingContext
 
 namespace Browser
 
 open Browser.Types
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+#endif
 
 [<AutoOpen>]
 module WebGL =
 
     type HTMLCanvasElement with
+        #if FABLE_COMPILER
         [<Emit("$0.getContext('experimental-webgl')")>]
-        member __.getContext_experimental_webgl(): WebGLRenderingContext = jsNative
+        #else
+        [<Inline("$this.getContext('experimental-webgl')")>]
+        #endif
+        member this.getContext_experimental_webgl(): WebGLRenderingContext = jsNative
 
-    let [<Global>] WEBGL_compressed_texture_s3tc: WEBGL_compressed_texture_s3tcType = jsNative
-    let [<Global>] WEBGL_debug_renderer_info: WEBGL_debug_renderer_infoType = jsNative
-    let [<Global>] WEBGL_depth_texture: WEBGL_depth_textureType = jsNative
-    let [<Global>] WebGLActiveInfo: WebGLActiveInfoType = jsNative
-    let [<Global>] WebGLBuffer: WebGLBufferType = jsNative
-    let [<Global>] WebGLContextEvent: WebGLContextEventType = jsNative
-    let [<Global>] WebGLFramebuffer: WebGLFramebufferType = jsNative
-    let [<Global>] WebGLObject: WebGLObjectType = jsNative
-    let [<Global>] WebGLProgram: WebGLProgramType = jsNative
-    let [<Global>] WebGLRenderbuffer: WebGLRenderbufferType = jsNative
-    let [<Global>] WebGLRenderingContext: WebGLRenderingContextType = jsNative
-    let [<Global>] WebGLShader: WebGLShaderType = jsNative
-    let [<Global>] WebGLShaderPrecisionFormat: WebGLShaderPrecisionFormatType = jsNative
-    let [<Global>] WebGLTexture: WebGLTextureType = jsNative
-    let [<Global>] WebGLUniformLocation: WebGLUniformLocationType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WEBGL_compressed_texture_s3tc: WEBGL_compressed_texture_s3tcType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WEBGL_debug_renderer_info: WEBGL_debug_renderer_infoType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WEBGL_depth_texture: WEBGL_depth_textureType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLActiveInfo: WebGLActiveInfoType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLBuffer: WebGLBufferType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLContextEvent: WebGLContextEventType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLFramebuffer: WebGLFramebufferType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLObject: WebGLObjectType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLProgram: WebGLProgramType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLRenderbuffer: WebGLRenderbufferType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLRenderingContext: WebGLRenderingContextType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLShader: WebGLShaderType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLShaderPrecisionFormat: WebGLShaderPrecisionFormatType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLTexture: WebGLTextureType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let WebGLUniformLocation: WebGLUniformLocationType = jsNative
+
+#endif

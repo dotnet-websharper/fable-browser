@@ -1,28 +1,59 @@
 namespace rec Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
 open System
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+module internal JS =
+    type Promise<'t> = JavaScript.Promise<'t>
+#endif
 
 type [<AllowNullLiteral>] CSS =
     abstract supports: property: string * ?value: string -> bool
 
-type [<AllowNullLiteral; Global>] CSSConditionRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSConditionRule =
     inherit CSSGroupingRule
     abstract conditionText: string with get, set
 
 type CSSConditionRuleType =
     abstract prototype: CSSConditionRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSConditionRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSConditionRule()">]
+    #endif
+    abstract Create: unit -> CSSConditionRule
 
-type [<AllowNullLiteral; Global>] CSSFontFaceRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSFontFaceRule =
     inherit CSSRule
     abstract style: CSSStyleDeclaration with get, set
 
 type CSSFontFaceRuleType =
     abstract prototype: CSSFontFaceRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSFontFaceRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSFontFaceRule()">]
+    #endif
+    abstract Create: unit -> CSSFontFaceRule
 
-type [<AllowNullLiteral; Global>] CSSGroupingRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSGroupingRule =
     inherit CSSRule
     abstract cssRules: CSSRuleList with get, set
     abstract deleteRule: ?index: float -> unit
@@ -30,9 +61,19 @@ type [<AllowNullLiteral; Global>] CSSGroupingRule =
 
 type CSSGroupingRuleType =
     abstract prototype: CSSGroupingRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSGroupingRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSGroupingRule()">]
+    #endif
+    abstract Create: unit -> CSSGroupingRule
 
-type [<AllowNullLiteral; Global>] CSSImportRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSImportRule =
     inherit CSSRule
     abstract href: string with get, set
     // TODO
@@ -41,18 +82,38 @@ type [<AllowNullLiteral; Global>] CSSImportRule =
 
 type CSSImportRuleType =
     abstract prototype: CSSImportRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSImportRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSImportRule()">]
+    #endif
+    abstract Create: unit -> CSSImportRule
 
-type [<AllowNullLiteral; Global>] CSSKeyframeRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSKeyframeRule =
     inherit CSSRule
     abstract keyText: string with get, set
     abstract style: CSSStyleDeclaration with get, set
 
 type CSSKeyframeRuleType =
     abstract prototype: CSSKeyframeRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSKeyframeRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSKeyframeRule()">]
+    #endif
+    abstract Create: unit -> CSSKeyframeRule
 
-type [<AllowNullLiteral; Global>] CSSKeyframesRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSKeyframesRule =
     inherit CSSRule
     abstract cssRules: CSSRuleList with get, set
     abstract name: string with get, set
@@ -62,27 +123,57 @@ type [<AllowNullLiteral; Global>] CSSKeyframesRule =
 
 type CSSKeyframesRuleType =
     abstract prototype: CSSKeyframesRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSKeyframesRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSKeyframesRule()">]
+    #endif
+    abstract Create: unit -> CSSKeyframesRule
 
-type [<AllowNullLiteral; Global>] CSSMediaRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSMediaRule =
     inherit CSSConditionRule
     /// TODO
     // abstract media: MediaList with get, set
 
 type CSSMediaRuleType =
     abstract prototype: CSSMediaRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSMediaRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSMediaRule()">]
+    #endif
+    abstract Create: unit -> CSSMediaRule
 
-type [<AllowNullLiteral; Global>] CSSNamespaceRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSNamespaceRule =
     inherit CSSRule
     abstract namespaceURI: string with get, set
     abstract prefix: string with get, set
 
 type CSSNamespaceRuleType =
     abstract prototype: CSSNamespaceRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSNamespaceRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSNamespaceRule()">]
+    #endif
+    abstract Create: unit -> CSSNamespaceRule
 
-type [<AllowNullLiteral; Global>] CSSPageRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSPageRule =
     inherit CSSRule
     abstract pseudoClass: string with get, set
     abstract selector: string with get, set
@@ -91,9 +182,19 @@ type [<AllowNullLiteral; Global>] CSSPageRule =
 
 type CSSPageRuleType =
     abstract prototype: CSSPageRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSPageRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSPageRule()">]
+    #endif
+    abstract Create: unit -> CSSPageRule
 
-type [<AllowNullLiteral; Global>] CSSRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSRule =
     abstract cssText: string with get, set
     abstract parentRule: CSSRule with get, set
     abstract parentStyleSheet: CSSStyleSheet with get, set
@@ -125,18 +226,43 @@ type CSSRuleType =
     abstract SUPPORTS_RULE: float with get, set
     abstract UNKNOWN_RULE: float with get, set
     abstract VIEWPORT_RULE: float with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSRule()">]
+    #endif
+    abstract Create: unit -> CSSRule
 
-type [<AllowNullLiteral; Global>] CSSRuleList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSRuleList =
     abstract length: float with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> CSSRule with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    [<Inline "">] // TODO
+    #endif
+    abstract Item: index: int -> CSSRule with get, set
     abstract item: index: float -> CSSRule
 
 type CSSRuleListType =
     abstract prototype: CSSRuleList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSRuleList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSRuleList()">]
+    #endif
+    abstract Create: unit -> CSSRuleList
 
-type [<AllowNullLiteral; Global>] CSSStyleDeclaration =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSStyleDeclaration =
     abstract alignContent: string with get, set
     abstract alignItems: string with get, set
     abstract alignSelf: string with get, set
@@ -499,7 +625,12 @@ type [<AllowNullLiteral; Global>] CSSStyleDeclaration =
     abstract writingMode: string with get, set
     abstract zIndex: string with get, set
     abstract zoom: string with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> string with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    [<Inline "">] // TODO
+    #endif
+    abstract Item: index: int -> string with get, set
     abstract getPropertyPriority: propertyName: string -> string
     abstract getPropertyValue: propertyName: string -> string
     abstract item: index: float -> string
@@ -508,9 +639,19 @@ type [<AllowNullLiteral; Global>] CSSStyleDeclaration =
 
 type CSSStyleDeclarationType =
     abstract prototype: CSSStyleDeclaration with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSStyleDeclaration
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSStyleDeclaration()">]
+    #endif
+    abstract Create: unit -> CSSStyleDeclaration
 
-type [<AllowNullLiteral; Global>] CSSStyleRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSStyleRule =
     inherit CSSRule
     abstract readOnly: bool with get, set
     abstract selectorText: string with get, set
@@ -518,9 +659,19 @@ type [<AllowNullLiteral; Global>] CSSStyleRule =
 
 type CSSStyleRuleType =
     abstract prototype: CSSStyleRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSStyleRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSStyleRule()">]
+    #endif
+    abstract Create: unit -> CSSStyleRule
 
-type [<AllowNullLiteral; Global>] CSSStyleSheet =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSStyleSheet =
     inherit StyleSheet
     abstract cssRules: CSSRuleList with get, set
     abstract cssText: string with get, set
@@ -559,24 +710,54 @@ type [<AllowNullLiteral; Global>] CSSStyleSheet =
 
 type CSSStyleSheetType =
     abstract prototype: CSSStyleSheet with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSStyleSheet
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSStyleSheet()">]
+    #endif
+    abstract Create: unit -> CSSStyleSheet
 
-type [<AllowNullLiteral; Global>] CSSSupportsRule =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] CSSSupportsRule =
     inherit CSSConditionRule
 
 type CSSSupportsRuleType =
     abstract prototype: CSSSupportsRule with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> CSSSupportsRule
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new CSSSupportsRule()">]
+    #endif
+    abstract Create: unit -> CSSSupportsRule
 
-type [<AllowNullLiteral; Global>] StyleMedia =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] StyleMedia =
     abstract ``type``: string with get, set
     abstract matchMedium: mediaquery: string -> bool
 
 type StyleMediaType =
     abstract prototype: StyleMedia with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> StyleMedia
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new StyleMedia()">]
+    #endif
+    abstract Create: unit -> StyleMedia
 
-type [<AllowNullLiteral; Global>] StyleSheet =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] StyleSheet =
     abstract disabled: bool with get, set
     abstract href: string with get, set
     // TODO
@@ -588,22 +769,59 @@ type [<AllowNullLiteral; Global>] StyleSheet =
 
 type StyleSheetType =
     abstract prototype: StyleSheet with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> StyleSheet
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new StyleSheet()">]
+    #endif
+    abstract Create: unit -> StyleSheet
 
-type [<AllowNullLiteral; Global>] StyleSheetList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] StyleSheetList =
     abstract length: float with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> StyleSheet with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    [<Inline "">] // TODO
+    #endif
+    abstract Item: index: int -> StyleSheet with get, set
     abstract item: ?index: float -> StyleSheet
 
 type StyleSheetListType =
     abstract prototype: StyleSheetList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> StyleSheetList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new StyleSheetList()">]
+    #endif
+    abstract Create: unit -> StyleSheetList
 
-type [<AllowNullLiteral; Global>] StyleSheetPageList =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] StyleSheetPageList =
     abstract length: float with get, set
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> CSSPageRule with get, set
+    #if FABLE_COMPILER
+    [<Emit("$0[$1]{{=$2}}")>]
+    #else
+    [<Inline "">] // TODO
+    #endif
+    abstract Item: index: int -> CSSPageRule with get, set
     abstract item: index: float -> CSSPageRule
 
 type StyleSheetPageListType =
     abstract prototype: StyleSheetPageList with get, set
-    [<Emit("new $0($1...)")>] abstract Create: unit -> StyleSheetPageList
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline "new StyleSheetPageList()">]
+    #endif
+    abstract Create: unit -> StyleSheetPageList
+
+    #endif

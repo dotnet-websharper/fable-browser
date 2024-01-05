@@ -1,8 +1,16 @@
 namespace Browser.Types
+#if FABLE_COMPILER || JAVASCRIPT
 
 open System
+
+#if FABLE_COMPILER
 open Fable.Core
 open Fable.Core.JS
+#else
+open WebSharper
+open WebSharper.JavaScript
+#endif
+
 open Browser
 open Browser.Types
 open System.Collections.Generic
@@ -11,26 +19,40 @@ type RTCDtlsFingerprint =
     abstract algorithm: string option with get, set
     abstract value: string with get, set
 
-type [<Global>] RTCCertificate =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCCertificate =
     abstract expires: float
     abstract getFingerprints: unit -> RTCDtlsFingerprint array
 
 type RTCCertificateType =
     abstract getSupportedAlgorithms: unit -> string array
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type BinaryType =
 | Blob
 | Arraybuffer
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCDataChannelState =
 | Connecting
 | Open
 | Closing
 | Closed
 
-type [<Global>] RTCDataChannel =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCDataChannel =
     inherit EventTarget
     abstract binaryType: BinaryType with get, set
     abstract bufferedAmount: uint32
@@ -53,7 +75,9 @@ type [<Global>] RTCDataChannel =
     abstract onerror: (ErrorEvent -> unit) with get, set
     abstract onclose: (Event -> unit) with get, set
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCPriorityType =
 | [<CompiledName("very-low")>] VeryLow
 | Low
@@ -70,14 +94,25 @@ type RTCDataChannelInit =
     abstract priority: RTCPriorityType with get, set
 
 type RTCDataChannelInitType =
+    #if FABLE_COMPILER
     [<Emit("new Object({ordered:true,protocol:'',negotiated:false,priority:'low'})")>]
+    #else
+    [<Inline("new Object({ordered:true,protocol:'',negotiated:false,priority:'low'})")>]
+    #endif
     abstract Create:unit -> RTCDataChannelInit
 
-type [<Global>] RTCDataChannelEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCDataChannelEvent =
     inherit Event
     abstract channel: RTCDataChannel
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceCredentialType =
     | Password
     | Oauth
@@ -89,15 +124,23 @@ type RTCIceServer =
     abstract username: string option with get, set
 
 type RTCIceServerType =
+    #if FABLE_COMPILER
     [<Emit "new Object({urls: $1, username: $2, credential: $3, credentialType: $4})">]
+    #else
+    [<Inline("new Object({urls: $urls, username: $username, credential: $credential, credentialType: $credentialType})")>]
+    #endif
     abstract Create: urls:string array * ?username:string * ?credential: string * ?credentialType: RTCIceCredentialType -> RTCIceServer
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceTransportComponent =
     | [<CompiledName("RTP")>] RTP
     | [<CompiledName("RTSP")>] RTSP
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceComponent =
     | [<CompiledName("rtp")>] RTP
     | [<CompiledName("rtcp")>] RTCP
@@ -122,32 +165,45 @@ type RTCIceParameters =
     abstract usernameFragment: string option with get, set
     abstract password: string option with get, set
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceGatheringState =
 | New
 | Gathering
 | Complete
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceProtocol =
 | [<CompiledName("udp")>] UDP
 | [<CompiledName("tcp")>] TCP
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceTcpCandidateType =
 | Active
 | Passive
 | [<CompiledName("so")>] SO
 
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceCandidateType =
 | Host
 | Srflx
 | Prflx
 | Relay
 
-type [<Global>] RTCIceCandidate =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCIceCandidate =
     abstract candidate: string
     abstract ``component``: RTCIceComponent
     abstract foundation: string
@@ -168,7 +224,11 @@ type [<Global>] RTCIceCandidate =
     abstract toJSON : unit -> RTCIceCandidateInit
 
 type RTCIceCandidateInitType =
+    #if FABLE_COMPILER
     [<Emit("new Object({candidate:$1,sdpMid:$2,sdpMLineIndex:$3{{,usernameFragment:$4}}})")>]
+    #else
+    [<Inline("new Object({candidate:$candidate,sdpMid:$sdpMid,sdpMLineIndex:$sdpMLineIndex,usernameFragment:$usernameFragment})")>] // TODO: check
+    #endif
     abstract Create: candidate:string * sdpMid:string * sdpMLineIndex:string * ?usernameFragment:string -> RTCIceCandidateInit
 
 type RTCIceCandidateStaticType =
@@ -177,18 +237,27 @@ type RTCIceCandidateStaticType =
     abstract sdpMLineIndex: uint16 with get, set
     abstract usernameFragment: string option with get, set
 
-    [<Emit("new $0($1...)")>] abstract Create: RTCIceCandidateInit option -> RTCIceCandidate
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>]
+    #else
+    [<Inline("new RTCIceCandidate.addTrack($0)")>]
+    #endif
+    abstract Create: RTCIceCandidateInit option -> RTCIceCandidate
 
 type RTCIceCandidatePair =
     abstract local: RTCIceCandidate  with get, set
     abstract remote: RTCIceCandidate with get, set
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RoleType =
     | Controlling
     | Controlled
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceTransportState =
 | New //The RTCIceTransport is currently gathering local candidates, or is waiting for the remote device to begin to transmit the remote candidates, or both. In this state, checking of candidates to look for those which might be acceptable has not yet begun.
 | Checking //At least one remote candidate has been received, and the RTCIceTransport has begun examining pairings of remote and local candidates in order to attempt to identify viable pairs that could be used to establish a connection. Keep in mind that gathering of local candidates may still be underway, and, similarly, the remote device also may still be gathering candidates of its own.
@@ -199,7 +268,12 @@ type RTCIceTransportState =
 | Failed //The RTCIceTransport has finished the gathering process, has received the "no more candidates" notification from the remote peer, and has finished checking pairs of candidates, without successfully finding a pair that is both valid and for which consent can be obtained. This is a terminal state, indicating that the connection cannot be achieved or maintained.
 | Closed //The transport has shut down and is no int64er responding to STUN requests.
 
-type [<Global>] RTCIceTransport =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCIceTransport =
     inherit EventTarget
     abstract ``component``: RTCIceTransportComponent
     abstract gatheringState: RTCIceGatheringState
@@ -218,7 +292,9 @@ type [<Global>] RTCIceTransport =
     abstract ongatheringstatechange: (Event -> unit) with get, set
     abstract onselectedcandidatepairchange: (Event -> unit) with get, set
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCDtlsTransportState =
 | New
 | Connecting
@@ -226,7 +302,12 @@ type RTCDtlsTransportState =
 | Closed
 | Failed
 
-type [<Global>] RTCDtlsTransport =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCDtlsTransport =
     inherit EventTarget
     abstract state: RTCDtlsTransportState
     abstract iceTransport: RTCIceTransport
@@ -239,7 +320,9 @@ type RTCRtpContributingSource =
     abstract uint32: float
     abstract timestamp: float
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCDegradationPreference =
 | [<CompiledName("maintain-framerate")>] MaintainFramerate
 | [<CompiledName("maintain-resolution")>] MaintainResolution
@@ -280,7 +363,9 @@ type RTCRtpSynchronizationSource =
     inherit RTCRtpContributingSource
     abstract voiceActivityFlag: bool
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCStatsType =
 | Codec
 | [<CompiledName("inbound-rtp")>] InboundRtp
@@ -305,7 +390,9 @@ type RTCStats =
     abstract ``type``: RTCStatsType
     abstract id: string
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCCodecType =
 | Encode
 | Decode
@@ -404,7 +491,9 @@ type RTCSentRtpStreamStats =
     abstract bytesSent: uint32
     abstract bytesDiscardedOnSend: uint32
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCQualityLimitationReason =
 | [<CompiledName("none")>] None'
 | Cpu
@@ -565,7 +654,9 @@ type RTCVideoReceiverStats =
 type RTCReceiverVideoTrackAttachmentStats =
     inherit RTCVideoReceiverStats
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceRole =
 | Unknown
 | Controlling
@@ -586,7 +677,9 @@ type RTCTransportStats =
     abstract dtlsCipher: string
     abstract srtpCipher: string
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCStatsIceCandidatePairState =
 | Frozen
 | Waiting
@@ -624,7 +717,9 @@ type RTCIceCandidatePairStats =
     abstract consentRequestsSent: uint32
     abstract consentExpiredTimestamp: float
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCNetworkType =
 | Bluetooth
 | Cellular
@@ -634,7 +729,9 @@ type RTCNetworkType =
 | Vpn
 | Unknown
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCRelayProtocol =
 | [<CompiledName("tcp")>] TCP
 | [<CompiledName("tls")>] TLS
@@ -662,7 +759,12 @@ type RTCCertificateStats =
 
 type RTCStatsReport = System.Collections.Generic.Dictionary<string,RTCStats>
 
-type [<Global>] RTCRtpReceiver =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCRtpReceiver =
     abstract track: MediaStreamTrack
     abstract rtcpTransport: RTCDtlsTransport option
     abstract transport: RTCDtlsTransport option
@@ -687,10 +789,16 @@ type RTCRtpCapabilities =
   abstract headerExtensions: ResizeArray<RTCRtpHeaderExtensionCapability>
 
 type RTCRtpReceiverType =
+    #if FABLE_COMPILER
     [<Emit("RTCRtpReceiver.getCapabilities($1)")>]
+    #else
+    [<Inline("RTCRtpReceiver.getCapabilities($kind)")>]
+    #endif
     abstract getCapabilities: kind:string -> RTCRtpCapabilities option
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCDtxStatus =
 | Disabled
 | Enabled
@@ -712,7 +820,12 @@ type RTCRtpSendParameters =
     abstract encodings: ResizeArray<RTCRtpEncodingParameters> with get, set
     abstract degradationPreference: RTCDegradationPreference option with get, set
 
-type [<Global>] RTCRtpSender =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCRtpSender =
     //TODO: abstract dtmf: obj
     abstract rtcpTransport: RTCDtlsTransport option
     abstract transport: RTCDtlsTransport option
@@ -722,24 +835,38 @@ type [<Global>] RTCRtpSender =
     abstract setParameters: parameters:RTCRtpSendParameters -> JS.Promise<unit>
     abstract getParameters: unit -> RTCRtpSendParameters
     abstract replaceTrack: withTrack:#MediaStreamTrack option -> JS.Promise<unit>
-
+    #if FABLE_COMPILER
     [<Emit("$0.setStreams($1...)")>]
+    #else
+    [<Inline("$this.setStreams($streams)")>]
+    #endif
     abstract setStreams: [<ParamArray>] streams:MediaStream [] -> unit
     abstract getStats: unit -> JS.Promise<RTCStatsReport>
 
 type RTCRtpSenderType =
+    #if FABLE_COMPILER
     [<Emit("RTCRtpSender.getCapabilities($1)")>]
+    #else
+    [<Inline("RTCRtpSender.getCapabilities($kind)")>]
+    #endif
     abstract getCapabilities: kind:string -> RTCRtpCapabilities option
 
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCRtpTransceiverDirection =
 | [<CompiledName("sendrecv")>] SendRecv
 | [<CompiledName("sendonly")>] SendOnly
 | [<CompiledName("recvonly")>] RecvOnly
 | [<CompiledName("inactive")>] Inactive
 
-type [<Global>] RTCRtpTransceiver =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCRtpTransceiver =
     abstract mid: string option
     abstract sender: RTCRtpSender
     abstract receiver: RTCRtpReceiver
@@ -748,13 +875,20 @@ type [<Global>] RTCRtpTransceiver =
     abstract stop: unit -> unit
     abstract setCodecPreferences: codecs: ResizeArray<RTCRtpCodecParameters> -> unit
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCSctpTransportState =
 | Connecting
 | Connected
 | Closed
 
-type [<Global>] RTCSctpTransport =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCSctpTransport =
     inherit EventTarget
     abstract transport: RTCDtlsTransport
     abstract state: RTCSctpTransportState
@@ -762,7 +896,9 @@ type [<Global>] RTCSctpTransport =
     abstract maxChannels: uint32 option
     abstract onstatechange: (Event -> unit) with get, set
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCSdpType =
 | Offer // An RTCSdpType of offer indicates that a description MUST be treated as an [SDP] offer.
 | [<CompiledName("pranswer")>] PRAnswer //An RTCSdpType of pranswer indicates that a description MUST be treated as an [SDP] answer, but not a final answer. A description used as an SDP pranswer may be applied as a response to an SDP offer, or an update to a previously sent SDP pranswer.
@@ -774,30 +910,62 @@ type RTCSessionDescriptionInit =
     abstract sdp: string with get, set
 
 type RTCSessionDescriptionInitType =
-    [<Emit "({type:$1, sdp:$2})">] abstract Create: ``type``:RTCSdpType * sdp:string  -> RTCSessionDescriptionInit
+    #if FABLE_COMPILER
+    [<Emit "({type:$1, sdp:$2})">] 
+    #else
+    [<Inline("({type:$type,sdp:$sdp})")>]
+    #endif
+    abstract Create: ``type``:RTCSdpType * sdp:string  -> RTCSessionDescriptionInit
 
-type [<Global>] RTCSessionDescription =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCSessionDescription =
     abstract ``type``: RTCSdpType
     abstract sdp: string
     abstract toJSON: unit -> RTCSessionDescriptionInit
 
 type RTCSessionDescriptionType =
-    [<Emit "new $0($1...)">] abstract Create: ?message: RTCSessionDescriptionInit -> RTCSessionDescription
-    [<Emit "new $0({sdp:$1})">] abstract Create: sdp: string -> RTCSessionDescription
+    #if FABLE_COMPILER
+    [<Emit "new $0($1...)">] 
+    #else
+    [<Inline("new RTCSessionDescription($message)")>]
+    #endif
+    abstract Create: ?message: RTCSessionDescriptionInit -> RTCSessionDescription
+    #if FABLE_COMPILER
+    [<Emit "new $0({sdp:$1})">] 
+    #else
+    [<Inline("new RTCSessionDescription({sdp:$sdp})")>]
+    #endif
+    abstract Create: sdp: string -> RTCSessionDescription
 
-type [<Global>] RTCPeerConnectionIceEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCPeerConnectionIceEvent =
     inherit Event
     abstract candidate: RTCIceCandidate option
     abstract url: string option
 
-type [<Global>] RTCPeerConnectionIceErrorEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCPeerConnectionIceErrorEvent =
     inherit Event
     abstract hostCandidate: string
     abstract url: string
     abstract errorCode: uint32
     abstract errorText: string
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCSignalingState =
 | Stable
 | [<CompiledName("have-local-offer")>] HaveLocalOffer
@@ -806,7 +974,9 @@ type RTCSignalingState =
 | [<CompiledName("have-remote-pranswer")>] HaveRemotePRAnswer
 | Closed
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceConnectionState =
 | Closed
 | Failed
@@ -816,7 +986,9 @@ type RTCIceConnectionState =
 | Completed
 | Connected
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCPeerConnectionState =
 | Closed
 | Failed
@@ -825,25 +997,33 @@ type RTCPeerConnectionState =
 | Connecting
 | Connected
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCIceTransportPolicy =
 | All // All ICE candidates will be considered.
 | Public // Only ICE candidates with public IP addresses will be considered. Removed from the specification's May 13, 2016 working draft
 | Relay // Only ICE candidates whose IP addresses are being relayed, such as those being passed through a TURN server, will be considered.
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCBundlePolicy =
 | Balance // On BUNDLE-aware connections, the ICE agent should gather candidates for all of the media types in use (audio, video, and data). Otherwise, the ICE agent should only negotiate one audio and video track on separate transports.
 | [<CompiledName("max-compat")>] MaxCompat // The ICE agent should gather candidates for each track, using separate transports to negotiate all media tracks for connections which aren't BUNDLE-compatible.
 | [<CompiledName("max-bundle")>] MaxBundle // The ICE agent should gather candidates for just one track. If the connection isn't BUNDLE-compatible, then the ICE agent should negotiate just one media track.
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type RTCRtcpMuxPolicy =
 | Negotiate //Instructs the ICE agent to gather both RTP and RTCP candidates. If the remote peer can multiplex RTCP, then RTCP candidates are multiplexed atop the corresponding RTP candidates. Otherwise, both the RTP and RTCP candidates are returned, separately.
 | Require //Tells the ICE agent to gather ICE candidates for only RTP, and to multiplex RTCP atop them. If the remote peer doesn't support RTCP multiplexing, then session negotiation fails.
 
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type SdpSemantics =
 | [<CompiledName "plan-b">] PlanB
 | [<CompiledName "unified-plan">] Unified
@@ -859,7 +1039,12 @@ type RTCConfiguration =
     abstract iceCandidatePoolSize: uint32 option with get, set
     abstract sdpSemantics: SdpSemantics option with get, set
 
-type [<Global>] RTCTrackEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCTrackEvent =
     inherit Event
     abstract receiver: RTCRtpReceiver
     abstract track: MediaStreamTrack
@@ -871,7 +1056,12 @@ type RTCRtpTransceiverInit =
     abstract sendEncodings: RTCRtpEncodingParameters array option
     abstract streams: MediaStream array option
 
-type [<Global>] RTCPeerConnection =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type RTCPeerConnection =
     inherit EventTarget
     abstract onnegotiationneeded: (Event->unit) with get,set
     abstract onicecandidate: (RTCPeerConnectionIceEvent->unit) with get,set
@@ -907,8 +1097,11 @@ type [<Global>] RTCPeerConnection =
     abstract getSenders: unit -> ResizeArray<RTCRtpSender>
     abstract getReceivers: unit -> ResizeArray<RTCRtpReceiver>
     abstract getTransceivers: unit -> ResizeArray<RTCRtpTransceiver>
-
+    #if FABLE_COMPILER
     [<Emit("$0.addTrack($1,$2...)")>]
+    #else
+    [<Inline("$this.addTrack($track,$streams)")>]
+    #endif
     abstract addTrack: track:MediaStreamTrack * [<ParamArray>] streams: MediaStream array -> RTCRtpSender
 
     abstract removeTrack: sender:RTCRtpSender -> unit
@@ -924,27 +1117,92 @@ type [<Global>] RTCPeerConnection =
 
 type RTCPeerConnectionType =
     abstract getDefaultIceServers: unit -> ResizeArray<RTCIceServer>
+    #if FABLE_COMPILER
     [<Emit "new $0($1...)">]
+    #else
+    [<Inline("new RTCPeerConnection($configuration)")>]
+    #endif
     abstract Create: ?configuration: RTCConfiguration -> RTCPeerConnection
 
 type RTCConfigurationType =
+    #if FABLE_COMPILER
     [<Emit "new Object({iceServers: $1})">]
+    #else
+    [<Inline("new Object({iceServers: $iceServers})")>]
+    #endif
     abstract Create: iceServers: RTCIceServer [] -> RTCConfiguration
 
 namespace Browser
 
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+#endif
+
 open Browser.Types
 
 [<AutoOpen>]
 module WebRTC =
-    let [<Global>] RTCPeerConnection: RTCPeerConnectionType = jsNative
-    let [<Global>] RTCIceCandidate: RTCIceCandidateStaticType = jsNative
-    let [<Global>] RTCIceCandidateInit: RTCIceCandidateInitType = jsNative
-    let [<Global>] RTCRtpReceiver: RTCRtpReceiverType = jsNative
-    let [<Global>] RTCRtpSender: RTCRtpSenderType = jsNative
-    let [<Global>] RTCSessionDescription: RTCSessionDescriptionType = jsNative
-    let [<Global>] RTCSessionDescriptionInit: RTCSessionDescriptionInitType = jsNative
-    let [<Global>] RTCConfiguration: RTCConfigurationType = jsNative
-    let [<Global>] RTCIceServer: RTCIceServerType = jsNative
-    let [<Global>] RTCDataChannelInit: RTCDataChannelInitType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCPeerConnection: RTCPeerConnectionType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCIceCandidate: RTCIceCandidateStaticType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCIceCandidateInit: RTCIceCandidateInitType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCRtpReceiver: RTCRtpReceiverType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCRtpSender: RTCRtpSenderType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCSessionDescription: RTCSessionDescriptionType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCSessionDescriptionInit: RTCSessionDescriptionInitType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCConfiguration: RTCConfigurationType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCIceServer: RTCIceServerType = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let RTCDataChannelInit: RTCDataChannelInitType = jsNative
+
+#endif

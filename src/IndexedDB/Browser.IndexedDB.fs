@@ -1,31 +1,50 @@
 ﻿namespace rec Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+[<AutoOpen;WebSharper.JavaScript>]
+module internal FableUtil =
+    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
+module internal JS =
+    type Promise<'t> = WebSharper.JavaScript.Promise<'t>
+#endif
 
+#if FABLE_COMPILER
 [<Erase>]
+#endif
 type IDBRequestSource =
     | Index of IDBIndex
     | ObjectStore of IDBObjectStore
     | Cursor of IDBCursor
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type IDBRequestReadyState =
     | Pending
     | Done
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type IDBTransactionMode =
     | Readonly
     | Readwrite
     | Versionchange
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type IDBTransactionDuarability =
     | Strict
     | Relaxed
     | Default
 
+#if FABLE_COMPILER
 [<StringEnum>]
+#endif
 type IDBCursorDirection =
     | Next
     | Nextunique
@@ -35,8 +54,12 @@ type IDBCursorDirection =
 type [<AllowNullLiteral>] DatabasesType =
     abstract name: string
     abstract version: int64
-
-type [<AllowNullLiteral; Global>] IDBIndex =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBIndex =
     abstract isAutoLocale: bool with get
     abstract locale: string with get
     abstract name: string with get
@@ -53,32 +76,63 @@ type [<AllowNullLiteral; Global>] IDBIndex =
     abstract openCursor: ?range: obj * ?direction: IDBCursorDirection -> IDBRequest
     abstract openKeyCursor: ?range: obj * ?direction: IDBCursorDirection -> IDBRequest
 
-type [<AllowNullLiteral; Global>] IDBVersionChangeEvent =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBVersionChangeEvent =
     inherit Event
 
     abstract oldVersion: int64 with get
     abstract newVersion: int64 with get
 
-type [<AbstractClass; AllowNullLiteral; Global>] IDBKeyRange =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AbstractClass; AllowNullLiteral>] IDBKeyRange =
     abstract lower: obj with get
     abstract upper: obj with get
     abstract lowerOpen: bool with get
     abstract upperOpen: bool with get
     abstract includes: obj -> bool
 
+    #if FABLE_COMPILER
     [<Emit("IDBKeyRange.bound($0, $1, $2, $3)")>]
+    #else
+    [<Inline("IDBKeyRange.bound($lower,$upper,$lowerOpen,$upperOpen)")>]
+    #endif
     static member bound(lower: obj, upper: obj, ?lowerOpen: bool, ?upperOpen: bool) = jsNative<IDBKeyRange>
 
+    #if FABLE_COMPILER
     [<Emit("IDBKeyRange.only($0)")>]
+    #else
+    [<Inline("IDBKeyRange.only($only)")>]
+    #endif
     static member only(only: obj) = jsNative<IDBKeyRange>
 
+    #if FABLE_COMPILER
     [<Emit("IDBKeyRange.lowerBound($0, $1)")>]
+    #else
+    [<Inline("IDBKeyRange.lowerBound($lower,$open)")>]
+    #endif
     static member lowerBound(lower: obj, ?``open``: bool) = jsNative<IDBKeyRange>
 
+    #if FABLE_COMPILER
     [<Emit("IDBKeyRange.upperBound($0, $1)")>]
+    #else
+    [<Inline("IDBKeyRange.upperBound($upper,$open)")>]
+    #endif
     static member upperBound(upper: obj, ?``open``: bool) = jsNative<IDBKeyRange>
 
-type [<AllowNullLiteral; Global>] IDBCursor =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBCursor =
     abstract source: IDBObjectStore with get
     abstract direction: IDBCursorDirection with get
     abstract key: obj option with get
@@ -91,12 +145,22 @@ type [<AllowNullLiteral; Global>] IDBCursor =
     abstract delete: unit -> IDBRequest
     abstract update: value: obj -> IDBRequest
 
-type [<AllowNullLiteral; Global>] IDBCursorWithValue =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBCursorWithValue =
     inherit IDBCursor
 
     abstract value: obj option with get
 
-type [<AllowNullLiteral; Global>] IDBTransaction =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBTransaction =
     inherit EventTarget
 
     abstract db: IDBDatabase with get
@@ -113,7 +177,12 @@ type [<AllowNullLiteral; Global>] IDBTransaction =
     abstract onerror: (Event -> unit) with get, set
     abstract onabort: (Event -> unit) with get, set
 
-type [<AllowNullLiteral; Global>] IDBRequest =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBRequest =
     inherit EventTarget
 
     abstract error: DOMException with get
@@ -125,11 +194,21 @@ type [<AllowNullLiteral; Global>] IDBRequest =
     abstract onerror: (Event -> unit) with get, set
     abstract onsuccess: (Event -> unit) with get, set
 
-type [<AllowNullLiteral; Global>] IDBCreateIndexOptions =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBCreateIndexOptions =
     abstract unique: bool with get, set
     abstract multiEntry: bool with get, set
 
-type [<AllowNullLiteral; Global>] IDBObjectStore =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBObjectStore =
     abstract indexNames: DOMStringList with get
     abstract keyPath: obj with get
     abstract name: string with get
@@ -151,14 +230,29 @@ type [<AllowNullLiteral; Global>] IDBObjectStore =
     abstract openKeyCursor: ?range: IDBKeyRange * ?direction: IDBCursorDirection -> IDBRequest
     abstract put: item: obj * ?key: obj -> IDBRequest
 
-type [<AllowNullLiteral; Global>] IDBCreateStoreOptions =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBCreateStoreOptions =
     abstract keyPath: obj with get, set
     abstract autoIncrement: bool with get, set
 
-type [<AllowNullLiteral; Global>] IDBTransactionOptions =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBTransactionOptions =
     abstract durability: IDBTransactionDuarability with get, set
 
-type [<AllowNullLiteral; Global>] IDBDatabase =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBDatabase =
     inherit EventTarget
 
     abstract name: string with get
@@ -176,14 +270,26 @@ type [<AllowNullLiteral; Global>] IDBDatabase =
     abstract onabort: (Event -> unit) with get, set
     abstract onerror: (Event -> unit) with get, set
 
-type [<AllowNullLiteral; Global>] IDBOpenDBRequest =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBOpenDBRequest =
     inherit IDBRequest
 
     abstract blocked: (Event -> unit) with get, set
     abstract onupgradeneeded: (IDBVersionChangeEvent -> unit) with get, set
 
-type [<AllowNullLiteral; Global>] IDBFactory =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IDBFactory =
     abstract ``open``: name: string * ?version: int -> IDBOpenDBRequest
     abstract cmp: first: 'T * second: 'T -> int
     abstract deleteDatabase: name: string -> IDBOpenDBRequest
     abstract databases: unit -> JS.Promise<DatabasesType array>
+
+#endif

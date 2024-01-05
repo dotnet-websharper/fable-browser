@@ -1,6 +1,10 @@
 namespace Browser.Types
-
+#if FABLE_COMPILER || JAVASCRIPT
+#if FABLE_COMPILER
 open Fable.Core
+#else
+open WebSharper
+#endif
 
 type IntersectionObserverEntry =
     /// A rectangle describing the smallest rectangle that contains the entire target element
@@ -26,8 +30,12 @@ type IntersectionObserverOptions =
     /// Either a single number or an array of numbers between 0.0 and 1.0, specifying a ratio of intersection area to total bounding box area for the observed target
     abstract threshold: U2<float,float[]> with get, set
 
-
-type [<AllowNullLiteral; Global>] IntersectionObserverType =
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type [<AllowNullLiteral>] IntersectionObserverType =
     /// identifies the Element or Document whose bounds are treated as the bounding box of the viewport for the element which is the observer's target. Use null for  document viewport
     abstract root: Node
     /// A string (in CSS margin format), which contains offsets for one or more sides of the root's bounding box. These offsets are added to the corresponding values in the root's bounding box before the intersection between the resulting rectangle and the target element's bounds
@@ -45,8 +53,18 @@ type [<AllowNullLiteral; Global>] IntersectionObserverType =
 
 type IntersectionObserverCallback = IntersectionObserverEntry[] -> IntersectionObserverType -> unit
 
-type [<Global>] IntersectionObserverCtor =
-    [<Emit("new $0($1...)")>] abstract Create: url: IntersectionObserverCallback  * ?options: IntersectionObserverOptions -> IntersectionObserverType
+#if FABLE_COMPILER
+[<Global>]
+#else
+//[<Stub>]
+#endif
+type IntersectionObserverCtor =
+    #if FABLE_COMPILER
+    [<Emit("new $0($1...)")>] 
+    #else
+    [<Inline("new IntersectionObserverType($url,$options)")>]
+    #endif
+    abstract Create: url: IntersectionObserverCallback  * ?options: IntersectionObserverOptions -> IntersectionObserverType
 
 namespace Browser
 
@@ -55,4 +73,15 @@ open Browser.Types
 
 [<AutoOpen>]
 module IntersectionObserver =
-    let [<Global>] IntersectionObserver: IntersectionObserverCtor = jsNative
+    #if FABLE_COMPILER
+    [<Global>]
+    #else
+    [<Inline>]
+    #endif
+    let  IntersectionObserver: IntersectionObserverCtor = 
+        #if FABLE_COMPILER
+        jsNative
+        #else
+        Unchecked.defaultof<_>
+        #endif
+#endif

@@ -6,8 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\Navigator\Browser.Navigator.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Navigator\Browser.Navigator.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Geolocation\WebSharper.Browser.Geolocation.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Worker\WebSharper.Browser.Worker.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.MediaStream\WebSharper.Browser.MediaStream.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Gamepad\WebSharper.Browser.Gamepad.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>
 
   <ItemGroup>

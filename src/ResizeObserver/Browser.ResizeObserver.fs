@@ -1,9 +1,9 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
-#if FABLE_COMPILER
-open Fable.Core
-#else
+
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 type ResizeObserverSize =
@@ -26,7 +26,13 @@ type ResizeObserverEntry =
     /// A reference to the Element or SVGElement being observed
     abstract target: Node
 
-#if FABLE_COMPILER
+#if JAVASCRIPT // TODO: testing
+
+type ResizeObserverBox =
+    | [<Constant "content-box">] ContentBox
+    | [<Constant "border-box">] BorderBox
+    | [<Constant "device-pixel-content-box">] DevicePixelContentBox
+#else
 [<StringEnum(CaseRules.KebabCase ||| CaseRules.LowerFirst)>]
 type ResizeObserverBox =
     /// Size of the content area as defined in CSS
@@ -37,11 +43,6 @@ type ResizeObserverBox =
 
     /// The size of the content area as defined in CSS, in device pixels, before applying any CSS transforms on the element or its ancestors
     | DevicePixelContentBox
-#else // TODO: testing
-type ResizeObserverBox =
-    | [<Constant "content-box">] ContentBox
-    | [<Constant "border-box">] BorderBox
-    | [<Constant "device-pixel-content-box">] DevicePixelContentBox
 #endif
 
 type ResizeObserverOptions =
@@ -49,10 +50,8 @@ type ResizeObserverOptions =
     abstract box: ResizeObserverBox with get, set
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ResizeObserverType =
     /// Unobserve all observed Element or SVGElement targets
@@ -69,39 +68,36 @@ type [<AllowNullLiteral>] ResizeObserverType =
 
 type ResizeObserverCallback = ResizeObserverEntry array -> ResizeObserverType -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type ResizeObserverCtor =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #else
+    #if JAVASCRIPT
     [<Inline("new ResizeObserverType($callback)")>]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: callback: ResizeObserverCallback -> ResizeObserverType
 
 namespace Browser
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 open Browser.Types
 
 [<AutoOpen>]
 module ResizeObserver =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let ResizeObserver: ResizeObserverCtor = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
-#endif

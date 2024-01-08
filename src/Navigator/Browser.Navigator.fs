@@ -1,18 +1,15 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
+
 open System
-#if FABLE_COMPILER
-open Fable.Core
-open Fable.Core.JS
-#else
+#if JAVASCRIPT
 open WebSharper
 open WebSharper.JavaScript
+#else
+open Fable.Core
 #endif
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type MimeType =
     abstract description: string
@@ -20,10 +17,8 @@ type MimeType =
     abstract suffixes: string
     abstract ``type``: string
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 and Plugin =
     abstract description: string
@@ -39,10 +34,8 @@ type ShareData =
     abstract text: string with get, set
     abstract title: string with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type Clipboard =
     abstract writeText: string -> Promise<unit>
@@ -64,7 +57,7 @@ type NavigatorOnLine =
 type NavigatorUserMediaSuccessCallback = MediaStream -> unit
 type NavigatorUserMediaErrorCallback = MediaStreamError -> unit // TODO: missing MediaStreamError class in WS.JS
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 [<RequireQualifiedAccess>]
@@ -78,37 +71,14 @@ type PermissionStatus =
     abstract state: PermissionState
     abstract status: PermissionState
     abstract onchange: 
-        #if FABLE_COMPILER
-        (Event -> unit) 
-        #else
+        #if JAVASCRIPT
         (Dom.Event -> unit)
+        #else
+        (Event -> unit) 
         #endif
         with get, set
 
-#if FABLE_COMPILER
-[<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
-type PermissionName =
-    | Geolocation
-    | Notifications
-    | Push
-    | Midi
-    | Camera
-    | Microphone
-    | SpeakerSelection
-    | DeviceInfo
-    | BackgroundFetch
-    | BackgroundSync
-    | Bluetooth
-    | PersistentStorage
-    | AmbientLightSensor
-    | Accelerometer
-    | Gyroscope
-    | Magnetometer
-    | ClipboardRead
-    | ClipboardWrite
-    | DisplayCapture
-    | NFC
-#else
+#if JAVASCRIPT
 [<RequireQualifiedAccess>]
 type PermissionName =
     | [<Constant "geolocation">] Geolocation
@@ -131,6 +101,29 @@ type PermissionName =
     | [<Constant "clipboard-write">] ClipboardWrite
     | [<Constant "display-capture">] DisplayCapture
     | [<Constant "nfc">] NFC
+#else
+[<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
+type PermissionName =
+    | Geolocation
+    | Notifications
+    | Push
+    | Midi
+    | Camera
+    | Microphone
+    | SpeakerSelection
+    | DeviceInfo
+    | BackgroundFetch
+    | BackgroundSync
+    | Bluetooth
+    | PersistentStorage
+    | AmbientLightSensor
+    | Accelerometer
+    | Gyroscope
+    | Magnetometer
+    | ClipboardRead
+    | ClipboardWrite
+    | DisplayCapture
+    | NFC
 #endif
 
 [<AllowNullLiteral>]
@@ -139,24 +132,20 @@ type PermissionDescriptor =
     abstract userVisibleOnly: bool with get, set
     abstract sysex: bool with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type Permissions =
-    #if FABLE_COMPILER
-    abstract query: (PermissionDescriptor -> JS.Promise<PermissionStatus>)
+    #if JAVASCRIPT
+   abstract query: (PermissionDescriptor -> Promise<PermissionStatus>)
     #else
-    abstract query: (PermissionDescriptor -> Promise<PermissionStatus>)
+    abstract query: (PermissionDescriptor -> JS.Promise<PermissionStatus>)
     #endif
     // TODO, currently not supported in any browser: abstract request: unit -> unit
     // TODO, currently not supported in any browser: abstract requestAll: unit -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type Navigator =
     inherit NavigatorID
@@ -201,10 +190,10 @@ type Navigator =
     // TODO: abstract registerProtocolHandler()
     // TODO: abstract requestMediaKeySystemAccess()
     // TODO: abstract sendBeacon()
-    #if FABLE_COMPILER
-    abstract share: ShareData -> JS.Promise<unit>
+    #if JAVASCRIPT
+   abstract share: ShareData -> Promise<unit>
     #else
-    abstract share: ShareData -> Promise<unit>
+    abstract share: ShareData -> JS.Promise<unit>
     #endif
     /// Pulses the vibration hardware on the device, if such hardware exists. If the device doesn't support vibration, this method has no effect. If a vibration pattern is already in progress when this method is called, the previous pattern is halted and the new one begins instead.
     /// - pattern: Provides a pattern of vibration and pause intervals. Each value indicates a number of milliseconds to vibrate or pause, in alternation. You may provide either a single value (to vibrate once for that many milliseconds) or an array of values to alternately vibrate, pause, then vibrate again. See Vibration API for details.
@@ -212,25 +201,24 @@ type Navigator =
 
 namespace Browser
 
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 open Browser.Types
 
 [<AutoOpen>]
 module Navigator =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let navigator: Navigator = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
-#endif

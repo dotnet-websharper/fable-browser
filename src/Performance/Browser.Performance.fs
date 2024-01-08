@@ -1,17 +1,15 @@
 namespace Browser.Types
 
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#elif JAVASCRIPT
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Performance =
     abstract clearMarks: ?markName: string -> unit
@@ -30,20 +28,20 @@ type [<AllowNullLiteral>] Performance =
 
 namespace Browser
 
-#if FABLE_COMPILER
-open Fable.Core
-#elif JAVASCRIPT
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 open Browser.Types
 
 [<AutoOpen>]
 module Performance =
-    #if FABLE_COMPILER
-    [<Global>]
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let performance: Performance = 
         #if FABLE_COMPILER

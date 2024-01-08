@@ -1,30 +1,28 @@
 namespace Browser.Types
 
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#elif JAVASCRIPT
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Storage =
     abstract length: int
-#if FABLE_COMPILER
-    [<Emit("$0[$1]{{=$2}}")>] 
-#elif JAVASCRIPT
+#if JAVASCRIPT
 // TODO: bro how do I
+#else
+    [<Emit("$0[$1]{{=$2}}")>]
 #endif
     abstract Item: key: string -> string with get, set
-#if FABLE_COMPILER
-    [<Emit("$0[$1]{{=$2}}")>] 
-#elif JAVASCRIPT
+#if JAVASCRIPT
 // TODO: bro how do I
+#else
+    [<Emit("$0[$1]{{=$2}}")>]
 #endif
     abstract Item: index: int -> string with get, set
     abstract clear: unit -> unit
@@ -34,10 +32,8 @@ type [<AllowNullLiteral>] Storage =
     abstract setItem: key: string * data: string -> unit
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] StorageEvent =
     inherit Event
@@ -49,10 +45,10 @@ type [<AllowNullLiteral>] StorageEvent =
 
 namespace Browser
 
-#if FABLE_COMPILER
-open Fable.Core
-#elif JAVASCRIPT
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 open Browser.Types
@@ -60,10 +56,10 @@ open Browser.Types
 [<AutoOpen>]
 module WebStorage =
 
-    #if FABLE_COMPILER
-    [<Global>]
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let localStorage: Storage = 
         #if FABLE_COMPILER
@@ -74,10 +70,10 @@ module WebStorage =
         #endif
     
     
-    #if FABLE_COMPILER
-    [<Global>]
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let sessionStorage: Storage = 
         #if FABLE_COMPILER

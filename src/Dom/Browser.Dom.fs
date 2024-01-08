@@ -621,7 +621,7 @@ type [<AllowNullLiteral>] Element =
     /// Attaches a shadow DOM tree to the specified element and returns a reference to its ShadowRoot.
     abstract attachShadow: ShadowRootInit -> ShadowRoot
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 [<RequireQualifiedAccess>]
@@ -1961,7 +1961,7 @@ type [<AllowNullLiteral>] HTMLElement =
     abstract scrollIntoView: scrollIntoViewOptions: ScrollIntoViewOptions -> unit
     abstract setActive: unit -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 [<RequireQualifiedAccess>]
@@ -1969,7 +1969,7 @@ type ScrollBehavior =
     | Auto
     | Smooth
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 [<RequireQualifiedAccess>]
@@ -4271,4 +4271,4 @@ type [<AllowNullLiteral>] WheelEvent =
 //     abstract DOM_DELTA_LINE: float
 //     abstract DOM_DELTA_PAGE: float
 //     abstract DOM_DELTA_PIXEL: float
-//     [<Emit("new $0($1...)")>] abstract Create: typeArg: string * ?eventInitDict: WheelEventInit -> WheelEvent
+//      [<Emit("new $0($1...)")>] abstract Create: typeArg: string * ?eventInitDict: WheelEventInit -> WheelEvent

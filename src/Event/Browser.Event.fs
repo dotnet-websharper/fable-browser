@@ -1,17 +1,15 @@
 namespace rec Browser.Types
 
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#elif JAVASCRIPT
+#if JAVASCRIPT
 open WebSharper
 open WebSharper.JavaScript
+#else
+open Fable.Core
 #endif
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Event =
     abstract bubbles: bool with get, set
@@ -39,10 +37,10 @@ type [<AllowNullLiteral>] EventInit =
     abstract composed: bool with get, set
 
 type [<AllowNullLiteral>] EventType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline "new Event($type, $eventInitDict)">]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: ``type``: string * ?eventInitDict: EventInit -> Event
     abstract AT_TARGET: float with get, set
@@ -57,10 +55,8 @@ type [<AllowNullLiteral>] AddEventListenerOptions =
 type [<AllowNullLiteral>] RemoveEventListenerOptions =
     abstract capture: bool with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] EventTarget =
     abstract addEventListener: ``type``: string * listener: (Event->unit) -> unit
@@ -71,23 +67,19 @@ type [<AllowNullLiteral>] EventTarget =
     abstract removeEventListener: ``type``: string * listener: (Event->unit) * useCapture: bool -> unit
     abstract removeEventListener: ``type``: string * listener: (Event->unit) * options: RemoveEventListenerOptions -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] EventTargetType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline("new EventTarget()")>]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: unit -> EventTarget
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CustomEvent =
     inherit Event
@@ -97,10 +89,8 @@ type [<AllowNullLiteral>] CustomEventInit =
     inherit EventInit
     abstract detail: obj with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CustomEvent<'T> =
     inherit Event
@@ -111,23 +101,21 @@ type [<AllowNullLiteral>] CustomEventInit<'T> =
     abstract detail: 'T option with get, set
 
 type [<AllowNullLiteral>] CustomEventType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline "new CustomEvent($typeArg, $eventInitDict)">]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create : typeArg: string * ?eventInitDict: CustomEventInit -> CustomEvent
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline "new CustomEvent($typeArg, $eventInitDict)">]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create : typeArg: string * ?eventInitDict: CustomEventInit<'T> -> CustomEvent<'T>
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ErrorEvent =
     inherit Event
@@ -138,10 +126,8 @@ type [<AllowNullLiteral>] ErrorEvent =
     abstract message: string
 
 // MessageEvent is used by several packages (WebSockets, Dom)
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MessageEvent =
     inherit Event
@@ -151,24 +137,22 @@ type [<AllowNullLiteral>] MessageEvent =
     // abstract ports: MessagePort[]
     abstract source: obj
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type GamepadEventType =
     | [<CompiledName("gamepadconnected")>] GamepadConnected
     | [<CompiledName("gamepaddisconnected")>] GamepadDisconnected
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] GamepadEvent =
     inherit Event
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline "new GamepadEvent($typeArg, $options)">]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: typeArg: GamepadEventType * ?options: Gamepad
     
@@ -176,10 +160,10 @@ type [<AllowNullLiteral>] GamepadEvent =
 
 namespace Browser
 
-#if FABLE_COMPILER
-open Fable.Core
-#elif JAVASCRIPT
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 open Browser.Types
 
@@ -189,38 +173,38 @@ open Browser.Types
 module Event =
 
 
-    #if FABLE_COMPILER
-    [<Global>]
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let Event: EventType = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
 
-    #if FABLE_COMPILER
-    [<Global>]
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let EventTarget: EventTargetType = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
 
-    #if FABLE_COMPILER
-    [<Global>]
-    #elif JAVASCRIPT
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CustomEvent : CustomEventType = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif

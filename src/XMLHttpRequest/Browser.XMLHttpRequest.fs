@@ -1,10 +1,10 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
+
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 type ReadyState =
@@ -20,19 +20,15 @@ type ReadyState =
   | Done = 4
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] XMLHttpRequestUpload =
     inherit EventTarget
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] XMLHttpRequest =
     inherit EventTarget
@@ -57,33 +53,32 @@ type [<AllowNullLiteral>] XMLHttpRequest =
     abstract setRequestHeader: header: string * value: string -> unit
 
 type [<AllowNullLiteral>] XMLHttpRequestType =
-#if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-#else
+#if JAVASCRIPT
     [<Inline("new XMLHttpRequest()")>] 
+#else
+    [<Emit("new $0($1...)")>] 
 #endif
     abstract Create: unit -> XMLHttpRequest
 
 namespace Browser
 
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 open Browser.Types
 
 [<AutoOpen>]
 module XMLHttpRequest =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let XMLHttpRequest: XMLHttpRequestType = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
-#endif

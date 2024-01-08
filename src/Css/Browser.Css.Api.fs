@@ -1,127 +1,125 @@
 namespace Browser
-#if FABLE_COMPILER || JAVASCRIPT
-#if FABLE_COMPILER
-open Fable.Core
-#else
+
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 open Browser.Types
 
 [<AutoOpen>]
 module Css =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSConditionRule: CSSConditionRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSFontFaceRule: CSSFontFaceRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSGroupingRule: CSSGroupingRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSImportRule: CSSImportRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSKeyframeRule: CSSKeyframeRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSKeyframesRule: CSSKeyframesRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSMediaRule: CSSMediaRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSNamespaceRule: CSSNamespaceRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSPageRule: CSSPageRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSRule: CSSRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSRuleList: CSSRuleListType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSStyleDeclaration: CSSStyleDeclarationType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSStyleRule: CSSStyleRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSStyleSheet: CSSStyleSheetType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let CSSSupportsRule: CSSSupportsRuleType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let StyleMedia: StyleMediaType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let StyleSheet: StyleSheetType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let StyleSheetList: StyleSheetListType = jsNative
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let StyleSheetPageList: StyleSheetPageListType = jsNative
-
-#endif

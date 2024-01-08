@@ -1,15 +1,15 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
+
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
 [<AutoOpen>]
 module internal JsUtil =
     type U2<'a,'b> = JavaScript.Union<'a,'b>
 module internal JS =
     type Promise<'t> = JavaScript.Promise<'t>
+#else
+open Fable.Core
 #endif
 
 open Browser
@@ -60,7 +60,7 @@ type Constrain<'T> =
     abstract exact: 'T option with get, set
     abstract ideal: 'T option with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Erase>]
 #endif
 type ConstrainOrRange<'T> =
@@ -71,7 +71,7 @@ type ConstrainOrRangeULong = ConstrainOrRange<uint32>
 type ConstrainOrRangeDouble = ConstrainOrRange<float>
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Erase>]
 #endif
 type ConstrainOrValue<'T> =
@@ -125,7 +125,7 @@ type AudioMediaTrackSettings =
     abstract sampleSize: uint32
     abstract volume: double
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type ShotMode =
@@ -140,7 +140,7 @@ type PointsOfInterest =
     abstract x:uint32 with get, set
     abstract y:uint32 with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Erase>]
 #endif
 type PointsOfInterestConstraint =
@@ -181,7 +181,7 @@ type ImageMediaTrackSettings =
     abstract zoom: double option
     abstract torch: bool option
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type ResizeMode =
@@ -191,7 +191,7 @@ type ResizeMode =
 type ConstrainResizeMode = Constrain<ResizeMode>
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type FacingMode =
@@ -220,7 +220,7 @@ type VideoMediaTrackSettings =
     abstract width: uint32
     abstract resizeMode: ResizeMode
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type Cursor =
@@ -230,7 +230,7 @@ type Cursor =
 
 type ConstrainCursor = Constrain<ResizeArray<Cursor>>
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type DisplaySurface =
@@ -267,7 +267,7 @@ type SharedScreenMediaTrackConstraintSet =
     abstract logicalSurface: ConstrainBoolean option with get, set
     abstract restrictOwnAudio: ConstrainBoolean option with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Erase>]
 #endif
 type StreamConstraintOrBool<'T> =
@@ -282,7 +282,7 @@ type DisplayMediaStreamConstraints =
     abstract video:StreamConstraintOrBool<SharedScreenMediaTrackConstraintSet> with get, set
     abstract audio:StreamConstraintOrBool<AudioMediaTrackConstraints> with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type TrackKind =
@@ -290,7 +290,7 @@ type TrackKind =
 | Video
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type MediaStreamTrackState =
@@ -326,10 +326,8 @@ type MediaTrackCapabilities =
     abstract whiteBalanceMode: ShotMode array option
     abstract zoom: SteppedRange<uint32> option
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type MediaStreamTrack =
     inherit EventTarget
@@ -349,10 +347,8 @@ type MediaStreamTrack =
     abstract getSettings: unit -> MediaTrackSettings
     abstract applyConstraints: constraints:#MediaTrackConstraints option -> JS.Promise<unit>
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type MediaStreamTrackEvent =
     abstract track: MediaStreamTrack
@@ -378,17 +374,15 @@ type [<AllowNullLiteral>] MediaStreamError =
 
 type [<AllowNullLiteral>] MediaStreamErrorType =
     abstract prototype: MediaStreamError with get, set
-    #if FABLE_COMPILER
-    [<Emit "new $0($1...)">] 
-    #else
+    #if JAVASCRIPT
     [<Inline "new MediaStreamError()">]
+    #else
+    [<Emit "new $0($1...)">] 
     #endif
     abstract Create: unit -> obj
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type MediaStream =
     inherit EventTarget
@@ -405,16 +399,16 @@ type MediaStream =
     abstract onremovetrack: (MediaStreamTrackEvent->unit) with get, set
 
 type MediaStreamType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>]
-    #else
+    #if JAVASCRIPT
     [<Inline "new MediaStream($streams)">]
+    #else
+    [<Emit("new $0($1...)")>]
     #endif
     abstract Create: ?streams: MediaStreamTrack array -> MediaStream
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>]
-    #else
+    #if JAVASCRIPT
     [<Inline "new MediaStream($streams)">]
+    #else
+    [<Emit("new $0($1...)")>]
     #endif
     abstract Create: streams: MediaStream -> MediaStream
 
@@ -423,7 +417,7 @@ type CanvasCaptureMediaStreamTrack =
     abstract canvas: HTMLCanvasElement
     abstract requestFrame : unit -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type MediaDeviceKind =
@@ -431,10 +425,8 @@ type MediaDeviceKind =
 | [<CompiledName("audioinput")>] AudioInput
 | [<CompiledName("audiooutput")>] AudioOutput
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type MediaDeviceInfo =
     abstract deviceId: string
@@ -442,10 +434,8 @@ type MediaDeviceInfo =
     abstract kind: MediaDeviceKind
     abstract label: string
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type MediaDevices =
     inherit EventTarget
@@ -457,28 +447,28 @@ type MediaDevices =
 
 
 type MediaStreamConstraintsType =
-    #if FABLE_COMPILER
-    [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #else
+    #if JAVASCRIPT
     [<Inline("new Object({ video: $video, audio: $audio })")>]
+    #else
+    [<Emit("new Object({ video: $1, audio: $2 })")>]
     #endif
     abstract Create: video : bool * audio : bool -> MediaStreamConstraints
-    #if FABLE_COMPILER
-    [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #else
+    #if JAVASCRIPT
     [<Inline("new Object({ video: $video, audio: $audio })")>]
+    #else
+    [<Emit("new Object({ video: $1, audio: $2 })")>]
     #endif
     abstract Create: video : VideoMediaTrackConstraints * audio : bool -> MediaStreamConstraints
-    #if FABLE_COMPILER
-    [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #else
+    #if JAVASCRIPT
     [<Inline("new Object({ video: $video, audio: $audio })")>]
+    #else
+    [<Emit("new Object({ video: $1, audio: $2 })")>]
     #endif
     abstract Create: video : VideoMediaTrackConstraints * audio : AudioMediaTrackConstraints -> MediaStreamConstraints
-    #if FABLE_COMPILER
-    [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #else
+    #if JAVASCRIPT
     [<Inline("new Object({ video: $video, audio: $audio })")>]
+    #else
+    [<Emit("new Object({ video: $1, audio: $2 })")>]
     #endif
     abstract Create: video : bool * audio : AudioMediaTrackConstraints -> MediaStreamConstraints
 
@@ -491,52 +481,51 @@ type HTMLAudioElement' =
   abstract srcObject: MediaStream option with get, set
 
 namespace Browser
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
-#endif
 
 [<AutoOpen>]
 module internal FableUtil =
     let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
 
+#else
+open Fable.Core
+#endif
 [<AutoOpenAttribute>]
 module MediaStreams =
     open Browser.Types
     type HTMLCanvasElement with
-        #if FABLE_COMPILER
-        [<Emit("$0.captureStream({{$1}})")>]
-        #else
+        #if JAVASCRIPT
         [<Inline("$this.captureStream($framerate)")>]
+        #else
+        [<Emit("$0.captureStream({{$1}})")>]
         #endif
         member this.captureStream(?framerate:uint32) : MediaStream = failwith ""
 
-    #if FABLE_COMPILER
-    [<Emit("navigator.mediaDevices")>] 
-    #else
+    #if JAVASCRIPT
     [<Inline("navigator.mediaDevices")>] 
+    #else
+    [<Emit("navigator.mediaDevices")>] 
     #endif
     let mediaDevices: MediaDevices = jsNative
 
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let MediaStream: MediaStreamType = jsNative
 
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let MediaStreamConstraints: MediaStreamConstraintsType = jsNative
 
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let MediaStreamError : MediaStreamErrorType = jsNative
-#endif

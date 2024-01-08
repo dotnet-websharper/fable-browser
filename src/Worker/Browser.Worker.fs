@@ -1,26 +1,24 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
-open System
-#if FABLE_COMPILER
-open Fable.Core
 
-type EnumNameAttribute = CompiledNameAttribute
-#else
+open System
+#if JAVASCRIPT
 open WebSharper
 
 type EnumNameAttribute = ConstantAttribute
 module internal JS =
     type Promise<'A> = WebSharper.JavaScript.Promise<'A>
+#else
+open Fable.Core
+
+type EnumNameAttribute = CompiledNameAttribute
 #endif
 
 type AbstractWorker =
     abstract onerror: (ErrorEvent -> unit) with get, set
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type Worker =
     inherit EventTarget
@@ -29,14 +27,14 @@ type Worker =
     abstract postMessage: message: obj * ?transfer: obj -> unit
     abstract terminate: unit -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif 
 type WorkerType =
     | Classic
     | Module
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif 
 type WorkerCredentials =
@@ -53,14 +51,14 @@ type WorkerOptions =
     abstract name: string with get, set
 
 type WorkerConstructor =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>]
-    #else
+    #if JAVASCRIPT
     [<Inline("new Worker($url,$options)")>]
+    #else
+    [<Emit("new $0($1...)")>]
     #endif 
     abstract Create: url: string * ?options: WorkerOptions -> Worker
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 [<RequireQualifiedAccess>]
@@ -72,10 +70,8 @@ type ServiceWorkerState =
     | Redundant
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type ServiceWorker =
     inherit Worker
@@ -84,10 +80,8 @@ type ServiceWorker =
     abstract onstatechange: (Event -> unit) option with get, set
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type ServiceWorkerRegistration =
     abstract scope: string
@@ -107,10 +101,8 @@ type ServiceWorkerRegistrationOptions =
     abstract scope: string with get, set
 
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type ServiceWorkerContainer =
     abstract controller: ServiceWorker option
@@ -126,23 +118,22 @@ type ServiceWorkerContainer =
 namespace Browser
 
 open Browser.Types
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 [<AutoOpen>]
 module Worker =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let  Worker: WorkerConstructor = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
-#endif

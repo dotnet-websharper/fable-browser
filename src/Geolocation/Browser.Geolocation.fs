@@ -1,10 +1,10 @@
 namespace Browser.Types
 
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#elif JAVASCRIPT
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 type Coordinates =
@@ -41,10 +41,8 @@ type PositionOptions =
     abstract timeout: int option with get, set
     abstract maximumAge: int option with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-[<Inline>]
 #endif
 type Geolocation =
     abstract clearWatch: watchId: float -> unit

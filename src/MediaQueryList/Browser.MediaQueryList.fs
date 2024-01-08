@@ -1,17 +1,15 @@
 namespace rec Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
-#if FABLE_COMPILER
-open Fable.Core
-#else
+
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
 open Browser.Types
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MediaQueryList =
     inherit EventTarget
@@ -21,10 +19,9 @@ type [<AllowNullLiteral>] MediaQueryList =
 
 type [<AllowNullLiteral>] MediaQueryListType =
     abstract prototype: MediaQueryList with get, set
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #else
+    #if JAVASCRIPT
     [<Inline("new MediaQueryList()")>]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: unit -> MediaQueryList
-#endif

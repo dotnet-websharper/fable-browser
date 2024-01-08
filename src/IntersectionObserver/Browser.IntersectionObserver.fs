@@ -1,9 +1,11 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
-#if FABLE_COMPILER
-open Fable.Core
-#else
+
+#if JAVASCRIPT
 open WebSharper
+
+type internal U2<'a,'b> = JavaScript.Union<'a,'b>
+#else
+open Fable.Core
 #endif
 
 type IntersectionObserverEntry =
@@ -30,10 +32,8 @@ type IntersectionObserverOptions =
     /// Either a single number or an array of numbers between 0.0 and 1.0, specifying a ratio of intersection area to total bounding box area for the observed target
     abstract threshold: U2<float,float[]> with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] IntersectionObserverType =
     /// identifies the Element or Document whose bounds are treated as the bounding box of the viewport for the element which is the observer's target. Use null for  document viewport
@@ -53,35 +53,36 @@ type [<AllowNullLiteral>] IntersectionObserverType =
 
 type IntersectionObserverCallback = IntersectionObserverEntry[] -> IntersectionObserverType -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type IntersectionObserverCtor =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #else
+    #if JAVASCRIPT
     [<Inline("new IntersectionObserverType($url,$options)")>]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: url: IntersectionObserverCallback  * ?options: IntersectionObserverOptions -> IntersectionObserverType
 
 namespace Browser
 
+#if JAVASCRIPT
+open WebSharper
+#else
 open Fable.Core
+#endif
 open Browser.Types
 
 [<AutoOpen>]
 module IntersectionObserver =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let  IntersectionObserver: IntersectionObserverCtor = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
-#endif

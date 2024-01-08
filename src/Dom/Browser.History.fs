@@ -6,8 +6,8 @@ open WebSharper
 open Fable.Core
 #endif
 
-#if FABLE_COMPILER
-StringEnum
+#if !JAVASCRIPT
+[<StringEnum>]
 #endif
 [<RequireQualifiedAccess>]
 type ScrollRestoration =

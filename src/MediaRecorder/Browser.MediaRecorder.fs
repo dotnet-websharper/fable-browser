@@ -1,12 +1,12 @@
 ﻿namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
-#if FABLE_COMPILER
-open Fable.Core
-#else
+
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 open Browser.Types
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<StringEnum>]
 #endif
 type MediaRecorderState =
@@ -16,10 +16,8 @@ type MediaRecorderState =
 
 type DOMHighResTimeStamp = System.Double
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] BlobEvent =
     inherit Event
@@ -27,20 +25,18 @@ type [<AllowNullLiteral>] BlobEvent =
     abstract timecode: DOMHighResTimeStamp
 
 type [<AllowNullLiteral>] BlobEventType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>]
-    #else
+    #if JAVASCRIPT
     [<Inline("new BlobEvent($data,$timecode)")>]
+    #else
+    [<Emit("new $0($1...)")>]
     #endif
     abstract Create: data: Blob * ?timecode: DOMHighResTimeStamp -> BlobEvent
 
 type [<AllowNullLiteral>] MediaRecorderErrorEvent =
     inherit Event
     abstract error: DOMException
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type  MediaRecorder =
     abstract mimeType: string
@@ -71,35 +67,33 @@ type MediaRecorderOptions =
     abstract bitsPerSecond: uint32 with get, set
 
 type MediaRecorderType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>]
-    #else
+    #if JAVASCRIPT
     [<Inline("new MediaRecorder($stream,$options)")>]
+    #else
+    [<Emit("new $0($1...)")>]
     #endif
     abstract Create: stream: MediaStream * ?options: MediaRecorderOptions -> MediaRecorder
     abstract isTypeSupported: mimeType: string -> bool
 
 namespace Browser
 
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 open Browser.Types
 
 [<AutoOpen>]
 module MediaRecorder =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let MediaRecorder: MediaRecorderType = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
+        #if JAVASCRIPT
         Unchecked.defaultof<_>
+        #else
+        jsNative
         #endif
-
-#endif

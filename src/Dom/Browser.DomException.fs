@@ -1,16 +1,14 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
+
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMException =
     abstract code: float with get, set
@@ -73,10 +71,9 @@ type [<AllowNullLiteral>] DOMExceptionType =
     abstract URL_MISMATCH_ERR: float with get, set
     abstract VALIDATION_ERR: float with get, set
     abstract WRONG_DOCUMENT_ERR: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new DOMException()")>] 
     #endif
     abstract Create: unit -> DOMException
-#endif

@@ -1,9 +1,6 @@
 namespace rec Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
 open System
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
 
 type internal U2<'A,'B> = WebSharper.JavaScript.Union<'A,'B>
@@ -11,12 +8,12 @@ type internal U3<'A,'B,'C> = WebSharper.JavaScript.Union<'A,'B,'C>
 
 module internal JS =
     type Promise<'A> = WebSharper.JavaScript.Promise<'A>
+#else
+open Fable.Core
 #endif
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Attr =
     inherit Node
@@ -26,33 +23,29 @@ type [<AllowNullLiteral>] Attr =
     abstract value: string with get, set
 
 type [<AllowNullLiteral>] AttrType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Attr()")>]
     #endif
     abstract Create: unit -> Attr
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CDATASection =
     inherit Text
 
 type [<AllowNullLiteral>] CDATASectionType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new CDATASection()")>]
     #endif
     abstract Create: unit -> CDATASection
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CharacterData =
     inherit Node
@@ -66,7 +59,7 @@ type [<AllowNullLiteral>] CharacterData =
     abstract substringData: offset: float * count: float -> string
 
 type [<AllowNullLiteral>] CharacterDataType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new CharacterData()")>]
@@ -76,27 +69,23 @@ type [<AllowNullLiteral>] CharacterDataType =
 type [<AllowNullLiteral>] ChildNode =
     abstract remove: unit -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Comment =
     inherit CharacterData
     abstract text: string with get, set
 
 type [<AllowNullLiteral>] CommentType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Comment()")>]
     #endif
     abstract Create: unit -> Comment
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Document =
     inherit Node
@@ -419,10 +408,8 @@ type [<AllowNullLiteral>] Document =
     /// <param name="content">The text and HTML tags to write.</param>
     abstract writeln: [<ParamArray>] content: string[] -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DocumentType =
     inherit Node
@@ -432,24 +419,22 @@ type [<AllowNullLiteral>] DocumentType =
     abstract notations: NamedNodeMap with get, set
     abstract publicId: string with get, set
     abstract systemId: string with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Document()")>]
     #endif
     abstract Create: unit -> Document
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DocumentFragment =
     inherit Node
     inherit NodeSelector
 
 type [<AllowNullLiteral>] DocumentFragmentType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new DocumentFragment()")>]
@@ -457,17 +442,15 @@ type [<AllowNullLiteral>] DocumentFragmentType =
     abstract Create: unit -> DocumentFragment
 
 type [<AllowNullLiteral>] DocumentTypeType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new DocumentType()")>]
     #endif
     abstract Create: unit -> DocumentType
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMImplementation =
     abstract createDocument: namespaceURI: string * qualifiedName: string * doctype: DocumentType -> Document
@@ -476,21 +459,19 @@ type [<AllowNullLiteral>] DOMImplementation =
     abstract hasFeature: feature: string * version: string -> bool
 
 type [<AllowNullLiteral>] DOMImplementationType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new DOMImplementation()")>]
     #endif
     abstract Create: unit -> DOMImplementation
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMStringList =
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -500,20 +481,18 @@ type [<AllowNullLiteral>] DOMStringList =
     abstract item: index: float -> string
 
 type [<AllowNullLiteral>] DOMStringListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new DOMStringList()")>]
     #endif
     abstract Create: unit -> DOMStringList
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMStringMap =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -521,21 +500,19 @@ type [<AllowNullLiteral>] DOMStringMap =
      abstract Item: name: string -> string with get, set
 
 type [<AllowNullLiteral>] DOMStringMapType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new DOMStringMap()")>]
     #endif
      abstract Create: unit -> DOMStringMap
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DOMTokenList =
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -549,17 +526,15 @@ type [<AllowNullLiteral>] DOMTokenList =
     abstract toggle: token: string * ?force: bool -> bool
 
 type [<AllowNullLiteral>] DOMTokenListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new DOMTokenList()")>]
     #endif
      abstract Create: unit -> DOMTokenList
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Element =
     inherit Node
@@ -623,19 +598,19 @@ type [<AllowNullLiteral>] Element =
     abstract scroll: ?x: float * ?y: float -> unit
     abstract scrollBy: ?x: float * ?y: float -> unit
     abstract scrollTo: ?x: float * ?y: float -> unit
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0.scroll({ top: $1, left: $2, behavior: $3 })")>]
     #else
     [<Inline("$this.scroll({top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scroll: top: float * left: float * behavior: ScrollBehavior -> unit
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0.scrollBy({ top: $1, left: $2, behavior: $3 })")>]
     #else
     [<Inline("$this.scrollBy({top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scrollBy: top: float * left: float * behavior: ScrollBehavior -> unit
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0.scrollTo({ top: $1, left: $2, behavior: $3 })")>]
     #else
     [<Inline("$this.scrollTo({top: $top, left: $left, behavior: $behavior})")>]
@@ -669,10 +644,8 @@ type [<AllowNullLiteral>] ShadowRootInit =
 /// that is rendered separately from a document's main DOM tree.
 /// You can retrieve a reference to an element's shadow root using its Element.shadowRoot property,
 /// provided it was created using Element.attachShadow() with the mode option set to open.
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ShadowRoot =
     inherit DocumentFragment
@@ -693,22 +666,20 @@ type [<AllowNullLiteral>] ShadowRoot =
     abstract pointerLockElement: Element
 
 type [<AllowNullLiteral>] ElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Element()")>]
     #endif
      abstract Create: unit -> Element
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLCollection =
     /// Sets or retrieves the number of objects in a collection.
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -721,21 +692,19 @@ type [<AllowNullLiteral>] HTMLCollection =
     abstract namedItem: name: string -> Element
 
 type [<AllowNullLiteral>] HTMLCollectionType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLCollection()")>]
     #endif
     abstract Create: unit -> HTMLCollection
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NamedNodeMap =
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -750,17 +719,15 @@ type [<AllowNullLiteral>] NamedNodeMap =
     abstract setNamedItemNS: arg: Attr -> Attr
 
 type [<AllowNullLiteral>] NamedNodeMapType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new NamedNodeMapType()")>]
     #endif
      abstract Create: unit -> NamedNodeMap
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Node =
     inherit EventTarget
@@ -836,7 +803,7 @@ type [<AllowNullLiteral>] NodeType =
     abstract NOTATION_NODE: float with get, set
     abstract PROCESSING_INSTRUCTION_NODE: float with get, set
     abstract TEXT_NODE: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Node()")>]
@@ -847,10 +814,8 @@ type [<AllowNullLiteral>] NodeSelector =
     abstract querySelector: selectors: string -> Element
     abstract querySelectorAll: selectors: string -> NodeListOf<Element>
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NodeFilter =
     abstract acceptNode: n: Node -> float
@@ -873,10 +838,8 @@ type [<AllowNullLiteral>] NodeFilterType =
     abstract SHOW_PROCESSING_INSTRUCTION: float with get, set
     abstract SHOW_TEXT: float with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NodeIterator =
     abstract filter: NodeFilter with get, set
@@ -887,21 +850,19 @@ type [<AllowNullLiteral>] NodeIterator =
     abstract previousNode: unit -> Node
 
 type [<AllowNullLiteral>] NodeIteratorType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new NodeIterator()")>]
     #endif
     abstract Create: unit -> NodeIterator
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] NodeList =
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> Node with get, set
     #else
     // TODO
@@ -909,7 +870,7 @@ type [<AllowNullLiteral>] NodeList =
     abstract item: index: float -> Node
 
 type [<AllowNullLiteral>] NodeListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new NodeList()")>]
@@ -919,34 +880,30 @@ type [<AllowNullLiteral>] NodeListType =
 type [<AllowNullLiteral>] NodeListOf<'TNode> =
     inherit NodeList
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> 'TNode with get, set
     #else
     // TODO
     #endif
     abstract item: index: float -> 'TNode
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ProcessingInstruction =
     inherit CharacterData
     abstract target: string with get, set
 
 type [<AllowNullLiteral>] ProcessingInstructionType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new ProcessingInstruction()")>]
     #endif
     abstract Create: unit -> ProcessingInstruction
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Selection =
     abstract anchorNode: Node with get, set
@@ -972,17 +929,15 @@ type [<AllowNullLiteral>] Selection =
     abstract toString: unit -> string
 
 type [<AllowNullLiteral>] SelectionType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Selection()")>]
     #endif
     abstract Create: unit -> Selection
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ClientRect =
     abstract bottom: float with get, set
@@ -993,17 +948,15 @@ type [<AllowNullLiteral>] ClientRect =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] ClientRectType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new ClientRect()")>]
     #endif
     abstract Create: unit -> ClientRect
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Range =
     abstract collapsed: bool with get, set
@@ -1044,17 +997,15 @@ type [<AllowNullLiteral>] RangeType =
     abstract END_TO_START: float with get, set
     abstract START_TO_END: float with get, set
     abstract START_TO_START: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Range()")>]
     #endif
     abstract Create: unit -> Range
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Text =
     inherit CharacterData
@@ -1063,17 +1014,15 @@ type [<AllowNullLiteral>] Text =
     abstract splitText: offset: float -> Text
 
 type [<AllowNullLiteral>] TextType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Text()")>]
     #endif
     abstract Create: unit -> Text
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TimeRanges =
     abstract length: int
@@ -1081,17 +1030,15 @@ type [<AllowNullLiteral>] TimeRanges =
     abstract start: index: float -> float
 
 type [<AllowNullLiteral>] TimeRangesType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new TimeRanges()")>]
     #endif
     abstract Create: unit -> TimeRanges
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TreeWalker =
     abstract currentNode: Node with get, set
@@ -1107,7 +1054,7 @@ type [<AllowNullLiteral>] TreeWalker =
     abstract previousSibling: unit -> Node
 
 type [<AllowNullLiteral>] TreeWalkerType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new TreeWalker()")>]
@@ -1117,25 +1064,7 @@ type [<AllowNullLiteral>] TreeWalkerType =
 type [<AllowNullLiteral>] BarProp =
     abstract visible: bool with get, set
 
-#if FABLE_COMPILER
-[<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
-type ScreenOrientationType =
-    | PortraitPrimary
-    | PortraitSecondary
-    | LandscapePrimary
-    | LandscapeSecondary
-
-[<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
-type OrientationLockType =
-    | Any
-    | Natural
-    | Landscape
-    | Portrait
-    | PortraitPrimary
-    | PortraitSecondary
-    | LandscapePrimary
-    | LandscapeSecondary
-#else
+#if JAVASCRIPT
 [<RequireQualifiedAccess>]
 type ScreenOrientationType =
     | [<Constant "portrait-primary">] PortraitPrimary
@@ -1153,6 +1082,24 @@ type OrientationLockType =
     | [<Constant "portrait-secondary">] PortraitSecondary
     | [<Constant "landscape-primary">] LandscapePrimary
     | [<Constant "landscape-secondary">] LandscapeSecondary
+#else
+[<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
+type ScreenOrientationType =
+    | PortraitPrimary
+    | PortraitSecondary
+    | LandscapePrimary
+    | LandscapeSecondary
+
+[<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
+type OrientationLockType =
+    | Any
+    | Natural
+    | Landscape
+    | Portrait
+    | PortraitPrimary
+    | PortraitSecondary
+    | LandscapePrimary
+    | LandscapeSecondary
 #endif
 
 type [<AllowNullLiteral>] ScreenOrientation =
@@ -1163,10 +1110,8 @@ type [<AllowNullLiteral>] ScreenOrientation =
     abstract lock: OrientationLockType -> JS.Promise<unit>
     abstract unlock: unit -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Screen =
     inherit EventTarget
@@ -1186,10 +1131,8 @@ type [<AllowNullLiteral>] Screen =
     abstract width: float with get, set
     abstract orientation: ScreenOrientation with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Location =
     abstract hash: string with get, set
@@ -1235,10 +1178,8 @@ type [<AllowNullLiteral>] WindowURI =
     abstract decodeURIComponent: encodedUri: string -> string
     abstract encodeURIComponent: str: string -> string
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Window =
     inherit EventTarget
@@ -1373,7 +1314,7 @@ type [<AllowNullLiteral>] Window =
     abstract toolbar: BarProp with get, set
     abstract top: Window with get, set
     abstract window: Window with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -1400,19 +1341,19 @@ type [<AllowNullLiteral>] Window =
     abstract scroll: ?x: float * ?y: float -> unit
     abstract scrollBy: ?x: float * ?y: float -> unit
     abstract scrollTo: ?x: float * ?y: float -> unit
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0.scroll({ top: $1, left: $2, behavior: $3 })")>]
     #else
     [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scroll: top: float * left: float * behavior: ScrollBehavior -> unit
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0.scrollBy({ top: $1, left: $2, behavior: $3 })")>]
     #else
     [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scrollBy: top: float * left: float * behavior: ScrollBehavior -> unit
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0.scrollTo({ top: $1, left: $2, behavior: $3 })")>]
     #else
     [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
@@ -1422,10 +1363,8 @@ type [<AllowNullLiteral>] Window =
 type [<AllowNullLiteral>] AbstractWorker =
     abstract onerror: (Event -> unit) with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Worker =
     inherit EventTarget
@@ -1435,23 +1374,21 @@ type [<AllowNullLiteral>] Worker =
     abstract terminate: unit -> unit
 
 type [<AllowNullLiteral>] WorkerType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new Worker()")>]
     #endif
     abstract Create: stringUrl: string -> Worker
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] XMLDocument =
     inherit Document
 
 type [<AllowNullLiteral>] XMLDocumentType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new XMLDocument()")>]
@@ -1474,10 +1411,8 @@ type [<AllowNullLiteral>] GlobalEventHandlers =
     abstract onpointerup: (PointerEvent -> unit) with get, set
     abstract onwheel: (WheelEvent -> unit) with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAllCollection =
     inherit HTMLCollection
@@ -1486,17 +1421,15 @@ type [<AllowNullLiteral>] HTMLAllCollection =
     abstract namedItem: name: string -> Element
 
 type [<AllowNullLiteral>] HTMLAllCollectionType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLAllCollection()")>]
     #endif
     abstract Create: unit -> HTMLAllCollection
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAnchorElement =
     inherit HTMLElement
@@ -1549,17 +1482,15 @@ type [<AllowNullLiteral>] HTMLAnchorElement =
     abstract toString: unit -> string
 
 type [<AllowNullLiteral>] HTMLAnchorElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLAnchorElement()")>]
     #endif
     abstract Create: unit -> HTMLAnchorElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAreaElement =
     inherit HTMLElement
@@ -1593,17 +1524,15 @@ type [<AllowNullLiteral>] HTMLAreaElement =
     abstract toString: unit -> string
 
 type [<AllowNullLiteral>] HTMLAreaElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLAreaElement()")>]
     #endif
     abstract Create: unit -> HTMLAreaElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAreasCollection =
     inherit HTMLCollection
@@ -1616,33 +1545,29 @@ type [<AllowNullLiteral>] HTMLAreasCollection =
     abstract remove: ?index: float -> unit
 
 type [<AllowNullLiteral>] HTMLAreasCollectionType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLAreasCollection()")>]
     #endif
     abstract Create: unit -> HTMLAreasCollection
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLAudioElement =
     inherit HTMLMediaElement
 
 type [<AllowNullLiteral>] HTMLAudioElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLAudioElement()")>]
     #endif
     abstract Create: unit -> HTMLAudioElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBRElement =
     inherit HTMLElement
@@ -1650,17 +1575,15 @@ type [<AllowNullLiteral>] HTMLBRElement =
     abstract clear: string with get, set
 
 type [<AllowNullLiteral>] HTMLBRElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLBRElement()")>]
     #endif
     abstract Create: unit -> HTMLBRElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBaseElement =
     inherit HTMLElement
@@ -1670,17 +1593,15 @@ type [<AllowNullLiteral>] HTMLBaseElement =
     abstract target: string with get, set
 
 type [<AllowNullLiteral>] HTMLBaseElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLBaseElement()")>]
     #endif
     abstract Create: unit -> HTMLBaseElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBlockElement =
     inherit HTMLElement
@@ -1691,17 +1612,15 @@ type [<AllowNullLiteral>] HTMLBlockElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLBlockElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLBlockElement()")>]
     #endif
     abstract Create: unit -> HTMLBlockElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLBodyElement =
     inherit HTMLElement
@@ -1734,17 +1653,15 @@ type [<AllowNullLiteral>] HTMLBodyElement =
     abstract vLink: obj with get, set
 
 type [<AllowNullLiteral>] HTMLBodyElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLBodyElement()")>]
     #endif
     abstract Create: unit -> HTMLBodyElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLButtonElement =
     inherit HTMLElement
@@ -1789,17 +1706,15 @@ type [<AllowNullLiteral>] HTMLButtonElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLButtonElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLButtonElement()")>]
     #endif
     abstract Create: unit -> HTMLButtonElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLCanvasElement =
     inherit HTMLElement
@@ -1807,7 +1722,7 @@ type [<AllowNullLiteral>] HTMLCanvasElement =
     abstract height: float with get, set
     /// Sets or retrieves the width of the object.
     abstract width: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0.getContext('2d'{{, $1}})")>]
     #else 
     // TODO
@@ -1824,17 +1739,15 @@ type [<AllowNullLiteral>] HTMLCanvasElement =
     abstract toBlob : (Blob -> unit) * ?mimeType:string * ?quality: float -> unit
 
 type [<AllowNullLiteral>] HTMLCanvasElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLCanvasElement()")>]
     #endif
     abstract Create: unit -> HTMLCanvasElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDDElement =
     inherit HTMLElement
@@ -1842,68 +1755,60 @@ type [<AllowNullLiteral>] HTMLDDElement =
     abstract noWrap: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDDElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLDDElement()")>]
     #endif
     abstract Create: unit -> HTMLDDElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDListElement =
     inherit HTMLElement
     abstract compact: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDListElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLDListElement()")>]
     #endif
     abstract Create: unit -> HTMLDListElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDTElement =
     inherit HTMLElement
     abstract noWrap: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDTElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLDTElement()")>]
     #endif
     abstract Create: unit -> HTMLDTElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDataListElement =
     inherit HTMLElement
     abstract options: HTMLCollection with get, set
 
 type [<AllowNullLiteral>] HTMLDataListElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLDataListElement()")>]
     #endif
     abstract Create: unit -> HTMLDataListElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDialogElement =
     inherit HTMLElement
@@ -1913,27 +1818,23 @@ type [<AllowNullLiteral>] HTMLDialogElement =
     abstract show: unit -> unit
     abstract showModal: unit -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDirectoryElement =
     inherit HTMLElement
     abstract compact: bool with get, set
 
 type [<AllowNullLiteral>] HTMLDirectoryElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLDirectoryElement()")>]
     #endif
     abstract Create: unit -> HTMLDirectoryElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDivElement =
     inherit HTMLElement
@@ -1941,26 +1842,22 @@ type [<AllowNullLiteral>] HTMLDivElement =
     abstract align: string with get, set
     abstract noWrap: bool with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLDocument =
     inherit Document
 
 type [<AllowNullLiteral>] HTMLDocumentType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLDocument()")>]
     #endif
     abstract Create: unit -> HTMLDocument
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLElement =
     inherit Element
@@ -2094,17 +1991,15 @@ type ScrollIntoViewOptions =
     abstract ``inline`` : ScrollAlignment with get, set
 
 type [<AllowNullLiteral>] HTMLElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLElement()")>]
     #endif
     abstract Create: unit -> HTMLElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLEmbedElement =
     inherit HTMLElement
@@ -2127,17 +2022,15 @@ type [<AllowNullLiteral>] HTMLEmbedElement =
     abstract width: string with get, set
 
 type [<AllowNullLiteral>] HTMLEmbedElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLEmbedElement()")>]
     #endif
     abstract Create: unit -> HTMLEmbedElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFieldSetElement =
     inherit HTMLElement
@@ -2158,17 +2051,15 @@ type [<AllowNullLiteral>] HTMLFieldSetElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLFieldSetElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLFieldSetElement()")>]
     #endif
     abstract Create: unit -> HTMLFieldSetElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFontElement =
     inherit HTMLElement
@@ -2176,17 +2067,15 @@ type [<AllowNullLiteral>] HTMLFontElement =
     abstract face: string with get, set
 
 type [<AllowNullLiteral>] HTMLFontElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLFontElementElement()")>]
     #endif
     abstract Create: unit -> HTMLFontElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFormElement =
     inherit HTMLElement
@@ -2213,7 +2102,7 @@ type [<AllowNullLiteral>] HTMLFormElement =
     abstract noValidate: bool with get, set
     /// Sets or retrieves the window or frame at which to target content.
     abstract target: string with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -2237,17 +2126,15 @@ type [<AllowNullLiteral>] HTMLFormElement =
     abstract submit: unit -> unit
 
 type [<AllowNullLiteral>] HTMLFormElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLFormElement()")>]
     #endif
     abstract Create: unit -> HTMLFormElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLFrameElement =
     inherit HTMLElement
@@ -2288,17 +2175,15 @@ type [<AllowNullLiteral>] HTMLFrameElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLFrameElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLFrameElement()")>]
     #endif
     abstract Create: unit -> HTMLFrameElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHRElement =
     inherit HTMLElement
@@ -2310,34 +2195,30 @@ type [<AllowNullLiteral>] HTMLHRElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLHRElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLHRElement()")>]
     #endif
     abstract Create: unit -> HTMLHRElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHeadElement =
     inherit HTMLElement
     abstract profile: string with get, set
 
 type [<AllowNullLiteral>] HTMLHeadElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLHeadElement()")>]
     #endif
     abstract Create: unit -> HTMLHeadElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHeadingElement =
     inherit HTMLElement
@@ -2346,17 +2227,15 @@ type [<AllowNullLiteral>] HTMLHeadingElement =
     abstract clear: string with get, set
 
 type [<AllowNullLiteral>] HTMLHeadingElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLHeadingElement()")>]
     #endif
     abstract Create: unit -> HTMLHeadingElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLHtmlElement =
     inherit HTMLElement
@@ -2364,17 +2243,15 @@ type [<AllowNullLiteral>] HTMLHtmlElement =
     abstract version: string with get, set
 
 type [<AllowNullLiteral>] HTMLHtmlElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLHtmlElement()")>]
     #endif
     abstract Create: unit -> HTMLHtmlElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLIFrameElement =
     inherit HTMLElement
@@ -2417,17 +2294,15 @@ type [<AllowNullLiteral>] HTMLIFrameElement =
     abstract width: string with get, set
 
 type [<AllowNullLiteral>] HTMLIFrameElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLIFrameElement()")>]
     #endif
     abstract Create: unit -> HTMLIFrameElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLImageElement =
     inherit HTMLElement
@@ -2470,17 +2345,15 @@ type [<AllowNullLiteral>] HTMLImageElement =
 
 type [<AllowNullLiteral>] ImageType =
     // Constructor must be Image, see #25
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new Image($1...)")>] 
     #else
     [<Inline("new Image($width, $height)")>]
     #endif
     abstract Create: ?width: float * ?height: float -> HTMLImageElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLInputElement =
     inherit HTMLElement
@@ -2596,17 +2469,15 @@ type [<AllowNullLiteral>] HTMLInputElement =
     abstract stepUp: ?n: float -> unit
 
 type [<AllowNullLiteral>] HTMLInputElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLInputElement()")>]
     #endif
     abstract Create: unit -> HTMLInputElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLIElement =
     inherit HTMLElement
@@ -2616,17 +2487,15 @@ type [<AllowNullLiteral>] HTMLLIElement =
     abstract value: float with get, set
 
 type [<AllowNullLiteral>] HTMLLIElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLLIElement()")>]
     #endif
     abstract Create: unit -> HTMLLIElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLabelElement =
     inherit HTMLElement
@@ -2635,17 +2504,15 @@ type [<AllowNullLiteral>] HTMLLabelElement =
     abstract htmlFor: string with get, set
 
 type [<AllowNullLiteral>] HTMLLabelElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLLabelElement()")>]
     #endif
     abstract Create: unit -> HTMLLabelElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLegendElement =
     inherit HTMLElement
@@ -2654,17 +2521,15 @@ type [<AllowNullLiteral>] HTMLLegendElement =
     abstract form: HTMLFormElement with get, set
 
 type [<AllowNullLiteral>] HTMLLegendElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLLegendElement()")>]
     #endif
     abstract Create: unit -> HTMLLegendElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLLinkElement =
     inherit HTMLElement
@@ -2687,17 +2552,15 @@ type [<AllowNullLiteral>] HTMLLinkElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLLinkElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLLinkElement()")>]
     #endif
     abstract Create: unit -> HTMLLinkElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMapElement =
     inherit HTMLElement
@@ -2707,17 +2570,15 @@ type [<AllowNullLiteral>] HTMLMapElement =
     abstract name: string with get, set
 
 type [<AllowNullLiteral>] HTMLMapElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLMapElement()")>]
     #endif
     abstract Create: unit -> HTMLMapElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMediaElement =
     inherit HTMLElement
@@ -2795,17 +2656,15 @@ type [<AllowNullLiteral>] HTMLMediaElementType =
     abstract NETWORK_IDLE: float with get, set
     abstract NETWORK_LOADING: float with get, set
     abstract NETWORK_NO_SOURCE: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLMediaElement()")>]
     #endif
     abstract Create: unit -> HTMLMediaElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMenuElement =
     inherit HTMLElement
@@ -2814,17 +2673,15 @@ type [<AllowNullLiteral>] HTMLMenuElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLMenuElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLMenuElement()")>]
     #endif
     abstract Create: unit -> HTMLMenuElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLMetaElement =
     inherit HTMLElement
@@ -2840,17 +2697,15 @@ type [<AllowNullLiteral>] HTMLMetaElement =
     abstract url: string with get, set
 
 type [<AllowNullLiteral>] HTMLMetaElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLMetaElement()")>]
     #endif
     abstract Create: unit -> HTMLMetaElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLModElement =
     inherit HTMLElement
@@ -2860,34 +2715,30 @@ type [<AllowNullLiteral>] HTMLModElement =
     abstract dateTime: string with get, set
 
 type [<AllowNullLiteral>] HTMLModElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLModElement()")>]
     #endif
     abstract Create: unit -> HTMLModElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLNextIdElement =
     inherit HTMLElement
     abstract n: string with get, set
 
 type [<AllowNullLiteral>] HTMLNextIdElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLNextIdElement()")>]
     #endif
     abstract Create: unit -> HTMLNextIdElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLOListElement =
     inherit HTMLElement
@@ -2897,17 +2748,15 @@ type [<AllowNullLiteral>] HTMLOListElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLOListElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLOListElement()")>]
     #endif
     abstract Create: unit -> HTMLOListElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLObjectElement =
     inherit HTMLElement
@@ -2959,17 +2808,15 @@ type [<AllowNullLiteral>] HTMLObjectElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLObjectElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLObjectElement()")>]
     #endif
     abstract Create: unit -> HTMLObjectElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLOptGroupElement =
     inherit HTMLElement
@@ -2989,17 +2836,15 @@ type [<AllowNullLiteral>] HTMLOptGroupElement =
     abstract value: string with get, set
 
 type [<AllowNullLiteral>] HTMLOptGroupElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLOptGroupElement()")>]
     #endif
     abstract Create: unit -> HTMLOptGroupElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLOptionElement =
     inherit HTMLElement
@@ -3019,7 +2864,7 @@ type [<AllowNullLiteral>] HTMLOptionElement =
     abstract value: string with get, set
 
 type [<AllowNullLiteral>] HTMLOptionElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLOptionElement()")>]
@@ -3027,10 +2872,8 @@ type [<AllowNullLiteral>] HTMLOptionElementType =
     abstract Create: unit -> HTMLOptionElement
     abstract create: unit -> HTMLOptionElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLParagraphElement =
     inherit HTMLElement
@@ -3039,17 +2882,15 @@ type [<AllowNullLiteral>] HTMLParagraphElement =
     abstract clear: string with get, set
 
 type [<AllowNullLiteral>] HTMLParagraphElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLParagraphElement()")>]
     #endif
     abstract Create: unit -> HTMLParagraphElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLParamElement =
     inherit HTMLElement
@@ -3063,17 +2904,15 @@ type [<AllowNullLiteral>] HTMLParamElement =
     abstract valueType: string with get, set
 
 type [<AllowNullLiteral>] HTMLParamElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLParamElement()")>]
     #endif
     abstract Create: unit -> HTMLParamElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLPhraseElement =
     inherit HTMLElement
@@ -3081,17 +2920,15 @@ type [<AllowNullLiteral>] HTMLPhraseElement =
     abstract dateTime: string with get, set
 
 type [<AllowNullLiteral>] HTMLPhraseElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLPhraseElement()")>]
     #endif
     abstract Create: unit -> HTMLPhraseElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLPreElement =
     inherit HTMLElement
@@ -3101,17 +2938,15 @@ type [<AllowNullLiteral>] HTMLPreElement =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] HTMLPreElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLPreElement()")>]
     #endif
     abstract Create: unit -> HTMLPreElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLProgressElement =
     inherit HTMLElement
@@ -3122,17 +2957,15 @@ type [<AllowNullLiteral>] HTMLProgressElement =
     abstract value: float with get, set
 
 type [<AllowNullLiteral>] HTMLProgressElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLProgressElement()")>]
     #endif
     abstract Create: unit -> HTMLProgressElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLQuoteElement =
     inherit HTMLElement
@@ -3140,17 +2973,15 @@ type [<AllowNullLiteral>] HTMLQuoteElement =
     abstract dateTime: string with get, set
 
 type [<AllowNullLiteral>] HTMLQuoteElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLQuoteElement()")>]
     #endif
     abstract Create: unit -> HTMLQuoteElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLScriptElement =
     inherit HTMLElement
@@ -3170,17 +3001,15 @@ type [<AllowNullLiteral>] HTMLScriptElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLScriptElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLScriptElement()")>]
     #endif
     abstract Create: unit -> HTMLScriptElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLSelectElement =
     inherit HTMLElement
@@ -3208,7 +3037,7 @@ type [<AllowNullLiteral>] HTMLSelectElement =
     /// Returns whether an element will successfully validate based on forms validation rules and constraints.
     abstract willValidate: bool with get, set
     abstract selectedOptions: HTMLCollection with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
     #else
     // TODO
@@ -3228,17 +3057,15 @@ type [<AllowNullLiteral>] HTMLSelectElement =
     abstract setCustomValidity: error: string -> unit
 
 type [<AllowNullLiteral>] HTMLSelectElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLSelectElement()")>]
     #endif
     abstract Create: unit -> HTMLSelectElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLSourceElement =
     inherit HTMLElement
@@ -3248,34 +3075,30 @@ type [<AllowNullLiteral>] HTMLSourceElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLSourceElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLSourceElement()")>]
     #endif
     abstract Create: unit -> HTMLSourceElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLSpanElement =
     inherit HTMLElement
 
 
 type [<AllowNullLiteral>] HTMLSpanElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLSpanElement()")>]
     #endif
     abstract Create: unit -> HTMLSpanElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLStyleElement =
     inherit HTMLElement
@@ -3286,17 +3109,15 @@ type [<AllowNullLiteral>] HTMLStyleElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLStyleElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLStyleElement()")>]
     #endif
     abstract Create: unit -> HTMLStyleElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableCaptionElement =
     inherit HTMLElement
@@ -3306,17 +3127,15 @@ type [<AllowNullLiteral>] HTMLTableCaptionElement =
     abstract vAlign: string with get, set
 
 type [<AllowNullLiteral>] HTMLTableCaptionElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableCaptionElement()")>]
     #endif
     abstract Create: unit -> HTMLTableCaptionElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableCellElement =
     inherit HTMLElement
@@ -3345,17 +3164,15 @@ type [<AllowNullLiteral>] HTMLTableCellElement =
     abstract width: string with get, set
 
 type [<AllowNullLiteral>] HTMLTableCellElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableCellElement()")>]
     #endif
     abstract Create: unit -> HTMLTableCellElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableColElement =
     inherit HTMLElement
@@ -3367,34 +3184,30 @@ type [<AllowNullLiteral>] HTMLTableColElement =
     abstract width: obj with get, set
 
 type [<AllowNullLiteral>] HTMLTableColElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableColElement()")>]
     #endif
     abstract Create: unit -> HTMLTableColElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableDataCellElement =
     inherit HTMLTableCellElement
 
 
 type [<AllowNullLiteral>] HTMLTableDataCellElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableDataCellElement()")>]
     #endif
     abstract Create: unit -> HTMLTableDataCellElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableElement =
     inherit HTMLElement
@@ -3450,17 +3263,15 @@ type [<AllowNullLiteral>] HTMLTableElement =
     abstract insertRow: ?index: float -> HTMLTableRowElement
 
 type [<AllowNullLiteral>] HTMLTableElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableElementElement()")>]
     #endif
     abstract Create: unit -> HTMLTableElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableHeaderCellElement =
     inherit HTMLTableCellElement
@@ -3468,17 +3279,15 @@ type [<AllowNullLiteral>] HTMLTableHeaderCellElement =
     abstract scope: string with get, set
 
 type [<AllowNullLiteral>] HTMLTableHeaderCellElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableHeaderCellElement()")>]
     #endif
     abstract Create: unit -> HTMLTableHeaderCellElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableRowElement =
     inherit HTMLElement
@@ -3501,17 +3310,15 @@ type [<AllowNullLiteral>] HTMLTableRowElement =
     abstract insertCell: ?index: float -> HTMLTableCellElement
 
 type [<AllowNullLiteral>] HTMLTableRowElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableRowElement()")>]
     #endif
     abstract Create: unit -> HTMLTableRowElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTableSectionElement =
     inherit HTMLElement
@@ -3525,17 +3332,15 @@ type [<AllowNullLiteral>] HTMLTableSectionElement =
     abstract insertRow: ?index: float -> HTMLTableRowElement
 
 type [<AllowNullLiteral>] HTMLTableSectionElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTableSectionElement()")>]
     #endif
     abstract Create: unit -> HTMLTableSectionElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTextAreaElement =
     inherit HTMLElement
@@ -3582,34 +3387,30 @@ type [<AllowNullLiteral>] HTMLTextAreaElement =
     abstract setSelectionRange: start: int * ``end``: int -> unit
 
 type [<AllowNullLiteral>] HTMLTextAreaElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTextAreaElement()")>]
     #endif
     abstract Create: unit -> HTMLTextAreaElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTitleElement =
     inherit HTMLElement
     abstract text: string with get, set
 
 type [<AllowNullLiteral>] HTMLTitleElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTitleElement()")>]
     #endif
     abstract Create: unit -> HTMLTitleElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLTrackElement =
     inherit HTMLElement
@@ -3630,17 +3431,15 @@ type [<AllowNullLiteral>] HTMLTrackElementType =
     abstract LOADED: float with get, set
     abstract LOADING: float with get, set
     abstract NONE: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLTrackElement()")>]
     #endif
     abstract Create: unit -> HTMLTrackElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLUListElement =
     inherit HTMLElement
@@ -3648,33 +3447,29 @@ type [<AllowNullLiteral>] HTMLUListElement =
     abstract ``type``: string with get, set
 
 type [<AllowNullLiteral>] HTMLUListElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLUListElement()")>]
     #endif
     abstract Create: unit -> HTMLUListElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLUnknownElement =
     inherit HTMLElement
 
 type [<AllowNullLiteral>] HTMLUnknownElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLUnknownElement()")>]
     #endif
     abstract Create: unit -> HTMLUnknownElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HTMLVideoElement =
     inherit HTMLMediaElement
@@ -3689,17 +3484,15 @@ type [<AllowNullLiteral>] HTMLVideoElement =
     abstract getVideoPlaybackQuality: unit -> VideoPlaybackQuality
 
 type [<AllowNullLiteral>] HTMLVideoElementType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLVideoElement()")>]
     #endif
     abstract Create: unit -> HTMLVideoElement
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] VideoPlaybackQuality =
     abstract corruptedVideoFrames: float with get, set
@@ -3709,17 +3502,15 @@ type [<AllowNullLiteral>] VideoPlaybackQuality =
     abstract totalVideoFrames: float with get, set
 
 type [<AllowNullLiteral>] VideoPlaybackQualityType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new HTMLVideoPlaybackQuality()")>]
     #endif
     abstract Create: unit -> VideoPlaybackQuality
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] VideoTrack =
     abstract id: string with get, set
@@ -3730,17 +3521,15 @@ type [<AllowNullLiteral>] VideoTrack =
     abstract sourceBuffer: SourceBuffer with get, set
 
 type [<AllowNullLiteral>] VideoTrackType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new VideoTrack()")>]
     #endif
     abstract Create: unit -> VideoTrack
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] VideoTrackList =
     inherit EventTarget
@@ -3749,7 +3538,7 @@ type [<AllowNullLiteral>] VideoTrackList =
     abstract onchange: (Event -> unit) with get, set
     abstract onremovetrack: (TrackEvent -> unit) with get, set
     abstract selectedIndex: int with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -3759,17 +3548,15 @@ type [<AllowNullLiteral>] VideoTrackList =
     abstract item: index: float -> VideoTrack
 
 type [<AllowNullLiteral>] VideoTrackListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new VideoTrackList()")>]
     #endif
     abstract Create: unit -> VideoTrackList
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] SourceBuffer =
     inherit EventTarget
@@ -3786,22 +3573,20 @@ type [<AllowNullLiteral>] SourceBuffer =
     abstract remove: start: float * ``end``: float -> unit
 
 type [<AllowNullLiteral>] SourceBufferType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new SourceBuffer()")>]
     #endif
     abstract Create: unit -> SourceBuffer
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] SourceBufferList =
     inherit EventTarget
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
     #else
     // TODO
@@ -3810,17 +3595,15 @@ type [<AllowNullLiteral>] SourceBufferList =
     abstract item: index: float -> SourceBuffer
 
 type [<AllowNullLiteral>] SourceBufferListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new SourceBufferList()")>]
     #endif
     abstract Create: unit -> SourceBufferList
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AudioTrack =
     abstract enabled: bool with get, set
@@ -3831,17 +3614,15 @@ type [<AllowNullLiteral>] AudioTrack =
     abstract sourceBuffer: SourceBuffer with get, set
 
 type [<AllowNullLiteral>] AudioTrackType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new AudioTrack()")>]
     #endif
     abstract Create: unit -> AudioTrack
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AudioTrackList =
     inherit EventTarget
@@ -3849,7 +3630,7 @@ type [<AllowNullLiteral>] AudioTrackList =
     abstract onaddtrack: (TrackEvent -> unit) with get, set
     abstract onchange: (Event -> unit) with get, set
     abstract onremovetrack: (TrackEvent -> unit) with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
     #else
     // TODO
@@ -3859,17 +3640,15 @@ type [<AllowNullLiteral>] AudioTrackList =
     abstract item: index: float -> AudioTrack
 
 type [<AllowNullLiteral>] AudioTrackListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new AudioTrackList()")>]
     #endif
     abstract Create: unit -> AudioTrackList
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrack =
     inherit EventTarget
@@ -3902,17 +3681,15 @@ type [<AllowNullLiteral>] TextTrackType =
     abstract LOADING: float with get, set
     abstract NONE: float with get, set
     abstract SHOWING: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new TextTrack()")>]
     #endif
     abstract Create: unit -> TextTrack
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrackCue =
     inherit EventTarget
@@ -3927,21 +3704,19 @@ type [<AllowNullLiteral>] TextTrackCue =
     abstract getCueAsHTML: unit -> DocumentFragment
 
 type [<AllowNullLiteral>] TextTrackCueType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new TextTrackCueType($startTime,$endTime,$text)")>]
     #endif
     abstract Create: startTime: float * endTime: float * text: string -> TextTrackCue
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrackCueList =
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -3951,23 +3726,21 @@ type [<AllowNullLiteral>] TextTrackCueList =
     abstract item: index: float -> TextTrackCue
 
 type [<AllowNullLiteral>] TextTrackCueListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new TextTrackCueList()")>]
     #endif
     abstract Create: unit -> TextTrackCueList
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextTrackList =
     inherit EventTarget
     abstract length: int
     abstract onaddtrack: (TrackEvent -> unit) with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -3976,7 +3749,7 @@ type [<AllowNullLiteral>] TextTrackList =
     abstract item: index: float -> TextTrack
 
 type [<AllowNullLiteral>] TextTrackListType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new TextTrackList()")>]
@@ -3993,42 +3766,36 @@ type [<AllowNullLiteral>] HTMLTableAlignment =
 
 // ## CANVAS
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CanvasGradient =
     abstract addColorStop: offset: float * color: string -> unit
 
 type [<AllowNullLiteral>] CanvasGradientType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new CanvasGradient()")>]
     #endif
     abstract Create: unit -> CanvasGradient
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CanvasPattern =
     interface end
 
 type [<AllowNullLiteral>] CanvasPatternType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new CanvasPattern()")>]
     #endif
     abstract Create: unit -> CanvasPattern
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CanvasRenderingContext2D =
     abstract canvas: HTMLCanvasElement with get, set
@@ -4092,17 +3859,15 @@ type [<AllowNullLiteral>] CanvasRenderingContext2D =
     abstract imageSmoothingEnabled: bool with get, set
 
 type [<AllowNullLiteral>] CanvasRenderingContext2DType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new CanvasRenderingContext2D()")>]
     #endif
     abstract Create: unit -> CanvasRenderingContext2D
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ImageData =
     abstract data: uint8[] with get, set
@@ -4110,13 +3875,13 @@ type [<AllowNullLiteral>] ImageData =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] ImageDataType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new ImageData($width,$height)")>]
     #endif
     abstract Create: width: float * height: float -> ImageData
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new ImageData($array,$width,$height)")>]
@@ -4125,26 +3890,22 @@ type [<AllowNullLiteral>] ImageDataType =
 
 // ## OTHER HTML INTERFACES
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TextMetrics =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] TextMetricsType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new TextMetrics()")>]
     #endif
     abstract Create: unit -> TextMetrics
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MediaError =
     abstract code: float with get, set
@@ -4158,17 +3919,15 @@ type [<AllowNullLiteral>] MediaErrorType =
     abstract MEDIA_ERR_DECODE: float with get, set
     abstract MEDIA_ERR_NETWORK: float with get, set
     abstract MEDIA_ERR_SRC_NOT_SUPPORTED: float with get, set
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new MediaError()")>]
     #endif
     abstract Create: unit -> MediaError
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ValidityState =
     abstract badInput: bool with get, set
@@ -4184,7 +3943,7 @@ type [<AllowNullLiteral>] ValidityState =
     abstract valueMissing: bool with get, set
 
 type [<AllowNullLiteral>] ValidityStateType =
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
     [<Inline("new ValidityState()")>]
@@ -4193,30 +3952,24 @@ type [<AllowNullLiteral>] ValidityStateType =
 
 // ## EVENTS
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] UIEvent =
     inherit Event
     abstract detail: float
     abstract view: Window
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AnimationEvent =
     inherit Event
     abstract animationName: string with get, set
     abstract elapsedTime: float with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MouseEvent =
     inherit UIEvent
@@ -4246,10 +3999,8 @@ type [<AllowNullLiteral>] MouseEvent =
     abstract y: float
     abstract getModifierState: keyArg: string -> bool
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] MouseWheelEvent =
     inherit MouseEvent
@@ -4257,46 +4008,36 @@ type [<AllowNullLiteral>] MouseWheelEvent =
     abstract wheelDeltaX: float
     abstract wheelDeltaY: float
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DocumentEvent =
     abstract createEvent: eventInterface: string -> Event
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DragEvent =
     inherit MouseEvent
     abstract dataTransfer: DataTransfer
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ClipboardEvent =
     inherit Event
     abstract clipboardData: DataTransfer
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CompositionEvent =
     inherit UIEvent
     abstract data: string
     abstract locale: string
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DataTransfer =
     abstract dropEffect: string with get, set
@@ -4308,10 +4049,8 @@ type [<AllowNullLiteral>] DataTransfer =
     abstract getData: format: string -> string
     abstract setData: format: string * data: string -> bool
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DataTransferItem =
     abstract kind: string
@@ -4319,14 +4058,12 @@ type [<AllowNullLiteral>] DataTransferItem =
     abstract getAsFile: unit -> File
     abstract getAsString: _callback: (string -> unit) -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DataTransferItemList =
     abstract length: int
-    #if FABLE_COMPILER
+    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     #else
     // TODO
@@ -4337,19 +4074,15 @@ type [<AllowNullLiteral>] DataTransferItemList =
     abstract item: index: float -> DataTransferItem
     abstract remove: index: float -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] FocusEvent =
     inherit UIEvent
     abstract relatedTarget: EventTarget
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] PointerEvent =
     inherit MouseEvent
@@ -4368,19 +4101,15 @@ type [<AllowNullLiteral>] PointerEvent =
     abstract getCurrentPoint: element: Element -> unit
     abstract getIntermediatePoints: element: Element -> unit
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] PopStateEvent =
     inherit Event
     abstract state: obj
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] KeyboardEvent =
     inherit UIEvent
@@ -4406,10 +4135,8 @@ type [<AllowNullLiteral>] KeyboardEvent =
     abstract DOM_KEY_LOCATION_STANDARD: float
     abstract getModifierState: keyArg: string -> bool
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] ProgressEvent =
     inherit Event
@@ -4417,10 +4144,8 @@ type [<AllowNullLiteral>] ProgressEvent =
     abstract loaded: float
     abstract total: float
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Touch =
     abstract clientX: float
@@ -4432,10 +4157,8 @@ type [<AllowNullLiteral>] Touch =
     abstract screenY: float
     abstract target: EventTarget
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TouchEvent =
     inherit UIEvent
@@ -4447,39 +4170,31 @@ type [<AllowNullLiteral>] TouchEvent =
     abstract targetTouches: Touch[]
     abstract touches: Touch[]
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] AriaRequestEvent =
     inherit Event
     abstract attributeName: string
     abstract attributeValue: string
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] CommandEvent =
     inherit Event
     abstract commandName: string
     abstract detail: string
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] BeforeUnloadEvent =
     inherit Event
     abstract returnValue: obj
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DeviceMotionEvent =
     inherit Event
@@ -4488,10 +4203,8 @@ type [<AllowNullLiteral>] DeviceMotionEvent =
     abstract interval: float
     abstract rotationRate: DeviceRotationRate
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] DeviceOrientationEvent =
     inherit Event
@@ -4510,48 +4223,38 @@ type [<AllowNullLiteral>] DeviceRotationRate =
     abstract beta: float
     abstract gamma: float
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TransitionEvent =
     inherit Event
     abstract elapsedTime: float with get, set
     abstract propertyName: string with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] PageTransitionEvent =
     inherit Event
     abstract persisted: bool
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] HashChangeEvent =
     inherit Event
     abstract newURL: string
     abstract oldURL: string
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] TrackEvent =
     inherit Event
     abstract track: obj
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#else
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] WheelEvent =
     inherit MouseEvent
@@ -4569,4 +4272,3 @@ type [<AllowNullLiteral>] WheelEvent =
 //     abstract DOM_DELTA_PAGE: float
 //     abstract DOM_DELTA_PIXEL: float
 //     [<Emit("new $0($1...)")>] abstract Create: typeArg: string * ?eventInitDict: WheelEventInit -> WheelEvent
-#endif

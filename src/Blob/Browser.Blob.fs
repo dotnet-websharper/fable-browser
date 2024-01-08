@@ -1,12 +1,16 @@
 namespace Browser.Types
-#if FABLE_COMPILER || JAVASCRIPT
+
 open System
-#if FABLE_COMPILER
-open Fable.Core
-open Fable.Core.JS
-#else
+#if JAVASCRIPT
 open WebSharper
 open WebSharper.JavaScript
+
+[<AutoOpen>]
+module internal FableUtil =
+    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
+#else
+open Fable.Core
+open Fable.Core.JS
 #endif
 
 type EnumNameAttribute =
@@ -27,10 +31,8 @@ type [<AllowNullLiteral>] BlobPropertyBag =
     abstract ``type``: string with get, set
     abstract endings: BlobEndings with get, set
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] Blob =
     abstract arrayBuffer: unit -> Promise<ArrayBuffer>
@@ -40,17 +42,15 @@ type [<AllowNullLiteral>] Blob =
     abstract text: unit -> Promise<string>
 
 type [<AllowNullLiteral>] BlobType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #else
+    #if JAVASCRIPT
     [<Inline("new Blob($blobParts, $options)")>]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: ?blobParts: obj[] * ?options: BlobPropertyBag -> Blob
 
-#if FABLE_COMPILER
+#if !JAVASCRIPT
 [<Global>]
-#elif JAVASCRIPT
-//[<Stub>]
 #endif
 type [<AllowNullLiteral>] FormData =
     abstract append: name: string * value: string -> unit
@@ -66,44 +66,35 @@ type [<AllowNullLiteral>] FormData =
     abstract values: unit -> obj seq
 
 type [<AllowNullLiteral>] FormDataType =
-    #if FABLE_COMPILER
-    [<Emit("new $0($1...)")>] 
-    #else
+    #if JAVASCRIPT
     [<Inline("new FormData()")>]
+    #else
+    [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: unit -> FormData
 
 namespace Browser
 
-#if FABLE_COMPILER
-open Fable.Core
-#else
+#if JAVASCRIPT
 open WebSharper
+#else
+open Fable.Core
 #endif
 open Browser.Types
 
 [<AutoOpen>]
 module Blob =
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let Blob: BlobType = 
-        #if FABLE_COMPILER
         jsNative
-        #else
-        Unchecked.defaultof<_>
-        #endif
-    #if FABLE_COMPILER
-    [<Global>]
-    #else
+    #if JAVASCRIPT
     [<Inline>]
+    #else
+    [<Global>]
     #endif
     let FormData: FormDataType = 
-        #if FABLE_COMPILER
         jsNative
-        #else
-        Unchecked.defaultof<_>
-        #endif
-#endif

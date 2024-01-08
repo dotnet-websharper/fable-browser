@@ -11,11 +11,11 @@ open Browser.Types
 
 type Document with
     #if JAVASCRIPT
-    [<Inline("new $this.matchMedia($mediaQuery)")>]
+    [<Inline("$this.matchMedia($mediaQuery)")>]
     #else
     [<Emit("$0.matchMedia($1...)")>]
     #endif
-    member __.matchMedia(mediaQuery : string) : MediaQueryList = 
+    member this.matchMedia(mediaQuery : string) : MediaQueryList = 
         #if JAVASCRIPT
         Unchecked.defaultof<_>
         #else
@@ -24,11 +24,11 @@ type Document with
 
 type Window with
     #if JAVASCRIPT
-    [<Inline("new $this.matchMedia($mediaQuery)")>]
+    [<Inline("$this.matchMedia($mediaQuery)")>]
     #else
     [<Emit("$0.matchMedia($1...)")>]
     #endif
-    member __.matchMedia(mediaQuery : string) : MediaQueryList = 
+    member this.matchMedia(mediaQuery : string) : MediaQueryList = 
         #if JAVASCRIPT
         Unchecked.defaultof<_>
         #else

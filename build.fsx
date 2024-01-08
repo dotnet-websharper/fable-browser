@@ -1,57 +1,45 @@
-#r "nuget: Fable.PublishUtils, 2.4.0"
+#if INTERACTIVE
+#r "nuget: FAKE.Core"
+#r "nuget: Fake.Core.Target"
+#r "nuget: Fake.IO.FileSystem"
+#r "nuget: Fake.Tools.Git"
+#r "nuget: Fake.DotNet.Cli"
+#r "nuget: Fake.DotNet.AssemblyInfoFile"
+#r "nuget: Fake.DotNet.Paket"
+#r "nuget: Paket.Core"
+#else
+#r "paket:
+nuget FSharp.Core 5.0.0
+nuget FAKE.Core
+nuget Fake.Core.Target
+nuget Fake.IO.FileSystem
+nuget Fake.Tools.Git
+nuget Fake.DotNet.Cli
+nuget Fake.DotNet.AssemblyInfoFile
+nuget Fake.DotNet.Paket
+nuget Paket.Core prerelease //"
+#endif
 
-open System
-open PublishUtils
+#load "paket-files/wsbuild/github.com/dotnet-websharper/build-script/WebSharper.Fake.fsx"
+open WebSharper.Fake
+open Fake.DotNet
 
-run "npm install && npm test"
+let WithProjects projects args =
+    { args with BuildAction = Projects projects }
 
-// ATTENTION: Packages must appear in dependency order
-let packages =
-    [ "Blob"
-      "Gamepad"
-      "Event"
-      "Performance"
-      "Url"
-      "WebSocket"
-      "WebStorage"
-      "Dom"
-      "XMLHttpRequest"
-      "Svg"
-      "Css"
-      "Worker"
-      "Geolocation"
-      "Navigator"
-      "MediaStream"
-      "MediaRecorder"
-      "MediaQueryList"
-      "WebRTC"
-      "WebGL"
-      "IndexedDB"
-      "IntersectionObserver"
-      "ResizeObserver"
-    ]
-
-let ignoreCaseEquals (str1: string) (str2: string) =
-    String.Equals(str1, str2, StringComparison.OrdinalIgnoreCase)
-
-let args =
-    fsi.CommandLineArgs
-    |> Array.skip 1
-    |> List.ofArray
-
-match args with
-| IgnoreCase "publish"::rest ->
-    let target = List.tryHead rest
-    let srcDir = fullPath "src"
-    let projFiles = packages |> List.map (fun pkg ->
-        (srcDir </> pkg), ("Browser." + pkg + ".fsproj"))
-
-    for projDir, file in projFiles do
-        let publish =
-            match target with
-            | Some target -> ignoreCaseEquals file.[..(file.Length - 8)] target
-            | None -> true
-        if publish then
-            pushFableNuget (projDir </> file) [] doNothing
-| _ -> ()
- 
+LazyVersionFrom "WebSharper" |> WSTargets.Default
+|> fun args ->
+    { args with
+        Attributes = [
+            AssemblyInfo.Company "IntelliFactory"
+            AssemblyInfo.Copyright "(c) IntelliFactory 2023"
+            AssemblyInfo.Title "https://github.com/dotnet-websharper/fable-browser"
+            AssemblyInfo.Product "WebSharper Browser"
+        ]
+    }
+|> WithProjects [
+    
+    "websharper/WebSharper.sln"
+]
+|> MakeTargets
+|> RunTargets

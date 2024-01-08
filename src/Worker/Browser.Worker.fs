@@ -131,9 +131,4 @@ module Worker =
     #else
     [<Global>]
     #endif
-    let  Worker: WorkerConstructor = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let  Worker: WorkerConstructor = jsNative

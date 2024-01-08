@@ -80,9 +80,4 @@ module IntersectionObserver =
     #else
     [<Global>]
     #endif
-    let  IntersectionObserver: IntersectionObserverCtor = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let  IntersectionObserver: IntersectionObserverCtor = jsNative

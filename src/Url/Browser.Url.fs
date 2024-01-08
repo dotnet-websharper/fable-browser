@@ -78,21 +78,11 @@ module Url =
     #else
     [<Global>]
     #endif
-    let URL: URLType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let URL: URLType = jsNative
 
     #if JAVASCRIPT
     [<WebSharper.Inline>]
     #else
     [<Global>]
     #endif
-    let URLSearchParams: URLSearchParamsType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let URLSearchParams: URLSearchParamsType = jsNative

@@ -2,7 +2,6 @@
 module Browser.DomExtensions
 #if JAVASCRIPT
 open WebSharper
-let [<Inline>] internal jsNative<'t> = Unchecked.defaultof<'t>
 #else
 open Fable.Core
 #endif 

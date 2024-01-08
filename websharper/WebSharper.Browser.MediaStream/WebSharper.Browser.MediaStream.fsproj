@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DefineConstants>$(DefineConstants);JAVASCRIPT</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Helpers.fs" />
+    <Compile Include="..\..\src\MediaStream\Browser.MediaStream.fs" />
+    <None Include="wsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MediaStream\Browser.MediaStream.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Blob\WebSharper.Browser.Blob.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

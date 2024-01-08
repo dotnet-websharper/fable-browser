@@ -14,9 +14,4 @@ module MediaQueryList =
     #else
     [<Global>]
     #endif
-    let MediaQueryList : MediaQueryListType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let MediaQueryList : MediaQueryListType = jsNative

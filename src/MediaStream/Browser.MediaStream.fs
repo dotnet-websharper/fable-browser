@@ -484,10 +484,6 @@ namespace Browser
 #if JAVASCRIPT
 open WebSharper
 
-[<AutoOpen>]
-module internal FableUtil =
-    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
-
 #else
 open Fable.Core
 #endif

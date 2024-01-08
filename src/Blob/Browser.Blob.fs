@@ -5,9 +5,6 @@ open System
 open WebSharper
 open WebSharper.JavaScript
 
-[<AutoOpen>]
-module internal FableUtil =
-    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
 #else
 open Fable.Core
 open Fable.Core.JS
@@ -89,12 +86,11 @@ module Blob =
     #else
     [<Global>]
     #endif
-    let Blob: BlobType = 
-        jsNative
+    let Blob: BlobType = jsNative
+
     #if JAVASCRIPT
     [<Inline>]
     #else
     [<Global>]
     #endif
-    let FormData: FormDataType = 
-        jsNative
+    let FormData: FormDataType = jsNative

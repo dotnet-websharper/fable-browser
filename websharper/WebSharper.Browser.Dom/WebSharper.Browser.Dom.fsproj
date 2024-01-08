@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DefineConstants>$(DefineConstants);JAVASCRIPT</DefineConstants>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Helpers.fs" />
+    <None Include="wsconfig.json" />
+    <Compile Include="../../src/Dom/Browser.DomException.fs" />
+    <Compile Include="../../src/Dom/Browser.File.fs" />
+    <Compile Include="../../src/Dom/Browser.History.fs" />
+    <Compile Include="../../src/Dom/Browser.Dom.fs" />
+    <Compile Include="../../src/Dom/Browser.Dom.Ext.fs" />
+    <Compile Include="../../src/Dom/Browser.Dom.Api.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Dom\Browser.Dom.fsproj" />
+    <ProjectReference Include="..\..\src\Event\Browser.Event.fsproj" />
+    <ProjectReference Include="..\..\src\Blob\Browser.Blob.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.WebStorage\WebSharper.Browser.WebStorage.fsproj" />
+    <ProjectReference Include="..\WebSharper.Browser.Blob\WebSharper.Browser.Blob.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

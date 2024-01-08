@@ -42,9 +42,4 @@ module Gamepad =
     #else
     [<Global>]
     #endif
-    let gamepad: Gamepad = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<Gamepad>
-        #else
-        jsNative
-        #endif
+    let gamepad: Gamepad = jsNative

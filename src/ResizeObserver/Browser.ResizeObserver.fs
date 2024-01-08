@@ -95,9 +95,4 @@ module ResizeObserver =
     #else
     [<Global>]
     #endif
-    let ResizeObserver: ResizeObserverCtor = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let ResizeObserver: ResizeObserverCtor = jsNative

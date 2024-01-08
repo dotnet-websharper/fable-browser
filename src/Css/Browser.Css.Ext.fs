@@ -3,10 +3,6 @@ module Browser.CssExtensions
 
 #if JAVASCRIPT
 open WebSharper
-
-[<AutoOpen>]
-module FableUtil =
-    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
 #else
 open Fable.Core
 #endif
@@ -100,7 +96,6 @@ type HTMLLinkElement with
 
 type HTMLStyleElement with
     #if JAVASCRIPT
-    [<Inline("")>]
     member this.sheet 
         with [<Inline "$this.sheet">] get(): StyleSheet = jsNative 
         and [<Inline "$this.sheet=$v">] set(v: StyleSheet) = jsNative

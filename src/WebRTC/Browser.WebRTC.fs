@@ -9,7 +9,6 @@ open WebSharper.JavaScript
 
 [<AutoOpen>]
 module JsUtil =
-    let [<Inline>] jsNative<'a> = Unchecked.defaultof<'a>
     type internal U2<'a,'b> = Union<'a,'b>
     type internal U4<'a,'b,'c,'d> = Union<'a,'b,'c,'d>
 module internal JS =

@@ -76,9 +76,4 @@ module XMLHttpRequest =
     #else
     [<Global>]
     #endif
-    let XMLHttpRequest: XMLHttpRequestType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let XMLHttpRequest: XMLHttpRequestType = jsNative

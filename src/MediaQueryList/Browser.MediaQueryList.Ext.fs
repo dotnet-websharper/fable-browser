@@ -15,12 +15,7 @@ type Document with
     #else
     [<Emit("$0.matchMedia($1...)")>]
     #endif
-    member this.matchMedia(mediaQuery : string) : MediaQueryList = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    member this.matchMedia(mediaQuery : string) : MediaQueryList = jsNative
 
 type Window with
     #if JAVASCRIPT
@@ -28,9 +23,4 @@ type Window with
     #else
     [<Emit("$0.matchMedia($1...)")>]
     #endif
-    member this.matchMedia(mediaQuery : string) : MediaQueryList = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    member this.matchMedia(mediaQuery : string) : MediaQueryList = jsNative

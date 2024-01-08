@@ -337,3 +337,6 @@ ASALocalRun/
 src/.DS_Store
 .DS_Store
 temp/
+
+websharper.log
+build/*

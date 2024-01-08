@@ -3,8 +3,6 @@
 #if JAVASCRIPT
 open WebSharper
 [<AutoOpen;WebSharper.JavaScript>]
-module internal FableUtil =
-    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
 module internal JS =
     type Promise<'t> = WebSharper.JavaScript.Promise<'t>
 #else
@@ -108,14 +106,14 @@ type [<AbstractClass; AllowNullLiteral>] IDBKeyRange =
     static member only(only: obj) = jsNative<IDBKeyRange>
 
     #if JAVASCRIPT
-    [<Inline("IDBKeyRange.lowerBound($lower,$open)")>]
+    [<Inline("IDBKeyRange.lowerBound($lower,$1)")>]
     #else
     [<Emit("IDBKeyRange.lowerBound($0, $1)")>]
     #endif
     static member lowerBound(lower: obj, ?``open``: bool) = jsNative<IDBKeyRange>
 
     #if JAVASCRIPT
-    [<Inline("IDBKeyRange.upperBound($upper,$open)")>]
+    [<Inline("IDBKeyRange.upperBound($upper,$1)")>]
     #else
     [<Emit("IDBKeyRange.upperBound($0, $1)")>]
     #endif

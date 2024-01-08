@@ -96,9 +96,4 @@ module WebSocket =
     #else
     [<Global>]
     #endif 
-    let WebSocket: WebSocketType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let WebSocket: WebSocketType = jsNative

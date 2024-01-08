@@ -178,33 +178,18 @@ module Event =
     #else
     [<Global>]
     #endif
-    let Event: EventType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let Event: EventType = jsNative
 
     #if JAVASCRIPT
     [<Inline>]
     #else
     [<Global>]
     #endif
-    let EventTarget: EventTargetType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let EventTarget: EventTargetType = jsNative
 
     #if JAVASCRIPT
     [<Inline>]
     #else
     [<Global>]
     #endif
-    let CustomEvent : CustomEventType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let CustomEvent : CustomEventType = jsNative

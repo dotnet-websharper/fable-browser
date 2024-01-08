@@ -43,11 +43,5 @@ module Performance =
     #else
     [<Global>]
     #endif
-    let performance: Performance = 
-        #if FABLE_COMPILER
-        jsNative
-
-        #else
-        Unchecked.defaultof<_>
-        #endif
+    let performance: Performance = jsNative
     

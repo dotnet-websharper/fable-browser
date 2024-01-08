@@ -1,0 +1,21 @@
+type file
+id WebSharper.Browser.Navigator
+authors IntelliFactory
+projectUrl https://websharper.com/
+repositoryType git
+repositoryUrl https://github.com/dotnet-websharper/fable-browser/
+licenseUrl https://github.com/dotnet-websharper/fable-browser/blob/master/LICENSE.md
+iconUrl https://github.com/dotnet-websharper/core/raw/websharper50/tools/WebSharper.png
+description
+    WebSharper Proxy for Fable's Browser.Navigator
+tags
+    WebSharper Web JavaScript FSharp
+dependencies
+    framework: netstandard2.0
+        WebSharper ~> LOCKEDVERSION:[3]
+files
+    ../websharper/WebSharper.Browser.Navigator/bin/Release/netstandard2.0/WebSharper.Browser.Navigator.dll ==> lib/netstandard2.0
+
+references
+    
+

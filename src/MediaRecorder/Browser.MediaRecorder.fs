@@ -91,9 +91,4 @@ module MediaRecorder =
     #else
     [<Global>]
     #endif
-    let MediaRecorder: MediaRecorderType = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let MediaRecorder: MediaRecorderType = jsNative

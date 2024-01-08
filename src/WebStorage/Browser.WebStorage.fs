@@ -68,13 +68,7 @@ module WebStorage =
     #else
     [<Global>]
     #endif
-    let localStorage: Storage = 
-        #if FABLE_COMPILER
-        jsNative
-
-        #else
-        Unchecked.defaultof<_>
-        #endif
+    let localStorage: Storage = jsNative
     
     
     #if JAVASCRIPT
@@ -82,10 +76,5 @@ module WebStorage =
     #else
     [<Global>]
     #endif
-    let sessionStorage: Storage = 
-        #if FABLE_COMPILER
-        jsNative
-        #else
-        Unchecked.defaultof<_>
-        #endif
+    let sessionStorage: Storage = jsNative
     

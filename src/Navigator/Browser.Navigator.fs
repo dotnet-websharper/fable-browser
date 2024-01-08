@@ -216,9 +216,4 @@ module Navigator =
     #else
     [<Global>]
     #endif
-    let navigator: Navigator = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<_>
-        #else
-        jsNative
-        #endif
+    let navigator: Navigator = jsNative

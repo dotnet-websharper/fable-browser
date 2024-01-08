@@ -4,6 +4,9 @@ open System
 #if JAVASCRIPT
 open WebSharper
 open WebSharper.JavaScript
+
+module internal JS =
+    type Promise<'a> = JavaScript.Promise<'a>
 #else
 open Fable.Core
 #endif
@@ -18,9 +21,10 @@ type MimeType =
     abstract ``type``: string
 
 #if !JAVASCRIPT
-[<Global>]
-#endif
+and [<Global>] Plugin =
+#else
 and Plugin =
+#endif
     abstract description: string
     abstract filename: string
     abstract length: int
@@ -38,8 +42,8 @@ type ShareData =
 [<Global>]
 #endif
 type Clipboard =
-    abstract writeText: string -> Promise<unit>
-    abstract readText: unit -> Promise<string>
+    abstract writeText: string -> JS.Promise<unit>
+    abstract readText: unit -> JS.Promise<string>
 
 type NavigatorID =
     abstract appName: string
@@ -190,11 +194,7 @@ type Navigator =
     // TODO: abstract registerProtocolHandler()
     // TODO: abstract requestMediaKeySystemAccess()
     // TODO: abstract sendBeacon()
-    #if JAVASCRIPT
-   abstract share: ShareData -> Promise<unit>
-    #else
     abstract share: ShareData -> JS.Promise<unit>
-    #endif
     /// Pulses the vibration hardware on the device, if such hardware exists. If the device doesn't support vibration, this method has no effect. If a vibration pattern is already in progress when this method is called, the previous pattern is halted and the new one begins instead.
     /// - pattern: Provides a pattern of vibration and pause intervals. Each value indicates a number of milliseconds to vibrate or pause, in alternation. You may provide either a single value (to vibrate once for that many milliseconds) or an array of values to alternately vibrate, pause, then vibrate again. See Vibration API for details.
     abstract vibrate: pattern: obj -> bool

@@ -13,6 +13,7 @@ module JsUtil =
     type internal U4<'a,'b,'c,'d> = Union<'a,'b,'c,'d>
 #else
 open Fable.Core
+open Fable.Core.JS
 #endif
 
 open Browser

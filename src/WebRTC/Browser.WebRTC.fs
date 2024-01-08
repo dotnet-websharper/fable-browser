@@ -227,7 +227,7 @@ type RTCIceCandidateInitType =
     #if JAVASCRIPT
     [<Inline("new Object({candidate:$candidate,sdpMid:$sdpMid,sdpMLineIndex:$sdpMLineIndex,usernameFragment:$usernameFragment})")>]
     #else
-    [<Emit("new Object({candidate:$1,sdpMid:$2,sdpMLineIndex:$3{{,usernameFragment:$4}}})")>] // TODO: check
+    [<Emit("new Object({candidate:$1,sdpMid:$2,sdpMLineIndex:$3,usernameFragment:$4})")>] // TODO: check
     #endif
     abstract Create: candidate:string * sdpMid:string * sdpMLineIndex:string * ?usernameFragment:string -> RTCIceCandidateInit
 

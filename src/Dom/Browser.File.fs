@@ -41,10 +41,11 @@ type [<AllowNullLiteral>] FileList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
-    #else
-    // TODO
-    #endif 
     abstract Item: index: int -> File
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> File
+    #endif 
     abstract item: index: int -> File
 
 #if !JAVASCRIPT

@@ -473,10 +473,13 @@ type [<AllowNullLiteral>] DOMStringList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif 
     abstract Item: index: int -> string with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> string with get
+    [<Inline "$this[$index]=$2">] // TODO: check $this[$index]=$2
+    abstract Item: index: int -> string with set
+    #endif 
     abstract contains: str: string -> bool
     abstract item: index: float -> string
 
@@ -494,10 +497,13 @@ type [<AllowNullLiteral>] DOMStringListType =
 type [<AllowNullLiteral>] DOMStringMap =
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif 
      abstract Item: name: string -> string with get, set
+    #else
+    [<Inline "$this[$name]">]
+    abstract Item: name: string -> string with get
+    [<Inline "$this[$name]=$2">]
+    abstract Item: name: string -> string with set
+    #endif 
 
 type [<AllowNullLiteral>] DOMStringMapType =
     #if !JAVASCRIPT
@@ -514,10 +520,13 @@ type [<AllowNullLiteral>] DOMTokenList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif 
     abstract Item: index: int -> string with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> string with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> string with set
+    #endif 
     abstract add: [<ParamArray>] token: string[] -> unit
     abstract contains: token: string -> bool
     abstract item: index: float -> string
@@ -681,10 +690,15 @@ type [<AllowNullLiteral>] HTMLCollection =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif 
     abstract Item: index: int -> Element with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> Element with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> Element with set
+    #endif 
+
+
     /// Retrieves an object from various collections.
     abstract item: ?nameOrIndex: obj * ?optionalIndex: obj -> Element
     /// Retrieves a form object or an object from an elements collection.
@@ -706,10 +720,13 @@ type [<AllowNullLiteral>] NamedNodeMap =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> Attr with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> Attr with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> Attr with set
+    #endif
     abstract getNamedItem: name: string -> Attr
     abstract getNamedItemNS: namespaceURI: string * localName: string -> Attr
     abstract item: index: float -> Attr
@@ -863,9 +880,13 @@ type [<AllowNullLiteral>] NodeIteratorType =
 type [<AllowNullLiteral>] NodeList =
     abstract length: int
     #if !JAVASCRIPT
-    [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> Node with get, set
+    [<Emit("$0[$1]{{=$2}}")>] 
+    abstract Item: index: int -> Node with get, set
     #else
-    // TODO
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> Node with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> Node with set
     #endif
     abstract item: index: float -> Node
 
@@ -883,7 +904,10 @@ type [<AllowNullLiteral>] NodeListOf<'TNode> =
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> 'TNode with get, set
     #else
-    // TODO
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> 'TNode with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> 'TNode with set
     #endif
     abstract item: index: float -> 'TNode
 
@@ -1316,10 +1340,13 @@ type [<AllowNullLiteral>] Window =
     abstract window: Window with get, set
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> Window with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> Window with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> Window with set
+    #endif
     abstract alert: ?message: obj -> unit
     abstract blur: unit -> unit
     abstract cancelAnimationFrame: handle: float -> unit
@@ -1725,8 +1752,8 @@ type [<AllowNullLiteral>] HTMLCanvasElement =
     #if !JAVASCRIPT
     [<Emit("$0.getContext('2d'{{, $1}})")>]
     #else 
-    // TODO
-    [<Inline("$this.getContext('2d'{{, $contextAttributes}})")>]
+    // TODO: check
+    [<Inline("$this.getContext('2d', $contextAttributes)")>]
     #endif
     abstract getContext_2d: ?contextAttributes: obj -> CanvasRenderingContext2D
     /// Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document. A context object includes information about colors, line widths, fonts, and other graphic parameters that can be drawn on a canvas.
@@ -2104,10 +2131,13 @@ type [<AllowNullLiteral>] HTMLFormElement =
     abstract target: string with get, set
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif
     abstract Item: name: string -> obj with get, set
+    #else
+    [<Inline "$this[$name]">]
+    abstract Item: name: string -> obj with get
+    [<Inline "$this[$name]=$2">]
+    abstract Item: name: string -> obj with set
+    #endif
     /// Returns whether a form will validate when it is submitted, without having to submit it.
     abstract checkValidity: unit -> bool
     /// Performs the same validity checking steps as the checkValidity function. If the value is invalid, this method also fires the invalid event on the element, and (if the event isn't canceled) reports the problem to the user.
@@ -3039,10 +3069,13 @@ type [<AllowNullLiteral>] HTMLSelectElement =
     abstract selectedOptions: HTMLCollection with get, set
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
-    #else
-    // TODO
-    #endif
     abstract Item: name: string -> obj with get, set
+    #else
+    [<Inline "$this[$name]">]
+    abstract Item: name: string -> obj with get
+    [<Inline "$this[$name]=$2">]
+    abstract Item: name: string -> obj with set
+    #endif
     abstract add: element: HTMLElement * ?before: U2<HTMLElement, float> -> unit
     /// Returns whether a form will validate when it is submitted, without having to submit it.
     abstract checkValidity: unit -> bool
@@ -3540,10 +3573,13 @@ type [<AllowNullLiteral>] VideoTrackList =
     abstract selectedIndex: int with get, set
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> VideoTrack with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> VideoTrack with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> VideoTrack with set
+    #endif
     abstract getTrackById: id: string -> VideoTrack
     abstract item: index: float -> VideoTrack
 
@@ -3588,10 +3624,13 @@ type [<AllowNullLiteral>] SourceBufferList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> SourceBuffer with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> SourceBuffer with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> SourceBuffer with set
+    #endif
     abstract item: index: float -> SourceBuffer
 
 type [<AllowNullLiteral>] SourceBufferListType =
@@ -3632,10 +3671,13 @@ type [<AllowNullLiteral>] AudioTrackList =
     abstract onremovetrack: (TrackEvent -> unit) with get, set
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> AudioTrack with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> AudioTrack with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> AudioTrack with set
+    #endif
     abstract getTrackById: id: string -> AudioTrack
     abstract item: index: float -> AudioTrack
 
@@ -3718,10 +3760,13 @@ type [<AllowNullLiteral>] TextTrackCueList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> TextTrackCue with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> TextTrackCue with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> TextTrackCue with set
+    #endif
     abstract getCueById: id: string -> TextTrackCue
     abstract item: index: float -> TextTrackCue
 
@@ -3742,10 +3787,13 @@ type [<AllowNullLiteral>] TextTrackList =
     abstract onaddtrack: (TrackEvent -> unit) with get, set
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> TextTrack with get, set
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> TextTrack with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> TextTrack with set
+    #endif
     abstract item: index: float -> TextTrack
 
 type [<AllowNullLiteral>] TextTrackListType =
@@ -4065,10 +4113,13 @@ type [<AllowNullLiteral>] DataTransferItemList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
-    #else
-    // TODO
-    #endif
     abstract Item: index: int -> DataTransferItem
+    #else
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> DataTransferItem with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> DataTransferItem with set
+    #endif
     abstract add: data: File -> DataTransferItem
     abstract clear: unit -> unit
     abstract item: index: float -> DataTransferItem

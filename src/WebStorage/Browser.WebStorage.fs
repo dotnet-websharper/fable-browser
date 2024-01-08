@@ -13,18 +13,25 @@ open Fable.Core
 #endif
 type [<AllowNullLiteral>] Storage =
     abstract length: int
-#if JAVASCRIPT
-// TODO: bro how do I
-#else
+    #if JAVASCRIPT
+    [<Inline "$this[$key]">]
+    abstract Item: key: string -> string with get
+
+    [<Inline "$this[$key]=$2">]
+    abstract Item: key: string -> string with set
+    #else
     [<Emit("$0[$1]{{=$2}}")>]
-#endif
     abstract Item: key: string -> string with get, set
-#if JAVASCRIPT
-// TODO: bro how do I
-#else
+    #endif
+    #if JAVASCRIPT
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> string with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> string with set
+    #else
     [<Emit("$0[$1]{{=$2}}")>]
-#endif
     abstract Item: index: int -> string with get, set
+    #endif
     abstract clear: unit -> unit
     abstract getItem: key: string -> string
     abstract key: index: float -> string
@@ -78,7 +85,6 @@ module WebStorage =
     let sessionStorage: Storage = 
         #if FABLE_COMPILER
         jsNative
-
         #else
         Unchecked.defaultof<_>
         #endif

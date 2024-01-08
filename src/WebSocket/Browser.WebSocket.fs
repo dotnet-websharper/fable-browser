@@ -73,7 +73,7 @@ type U2<'A,'B> = JavaScript.Union<'A,'B>
 
 type [<AllowNullLiteral>] WebSocketType =
     #if JAVASCRIPT
-    [<Inline("")>]
+    [<Inline("new WebSocket($url,$protocols)")>]
     #else
     [<Emit("new $0($1...)")>]
     #endif 

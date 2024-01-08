@@ -219,11 +219,14 @@ type CSSRuleType =
 type [<AllowNullLiteral>] CSSRuleList =
     abstract length: float with get, set
     #if JAVASCRIPT
-    [<Inline "">] // TODO
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> CSSRule with get
+    [<Inline "$this[$index]=$2">] // TODO: check
+    abstract Item: index: int -> CSSRule with set
     #else
     [<Emit("$0[$1]{{=$2}}")>]
-    #endif
     abstract Item: index: int -> CSSRule with get, set
+    #endif
     abstract item: index: float -> CSSRule
 
 type CSSRuleListType =
@@ -602,11 +605,14 @@ type [<AllowNullLiteral>] CSSStyleDeclaration =
     abstract zIndex: string with get, set
     abstract zoom: string with get, set
     #if JAVASCRIPT
-    [<Inline "">] // TODO
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> string with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> string with set
     #else
     [<Emit("$0[$1]{{=$2}}")>]
-    #endif
     abstract Item: index: int -> string with get, set
+    #endif
     abstract getPropertyPriority: propertyName: string -> string
     abstract getPropertyValue: propertyName: string -> string
     abstract item: index: float -> string
@@ -748,11 +754,14 @@ type StyleSheetType =
 type [<AllowNullLiteral>] StyleSheetList =
     abstract length: float with get, set
     #if JAVASCRIPT
-    [<Inline "">] // TODO
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> StyleSheet with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> StyleSheet with set
     #else
     [<Emit("$0[$1]{{=$2}}")>]
-    #endif
     abstract Item: index: int -> StyleSheet with get, set
+    #endif
     abstract item: ?index: float -> StyleSheet
 
 type StyleSheetListType =
@@ -770,11 +779,14 @@ type StyleSheetListType =
 type [<AllowNullLiteral>] StyleSheetPageList =
     abstract length: float with get, set
     #if JAVASCRIPT
-    [<Inline "">] // TODO
+    [<Inline "$this[$index]">]
+    abstract Item: index: int -> CSSPageRule with get
+    [<Inline "$this[$index]=$2">]
+    abstract Item: index: int -> CSSPageRule with set
     #else
     [<Emit("$0[$1]{{=$2}}")>]
-    #endif
     abstract Item: index: int -> CSSPageRule with get, set
+    #endif
     abstract item: index: float -> CSSPageRule
 
 type StyleSheetPageListType =

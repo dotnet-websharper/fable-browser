@@ -340,3 +340,4 @@ temp/
 
 websharper.log
 build/*
+nuget

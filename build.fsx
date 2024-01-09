@@ -96,6 +96,7 @@ references
     files
     |> List.iter (fun x ->
         let versionNumber = getVersionNumber x
+        System.IO.Directory.CreateDirectory "nuget" |> ignore
         System.IO.File.WriteAllText(sprintf "nuget/WebSharper.Browser.%s.paket.template" x, content x versionNumber)
     )
 

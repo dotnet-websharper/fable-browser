@@ -1,14 +1,8 @@
 ﻿namespace Browser.Types
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 open Browser.Types
-#if !JAVASCRIPT
 [<StringEnum>]
-#endif
 type MediaRecorderState =
 | Inactive
 | Recording
@@ -16,17 +10,14 @@ type MediaRecorderState =
 
 type DOMHighResTimeStamp = System.Double
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] BlobEvent =
+type [<Global;AllowNullLiteral>] BlobEvent =
     inherit Event
     abstract data: Blob
     abstract timecode: DOMHighResTimeStamp
 
 type [<AllowNullLiteral>] BlobEventType =
     #if JAVASCRIPT
-    [<Inline("new BlobEvent($data,$timecode)")>]
+    [<WebSharper.Inline("new BlobEvent($data,$timecode)")>]
     #else
     [<Emit("new $0($1...)")>]
     #endif
@@ -35,10 +26,7 @@ type [<AllowNullLiteral>] BlobEventType =
 type [<AllowNullLiteral>] MediaRecorderErrorEvent =
     inherit Event
     abstract error: DOMException
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type  MediaRecorder =
+type [<Global>]  MediaRecorder =
     abstract mimeType: string
     abstract state: MediaRecorderState
     abstract stream: MediaStream
@@ -68,7 +56,7 @@ type MediaRecorderOptions =
 
 type MediaRecorderType =
     #if JAVASCRIPT
-    [<Inline("new MediaRecorder($stream,$options)")>]
+    [<WebSharper.Inline("new MediaRecorder($stream,$options)")>]
     #else
     [<Emit("new $0($1...)")>]
     #endif
@@ -77,22 +65,14 @@ type MediaRecorderType =
 
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 open Browser.Types
 
 [<AutoOpen>]
 module MediaRecorder =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let MediaRecorder: MediaRecorderType = 
+    let [<Global>] MediaRecorder: MediaRecorderType = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

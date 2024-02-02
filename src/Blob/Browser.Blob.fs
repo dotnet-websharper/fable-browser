@@ -1,19 +1,10 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-open WebSharper
-open WebSharper.JavaScript
-
-[<AutoOpen>]
-module internal FableUtil =
-    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
-#else
 open Fable.Core
 open Fable.Core.JS
-#endif
 
-type EnumNameAttribute =
+type private EnumNameAttribute =
     #if JAVASCRIPT
     WebSharper.ConstantAttribute
     #else
@@ -31,10 +22,7 @@ type [<AllowNullLiteral>] BlobPropertyBag =
     abstract ``type``: string with get, set
     abstract endings: BlobEndings with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Blob =
+type [<Global;AllowNullLiteral>] Blob =
     abstract arrayBuffer: unit -> Promise<ArrayBuffer>
     abstract size: int
     abstract ``type``: string
@@ -43,16 +31,13 @@ type [<AllowNullLiteral>] Blob =
 
 type [<AllowNullLiteral>] BlobType =
     #if JAVASCRIPT
-    [<Inline("new Blob($blobParts, $options)")>]
+    [<WebSharper.Inline("new Blob($blobParts, $options)")>]
     #else
     [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: ?blobParts: obj[] * ?options: BlobPropertyBag -> Blob
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] FormData =
+type [<Global;AllowNullLiteral>] FormData =
     abstract append: name: string * value: string -> unit
     abstract append: name: string * value: Blob * ?filename: string -> unit
     abstract delete: name: string -> unit
@@ -67,7 +52,7 @@ type [<AllowNullLiteral>] FormData =
 
 type [<AllowNullLiteral>] FormDataType =
     #if JAVASCRIPT
-    [<Inline("new FormData()")>]
+    [<WebSharper.Inline("new FormData()")>]
     #else
     [<Emit("new $0($1...)")>] 
     #endif
@@ -75,26 +60,12 @@ type [<AllowNullLiteral>] FormDataType =
 
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 open Browser.Types
 
 [<AutoOpen>]
 module Blob =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let Blob: BlobType = 
+    let [<Global>] Blob: BlobType = 
         jsNative
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let FormData: FormDataType = 
+    let [<Global>] FormData: FormDataType = 
         jsNative

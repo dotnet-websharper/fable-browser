@@ -1,20 +1,14 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-open WebSharper
-open WebSharper.JavaScript
-
-module internal JS =
-    type Promise<'a> = JavaScript.Promise<'a>
-#else
 open Fable.Core
+
+#if JAVASCRIPT
+[<WebSharper.InternalProxy(typeof<Fable.Core.JS.Promise<_>>)>]
+type private PromiseProxy<'a> = WebSharper.JavaScript.Promise<'a>
 #endif
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type MimeType =
+type [<Global>] MimeType =
     abstract description: string
     abstract enabledPlugin: Plugin
     abstract suffixes: string
@@ -38,10 +32,7 @@ type ShareData =
     abstract text: string with get, set
     abstract title: string with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type Clipboard =
+type [<Global>] Clipboard =
     abstract writeText: string -> JS.Promise<unit>
     abstract readText: unit -> JS.Promise<string>
 
@@ -61,9 +52,7 @@ type NavigatorOnLine =
 type NavigatorUserMediaSuccessCallback = MediaStream -> unit
 type NavigatorUserMediaErrorCallback = MediaStreamError -> unit // TODO: missing MediaStreamError class in WS.JS
 
-#if !JAVASCRIPT
 [<StringEnum>]
-#endif
 [<RequireQualifiedAccess>]
 type PermissionState =
     | Granted
@@ -74,37 +63,32 @@ type PermissionState =
 type PermissionStatus =
     abstract state: PermissionState
     abstract status: PermissionState
-    abstract onchange: 
-        #if JAVASCRIPT
-        (Dom.Event -> unit)
-        #else
-        (Event -> unit) 
-        #endif
+    abstract onchange: (Event -> unit) 
         with get, set
 
 #if JAVASCRIPT
 [<RequireQualifiedAccess>]
 type PermissionName =
-    | [<Constant "geolocation">] Geolocation
-    | [<Constant "notifications">] Notifications
-    | [<Constant "push">] Push
-    | [<Constant "midi">] Midi
-    | [<Constant "camera">] Camera
-    | [<Constant "microphone">] Microphone
-    | [<Constant "speaker-selection">] SpeakerSelection
-    | [<Constant "device-info">] DeviceInfo
-    | [<Constant "background-fetch">] BackgroundFetch
-    | [<Constant "background-sync">] BackgroundSync
-    | [<Constant "bluetooth">] Bluetooth
-    | [<Constant "persistent-storage">] PersistentStorage
-    | [<Constant "ambient-light-sensor">] AmbientLightSensor
-    | [<Constant "accelerometer">] Accelerometer
-    | [<Constant "gyroscope">] Gyroscope
-    | [<Constant "magnetometer">] Magnetometer
-    | [<Constant "clipboard.read">] ClipboardRead
-    | [<Constant "clipboard-write">] ClipboardWrite
-    | [<Constant "display-capture">] DisplayCapture
-    | [<Constant "nfc">] NFC
+    | [<WebSharper.Constant "geolocation">] Geolocation
+    | [<WebSharper.Constant "notifications">] Notifications
+    | [<WebSharper.Constant "push">] Push
+    | [<WebSharper.Constant "midi">] Midi
+    | [<WebSharper.Constant "camera">] Camera
+    | [<WebSharper.Constant "microphone">] Microphone
+    | [<WebSharper.Constant "speaker-selection">] SpeakerSelection
+    | [<WebSharper.Constant "device-info">] DeviceInfo
+    | [<WebSharper.Constant "background-fetch">] BackgroundFetch
+    | [<WebSharper.Constant "background-sync">] BackgroundSync
+    | [<WebSharper.Constant "bluetooth">] Bluetooth
+    | [<WebSharper.Constant "persistent-storage">] PersistentStorage
+    | [<WebSharper.Constant "ambient-light-sensor">] AmbientLightSensor
+    | [<WebSharper.Constant "accelerometer">] Accelerometer
+    | [<WebSharper.Constant "gyroscope">] Gyroscope
+    | [<WebSharper.Constant "magnetometer">] Magnetometer
+    | [<WebSharper.Constant "clipboard.read">] ClipboardRead
+    | [<WebSharper.Constant "clipboard-write">] ClipboardWrite
+    | [<WebSharper.Constant "display-capture">] DisplayCapture
+    | [<WebSharper.Constant "nfc">] NFC
 #else
 [<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
 type PermissionName =
@@ -136,22 +120,12 @@ type PermissionDescriptor =
     abstract userVisibleOnly: bool with get, set
     abstract sysex: bool with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type Permissions =
-    #if JAVASCRIPT
-   abstract query: (PermissionDescriptor -> Promise<PermissionStatus>)
-    #else
+type [<Global>] Permissions =
     abstract query: (PermissionDescriptor -> JS.Promise<PermissionStatus>)
-    #endif
     // TODO, currently not supported in any browser: abstract request: unit -> unit
     // TODO, currently not supported in any browser: abstract requestAll: unit -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type Navigator =
+type [<Global>] Navigator =
     inherit NavigatorID
     inherit NavigatorOnLine
     // TODO: abstract activeVRDisplays
@@ -201,23 +175,14 @@ type Navigator =
 
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
-
 open Browser.Types
 
 [<AutoOpen>]
 module Navigator =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let navigator: Navigator = 
+    let [<Global>] navigator: Navigator = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

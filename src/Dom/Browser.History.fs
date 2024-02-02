@@ -1,23 +1,14 @@
 namespace Browser.Types
 open System
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
-#if !JAVASCRIPT
 [<StringEnum>]
-#endif
 [<RequireQualifiedAccess>]
 type ScrollRestoration =
     | Auto
     | Manual
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] History =
+type [<Global;AllowNullLiteral>] History =
     abstract length: int
     abstract scrollRestoration : ScrollRestoration with get, set
     abstract state: obj with get, set

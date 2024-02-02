@@ -1,16 +1,9 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DOMException =
+type [<Global;AllowNullLiteral>] DOMException =
     abstract code: float with get, set
     abstract message: string with get, set
     abstract name: string with get, set
@@ -74,6 +67,6 @@ type [<AllowNullLiteral>] DOMExceptionType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new DOMException()")>] 
+    [<WebSharper.Inline("new DOMException()")>] 
     #endif
     abstract Create: unit -> DOMException

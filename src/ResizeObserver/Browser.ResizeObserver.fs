@@ -1,10 +1,6 @@
 namespace Browser.Types
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
 type ResizeObserverSize =
     abstract inlineSize: float
@@ -29,9 +25,9 @@ type ResizeObserverEntry =
 #if JAVASCRIPT // TODO: testing
 
 type ResizeObserverBox =
-    | [<Constant "content-box">] ContentBox
-    | [<Constant "border-box">] BorderBox
-    | [<Constant "device-pixel-content-box">] DevicePixelContentBox
+    | [<WebSharper.Constant "content-box">] ContentBox
+    | [<WebSharper.Constant "border-box">] BorderBox
+    | [<WebSharper.Constant "device-pixel-content-box">] DevicePixelContentBox
 #else
 [<StringEnum(CaseRules.KebabCase ||| CaseRules.LowerFirst)>]
 type ResizeObserverBox =
@@ -50,10 +46,7 @@ type ResizeObserverOptions =
     abstract box: ResizeObserverBox with get, set
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ResizeObserverType =
+type [<Global;AllowNullLiteral>] ResizeObserverType =
     /// Unobserve all observed Element or SVGElement targets
     abstract disconnect: unit -> unit
 
@@ -73,30 +66,23 @@ type ResizeObserverCallback = ResizeObserverEntry array -> ResizeObserverType ->
 #endif
 type ResizeObserverCtor =
     #if JAVASCRIPT
-    [<Inline("new ResizeObserverType($callback)")>]
+    [<WebSharper.Inline("new ResizeObserverType($callback)")>]
     #else
     [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: callback: ResizeObserverCallback -> ResizeObserverType
 
 namespace Browser
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
 open Browser.Types
 
 [<AutoOpen>]
 module ResizeObserver =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let ResizeObserver: ResizeObserverCtor = 
+    
+    let [<Global>] ResizeObserver: ResizeObserverCtor = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

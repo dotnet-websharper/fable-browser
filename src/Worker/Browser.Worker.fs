@@ -2,41 +2,28 @@ namespace Browser.Types
 
 open System
 #if JAVASCRIPT
-open WebSharper
-
-type EnumNameAttribute = ConstantAttribute
-module internal JS =
-    type Promise<'A> = WebSharper.JavaScript.Promise<'A>
+type EnumNameAttribute = WebSharper.ConstantAttribute
 #else
-open Fable.Core
-
 type EnumNameAttribute = CompiledNameAttribute
 #endif
-
+open Fable.Core
 type AbstractWorker =
     abstract onerror: (ErrorEvent -> unit) with get, set
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type Worker =
+type [<Global>] Worker =
     inherit EventTarget
     inherit AbstractWorker
     abstract onmessage: (MessageEvent -> unit) with get, set
     abstract postMessage: message: obj * ?transfer: obj -> unit
     abstract terminate: unit -> unit
 
-#if !JAVASCRIPT
-[<StringEnum>]
-#endif 
+[<StringEnum>] 
 type WorkerType =
     | Classic
     | Module
 
-#if !JAVASCRIPT
-[<StringEnum>]
-#endif 
+[<StringEnum>] 
 type WorkerCredentials =
     | Omit
     | [<EnumName("same-origin")>] SameOrigin
@@ -52,15 +39,13 @@ type WorkerOptions =
 
 type WorkerConstructor =
     #if JAVASCRIPT
-    [<Inline("new Worker($url,$options)")>]
+    [<WebSharper.Inline("new Worker($url,$options)")>]
     #else
     [<Emit("new $0($1...)")>]
     #endif 
     abstract Create: url: string * ?options: WorkerOptions -> Worker
 
-#if !JAVASCRIPT
 [<StringEnum>]
-#endif
 [<RequireQualifiedAccess>]
 type ServiceWorkerState =
     | Installing
@@ -70,20 +55,14 @@ type ServiceWorkerState =
     | Redundant
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type ServiceWorker =
+type [<Global>] ServiceWorker =
     inherit Worker
     abstract scriptURL: string
     abstract state: ServiceWorkerState
     abstract onstatechange: (Event -> unit) option with get, set
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type ServiceWorkerRegistration =
+type [<Global>] ServiceWorkerRegistration =
     abstract scope: string
     abstract installing: ServiceWorker option
     abstract waiting: ServiceWorker option
@@ -101,10 +80,7 @@ type ServiceWorkerRegistrationOptions =
     abstract scope: string with get, set
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type ServiceWorkerContainer =
+type [<Global>] ServiceWorkerContainer =
     abstract controller: ServiceWorker option
     abstract ready: JS.Promise<ServiceWorkerRegistration>
     abstract oncontrollerchange: (Event -> unit) with get, set
@@ -118,21 +94,13 @@ type ServiceWorkerContainer =
 namespace Browser
 
 open Browser.Types
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
 [<AutoOpen>]
 module Worker =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let  Worker: WorkerConstructor = 
+    let [<Global>] Worker: WorkerConstructor = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

@@ -1,13 +1,8 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-open WebSharper
-// open WebSharper.JavaScript
-#else
 open Fable.Core
 open Fable.Core.JS
-#endif
 
 type FileReaderState =
     | EMPTY = 0
@@ -18,10 +13,7 @@ type [<AllowNullLiteral>] FilePropertyBag =
     abstract ``type``: string with get, set
     abstract lastModified: float with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] File =
+type [<Global;AllowNullLiteral>] File =
     inherit Browser.Types.Blob
     abstract lastModified: float
     abstract name: string
@@ -30,28 +22,22 @@ type [<AllowNullLiteral>] FileType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new File($parts,$filename,$properties)")>]
+    [<WebSharper.Inline("new File($parts,$filename,$properties)")>]
     #endif
     abstract Create: parts: obj[] * filename: string * ?properties: FilePropertyBag -> File
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] FileList =
+type [<Global;AllowNullLiteral>] FileList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
     abstract Item: index: int -> File
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> File
     #endif 
     abstract item: index: int -> File
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] FileReader =
+type [<Global;AllowNullLiteral>] FileReader =
     inherit EventTarget
     // abstract error: DOMException with get, set
     abstract readyState: FileReaderState
@@ -70,6 +56,6 @@ type [<AllowNullLiteral>] FileReaderType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>]
     #else
-    [<Inline("new FileReader()")>]
+    [<WebSharper.Inline("new FileReader()")>]
     #endif 
     abstract Create: unit -> FileReader

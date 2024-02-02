@@ -1,17 +1,10 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] URLSearchParams =
+type [<Global;AllowNullLiteral>] URLSearchParams =
     /// Appends a specified key/value pair as a new search parameter.
     abstract append: name: string * value: string -> unit
     /// Deletes the given search parameter, and its associated value, from the list of all search parameters.
@@ -27,16 +20,13 @@ type [<AllowNullLiteral>] URLSearchParams =
 
 type [<AllowNullLiteral>] URLSearchParamsType =
     #if JAVASCRIPT
-    [<Inline("new URLSearchParams($arg)")>] 
+    [<WebSharper.Inline("new URLSearchParams($arg)")>] 
     #else
     [<Emit("new $0($1...)")>] 
     #endif
     abstract Create: arg: obj -> URLSearchParams
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] URL =
+type [<Global;AllowNullLiteral>] URL =
     abstract hash: string with get, set
     abstract host: string with get, set
     abstract hostname: string with get, set
@@ -54,7 +44,7 @@ type [<AllowNullLiteral>] URL =
 
 type [<AllowNullLiteral>] URLType =
     #if JAVASCRIPT
-    [<Inline("new URL($url,$base)")>] 
+    [<WebSharper.Inline("new URL($url,$base)")>] 
     #else
     [<Emit("new $0($1...)")>] 
     #endif
@@ -73,25 +63,19 @@ open Browser.Types
 
 [<AutoOpen>]
 module Url =
-    #if JAVASCRIPT
-    [<WebSharper.Inline>]
-    #else
-    [<Global>]
-    #endif
-    let URL: URLType = 
+    
+    let [<Global>] URL: URLType = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative
         #endif
 
-    #if JAVASCRIPT
-    [<WebSharper.Inline>]
-    #else
-    [<Global>]
-    #endif
-    let URLSearchParams: URLSearchParamsType = 
+    
+    let [<Global>] URLSearchParams: URLSearchParamsType = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

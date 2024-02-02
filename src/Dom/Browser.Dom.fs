@@ -1,21 +1,20 @@
 namespace rec Browser.Types
 open System
-#if JAVASCRIPT
-open WebSharper
-
-type internal U2<'A,'B> = WebSharper.JavaScript.Union<'A,'B>
-type internal U3<'A,'B,'C> = WebSharper.JavaScript.Union<'A,'B,'C>
-
-module internal JS =
-    type Promise<'A> = WebSharper.JavaScript.Promise<'A>
-#else
 open Fable.Core
+
+#if JAVASCRIPT
+// TODO: move to separate proxies
+module private JsProxies = 
+    [<WebSharper.Proxy(typeof<Fable.Core.U2<_,_>>)>]
+    type private U2Proxy<'A,'B> = WebSharper.JavaScript.Union<'A,'B>
+    [<WebSharper.Proxy(typeof<Fable.Core.U3<_,_,_>>)>]
+    type private U3Proxy<'A,'B,'C> = WebSharper.JavaScript.Union<'A,'B,'C>
+
+    [<WebSharper.Proxy(typeof<Fable.Core.JS.Promise<_>>)>]
+    type private PromiseProxy<'A> = WebSharper.JavaScript.Promise<'A>
 #endif
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Attr =
+type [<Global;AllowNullLiteral>] Attr =
     inherit Node
     abstract name: string with get, set
     abstract ownerElement: Element with get, set
@@ -26,28 +25,22 @@ type [<AllowNullLiteral>] AttrType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Attr()")>]
+    [<WebSharper.Inline("new Attr()")>]
     #endif
     abstract Create: unit -> Attr
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] CDATASection =
+type [<Global;AllowNullLiteral>] CDATASection =
     inherit Text
 
 type [<AllowNullLiteral>] CDATASectionType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new CDATASection()")>]
+    [<WebSharper.Inline("new CDATASection()")>]
     #endif
     abstract Create: unit -> CDATASection
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] CharacterData =
+type [<Global;AllowNullLiteral>] CharacterData =
     inherit Node
     inherit ChildNode
     abstract data: string with get, set
@@ -62,17 +55,14 @@ type [<AllowNullLiteral>] CharacterDataType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new CharacterData()")>]
+    [<WebSharper.Inline("new CharacterData()")>]
     #endif
     abstract Create: unit -> CharacterData
 
 type [<AllowNullLiteral>] ChildNode =
     abstract remove: unit -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Comment =
+type [<Global;AllowNullLiteral>] Comment =
     inherit CharacterData
     abstract text: string with get, set
 
@@ -80,14 +70,11 @@ type [<AllowNullLiteral>] CommentType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Comment()")>]
+    [<WebSharper.Inline("new Comment()")>]
     #endif
     abstract Create: unit -> Comment
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Document =
+type [<Global;AllowNullLiteral>] Document =
     inherit Node
     inherit GlobalEventHandlers
     inherit NodeSelector
@@ -408,10 +395,7 @@ type [<AllowNullLiteral>] Document =
     /// <param name="content">The text and HTML tags to write.</param>
     abstract writeln: [<ParamArray>] content: string[] -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DocumentType =
+type [<Global;AllowNullLiteral>] DocumentType =
     inherit Node
     abstract entities: NamedNodeMap with get, set
     abstract internalSubset: string with get, set
@@ -422,14 +406,11 @@ type [<AllowNullLiteral>] DocumentType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Document()")>]
+    [<WebSharper.Inline("new Document()")>]
     #endif
     abstract Create: unit -> Document
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DocumentFragment =
+type [<Global;AllowNullLiteral>] DocumentFragment =
     inherit Node
     inherit NodeSelector
 
@@ -437,7 +418,7 @@ type [<AllowNullLiteral>] DocumentFragmentType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new DocumentFragment()")>]
+    [<WebSharper.Inline("new DocumentFragment()")>]
     #endif
     abstract Create: unit -> DocumentFragment
 
@@ -445,14 +426,11 @@ type [<AllowNullLiteral>] DocumentTypeType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new DocumentType()")>]
+    [<WebSharper.Inline("new DocumentType()")>]
     #endif
     abstract Create: unit -> DocumentType
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DOMImplementation =
+type [<Global;AllowNullLiteral>] DOMImplementation =
     abstract createDocument: namespaceURI: string * qualifiedName: string * doctype: DocumentType -> Document
     abstract createDocumentType: qualifiedName: string * publicId: string * systemId: string -> DocumentType
     abstract createHTMLDocument: title: string -> Document
@@ -462,22 +440,19 @@ type [<AllowNullLiteral>] DOMImplementationType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new DOMImplementation()")>]
+    [<WebSharper.Inline("new DOMImplementation()")>]
     #endif
     abstract Create: unit -> DOMImplementation
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DOMStringList =
+type [<Global;AllowNullLiteral>] DOMStringList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> string with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> string with get
-    [<Inline "$this[$index]=$2">] // TODO: check $this[$index]=$2
+    [<WebSharper.Inline "$this[$index]=$2">] // TODO: check $this[$index]=$2
     abstract Item: index: int -> string with set
     #endif 
     abstract contains: str: string -> bool
@@ -487,21 +462,18 @@ type [<AllowNullLiteral>] DOMStringListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new DOMStringList()")>]
+    [<WebSharper.Inline("new DOMStringList()")>]
     #endif
     abstract Create: unit -> DOMStringList
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DOMStringMap =
+type [<Global;AllowNullLiteral>] DOMStringMap =
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
      abstract Item: name: string -> string with get, set
     #else
-    [<Inline "$this[$name]">]
+    [<WebSharper.Inline "$this[$name]">]
     abstract Item: name: string -> string with get
-    [<Inline "$this[$name]=$2">]
+    [<WebSharper.Inline "$this[$name]=$2">]
     abstract Item: name: string -> string with set
     #endif 
 
@@ -509,22 +481,19 @@ type [<AllowNullLiteral>] DOMStringMapType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new DOMStringMap()")>]
+    [<WebSharper.Inline("new DOMStringMap()")>]
     #endif
      abstract Create: unit -> DOMStringMap
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DOMTokenList =
+type [<Global;AllowNullLiteral>] DOMTokenList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> string with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> string with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> string with set
     #endif 
     abstract add: [<ParamArray>] token: string[] -> unit
@@ -538,14 +507,11 @@ type [<AllowNullLiteral>] DOMTokenListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new DOMTokenList()")>]
+    [<WebSharper.Inline("new DOMTokenList()")>]
     #endif
      abstract Create: unit -> DOMTokenList
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Element =
+type [<Global;AllowNullLiteral>] Element =
     inherit Node
     inherit GlobalEventHandlers
     inherit NodeSelector
@@ -610,19 +576,19 @@ type [<AllowNullLiteral>] Element =
     #if !JAVASCRIPT
     [<Emit("$0.scroll({ top: $1, left: $2, behavior: $3 })")>]
     #else
-    [<Inline("$this.scroll({top: $top, left: $left, behavior: $behavior})")>]
+    [<WebSharper.Inline("$this.scroll({top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scroll: top: float * left: float * behavior: ScrollBehavior -> unit
     #if !JAVASCRIPT
     [<Emit("$0.scrollBy({ top: $1, left: $2, behavior: $3 })")>]
     #else
-    [<Inline("$this.scrollBy({top: $top, left: $left, behavior: $behavior})")>]
+    [<WebSharper.Inline("$this.scrollBy({top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scrollBy: top: float * left: float * behavior: ScrollBehavior -> unit
     #if !JAVASCRIPT
     [<Emit("$0.scrollTo({ top: $1, left: $2, behavior: $3 })")>]
     #else
-    [<Inline("$this.scrollTo({top: $top, left: $left, behavior: $behavior})")>]
+    [<WebSharper.Inline("$this.scrollTo({top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scrollTo: top: float * left: float * behavior: ScrollBehavior -> unit
     /// Returns the open shadow root that is hosted by the element, or null if no open shadow root is present.
@@ -630,9 +596,7 @@ type [<AllowNullLiteral>] Element =
     /// Attaches a shadow DOM tree to the specified element and returns a reference to its ShadowRoot.
     abstract attachShadow: ShadowRootInit -> ShadowRoot
 
-#if !JAVASCRIPT
 [<StringEnum>]
-#endif
 [<RequireQualifiedAccess>]
 type EncapsulationMode =
     /// Elements of the shadow root are accessible from JavaScript outside the root
@@ -653,10 +617,7 @@ type [<AllowNullLiteral>] ShadowRootInit =
 /// that is rendered separately from a document's main DOM tree.
 /// You can retrieve a reference to an element's shadow root using its Element.shadowRoot property,
 /// provided it was created using Element.attachShadow() with the mode option set to open.
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ShadowRoot =
+type [<Global;AllowNullLiteral>] ShadowRoot =
     inherit DocumentFragment
     inherit Element
     /// Returns the Element within the shadow tree that has focus.
@@ -678,23 +639,20 @@ type [<AllowNullLiteral>] ElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Element()")>]
+    [<WebSharper.Inline("new Element()")>]
     #endif
      abstract Create: unit -> Element
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLCollection =
+type [<Global;AllowNullLiteral>] HTMLCollection =
     /// Sets or retrieves the number of objects in a collection.
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> Element with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> Element with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> Element with set
     #endif 
 
@@ -709,22 +667,19 @@ type [<AllowNullLiteral>] HTMLCollectionType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLCollection()")>]
+    [<WebSharper.Inline("new HTMLCollection()")>]
     #endif
     abstract Create: unit -> HTMLCollection
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] NamedNodeMap =
+type [<Global;AllowNullLiteral>] NamedNodeMap =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> Attr with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> Attr with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> Attr with set
     #endif
     abstract getNamedItem: name: string -> Attr
@@ -739,14 +694,11 @@ type [<AllowNullLiteral>] NamedNodeMapType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new NamedNodeMapType()")>]
+    [<WebSharper.Inline("new NamedNodeMapType()")>]
     #endif
      abstract Create: unit -> NamedNodeMap
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Node =
+type [<Global;AllowNullLiteral>] Node =
     inherit EventTarget
     abstract attributes: NamedNodeMap with get, set
     abstract baseURI: string with get, set
@@ -823,7 +775,7 @@ type [<AllowNullLiteral>] NodeType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Node()")>]
+    [<WebSharper.Inline("new Node()")>]
     #endif
     abstract Create: unit -> Node
 
@@ -831,10 +783,7 @@ type [<AllowNullLiteral>] NodeSelector =
     abstract querySelector: selectors: string -> Element
     abstract querySelectorAll: selectors: string -> NodeListOf<Element>
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] NodeFilter =
+type [<Global;AllowNullLiteral>] NodeFilter =
     abstract acceptNode: n: Node -> float
 
 type [<AllowNullLiteral>] NodeFilterType =
@@ -855,10 +804,7 @@ type [<AllowNullLiteral>] NodeFilterType =
     abstract SHOW_PROCESSING_INSTRUCTION: float with get, set
     abstract SHOW_TEXT: float with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] NodeIterator =
+type [<Global;AllowNullLiteral>] NodeIterator =
     abstract filter: NodeFilter with get, set
     abstract root: Node with get, set
     abstract whatToShow: float with get, set
@@ -870,22 +816,19 @@ type [<AllowNullLiteral>] NodeIteratorType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new NodeIterator()")>]
+    [<WebSharper.Inline("new NodeIterator()")>]
     #endif
     abstract Create: unit -> NodeIterator
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] NodeList =
+type [<Global;AllowNullLiteral>] NodeList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
     abstract Item: index: int -> Node with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> Node with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> Node with set
     #endif
     abstract item: index: float -> Node
@@ -894,7 +837,7 @@ type [<AllowNullLiteral>] NodeListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new NodeList()")>]
+    [<WebSharper.Inline("new NodeList()")>]
     #endif
     abstract Create: unit -> NodeList
 
@@ -904,17 +847,14 @@ type [<AllowNullLiteral>] NodeListOf<'TNode> =
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] abstract Item: index: int -> 'TNode with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> 'TNode with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> 'TNode with set
     #endif
     abstract item: index: float -> 'TNode
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ProcessingInstruction =
+type [<Global;AllowNullLiteral>] ProcessingInstruction =
     inherit CharacterData
     abstract target: string with get, set
 
@@ -922,14 +862,11 @@ type [<AllowNullLiteral>] ProcessingInstructionType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new ProcessingInstruction()")>]
+    [<WebSharper.Inline("new ProcessingInstruction()")>]
     #endif
     abstract Create: unit -> ProcessingInstruction
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Selection =
+type [<Global;AllowNullLiteral>] Selection =
     abstract anchorNode: Node with get, set
     abstract anchorOffset: float with get, set
     abstract focusNode: Node with get, set
@@ -956,14 +893,11 @@ type [<AllowNullLiteral>] SelectionType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Selection()")>]
+    [<WebSharper.Inline("new Selection()")>]
     #endif
     abstract Create: unit -> Selection
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ClientRect =
+type [<Global;AllowNullLiteral>] ClientRect =
     abstract bottom: float with get, set
     abstract height: float with get, set
     abstract left: float with get, set
@@ -975,14 +909,11 @@ type [<AllowNullLiteral>] ClientRectType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new ClientRect()")>]
+    [<WebSharper.Inline("new ClientRect()")>]
     #endif
     abstract Create: unit -> ClientRect
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Range =
+type [<Global;AllowNullLiteral>] Range =
     abstract collapsed: bool with get, set
     abstract commonAncestorContainer: Node with get, set
     abstract endContainer: Node with get, set
@@ -1024,14 +955,11 @@ type [<AllowNullLiteral>] RangeType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Range()")>]
+    [<WebSharper.Inline("new Range()")>]
     #endif
     abstract Create: unit -> Range
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Text =
+type [<Global;AllowNullLiteral>] Text =
     inherit CharacterData
     abstract wholeText: string with get, set
     abstract replaceWholeText: content: string -> Text
@@ -1041,14 +969,11 @@ type [<AllowNullLiteral>] TextType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Text()")>]
+    [<WebSharper.Inline("new Text()")>]
     #endif
     abstract Create: unit -> Text
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TimeRanges =
+type [<Global;AllowNullLiteral>] TimeRanges =
     abstract length: int
     abstract ``end``: index: float -> float
     abstract start: index: float -> float
@@ -1057,14 +982,11 @@ type [<AllowNullLiteral>] TimeRangesType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new TimeRanges()")>]
+    [<WebSharper.Inline("new TimeRanges()")>]
     #endif
     abstract Create: unit -> TimeRanges
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TreeWalker =
+type [<Global;AllowNullLiteral>] TreeWalker =
     abstract currentNode: Node with get, set
     abstract filter: NodeFilter with get, set
     abstract root: Node with get, set
@@ -1081,7 +1003,7 @@ type [<AllowNullLiteral>] TreeWalkerType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new TreeWalker()")>]
+    [<WebSharper.Inline("new TreeWalker()")>]
     #endif
     abstract Create: unit -> TreeWalker
 
@@ -1089,23 +1011,24 @@ type [<AllowNullLiteral>] BarProp =
     abstract visible: bool with get, set
 
 #if JAVASCRIPT
+//? TODO: is there any way to proxy their StringEnum/CaseRules thing?
 [<RequireQualifiedAccess>]
 type ScreenOrientationType =
-    | [<Constant "portrait-primary">] PortraitPrimary
-    | [<Constant "portrait-secondary">] PortraitSecondary
-    | [<Constant "landscape-primary">] LandscapePrimary
-    | [<Constant "landscape-secondary">] LandscapeSecondary
+    | [<WebSharper.Constant "portrait-primary">] PortraitPrimary
+    | [<WebSharper.Constant "portrait-secondary">] PortraitSecondary
+    | [<WebSharper.Constant "landscape-primary">] LandscapePrimary
+    | [<WebSharper.Constant "landscape-secondary">] LandscapeSecondary
 
 [<RequireQualifiedAccess>]
 type OrientationLockType =
-    | [<Constant "any">] Any
-    | [<Constant "natural">] Natural
-    | [<Constant "landscape">] Landscape
-    | [<Constant "portrait">] Portrait
-    | [<Constant "portrait-primary">] PortraitPrimary
-    | [<Constant "portrait-secondary">] PortraitSecondary
-    | [<Constant "landscape-primary">] LandscapePrimary
-    | [<Constant "landscape-secondary">] LandscapeSecondary
+    | [<WebSharper.Constant "any">] Any
+    | [<WebSharper.Constant "natural">] Natural
+    | [<WebSharper.Constant "landscape">] Landscape
+    | [<WebSharper.Constant "portrait">] Portrait
+    | [<WebSharper.Constant "portrait-primary">] PortraitPrimary
+    | [<WebSharper.Constant "portrait-secondary">] PortraitSecondary
+    | [<WebSharper.Constant "landscape-primary">] LandscapePrimary
+    | [<WebSharper.Constant "landscape-secondary">] LandscapeSecondary
 #else
 [<StringEnum(CaseRules.KebabCase); RequireQualifiedAccess>]
 type ScreenOrientationType =
@@ -1134,10 +1057,7 @@ type [<AllowNullLiteral>] ScreenOrientation =
     abstract lock: OrientationLockType -> JS.Promise<unit>
     abstract unlock: unit -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Screen =
+type [<Global;AllowNullLiteral>] Screen =
     inherit EventTarget
     abstract availHeight: float with get, set
     abstract availWidth: float with get, set
@@ -1155,10 +1075,7 @@ type [<AllowNullLiteral>] Screen =
     abstract width: float with get, set
     abstract orientation: ScreenOrientation with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Location =
+type [<Global;AllowNullLiteral>] Location =
     abstract hash: string with get, set
     abstract host: string with get, set
     abstract hostname: string with get, set
@@ -1202,10 +1119,7 @@ type [<AllowNullLiteral>] WindowURI =
     abstract decodeURIComponent: encodedUri: string -> string
     abstract encodeURIComponent: str: string -> string
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Window =
+type [<Global;AllowNullLiteral>] Window =
     inherit EventTarget
     inherit WindowTimers
     inherit WindowSessionStorage
@@ -1342,9 +1256,9 @@ type [<AllowNullLiteral>] Window =
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> Window with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> Window with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> Window with set
     #endif
     abstract alert: ?message: obj -> unit
@@ -1371,29 +1285,26 @@ type [<AllowNullLiteral>] Window =
     #if !JAVASCRIPT
     [<Emit("$0.scroll({ top: $1, left: $2, behavior: $3 })")>]
     #else
-    [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
+    [<WebSharper.Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scroll: top: float * left: float * behavior: ScrollBehavior -> unit
     #if !JAVASCRIPT
     [<Emit("$0.scrollBy({ top: $1, left: $2, behavior: $3 })")>]
     #else
-    [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
+    [<WebSharper.Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scrollBy: top: float * left: float * behavior: ScrollBehavior -> unit
     #if !JAVASCRIPT
     [<Emit("$0.scrollTo({ top: $1, left: $2, behavior: $3 })")>]
     #else
-    [<Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
+    [<WebSharper.Inline("$this.scroll({ top: $top, left: $left, behavior: $behavior})")>]
     #endif
     abstract scrollTo: top: float * left: float * behavior: ScrollBehavior -> unit
 
 type [<AllowNullLiteral>] AbstractWorker =
     abstract onerror: (Event -> unit) with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Worker =
+type [<Global;AllowNullLiteral>] Worker =
     inherit EventTarget
     inherit AbstractWorker
     abstract onmessage: (MessageEvent -> unit) with get, set
@@ -1404,21 +1315,18 @@ type [<AllowNullLiteral>] WorkerType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new Worker()")>]
+    [<WebSharper.Inline("new Worker()")>]
     #endif
     abstract Create: stringUrl: string -> Worker
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] XMLDocument =
+type [<Global;AllowNullLiteral>] XMLDocument =
     inherit Document
 
 type [<AllowNullLiteral>] XMLDocumentType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new XMLDocument()")>]
+    [<WebSharper.Inline("new XMLDocument()")>]
     #endif
     abstract Create: unit -> XMLDocument
 
@@ -1438,10 +1346,7 @@ type [<AllowNullLiteral>] GlobalEventHandlers =
     abstract onpointerup: (PointerEvent -> unit) with get, set
     abstract onwheel: (WheelEvent -> unit) with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLAllCollection =
+type [<Global;AllowNullLiteral>] HTMLAllCollection =
     inherit HTMLCollection
     /// Sets or retrieves the shape of the object.
     /// Retrieves a select object or an object from an options collection.
@@ -1451,14 +1356,11 @@ type [<AllowNullLiteral>] HTMLAllCollectionType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLAllCollection()")>]
+    [<WebSharper.Inline("new HTMLAllCollection()")>]
     #endif
     abstract Create: unit -> HTMLAllCollection
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLAnchorElement =
+type [<Global;AllowNullLiteral>] HTMLAnchorElement =
     inherit HTMLElement
     abstract Methods: string with get, set
     /// Sets or retrieves the character set used to encode the object.
@@ -1512,14 +1414,11 @@ type [<AllowNullLiteral>] HTMLAnchorElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLAnchorElement()")>]
+    [<WebSharper.Inline("new HTMLAnchorElement()")>]
     #endif
     abstract Create: unit -> HTMLAnchorElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLAreaElement =
+type [<Global;AllowNullLiteral>] HTMLAreaElement =
     inherit HTMLElement
     /// Sets or retrieves a text alternative to the graphic.
     abstract alt: string with get, set
@@ -1554,14 +1453,11 @@ type [<AllowNullLiteral>] HTMLAreaElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLAreaElement()")>]
+    [<WebSharper.Inline("new HTMLAreaElement()")>]
     #endif
     abstract Create: unit -> HTMLAreaElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLAreasCollection =
+type [<Global;AllowNullLiteral>] HTMLAreasCollection =
     inherit HTMLCollection
     /// <summary>Adds an element to the areas, controlRange, or options collection.</summary>
     /// <param name="element">Variant of type Number that specifies the index position in the collection where the element is placed. If no value is given, the method places the element at the end of the collection.</param>
@@ -1575,28 +1471,22 @@ type [<AllowNullLiteral>] HTMLAreasCollectionType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLAreasCollection()")>]
+    [<WebSharper.Inline("new HTMLAreasCollection()")>]
     #endif
     abstract Create: unit -> HTMLAreasCollection
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLAudioElement =
+type [<Global;AllowNullLiteral>] HTMLAudioElement =
     inherit HTMLMediaElement
 
 type [<AllowNullLiteral>] HTMLAudioElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLAudioElement()")>]
+    [<WebSharper.Inline("new HTMLAudioElement()")>]
     #endif
     abstract Create: unit -> HTMLAudioElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLBRElement =
+type [<Global;AllowNullLiteral>] HTMLBRElement =
     inherit HTMLElement
     /// Sets or retrieves the side on which floating objects are not to be positioned when any IHTMLBlockElement is inserted into the document.
     abstract clear: string with get, set
@@ -1605,14 +1495,11 @@ type [<AllowNullLiteral>] HTMLBRElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLBRElement()")>]
+    [<WebSharper.Inline("new HTMLBRElement()")>]
     #endif
     abstract Create: unit -> HTMLBRElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLBaseElement =
+type [<Global;AllowNullLiteral>] HTMLBaseElement =
     inherit HTMLElement
     /// Sets or retrieves a destination URL or an anchor point.
     abstract href: string with get, set
@@ -1623,14 +1510,11 @@ type [<AllowNullLiteral>] HTMLBaseElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLBaseElement()")>]
+    [<WebSharper.Inline("new HTMLBaseElement()")>]
     #endif
     abstract Create: unit -> HTMLBaseElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLBlockElement =
+type [<Global;AllowNullLiteral>] HTMLBlockElement =
     inherit HTMLElement
     /// Sets or retrieves reference information about the object.
     abstract cite: string with get, set
@@ -1642,14 +1526,11 @@ type [<AllowNullLiteral>] HTMLBlockElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLBlockElement()")>]
+    [<WebSharper.Inline("new HTMLBlockElement()")>]
     #endif
     abstract Create: unit -> HTMLBlockElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLBodyElement =
+type [<Global;AllowNullLiteral>] HTMLBodyElement =
     inherit HTMLElement
     abstract aLink: obj with get, set
     abstract background: string with get, set
@@ -1683,14 +1564,11 @@ type [<AllowNullLiteral>] HTMLBodyElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLBodyElement()")>]
+    [<WebSharper.Inline("new HTMLBodyElement()")>]
     #endif
     abstract Create: unit -> HTMLBodyElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLButtonElement =
+type [<Global;AllowNullLiteral>] HTMLButtonElement =
     inherit HTMLElement
     /// Provides a way to direct a user to a specific field when a document loads. This can provide both direction and convenience for a user, reducing the need to click or tab to a field when a page opens. This attribute is true when present on an element, and false when missing.
     abstract autofocus: bool with get, set
@@ -1736,14 +1614,11 @@ type [<AllowNullLiteral>] HTMLButtonElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLButtonElement()")>]
+    [<WebSharper.Inline("new HTMLButtonElement()")>]
     #endif
     abstract Create: unit -> HTMLButtonElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLCanvasElement =
+type [<Global;AllowNullLiteral>] HTMLCanvasElement =
     inherit HTMLElement
     /// Gets or sets the height of a canvas element on a document.
     abstract height: float with get, set
@@ -1753,7 +1628,7 @@ type [<AllowNullLiteral>] HTMLCanvasElement =
     [<Emit("$0.getContext('2d'{{, $1}})")>]
     #else 
     // TODO: check
-    [<Inline("$this.getContext('2d', $contextAttributes)")>]
+    [<WebSharper.Inline("$this.getContext('2d', $contextAttributes)")>]
     #endif
     abstract getContext_2d: ?contextAttributes: obj -> CanvasRenderingContext2D
     /// Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document. A context object includes information about colors, line widths, fonts, and other graphic parameters that can be drawn on a canvas.
@@ -1769,14 +1644,11 @@ type [<AllowNullLiteral>] HTMLCanvasElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLCanvasElement()")>]
+    [<WebSharper.Inline("new HTMLCanvasElement()")>]
     #endif
     abstract Create: unit -> HTMLCanvasElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDDElement =
+type [<Global;AllowNullLiteral>] HTMLDDElement =
     inherit HTMLElement
     /// Sets or retrieves whether the browser automatically performs wordwrap.
     abstract noWrap: bool with get, set
@@ -1785,14 +1657,11 @@ type [<AllowNullLiteral>] HTMLDDElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLDDElement()")>]
+    [<WebSharper.Inline("new HTMLDDElement()")>]
     #endif
     abstract Create: unit -> HTMLDDElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDListElement =
+type [<Global;AllowNullLiteral>] HTMLDListElement =
     inherit HTMLElement
     abstract compact: bool with get, set
 
@@ -1800,14 +1669,11 @@ type [<AllowNullLiteral>] HTMLDListElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLDListElement()")>]
+    [<WebSharper.Inline("new HTMLDListElement()")>]
     #endif
     abstract Create: unit -> HTMLDListElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDTElement =
+type [<Global;AllowNullLiteral>] HTMLDTElement =
     inherit HTMLElement
     abstract noWrap: bool with get, set
 
@@ -1815,14 +1681,11 @@ type [<AllowNullLiteral>] HTMLDTElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLDTElement()")>]
+    [<WebSharper.Inline("new HTMLDTElement()")>]
     #endif
     abstract Create: unit -> HTMLDTElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDataListElement =
+type [<Global;AllowNullLiteral>] HTMLDataListElement =
     inherit HTMLElement
     abstract options: HTMLCollection with get, set
 
@@ -1830,14 +1693,11 @@ type [<AllowNullLiteral>] HTMLDataListElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLDataListElement()")>]
+    [<WebSharper.Inline("new HTMLDataListElement()")>]
     #endif
     abstract Create: unit -> HTMLDataListElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDialogElement =
+type [<Global;AllowNullLiteral>] HTMLDialogElement =
     inherit HTMLElement
     abstract ``open``: bool with get, set
     abstract returnValue: string with get, set
@@ -1845,10 +1705,7 @@ type [<AllowNullLiteral>] HTMLDialogElement =
     abstract show: unit -> unit
     abstract showModal: unit -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDirectoryElement =
+type [<Global;AllowNullLiteral>] HTMLDirectoryElement =
     inherit HTMLElement
     abstract compact: bool with get, set
 
@@ -1856,37 +1713,28 @@ type [<AllowNullLiteral>] HTMLDirectoryElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLDirectoryElement()")>]
+    [<WebSharper.Inline("new HTMLDirectoryElement()")>]
     #endif
     abstract Create: unit -> HTMLDirectoryElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDivElement =
+type [<Global;AllowNullLiteral>] HTMLDivElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
     abstract noWrap: bool with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLDocument =
+type [<Global;AllowNullLiteral>] HTMLDocument =
     inherit Document
 
 type [<AllowNullLiteral>] HTMLDocumentType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLDocument()")>]
+    [<WebSharper.Inline("new HTMLDocument()")>]
     #endif
     abstract Create: unit -> HTMLDocument
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLElement =
+type [<Global;AllowNullLiteral>] HTMLElement =
     inherit Element
     abstract accessKey: string with get, set
     abstract children: HTMLCollection with get, set
@@ -1988,17 +1836,13 @@ type [<AllowNullLiteral>] HTMLElement =
     abstract scrollIntoView: scrollIntoViewOptions: ScrollIntoViewOptions -> unit
     abstract setActive: unit -> unit
 
-#if !JAVASCRIPT
 [<StringEnum>]
-#endif
 [<RequireQualifiedAccess>]
 type ScrollBehavior =
     | Auto
     | Smooth
 
-#if !JAVASCRIPT
 [<StringEnum>]
-#endif
 [<RequireQualifiedAccess>]
 type ScrollAlignment =
     | Start
@@ -2021,14 +1865,11 @@ type [<AllowNullLiteral>] HTMLElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLElement()")>]
+    [<WebSharper.Inline("new HTMLElement()")>]
     #endif
     abstract Create: unit -> HTMLElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLEmbedElement =
+type [<Global;AllowNullLiteral>] HTMLEmbedElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Sets or retrieves the height of the object.
@@ -2052,14 +1893,11 @@ type [<AllowNullLiteral>] HTMLEmbedElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLEmbedElement()")>]
+    [<WebSharper.Inline("new HTMLEmbedElement()")>]
     #endif
     abstract Create: unit -> HTMLEmbedElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLFieldSetElement =
+type [<Global;AllowNullLiteral>] HTMLFieldSetElement =
     inherit HTMLElement
     /// Sets or retrieves a value that indicates the table alignment.
     abstract align: string with get, set
@@ -2081,14 +1919,11 @@ type [<AllowNullLiteral>] HTMLFieldSetElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLFieldSetElement()")>]
+    [<WebSharper.Inline("new HTMLFieldSetElement()")>]
     #endif
     abstract Create: unit -> HTMLFieldSetElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLFontElement =
+type [<Global;AllowNullLiteral>] HTMLFontElement =
     inherit HTMLElement
     /// Sets or retrieves the current typeface family.
     abstract face: string with get, set
@@ -2097,14 +1932,11 @@ type [<AllowNullLiteral>] HTMLFontElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLFontElementElement()")>]
+    [<WebSharper.Inline("new HTMLFontElementElement()")>]
     #endif
     abstract Create: unit -> HTMLFontElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLFormElement =
+type [<Global;AllowNullLiteral>] HTMLFormElement =
     inherit HTMLElement
     /// Sets or retrieves a list of character encodings for input data that must be accepted by the server processing the form.
     /// Sets or retrieves a comma-separated list of content types.
@@ -2133,9 +1965,9 @@ type [<AllowNullLiteral>] HTMLFormElement =
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: name: string -> obj with get, set
     #else
-    [<Inline "$this[$name]">]
+    [<WebSharper.Inline "$this[$name]">]
     abstract Item: name: string -> obj with get
-    [<Inline "$this[$name]=$2">]
+    [<WebSharper.Inline "$this[$name]=$2">]
     abstract Item: name: string -> obj with set
     #endif
     /// Returns whether a form will validate when it is submitted, without having to submit it.
@@ -2159,14 +1991,11 @@ type [<AllowNullLiteral>] HTMLFormElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLFormElement()")>]
+    [<WebSharper.Inline("new HTMLFormElement()")>]
     #endif
     abstract Create: unit -> HTMLFormElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLFrameElement =
+type [<Global;AllowNullLiteral>] HTMLFrameElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Specifies the properties of a border drawn around an object.
@@ -2208,14 +2037,11 @@ type [<AllowNullLiteral>] HTMLFrameElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLFrameElement()")>]
+    [<WebSharper.Inline("new HTMLFrameElement()")>]
     #endif
     abstract Create: unit -> HTMLFrameElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLHRElement =
+type [<Global;AllowNullLiteral>] HTMLHRElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
@@ -2228,14 +2054,11 @@ type [<AllowNullLiteral>] HTMLHRElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLHRElement()")>]
+    [<WebSharper.Inline("new HTMLHRElement()")>]
     #endif
     abstract Create: unit -> HTMLHRElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLHeadElement =
+type [<Global;AllowNullLiteral>] HTMLHeadElement =
     inherit HTMLElement
     abstract profile: string with get, set
 
@@ -2243,14 +2066,11 @@ type [<AllowNullLiteral>] HTMLHeadElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLHeadElement()")>]
+    [<WebSharper.Inline("new HTMLHeadElement()")>]
     #endif
     abstract Create: unit -> HTMLHeadElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLHeadingElement =
+type [<Global;AllowNullLiteral>] HTMLHeadingElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
@@ -2260,14 +2080,11 @@ type [<AllowNullLiteral>] HTMLHeadingElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLHeadingElement()")>]
+    [<WebSharper.Inline("new HTMLHeadingElement()")>]
     #endif
     abstract Create: unit -> HTMLHeadingElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLHtmlElement =
+type [<Global;AllowNullLiteral>] HTMLHtmlElement =
     inherit HTMLElement
     /// Sets or retrieves the DTD version that governs the current document.
     abstract version: string with get, set
@@ -2276,14 +2093,11 @@ type [<AllowNullLiteral>] HTMLHtmlElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLHtmlElement()")>]
+    [<WebSharper.Inline("new HTMLHtmlElement()")>]
     #endif
     abstract Create: unit -> HTMLHtmlElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLIFrameElement =
+type [<Global;AllowNullLiteral>] HTMLIFrameElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Sets or retrieves how the object is aligned with adjacent text.
@@ -2327,14 +2141,11 @@ type [<AllowNullLiteral>] HTMLIFrameElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLIFrameElement()")>]
+    [<WebSharper.Inline("new HTMLIFrameElement()")>]
     #endif
     abstract Create: unit -> HTMLIFrameElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLImageElement =
+type [<Global;AllowNullLiteral>] HTMLImageElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
@@ -2378,14 +2189,11 @@ type [<AllowNullLiteral>] ImageType =
     #if !JAVASCRIPT
     [<Emit("new Image($1...)")>] 
     #else
-    [<Inline("new Image($width, $height)")>]
+    [<WebSharper.Inline("new Image($width, $height)")>]
     #endif
     abstract Create: ?width: float * ?height: float -> HTMLImageElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLInputElement =
+type [<Global;AllowNullLiteral>] HTMLInputElement =
     inherit HTMLElement
     /// Returns a FileList object on a file type input object.
     abstract files: FileList with get, set
@@ -2502,14 +2310,11 @@ type [<AllowNullLiteral>] HTMLInputElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLInputElement()")>]
+    [<WebSharper.Inline("new HTMLInputElement()")>]
     #endif
     abstract Create: unit -> HTMLInputElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLLIElement =
+type [<Global;AllowNullLiteral>] HTMLLIElement =
     inherit HTMLElement
     /// Sets or retrieves the MIME type of the object.
     abstract ``type``: string with get, set
@@ -2520,14 +2325,11 @@ type [<AllowNullLiteral>] HTMLLIElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLLIElement()")>]
+    [<WebSharper.Inline("new HTMLLIElement()")>]
     #endif
     abstract Create: unit -> HTMLLIElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLLabelElement =
+type [<Global;AllowNullLiteral>] HTMLLabelElement =
     inherit HTMLElement
     abstract form: HTMLFormElement with get, set
     /// Sets or retrieves the object to which the given label object is assigned.
@@ -2537,14 +2339,11 @@ type [<AllowNullLiteral>] HTMLLabelElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLLabelElement()")>]
+    [<WebSharper.Inline("new HTMLLabelElement()")>]
     #endif
     abstract Create: unit -> HTMLLabelElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLLegendElement =
+type [<Global;AllowNullLiteral>] HTMLLegendElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
@@ -2554,14 +2353,11 @@ type [<AllowNullLiteral>] HTMLLegendElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLLegendElement()")>]
+    [<WebSharper.Inline("new HTMLLegendElement()")>]
     #endif
     abstract Create: unit -> HTMLLegendElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLLinkElement =
+type [<Global;AllowNullLiteral>] HTMLLinkElement =
     inherit HTMLElement
     // TODO
     // inherit LinkStyle
@@ -2585,14 +2381,11 @@ type [<AllowNullLiteral>] HTMLLinkElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLLinkElement()")>]
+    [<WebSharper.Inline("new HTMLLinkElement()")>]
     #endif
     abstract Create: unit -> HTMLLinkElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLMapElement =
+type [<Global;AllowNullLiteral>] HTMLMapElement =
     inherit HTMLElement
     /// Retrieves a collection of the area objects defined for the given map object.
     abstract areas: HTMLAreasCollection with get, set
@@ -2603,14 +2396,11 @@ type [<AllowNullLiteral>] HTMLMapElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLMapElement()")>]
+    [<WebSharper.Inline("new HTMLMapElement()")>]
     #endif
     abstract Create: unit -> HTMLMapElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLMediaElement =
+type [<Global;AllowNullLiteral>] HTMLMediaElement =
     inherit HTMLElement
     /// Returns an AudioTrackList object with the audio tracks for a given video element.
     abstract audioTracks: AudioTrackList with get, set
@@ -2689,14 +2479,11 @@ type [<AllowNullLiteral>] HTMLMediaElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLMediaElement()")>]
+    [<WebSharper.Inline("new HTMLMediaElement()")>]
     #endif
     abstract Create: unit -> HTMLMediaElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLMenuElement =
+type [<Global;AllowNullLiteral>] HTMLMenuElement =
     inherit HTMLElement
     abstract compact: bool with get, set
     /// Sets or retrieves the MIME type for the associated scripting engine.
@@ -2706,14 +2493,11 @@ type [<AllowNullLiteral>] HTMLMenuElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLMenuElement()")>]
+    [<WebSharper.Inline("new HTMLMenuElement()")>]
     #endif
     abstract Create: unit -> HTMLMenuElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLMetaElement =
+type [<Global;AllowNullLiteral>] HTMLMetaElement =
     inherit HTMLElement
     /// Sets or retrieves the character set used to encode the object.
     abstract charset: string with get, set
@@ -2730,14 +2514,11 @@ type [<AllowNullLiteral>] HTMLMetaElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLMetaElement()")>]
+    [<WebSharper.Inline("new HTMLMetaElement()")>]
     #endif
     abstract Create: unit -> HTMLMetaElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLModElement =
+type [<Global;AllowNullLiteral>] HTMLModElement =
     inherit HTMLElement
     /// Sets or retrieves reference information about the object.
     abstract cite: string with get, set
@@ -2748,14 +2529,11 @@ type [<AllowNullLiteral>] HTMLModElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLModElement()")>]
+    [<WebSharper.Inline("new HTMLModElement()")>]
     #endif
     abstract Create: unit -> HTMLModElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLNextIdElement =
+type [<Global;AllowNullLiteral>] HTMLNextIdElement =
     inherit HTMLElement
     abstract n: string with get, set
 
@@ -2763,14 +2541,11 @@ type [<AllowNullLiteral>] HTMLNextIdElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLNextIdElement()")>]
+    [<WebSharper.Inline("new HTMLNextIdElement()")>]
     #endif
     abstract Create: unit -> HTMLNextIdElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLOListElement =
+type [<Global;AllowNullLiteral>] HTMLOListElement =
     inherit HTMLElement
     abstract compact: bool with get, set
     abstract start: float with get, set
@@ -2781,14 +2556,11 @@ type [<AllowNullLiteral>] HTMLOListElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLOListElement()")>]
+    [<WebSharper.Inline("new HTMLOListElement()")>]
     #endif
     abstract Create: unit -> HTMLOListElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLObjectElement =
+type [<Global;AllowNullLiteral>] HTMLObjectElement =
     inherit HTMLElement
     inherit GetSVGDocument
     /// Retrieves a string of the URL where the object tag can be found. This is often the href of the document that the object is in, or the value set by a base element.
@@ -2841,14 +2613,11 @@ type [<AllowNullLiteral>] HTMLObjectElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLObjectElement()")>]
+    [<WebSharper.Inline("new HTMLObjectElement()")>]
     #endif
     abstract Create: unit -> HTMLObjectElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLOptGroupElement =
+type [<Global;AllowNullLiteral>] HTMLOptGroupElement =
     inherit HTMLElement
     /// Sets or retrieves the status of an option.
     abstract defaultSelected: bool with get, set
@@ -2869,14 +2638,11 @@ type [<AllowNullLiteral>] HTMLOptGroupElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLOptGroupElement()")>]
+    [<WebSharper.Inline("new HTMLOptGroupElement()")>]
     #endif
     abstract Create: unit -> HTMLOptGroupElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLOptionElement =
+type [<Global;AllowNullLiteral>] HTMLOptionElement =
     inherit HTMLElement
     /// Sets or retrieves the status of an option.
     abstract defaultSelected: bool with get, set
@@ -2897,15 +2663,12 @@ type [<AllowNullLiteral>] HTMLOptionElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLOptionElement()")>]
+    [<WebSharper.Inline("new HTMLOptionElement()")>]
     #endif
     abstract Create: unit -> HTMLOptionElement
     abstract create: unit -> HTMLOptionElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLParagraphElement =
+type [<Global;AllowNullLiteral>] HTMLParagraphElement =
     inherit HTMLElement
     /// Sets or retrieves how the object is aligned with adjacent text.
     abstract align: string with get, set
@@ -2915,14 +2678,11 @@ type [<AllowNullLiteral>] HTMLParagraphElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLParagraphElement()")>]
+    [<WebSharper.Inline("new HTMLParagraphElement()")>]
     #endif
     abstract Create: unit -> HTMLParagraphElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLParamElement =
+type [<Global;AllowNullLiteral>] HTMLParamElement =
     inherit HTMLElement
     abstract name: string with get, set
     /// Retrieves the CSS language in which the style sheet is written.
@@ -2937,14 +2697,11 @@ type [<AllowNullLiteral>] HTMLParamElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLParamElement()")>]
+    [<WebSharper.Inline("new HTMLParamElement()")>]
     #endif
     abstract Create: unit -> HTMLParamElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLPhraseElement =
+type [<Global;AllowNullLiteral>] HTMLPhraseElement =
     inherit HTMLElement
     abstract cite: string with get, set
     abstract dateTime: string with get, set
@@ -2953,14 +2710,11 @@ type [<AllowNullLiteral>] HTMLPhraseElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLPhraseElement()")>]
+    [<WebSharper.Inline("new HTMLPhraseElement()")>]
     #endif
     abstract Create: unit -> HTMLPhraseElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLPreElement =
+type [<Global;AllowNullLiteral>] HTMLPreElement =
     inherit HTMLElement
     abstract cite: string with get, set
     abstract clear: string with get, set
@@ -2971,14 +2725,11 @@ type [<AllowNullLiteral>] HTMLPreElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLPreElement()")>]
+    [<WebSharper.Inline("new HTMLPreElement()")>]
     #endif
     abstract Create: unit -> HTMLPreElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLProgressElement =
+type [<Global;AllowNullLiteral>] HTMLProgressElement =
     inherit HTMLElement
     abstract form: HTMLFormElement with get, set
     abstract max: float with get, set
@@ -2990,14 +2741,11 @@ type [<AllowNullLiteral>] HTMLProgressElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLProgressElement()")>]
+    [<WebSharper.Inline("new HTMLProgressElement()")>]
     #endif
     abstract Create: unit -> HTMLProgressElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLQuoteElement =
+type [<Global;AllowNullLiteral>] HTMLQuoteElement =
     inherit HTMLElement
     abstract cite: string with get, set
     abstract dateTime: string with get, set
@@ -3006,14 +2754,11 @@ type [<AllowNullLiteral>] HTMLQuoteElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLQuoteElement()")>]
+    [<WebSharper.Inline("new HTMLQuoteElement()")>]
     #endif
     abstract Create: unit -> HTMLQuoteElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLScriptElement =
+type [<Global;AllowNullLiteral>] HTMLScriptElement =
     inherit HTMLElement
     abstract async: bool with get, set
     /// Sets or retrieves the character set used to encode the object.
@@ -3034,14 +2779,11 @@ type [<AllowNullLiteral>] HTMLScriptElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLScriptElement()")>]
+    [<WebSharper.Inline("new HTMLScriptElement()")>]
     #endif
     abstract Create: unit -> HTMLScriptElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLSelectElement =
+type [<Global;AllowNullLiteral>] HTMLSelectElement =
     inherit HTMLElement
     /// Provides a way to direct a user to a specific field when a document loads. This can provide both direction and convenience for a user, reducing the need to click or tab to a field when a page opens. This attribute is true when present on an element, and false when missing.
     abstract autofocus: bool with get, set
@@ -3071,9 +2813,9 @@ type [<AllowNullLiteral>] HTMLSelectElement =
     [<Emit("$0[$1]{{=$2}}")>] 
     abstract Item: name: string -> obj with get, set
     #else
-    [<Inline "$this[$name]">]
+    [<WebSharper.Inline "$this[$name]">]
     abstract Item: name: string -> obj with get
-    [<Inline "$this[$name]=$2">]
+    [<WebSharper.Inline "$this[$name]=$2">]
     abstract Item: name: string -> obj with set
     #endif
     abstract add: element: HTMLElement * ?before: U2<HTMLElement, float> -> unit
@@ -3093,14 +2835,11 @@ type [<AllowNullLiteral>] HTMLSelectElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLSelectElement()")>]
+    [<WebSharper.Inline("new HTMLSelectElement()")>]
     #endif
     abstract Create: unit -> HTMLSelectElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLSourceElement =
+type [<Global;AllowNullLiteral>] HTMLSourceElement =
     inherit HTMLElement
     /// Gets or sets the intended media type of the media source.
     abstract media: string with get, set
@@ -3111,14 +2850,11 @@ type [<AllowNullLiteral>] HTMLSourceElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLSourceElement()")>]
+    [<WebSharper.Inline("new HTMLSourceElement()")>]
     #endif
     abstract Create: unit -> HTMLSourceElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLSpanElement =
+type [<Global;AllowNullLiteral>] HTMLSpanElement =
     inherit HTMLElement
 
 
@@ -3126,14 +2862,11 @@ type [<AllowNullLiteral>] HTMLSpanElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLSpanElement()")>]
+    [<WebSharper.Inline("new HTMLSpanElement()")>]
     #endif
     abstract Create: unit -> HTMLSpanElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLStyleElement =
+type [<Global;AllowNullLiteral>] HTMLStyleElement =
     inherit HTMLElement
     // TODO
     // inherit LinkStyle
@@ -3145,14 +2878,11 @@ type [<AllowNullLiteral>] HTMLStyleElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLStyleElement()")>]
+    [<WebSharper.Inline("new HTMLStyleElement()")>]
     #endif
     abstract Create: unit -> HTMLStyleElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableCaptionElement =
+type [<Global;AllowNullLiteral>] HTMLTableCaptionElement =
     inherit HTMLElement
     /// Sets or retrieves the alignment of the object relative to the display or table.
     abstract align: string with get, set
@@ -3163,14 +2893,11 @@ type [<AllowNullLiteral>] HTMLTableCaptionElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableCaptionElement()")>]
+    [<WebSharper.Inline("new HTMLTableCaptionElement()")>]
     #endif
     abstract Create: unit -> HTMLTableCaptionElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableCellElement =
+type [<Global;AllowNullLiteral>] HTMLTableCellElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     /// Sets or retrieves abbreviated text for the object.
@@ -3200,14 +2927,11 @@ type [<AllowNullLiteral>] HTMLTableCellElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableCellElement()")>]
+    [<WebSharper.Inline("new HTMLTableCellElement()")>]
     #endif
     abstract Create: unit -> HTMLTableCellElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableColElement =
+type [<Global;AllowNullLiteral>] HTMLTableColElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     /// Sets or retrieves how the object is aligned with adjacent text.
@@ -3220,14 +2944,11 @@ type [<AllowNullLiteral>] HTMLTableColElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableColElement()")>]
+    [<WebSharper.Inline("new HTMLTableColElement()")>]
     #endif
     abstract Create: unit -> HTMLTableColElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableDataCellElement =
+type [<Global;AllowNullLiteral>] HTMLTableDataCellElement =
     inherit HTMLTableCellElement
 
 
@@ -3235,14 +2956,11 @@ type [<AllowNullLiteral>] HTMLTableDataCellElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableDataCellElement()")>]
+    [<WebSharper.Inline("new HTMLTableDataCellElement()")>]
     #endif
     abstract Create: unit -> HTMLTableDataCellElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableElement =
+type [<Global;AllowNullLiteral>] HTMLTableElement =
     inherit HTMLElement
     /// Sets or retrieves a value that indicates the table alignment.
     abstract align: string with get, set
@@ -3299,14 +3017,11 @@ type [<AllowNullLiteral>] HTMLTableElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableElementElement()")>]
+    [<WebSharper.Inline("new HTMLTableElementElement()")>]
     #endif
     abstract Create: unit -> HTMLTableElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableHeaderCellElement =
+type [<Global;AllowNullLiteral>] HTMLTableHeaderCellElement =
     inherit HTMLTableCellElement
     /// Sets or retrieves the group of cells in a table to which the object's information applies.
     abstract scope: string with get, set
@@ -3315,14 +3030,11 @@ type [<AllowNullLiteral>] HTMLTableHeaderCellElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableHeaderCellElement()")>]
+    [<WebSharper.Inline("new HTMLTableHeaderCellElement()")>]
     #endif
     abstract Create: unit -> HTMLTableHeaderCellElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableRowElement =
+type [<Global;AllowNullLiteral>] HTMLTableRowElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     abstract align: string with get, set
@@ -3346,14 +3058,11 @@ type [<AllowNullLiteral>] HTMLTableRowElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableRowElement()")>]
+    [<WebSharper.Inline("new HTMLTableRowElement()")>]
     #endif
     abstract Create: unit -> HTMLTableRowElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTableSectionElement =
+type [<Global;AllowNullLiteral>] HTMLTableSectionElement =
     inherit HTMLElement
     inherit HTMLTableAlignment
     abstract align: string with get, set
@@ -3368,14 +3077,11 @@ type [<AllowNullLiteral>] HTMLTableSectionElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTableSectionElement()")>]
+    [<WebSharper.Inline("new HTMLTableSectionElement()")>]
     #endif
     abstract Create: unit -> HTMLTableSectionElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTextAreaElement =
+type [<Global;AllowNullLiteral>] HTMLTextAreaElement =
     inherit HTMLElement
     /// Provides a way to direct a user to a specific field when a document loads. This can provide both direction and convenience for a user, reducing the need to click or tab to a field when a page opens. This attribute is true when present on an element, and false when missing.
     abstract autofocus: bool with get, set
@@ -3423,14 +3129,11 @@ type [<AllowNullLiteral>] HTMLTextAreaElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTextAreaElement()")>]
+    [<WebSharper.Inline("new HTMLTextAreaElement()")>]
     #endif
     abstract Create: unit -> HTMLTextAreaElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTitleElement =
+type [<Global;AllowNullLiteral>] HTMLTitleElement =
     inherit HTMLElement
     abstract text: string with get, set
 
@@ -3438,14 +3141,11 @@ type [<AllowNullLiteral>] HTMLTitleElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTitleElement()")>]
+    [<WebSharper.Inline("new HTMLTitleElement()")>]
     #endif
     abstract Create: unit -> HTMLTitleElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLTrackElement =
+type [<Global;AllowNullLiteral>] HTMLTrackElement =
     inherit HTMLElement
     abstract ``default``: bool with get, set
     abstract kind: string with get, set
@@ -3467,14 +3167,11 @@ type [<AllowNullLiteral>] HTMLTrackElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLTrackElement()")>]
+    [<WebSharper.Inline("new HTMLTrackElement()")>]
     #endif
     abstract Create: unit -> HTMLTrackElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLUListElement =
+type [<Global;AllowNullLiteral>] HTMLUListElement =
     inherit HTMLElement
     abstract compact: bool with get, set
     abstract ``type``: string with get, set
@@ -3483,28 +3180,22 @@ type [<AllowNullLiteral>] HTMLUListElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLUListElement()")>]
+    [<WebSharper.Inline("new HTMLUListElement()")>]
     #endif
     abstract Create: unit -> HTMLUListElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLUnknownElement =
+type [<Global;AllowNullLiteral>] HTMLUnknownElement =
     inherit HTMLElement
 
 type [<AllowNullLiteral>] HTMLUnknownElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLUnknownElement()")>]
+    [<WebSharper.Inline("new HTMLUnknownElement()")>]
     #endif
     abstract Create: unit -> HTMLUnknownElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HTMLVideoElement =
+type [<Global;AllowNullLiteral>] HTMLVideoElement =
     inherit HTMLMediaElement
     abstract height: float with get, set
     /// Gets or sets a URL of an image to display, for example, like a movie poster. This can be a still frame from the video, or another image if no video data is available.
@@ -3520,14 +3211,11 @@ type [<AllowNullLiteral>] HTMLVideoElementType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLVideoElement()")>]
+    [<WebSharper.Inline("new HTMLVideoElement()")>]
     #endif
     abstract Create: unit -> HTMLVideoElement
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] VideoPlaybackQuality =
+type [<Global;AllowNullLiteral>] VideoPlaybackQuality =
     abstract corruptedVideoFrames: float with get, set
     abstract creationTime: float with get, set
     abstract droppedVideoFrames: float with get, set
@@ -3538,14 +3226,11 @@ type [<AllowNullLiteral>] VideoPlaybackQualityType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new HTMLVideoPlaybackQuality()")>]
+    [<WebSharper.Inline("new HTMLVideoPlaybackQuality()")>]
     #endif
     abstract Create: unit -> VideoPlaybackQuality
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] VideoTrack =
+type [<Global;AllowNullLiteral>] VideoTrack =
     abstract id: string with get, set
     abstract kind: string with get, set
     abstract label: string with get, set
@@ -3557,14 +3242,11 @@ type [<AllowNullLiteral>] VideoTrackType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new VideoTrack()")>]
+    [<WebSharper.Inline("new VideoTrack()")>]
     #endif
     abstract Create: unit -> VideoTrack
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] VideoTrackList =
+type [<Global;AllowNullLiteral>] VideoTrackList =
     inherit EventTarget
     abstract length: int
     abstract onaddtrack: (TrackEvent -> unit) with get, set
@@ -3575,9 +3257,9 @@ type [<AllowNullLiteral>] VideoTrackList =
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> VideoTrack with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> VideoTrack with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> VideoTrack with set
     #endif
     abstract getTrackById: id: string -> VideoTrack
@@ -3587,14 +3269,11 @@ type [<AllowNullLiteral>] VideoTrackListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new VideoTrackList()")>]
+    [<WebSharper.Inline("new VideoTrackList()")>]
     #endif
     abstract Create: unit -> VideoTrackList
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] SourceBuffer =
+type [<Global;AllowNullLiteral>] SourceBuffer =
     inherit EventTarget
     abstract appendWindowEnd: float with get, set
     abstract appendWindowStart: float with get, set
@@ -3612,23 +3291,20 @@ type [<AllowNullLiteral>] SourceBufferType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new SourceBuffer()")>]
+    [<WebSharper.Inline("new SourceBuffer()")>]
     #endif
     abstract Create: unit -> SourceBuffer
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] SourceBufferList =
+type [<Global;AllowNullLiteral>] SourceBufferList =
     inherit EventTarget
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
     abstract Item: index: int -> SourceBuffer with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> SourceBuffer with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> SourceBuffer with set
     #endif
     abstract item: index: float -> SourceBuffer
@@ -3637,14 +3313,11 @@ type [<AllowNullLiteral>] SourceBufferListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new SourceBufferList()")>]
+    [<WebSharper.Inline("new SourceBufferList()")>]
     #endif
     abstract Create: unit -> SourceBufferList
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] AudioTrack =
+type [<Global;AllowNullLiteral>] AudioTrack =
     abstract enabled: bool with get, set
     abstract id: string with get, set
     abstract kind: string with get, set
@@ -3656,14 +3329,11 @@ type [<AllowNullLiteral>] AudioTrackType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new AudioTrack()")>]
+    [<WebSharper.Inline("new AudioTrack()")>]
     #endif
     abstract Create: unit -> AudioTrack
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] AudioTrackList =
+type [<Global;AllowNullLiteral>] AudioTrackList =
     inherit EventTarget
     abstract length: int
     abstract onaddtrack: (TrackEvent -> unit) with get, set
@@ -3673,9 +3343,9 @@ type [<AllowNullLiteral>] AudioTrackList =
     [<Emit("$0[$1]{{=$2}}")>] 
     abstract Item: index: int -> AudioTrack with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> AudioTrack with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> AudioTrack with set
     #endif
     abstract getTrackById: id: string -> AudioTrack
@@ -3685,14 +3355,11 @@ type [<AllowNullLiteral>] AudioTrackListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new AudioTrackList()")>]
+    [<WebSharper.Inline("new AudioTrackList()")>]
     #endif
     abstract Create: unit -> AudioTrackList
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TextTrack =
+type [<Global;AllowNullLiteral>] TextTrack =
     inherit EventTarget
     abstract activeCues: TextTrackCueList with get, set
     abstract cues: TextTrackCueList with get, set
@@ -3726,14 +3393,11 @@ type [<AllowNullLiteral>] TextTrackType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new TextTrack()")>]
+    [<WebSharper.Inline("new TextTrack()")>]
     #endif
     abstract Create: unit -> TextTrack
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TextTrackCue =
+type [<Global;AllowNullLiteral>] TextTrackCue =
     inherit EventTarget
     abstract endTime: float with get, set
     abstract id: string with get, set
@@ -3749,22 +3413,19 @@ type [<AllowNullLiteral>] TextTrackCueType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new TextTrackCueType($startTime,$endTime,$text)")>]
+    [<WebSharper.Inline("new TextTrackCueType($startTime,$endTime,$text)")>]
     #endif
     abstract Create: startTime: float * endTime: float * text: string -> TextTrackCue
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TextTrackCueList =
+type [<Global;AllowNullLiteral>] TextTrackCueList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> TextTrackCue with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> TextTrackCue with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> TextTrackCue with set
     #endif
     abstract getCueById: id: string -> TextTrackCue
@@ -3774,14 +3435,11 @@ type [<AllowNullLiteral>] TextTrackCueListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new TextTrackCueList()")>]
+    [<WebSharper.Inline("new TextTrackCueList()")>]
     #endif
     abstract Create: unit -> TextTrackCueList
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TextTrackList =
+type [<Global;AllowNullLiteral>] TextTrackList =
     inherit EventTarget
     abstract length: int
     abstract onaddtrack: (TrackEvent -> unit) with get, set
@@ -3789,9 +3447,9 @@ type [<AllowNullLiteral>] TextTrackList =
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> TextTrack with get, set
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> TextTrack with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> TextTrack with set
     #endif
     abstract item: index: float -> TextTrack
@@ -3800,7 +3458,7 @@ type [<AllowNullLiteral>] TextTrackListType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new TextTrackList()")>]
+    [<WebSharper.Inline("new TextTrackList()")>]
     #endif
     abstract Create: unit -> TextTrackList
 
@@ -3814,38 +3472,29 @@ type [<AllowNullLiteral>] HTMLTableAlignment =
 
 // ## CANVAS
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] CanvasGradient =
+type [<Global;AllowNullLiteral>] CanvasGradient =
     abstract addColorStop: offset: float * color: string -> unit
 
 type [<AllowNullLiteral>] CanvasGradientType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new CanvasGradient()")>]
+    [<WebSharper.Inline("new CanvasGradient()")>]
     #endif
     abstract Create: unit -> CanvasGradient
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] CanvasPattern =
+type [<Global;AllowNullLiteral>] CanvasPattern =
     interface end
 
 type [<AllowNullLiteral>] CanvasPatternType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new CanvasPattern()")>]
+    [<WebSharper.Inline("new CanvasPattern()")>]
     #endif
     abstract Create: unit -> CanvasPattern
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] CanvasRenderingContext2D =
+type [<Global;AllowNullLiteral>] CanvasRenderingContext2D =
     abstract canvas: HTMLCanvasElement with get, set
     abstract fillStyle: U3<string, CanvasGradient, CanvasPattern> with get, set
     abstract font: string with get, set
@@ -3910,14 +3559,11 @@ type [<AllowNullLiteral>] CanvasRenderingContext2DType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new CanvasRenderingContext2D()")>]
+    [<WebSharper.Inline("new CanvasRenderingContext2D()")>]
     #endif
     abstract Create: unit -> CanvasRenderingContext2D
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ImageData =
+type [<Global;AllowNullLiteral>] ImageData =
     abstract data: uint8[] with get, set
     abstract height: float with get, set
     abstract width: float with get, set
@@ -3926,36 +3572,30 @@ type [<AllowNullLiteral>] ImageDataType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new ImageData($width,$height)")>]
+    [<WebSharper.Inline("new ImageData($width,$height)")>]
     #endif
     abstract Create: width: float * height: float -> ImageData
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new ImageData($array,$width,$height)")>]
+    [<WebSharper.Inline("new ImageData($array,$width,$height)")>]
     #endif
     abstract Create: array: uint8[] * width: float * height: float -> ImageData
 
 // ## OTHER HTML INTERFACES
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TextMetrics =
+type [<Global;AllowNullLiteral>] TextMetrics =
     abstract width: float with get, set
 
 type [<AllowNullLiteral>] TextMetricsType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new TextMetrics()")>]
+    [<WebSharper.Inline("new TextMetrics()")>]
     #endif
     abstract Create: unit -> TextMetrics
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] MediaError =
+type [<Global;AllowNullLiteral>] MediaError =
     abstract code: float with get, set
     abstract MEDIA_ERR_ABORTED: float with get, set
     abstract MEDIA_ERR_DECODE: float with get, set
@@ -3970,14 +3610,11 @@ type [<AllowNullLiteral>] MediaErrorType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new MediaError()")>]
+    [<WebSharper.Inline("new MediaError()")>]
     #endif
     abstract Create: unit -> MediaError
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ValidityState =
+type [<Global;AllowNullLiteral>] ValidityState =
     abstract badInput: bool with get, set
     abstract customError: bool with get, set
     abstract patternMismatch: bool with get, set
@@ -3994,32 +3631,23 @@ type [<AllowNullLiteral>] ValidityStateType =
     #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
     #else
-    [<Inline("new ValidityState()")>]
+    [<WebSharper.Inline("new ValidityState()")>]
     #endif
     abstract Create: unit -> ValidityState
 
 // ## EVENTS
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] UIEvent =
+type [<Global;AllowNullLiteral>] UIEvent =
     inherit Event
     abstract detail: float
     abstract view: Window
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] AnimationEvent =
+type [<Global;AllowNullLiteral>] AnimationEvent =
     inherit Event
     abstract animationName: string with get, set
     abstract elapsedTime: float with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] MouseEvent =
+type [<Global;AllowNullLiteral>] MouseEvent =
     inherit UIEvent
     abstract altKey: bool
     abstract button: float
@@ -4047,47 +3675,29 @@ type [<AllowNullLiteral>] MouseEvent =
     abstract y: float
     abstract getModifierState: keyArg: string -> bool
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] MouseWheelEvent =
+type [<Global;AllowNullLiteral>] MouseWheelEvent =
     inherit MouseEvent
     abstract wheelDelta: float
     abstract wheelDeltaX: float
     abstract wheelDeltaY: float
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DocumentEvent =
+type [<Global;AllowNullLiteral>] DocumentEvent =
     abstract createEvent: eventInterface: string -> Event
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DragEvent =
+type [<Global;AllowNullLiteral>] DragEvent =
     inherit MouseEvent
     abstract dataTransfer: DataTransfer
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ClipboardEvent =
+type [<Global;AllowNullLiteral>] ClipboardEvent =
     inherit Event
     abstract clipboardData: DataTransfer
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] CompositionEvent =
+type [<Global;AllowNullLiteral>] CompositionEvent =
     inherit UIEvent
     abstract data: string
     abstract locale: string
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DataTransfer =
+type [<Global;AllowNullLiteral>] DataTransfer =
     abstract dropEffect: string with get, set
     abstract effectAllowed: string with get, set
     abstract files: FileList with get, set
@@ -4097,27 +3707,21 @@ type [<AllowNullLiteral>] DataTransfer =
     abstract getData: format: string -> string
     abstract setData: format: string * data: string -> bool
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DataTransferItem =
+type [<Global;AllowNullLiteral>] DataTransferItem =
     abstract kind: string
     abstract ``type``: string
     abstract getAsFile: unit -> File
     abstract getAsString: _callback: (string -> unit) -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DataTransferItemList =
+type [<Global;AllowNullLiteral>] DataTransferItemList =
     abstract length: int
     #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> DataTransferItem
     #else
-    [<Inline "$this[$index]">]
+    [<WebSharper.Inline "$this[$index]">]
     abstract Item: index: int -> DataTransferItem with get
-    [<Inline "$this[$index]=$2">]
+    [<WebSharper.Inline "$this[$index]=$2">]
     abstract Item: index: int -> DataTransferItem with set
     #endif
     abstract add: data: File -> DataTransferItem
@@ -4125,17 +3729,11 @@ type [<AllowNullLiteral>] DataTransferItemList =
     abstract item: index: float -> DataTransferItem
     abstract remove: index: float -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] FocusEvent =
+type [<Global;AllowNullLiteral>] FocusEvent =
     inherit UIEvent
     abstract relatedTarget: EventTarget
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] PointerEvent =
+type [<Global;AllowNullLiteral>] PointerEvent =
     inherit MouseEvent
     abstract currentPoint: obj
     abstract height: float
@@ -4152,17 +3750,11 @@ type [<AllowNullLiteral>] PointerEvent =
     abstract getCurrentPoint: element: Element -> unit
     abstract getIntermediatePoints: element: Element -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] PopStateEvent =
+type [<Global;AllowNullLiteral>] PopStateEvent =
     inherit Event
     abstract state: obj
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] KeyboardEvent =
+type [<Global;AllowNullLiteral>] KeyboardEvent =
     inherit UIEvent
     abstract altKey: bool
     abstract char: string
@@ -4186,19 +3778,13 @@ type [<AllowNullLiteral>] KeyboardEvent =
     abstract DOM_KEY_LOCATION_STANDARD: float
     abstract getModifierState: keyArg: string -> bool
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] ProgressEvent =
+type [<Global;AllowNullLiteral>] ProgressEvent =
     inherit Event
     abstract lengthComputable: bool
     abstract loaded: float
     abstract total: float
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Touch =
+type [<Global;AllowNullLiteral>] Touch =
     abstract clientX: float
     abstract clientY: float
     abstract identifier: float
@@ -4208,10 +3794,7 @@ type [<AllowNullLiteral>] Touch =
     abstract screenY: float
     abstract target: EventTarget
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TouchEvent =
+type [<Global;AllowNullLiteral>] TouchEvent =
     inherit UIEvent
     abstract altKey: bool
     abstract changedTouches: Touch[]
@@ -4221,43 +3804,28 @@ type [<AllowNullLiteral>] TouchEvent =
     abstract targetTouches: Touch[]
     abstract touches: Touch[]
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] AriaRequestEvent =
+type [<Global;AllowNullLiteral>] AriaRequestEvent =
     inherit Event
     abstract attributeName: string
     abstract attributeValue: string
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] CommandEvent =
+type [<Global;AllowNullLiteral>] CommandEvent =
     inherit Event
     abstract commandName: string
     abstract detail: string
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] BeforeUnloadEvent =
+type [<Global;AllowNullLiteral>] BeforeUnloadEvent =
     inherit Event
     abstract returnValue: obj
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DeviceMotionEvent =
+type [<Global;AllowNullLiteral>] DeviceMotionEvent =
     inherit Event
     abstract acceleration: DeviceAcceleration
     abstract accelerationIncludingGravity: DeviceAcceleration
     abstract interval: float
     abstract rotationRate: DeviceRotationRate
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] DeviceOrientationEvent =
+type [<Global;AllowNullLiteral>] DeviceOrientationEvent =
     inherit Event
     abstract absolute: bool
     abstract alpha: float
@@ -4274,40 +3842,25 @@ type [<AllowNullLiteral>] DeviceRotationRate =
     abstract beta: float
     abstract gamma: float
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TransitionEvent =
+type [<Global;AllowNullLiteral>] TransitionEvent =
     inherit Event
     abstract elapsedTime: float with get, set
     abstract propertyName: string with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] PageTransitionEvent =
+type [<Global;AllowNullLiteral>] PageTransitionEvent =
     inherit Event
     abstract persisted: bool
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] HashChangeEvent =
+type [<Global;AllowNullLiteral>] HashChangeEvent =
     inherit Event
     abstract newURL: string
     abstract oldURL: string
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] TrackEvent =
+type [<Global;AllowNullLiteral>] TrackEvent =
     inherit Event
     abstract track: obj
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] WheelEvent =
+type [<Global;AllowNullLiteral>] WheelEvent =
     inherit MouseEvent
     abstract deltaMode: float
     abstract deltaX: float

@@ -1,21 +1,12 @@
 namespace Browser
 
-
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 open Browser.Types
 
 module MediaQueryList =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let MediaQueryList : MediaQueryListType = 
+    let [<Global>] MediaQueryList : MediaQueryListType = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

@@ -1,11 +1,6 @@
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-type GlobalAttribute = InlineAttribute
-#else
 open Fable.Core
-#endif
 
 open Browser.Types
 

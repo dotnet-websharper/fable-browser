@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="../Common/Proxies.fs" />
     <Compile Include="..\..\Css\Browser.Css.fs" />
     <Compile Include="..\..\Css\Browser.Css.Ext.fs" />
     <Compile Include="..\..\Css\Browser.Css.Api.fs" />
@@ -14,8 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WebSharper" Version="7.0.5.390-beta4" />    
-    <PackageReference Include="WebSharper.FSharp" Version="7.0.5.390-beta4" />
+    <PackageReference Include="GensAndHooks" Version="1.0.0" />
+    <PackageReference Include="WebSharper" Version="7.0.6.401-beta4" />    
+    <PackageReference Include="WebSharper.FSharp" Version="7.0.6.401-beta4" />
   </ItemGroup>
 
   <ItemGroup>

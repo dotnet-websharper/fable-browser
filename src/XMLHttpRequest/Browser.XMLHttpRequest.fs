@@ -1,12 +1,7 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
-
 type ReadyState =
   /// Client has been created. `open()` was not yet called.
   | Unsent = 0
@@ -20,17 +15,11 @@ type ReadyState =
   | Done = 4
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] XMLHttpRequestUpload =
+type [<Global;AllowNullLiteral>] XMLHttpRequestUpload =
     inherit EventTarget
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] XMLHttpRequest =
+type [<Global;AllowNullLiteral>] XMLHttpRequest =
     inherit EventTarget
     abstract onreadystatechange: (unit -> unit) with get, set
     abstract readyState: ReadyState
@@ -54,7 +43,7 @@ type [<AllowNullLiteral>] XMLHttpRequest =
 
 type [<AllowNullLiteral>] XMLHttpRequestType =
 #if JAVASCRIPT
-    [<Inline("new XMLHttpRequest()")>] 
+    [<WebSharper.Inline("new XMLHttpRequest()")>] 
 #else
     [<Emit("new $0($1...)")>] 
 #endif
@@ -62,22 +51,15 @@ type [<AllowNullLiteral>] XMLHttpRequestType =
 
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
+
 open Browser.Types
 
 [<AutoOpen>]
 module XMLHttpRequest =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let XMLHttpRequest: XMLHttpRequestType = 
+    let [<Global>] XMLHttpRequest: XMLHttpRequestType = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

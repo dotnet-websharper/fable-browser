@@ -1,17 +1,10 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] Performance =
+type [<Global;AllowNullLiteral>] Performance =
     abstract clearMarks: ?markName: string -> unit
     abstract clearMeasures: ?measureName: string -> unit
     abstract clearResourceTimings: unit -> unit
@@ -28,22 +21,14 @@ type [<AllowNullLiteral>] Performance =
 
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 
 open Browser.Types
 
 [<AutoOpen>]
 module Performance =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
-    [<Global>]
-    #endif
-    let performance: Performance = 
+    
+    let [<Global>] performance: Performance = 
         #if FABLE_COMPILER
         jsNative
 

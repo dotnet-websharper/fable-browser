@@ -6,18 +6,7 @@ module Browser =
 
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-type internal GlobalAttribute = InlineAttribute
-[<AutoOpen>]
-module internal JsUtil =
-    let [<Inline>] jsNative<'t> = Unchecked.defaultof<'t>
-
-module internal JS =
-    type Console = WebSharper.JavaScript.Console
-#else
 open Fable.Core
-#endif
 open Browser.Types
 
 [<AutoOpen>]

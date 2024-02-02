@@ -3,7 +3,7 @@ open WebSharper
 open WebSharper.JavaScript
 
 // type WindowOrWorkerGlobalScope with
-//     [<Inline>] 
+//      [<WebSharper.Inline>] 
 //     static member Geolocation = Unchecked.defaultof<Browser.Types.Geolocation>
 
 // type GeolocationProxy =

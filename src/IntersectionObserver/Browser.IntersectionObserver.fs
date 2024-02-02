@@ -1,11 +1,9 @@
 namespace Browser.Types
 
-#if JAVASCRIPT
-open WebSharper
-
-type internal U2<'a,'b> = JavaScript.Union<'a,'b>
-#else
 open Fable.Core
+#if JAVASCRIPT
+    [<WebSharper.InternalProxy(typeof<Fable.Core.U2<_,_>>)>]
+    type private U2Proxy<'a,'b> = WebSharper.JavaScript.Union<'a,'b>
 #endif
 
 type IntersectionObserverEntry =
@@ -32,10 +30,7 @@ type IntersectionObserverOptions =
     /// Either a single number or an array of numbers between 0.0 and 1.0, specifying a ratio of intersection area to total bounding box area for the observed target
     abstract threshold: U2<float,float[]> with get, set
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type [<AllowNullLiteral>] IntersectionObserverType =
+type [<Global;AllowNullLiteral>] IntersectionObserverType =
     /// identifies the Element or Document whose bounds are treated as the bounding box of the viewport for the element which is the observer's target. Use null for  document viewport
     abstract root: Node
     /// A string (in CSS margin format), which contains offsets for one or more sides of the root's bounding box. These offsets are added to the corresponding values in the root's bounding box before the intersection between the resulting rectangle and the target element's bounds
@@ -53,12 +48,9 @@ type [<AllowNullLiteral>] IntersectionObserverType =
 
 type IntersectionObserverCallback = IntersectionObserverEntry[] -> IntersectionObserverType -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type IntersectionObserverCtor =
+type [<Global>] IntersectionObserverCtor =
     #if JAVASCRIPT
-    [<Inline("new IntersectionObserverType($url,$options)")>]
+    [<WebSharper.Inline("new IntersectionObserverType($url,$options)")>]
     #else
     [<Emit("new $0($1...)")>] 
     #endif
@@ -66,22 +58,15 @@ type IntersectionObserverCtor =
 
 namespace Browser
 
-#if JAVASCRIPT
-open WebSharper
-#else
 open Fable.Core
-#endif
 open Browser.Types
 
 [<AutoOpen>]
 module IntersectionObserver =
-    #if JAVASCRIPT
-    [<Inline>]
-    #else
     [<Global>]
-    #endif
     let  IntersectionObserver: IntersectionObserverCtor = 
         #if JAVASCRIPT
+        // TODO: move to jsNative proxy
         Unchecked.defaultof<_>
         #else
         jsNative

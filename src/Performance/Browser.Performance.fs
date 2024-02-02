@@ -29,10 +29,4 @@ open Browser.Types
 module Performance =
     
     let [<Global>] performance: Performance = 
-        #if FABLE_COMPILER
         jsNative
-
-        #else
-        Unchecked.defaultof<_>
-        #endif
-    

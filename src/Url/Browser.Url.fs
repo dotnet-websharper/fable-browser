@@ -56,27 +56,15 @@ type [<AllowNullLiteral>] URLType =
 
 namespace Browser
 
-#if !JAVASCRIPT
 open Fable.Core
-#endif
 open Browser.Types
 
 [<AutoOpen>]
 module Url =
     
     let [<Global>] URL: URLType = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif
 
     
     let [<Global>] URLSearchParams: URLSearchParamsType = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif

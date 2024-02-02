@@ -50,19 +50,9 @@ open Browser.Types
 module WebStorage =
 
     let [<Global>] localStorage: Storage = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif
     
     
     let [<Global>] sessionStorage: Storage = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif
     

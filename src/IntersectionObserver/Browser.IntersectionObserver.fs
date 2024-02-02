@@ -63,11 +63,6 @@ open Browser.Types
 
 [<AutoOpen>]
 module IntersectionObserver =
-    [<Global>]
-    let  IntersectionObserver: IntersectionObserverCtor = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
+    
+    let [<Global>] IntersectionObserver: IntersectionObserverCtor = 
         jsNative
-        #endif

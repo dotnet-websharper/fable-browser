@@ -61,10 +61,8 @@ type [<Global;AllowNullLiteral>] ResizeObserverType =
 
 type ResizeObserverCallback = ResizeObserverEntry array -> ResizeObserverType -> unit
 
-#if !JAVASCRIPT
-[<Global>]
-#endif
-type ResizeObserverCtor =
+
+type [<Global>] ResizeObserverCtor =
     #if JAVASCRIPT
     [<WebSharper.Inline("new ResizeObserverType($callback)")>]
     #else
@@ -81,9 +79,4 @@ open Browser.Types
 module ResizeObserver =
     
     let [<Global>] ResizeObserver: ResizeObserverCtor = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif

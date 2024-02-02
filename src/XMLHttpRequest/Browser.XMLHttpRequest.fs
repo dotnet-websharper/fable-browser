@@ -58,9 +58,4 @@ open Browser.Types
 [<AutoOpen>]
 module XMLHttpRequest =
     let [<Global>] XMLHttpRequest: XMLHttpRequestType = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif

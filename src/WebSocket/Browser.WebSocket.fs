@@ -74,9 +74,4 @@ open Browser.Types
 module WebSocket =
     [<Global>] 
     let WebSocket: WebSocketType = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif

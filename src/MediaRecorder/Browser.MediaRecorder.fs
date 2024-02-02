@@ -71,9 +71,4 @@ open Browser.Types
 [<AutoOpen>]
 module MediaRecorder =
     let [<Global>] MediaRecorder: MediaRecorderType = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif

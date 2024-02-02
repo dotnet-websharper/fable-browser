@@ -14,11 +14,7 @@ type [<Global>] MimeType =
     abstract suffixes: string
     abstract ``type``: string
 
-#if !JAVASCRIPT
 and [<Global>] Plugin =
-#else
-and Plugin =
-#endif
     abstract description: string
     abstract filename: string
     abstract length: int
@@ -181,9 +177,4 @@ open Browser.Types
 [<AutoOpen>]
 module Navigator =
     let [<Global>] navigator: Navigator = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif

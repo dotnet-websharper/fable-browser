@@ -11,12 +11,7 @@ type Document with
     [<Emit("$0.matchMedia($1...)")>]
     #endif
     member this.matchMedia(mediaQuery : string) : MediaQueryList = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif
 
 type Window with
     #if JAVASCRIPT
@@ -25,9 +20,4 @@ type Window with
     [<Emit("$0.matchMedia($1...)")>]
     #endif
     member this.matchMedia(mediaQuery : string) : MediaQueryList = 
-        #if JAVASCRIPT
-        // TODO: move to jsNative proxy
-        Unchecked.defaultof<_>
-        #else
         jsNative
-        #endif

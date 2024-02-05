@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="../Common/Proxies.fs" />
     <Compile Include="..\..\MediaStream\Browser.MediaStream.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
@@ -19,9 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FablePartialProxy" Version="1.0.0" />
     <PackageReference Include="GensAndHooks" Version="1.0.0" />
-    <PackageReference Include="WebSharper" Version="7.0.6.401-beta4" />    
-    <PackageReference Include="WebSharper.FSharp" Version="7.0.6.401-beta4" />
+    <PackageReference Include="WebSharper" Version="7.0.6.405-beta4" />    
+    <PackageReference Include="WebSharper.FSharp" Version="7.0.6.405-beta4" />
   </ItemGroup>
 
 </Project>

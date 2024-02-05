@@ -24,8 +24,4 @@ open Browser.Types
 module Gamepad =
     
     let [<Global>] gamepad: Gamepad = 
-        #if JAVASCRIPT
-        Unchecked.defaultof<Gamepad>
-        #else
         jsNative
-        #endif

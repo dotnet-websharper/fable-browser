@@ -1,12 +1,6 @@
 namespace Browser.Types
 
 open System
-#if JAVASCRIPT
-[<WebSharper.InternalProxy(typeof<Fable.Core.U2<_,_>>)>]
-type private U2Proxy<'a,'b> = WebSharper.JavaScript.Union<'a,'b>
-[<WebSharper.InternalProxy(typeof<Fable.Core.JS.Promise<_>>)>]
-type private PromiseProxy<'t> = WebSharper.JavaScript.Promise<'t>
-#endif
 open Fable.Core
 
 open Browser

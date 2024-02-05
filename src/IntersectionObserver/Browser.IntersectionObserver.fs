@@ -1,10 +1,6 @@
 namespace Browser.Types
 
 open Fable.Core
-#if JAVASCRIPT
-    [<WebSharper.InternalProxy(typeof<Fable.Core.U2<_,_>>)>]
-    type private U2Proxy<'a,'b> = WebSharper.JavaScript.Union<'a,'b>
-#endif
 
 type IntersectionObserverEntry =
     /// A rectangle describing the smallest rectangle that contains the entire target element

@@ -3,11 +3,6 @@ namespace Browser.Types
 open System
 open Fable.Core
 
-#if JAVASCRIPT
-[<WebSharper.InternalProxy(typeof<Fable.Core.JS.Promise<_>>)>]
-type private PromiseProxy<'a> = WebSharper.JavaScript.Promise<'a>
-#endif
-
 type [<Global>] MimeType =
     abstract description: string
     abstract enabledPlugin: Plugin

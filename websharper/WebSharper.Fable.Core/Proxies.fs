@@ -1,5 +1,6 @@
 module internal FableProxies
 
+open System
 open WebSharper
 open WebSharper.JavaScript
     
@@ -61,5 +62,28 @@ type internal U3Proxy<'a,'b,'c> = JavaScript.Union<'a,'b,'c>
 type internal U4Proxy<'a,'b,'c,'d> = JavaScript.Union<'a,'b,'c,'d>
 
 [<Proxy(typeof<Fable.Core.JS.Console>)>]
-type internal ConsoleProxy = JavaScript.Console
-
+type internal ConsoleProxy =
+    // member this.``assert``(?test: bool * ?message: string * [<ParamArray>] optionalParams: obj[]) =
+    //     WebSharper.JavaScript.Console.
+    // member this.clear() =
+    //     WebSharper.JavaScript.Console.
+    // member this.count(countTitle: string) = WebSharper.JavaScript.Console.Count(countTitle)
+    // member this.debug(?message: string * [<ParamArray>] optionalParams: obj[]) = 
+    //     WebSharper.JavaScript.Console
+    // member this.dir: ?value: obj * [<ParamArray>] optionalParams: obj[] -> unit
+    // member this.dirxml: value: obj -> unit
+    member this.error(message: obj, [<ParamArray>] optionalParams: obj[]) =
+        WebSharper.JavaScript.Console.Error(message, optionalParams)
+    // member this.group: ?groupTitle: string -> unit
+    // member this.groupCollapsed: ?groupTitle: string -> unit
+    // member this.groupEnd: unit -> unit
+    // member this.info: ?message: obj * [<ParamArray>] optionalParams: obj[] -> unit
+    member this.log (message: obj, [<ParamArray>] optionalParams: obj[]) =
+        WebSharper.JavaScript.Console.Log(message, optionalParams)
+    // member this.profile: ?reportName: string -> unit
+    // member this.profileEnd: unit -> unit
+    // member this.time: ?timerName: string -> unit
+    // member this.timeEnd: ?timerName: string -> unit
+    // member this.trace: ?message: obj * [<ParamArray>] optionalParams: obj[] -> unit
+    // member this.warn: ?message: obj * [<ParamArray>] optionalParams: obj[] -> unit
+    // member this.table: ?data: obj -> unit

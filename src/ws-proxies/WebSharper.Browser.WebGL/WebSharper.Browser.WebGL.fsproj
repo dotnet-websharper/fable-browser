@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\WebGL\Browser.WebGL.fs" />
+    <Compile Include="..\..\src\WebGL\Browser.WebGL.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WebGL\Browser.WebGL.fsproj" />
+    <ProjectReference Include="..\..\src\WebGL\Browser.WebGL.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>

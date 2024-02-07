@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Proxies.fs" />
+    <None Include="Readme.md" />
+    <None Include="wsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../WebSharper.Fable.Attributes/WebSharper.Fable.Attributes.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

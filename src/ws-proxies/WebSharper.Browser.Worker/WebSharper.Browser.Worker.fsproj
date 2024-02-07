@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Worker\Browser.Worker.fs" />
+    <Compile Include="..\..\src\Worker\Browser.Worker.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Worker\Browser.Worker.fsproj" />
+    <ProjectReference Include="..\..\src\Worker\Browser.Worker.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>
 

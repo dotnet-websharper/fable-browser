@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Css\Browser.Css.fs" />
-    <Compile Include="..\..\Css\Browser.Css.Ext.fs" />
-    <Compile Include="..\..\Css\Browser.Css.Api.fs" />
+    <Compile Include="..\..\src\Css\Browser.Css.fs" />
+    <Compile Include="..\..\src\Css\Browser.Css.Ext.fs" />
+    <Compile Include="..\..\src\Css\Browser.Css.Api.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>

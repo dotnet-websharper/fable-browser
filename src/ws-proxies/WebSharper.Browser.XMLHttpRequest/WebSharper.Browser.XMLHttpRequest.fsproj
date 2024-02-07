@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\XMLHttpRequest\Browser.XMLHttpRequest.fs" />
+    <Compile Include="..\..\src\XMLHttpRequest\Browser.XMLHttpRequest.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\XMLHttpRequest\Browser.XMLHttpRequest.fsproj" />
+    <ProjectReference Include="..\..\src\XMLHttpRequest\Browser.XMLHttpRequest.fsproj" />
   </ItemGroup>
 
 </Project>

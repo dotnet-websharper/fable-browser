@@ -4,7 +4,7 @@
     <DefineConstants>$(DefineConstants);JAVASCRIPT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\WebStorage\Browser.WebStorage.fs" />
+    <Compile Include="..\..\src\WebStorage\Browser.WebStorage.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -15,7 +15,7 @@
     <PackageReference Include="WebSharper.FSharp" Version="7.0.6.405-beta4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WebStorage\Browser.WebStorage.fsproj" />
+    <ProjectReference Include="..\..\src\WebStorage\Browser.WebStorage.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>
 </Project>

@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\IndexedDB\Browser.IndexedDB.fs" />
-    <Compile Include="..\..\IndexedDB\Browser.IndexedDB.Ext.fs" />
-    <Compile Include="..\..\IndexedDB\Browser.IndexedDB.Api.fs" />
+    <Compile Include="..\..\src\IndexedDB\Browser.IndexedDB.fs" />
+    <Compile Include="..\..\src\IndexedDB\Browser.IndexedDB.Ext.fs" />
+    <Compile Include="..\..\src\IndexedDB\Browser.IndexedDB.Api.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\IndexedDB\Browser.IndexedDB.fsproj" />
+    <ProjectReference Include="..\..\src\IndexedDB\Browser.IndexedDB.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
   </ItemGroup>

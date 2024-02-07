@@ -4,7 +4,7 @@
     <DefineConstants>$(DefineConstants);JAVASCRIPT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../Blob/Browser.Blob.fs" />
+    <Compile Include="../../src/Blob/Browser.Blob.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -15,6 +15,6 @@
     <PackageReference Include="WebSharper.FSharp" Version="7.0.6.405-beta4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Blob\Browser.Blob.fsproj" />
+    <ProjectReference Include="..\..\src\Blob\Browser.Blob.fsproj" />
   </ItemGroup>
 </Project>

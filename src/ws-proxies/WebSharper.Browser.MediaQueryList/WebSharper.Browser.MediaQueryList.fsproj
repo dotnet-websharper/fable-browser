@@ -6,14 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\MediaQueryList\Browser.MediaQueryList.fs" />
-    <Compile Include="..\..\MediaQueryList\Browser.MediaQueryList.Ext.fs" />
-    <Compile Include="..\..\MediaQueryList\Browser.MediaQueryList.Api.fs" />
+    <Compile Include="..\..\src\MediaQueryList\Browser.MediaQueryList.fs" />
+    <Compile Include="..\..\src\MediaQueryList\Browser.MediaQueryList.Ext.fs" />
+    <Compile Include="..\..\src\MediaQueryList\Browser.MediaQueryList.Api.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MediaQueryList\Browser.MediaQueryList.fsproj" />
+    <ProjectReference Include="..\..\src\MediaQueryList\Browser.MediaQueryList.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>

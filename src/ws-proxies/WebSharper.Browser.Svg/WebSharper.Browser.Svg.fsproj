@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Svg\Browser.Svg.fs" />
-    <Compile Include="..\..\Svg\Browser.Svg.Ext.fs" />
-    <Compile Include="..\..\Svg\Browser.Svg.Api.fs" />
+    <Compile Include="..\..\src\Svg\Browser.Svg.fs" />
+    <Compile Include="..\..\src\Svg\Browser.Svg.Ext.fs" />
+    <Compile Include="..\..\src\Svg\Browser.Svg.Api.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Svg\Browser.Svg.fsproj" />
+    <ProjectReference Include="..\..\src\Svg\Browser.Svg.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>

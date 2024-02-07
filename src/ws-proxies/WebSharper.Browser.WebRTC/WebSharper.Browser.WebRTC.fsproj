@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\WebRTC\Browser.WebRTC.fs" />
+    <Compile Include="..\..\src\WebRTC\Browser.WebRTC.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WebRTC\Browser.WebRTC.fsproj" />
+    <ProjectReference Include="..\..\src\WebRTC\Browser.WebRTC.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.MediaStream\WebSharper.Browser.MediaStream.fsproj" />
   </ItemGroup>
 

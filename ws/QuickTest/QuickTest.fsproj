@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ws-proxies\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
+    <ProjectReference Include="..\..\src\src\ws-proxies\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
   </ItemGroup>
 
 </Project>

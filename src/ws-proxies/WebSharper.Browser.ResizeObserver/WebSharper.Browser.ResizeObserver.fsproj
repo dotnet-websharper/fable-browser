@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\ResizeObserver\Browser.ResizeObserver.fs" />
+    <Compile Include="..\..\src\ResizeObserver\Browser.ResizeObserver.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ResizeObserver\Browser.ResizeObserver.fsproj" />
+    <ProjectReference Include="..\..\src\ResizeObserver\Browser.ResizeObserver.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>

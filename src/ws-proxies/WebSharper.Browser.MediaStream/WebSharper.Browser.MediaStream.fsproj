@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\MediaStream\Browser.MediaStream.fs" />
+    <Compile Include="..\..\src\MediaStream\Browser.MediaStream.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MediaStream\Browser.MediaStream.fsproj" />
+    <ProjectReference Include="..\..\src\MediaStream\Browser.MediaStream.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Blob\WebSharper.Browser.Blob.fsproj" />

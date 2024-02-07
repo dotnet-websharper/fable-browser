@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Performance\Browser.Performance.fs" />
+    <Compile Include="..\..\src\Performance\Browser.Performance.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -18,7 +18,7 @@
     <PackageReference Include="WebSharper.FSharp" Version="7.0.6.405-beta4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Performance\Browser.Performance.fsproj" />
+    <ProjectReference Include="..\..\src\Performance\Browser.Performance.fsproj" />
   </ItemGroup>
 
 </Project>

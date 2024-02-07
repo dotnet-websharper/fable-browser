@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\IntersectionObserver\Browser.IntersectionObserver.fs" />
+    <Compile Include="..\..\src\IntersectionObserver\Browser.IntersectionObserver.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\IntersectionObserver\Browser.IntersectionObserver.fsproj" />
+    <ProjectReference Include="..\..\src\IntersectionObserver\Browser.IntersectionObserver.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Dom\WebSharper.Browser.Dom.fsproj" />
     <ProjectReference Include="..\WebSharper.Browser.Event\WebSharper.Browser.Event.fsproj" />
   </ItemGroup>

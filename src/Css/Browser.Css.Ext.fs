@@ -92,7 +92,6 @@ type HTMLLinkElement with
 
 type HTMLStyleElement with
     #if JAVASCRIPT
-    [<WebSharper.Inline("")>]
     member this.sheet 
         with [<WebSharper.Inline "$this.sheet">] get(): StyleSheet = jsNative 
         and [<WebSharper.Inline "$this.sheet=$v">] set(v: StyleSheet) = jsNative

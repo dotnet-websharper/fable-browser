@@ -4,7 +4,7 @@
     <DefineConstants>$(DefineConstants);JAVASCRIPT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../Gamepad/Browser.Gamepad.fs" />
+    <Compile Include="../../src/Gamepad/Browser.Gamepad.fs" />
     <None Include="Readme.md" />
     <None Include="wsconfig.json" />
   </ItemGroup>
@@ -15,6 +15,6 @@
     <PackageReference Include="WebSharper.FSharp" Version="7.0.6.405-beta4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Gamepad\Browser.Gamepad.fsproj" />
+    <ProjectReference Include="..\..\src\Gamepad\Browser.Gamepad.fsproj" />
   </ItemGroup>
 </Project>

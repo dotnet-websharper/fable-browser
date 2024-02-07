@@ -77,6 +77,7 @@ files
 
 references
     WebSharper.Fable.Core.dll
+    WebSharper.Fable.Attributes.dll
 
 """
 

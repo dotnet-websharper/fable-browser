@@ -32,7 +32,7 @@ module internal JsInteropProxies =
     let createObj<'b when 'b :> seq<string*obj>> (fields: 'b) = New fields
 
     [<Fable.Core.FableImportJs;Inline>]
-    let importDefault<'T0> path : 'T0 = Fable.Core.Util.jsNative
+    let importDefault<'T0> (path:string) : 'T0 = Fable.Core.Util.jsNative
 
     [<Fable.Core.FableImportJs;Inline>]
     let import<'T> (selector:string) (path:string) : 'T = Fable.Core.Util.jsNative
@@ -43,6 +43,10 @@ module internal JsInteropProxies =
 [<Proxy("Fable.Core.JS, Fable.Core")>]
 module internal JSProxy =
     let [<Inline "undefined">] undefined<'T> = X<'T>
+
+    let setTimeout (fn:unit->unit, timeout:int):int =
+        WebSharper.JavaScript.JS.SetTimeout fn timeout
+        |> As<int>
 
     let [<Fable.Core.Global>] console : Fable.Core.JS.Console = Fable.Core.Util.jsNative
 
@@ -72,13 +76,13 @@ type internal ConsoleProxy =
     //     WebSharper.JavaScript.Console
     // member this.dir: ?value: obj * [<ParamArray>] optionalParams: obj[] -> unit
     // member this.dirxml: value: obj -> unit
-    member this.error(message: obj, [<ParamArray>] optionalParams: obj[]) =
+    member this.error(message: obj option, [<ParamArray>] optionalParams: obj[]) =
         WebSharper.JavaScript.Console.Error(message, optionalParams)
     // member this.group: ?groupTitle: string -> unit
     // member this.groupCollapsed: ?groupTitle: string -> unit
     // member this.groupEnd: unit -> unit
     // member this.info: ?message: obj * [<ParamArray>] optionalParams: obj[] -> unit
-    member this.log (message: obj, [<ParamArray>] optionalParams: obj[]) =
+    member this.log (message: obj option, [<ParamArray>] optionalParams: obj[]) =
         WebSharper.JavaScript.Console.Log(message, optionalParams)
     // member this.profile: ?reportName: string -> unit
     // member this.profileEnd: unit -> unit

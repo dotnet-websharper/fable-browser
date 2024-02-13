@@ -3,7 +3,46 @@ module internal FableProxies
 open System
 open WebSharper
 open WebSharper.JavaScript
-    
+
+[<JavaScript false>] 
+type JSOptionsMacro() =
+    inherit Core.Macro()
+
+    // override this.
+    override this.TranslateCall(c: Core.MacroCall) =
+        let rec gatherSetters (st: Core.AST.Statement list) =
+            match st with
+            | [Core.AST.Statement.Block statements] ->
+                statements |> gatherSetters
+            | Core.AST.Statement.ExprStatement(Core.AST.Expression.ExprSourcePos(_, Core.AST.Expression.FieldSet(Some this, td, f, v)))::xs
+            | Core.AST.Statement.ExprStatement(Core.AST.Expression.FieldSet(Some this, td, f, v))::xs ->
+                (this, f, v) :: gatherSetters xs
+            | Core.AST.Statement.ExprStatement(Core.AST.Expression.ExprSourcePos(_, Core.AST.Expression.Call(Some this, td, f, v)))::xs
+            | Core.AST.Statement.ExprStatement(Core.AST.Expression.Call(Some this, td, f, v))::xs ->
+                (this, f.Entity.Value.MethodName.Replace("set_", ""), v.Head) :: gatherSetters xs
+            | [] -> []
+            | x::xs ->
+                gatherSetters xs
+        
+        match c.Arguments with
+        | [Core.AST.Expression.ExprSourcePos (_, Core.AST.Expression.Function ([arg], None, _, body))]
+        | [Core.AST.Expression.Function ([arg], None, _, body)] ->
+            gatherSetters [body]
+            |> List.choose (fun (this, f, v) ->
+                match this with
+                | Core.AST.Expression.ExprSourcePos(_, Core.AST.Expression.Var t)
+                | Core.AST.Expression.Var t ->
+                    if t = arg then  
+                        Some (f, Core.AST.MemberKind.Simple ,v)
+                    else
+                        None
+                | _ -> None
+            )
+            |> Core.AST.Expression.Object
+            |> Core.MacroOk
+        | _ ->
+            Core.MacroError <| sprintf "Incorrect usage of JSOptions %A" c.Arguments
+
 [<Proxy("Fable.Core.Util, Fable.Core")>]
 module internal UtilProxy =
     let [<Inline>] jsNative<'a> = Unchecked.defaultof<'a>
@@ -37,8 +76,14 @@ module internal JsInteropProxies =
     [<Fable.Core.FableImportJs;Inline>]
     let import<'T> (selector:string) (path:string) : 'T = Fable.Core.Util.jsNative
 
+    [<Inline>]
+    let importSideEffects (path:string) = WebSharper.JavaScript.JS.ImportFile path
+
     [<Inline "$target == null">]
     let isNullOrUndefined (target:obj) : bool = target = null
+
+    [<Macro(typeof<JSOptionsMacro>)>]
+    let jsOptions<'T> (f: 'T -> unit) : 'T = X<'T>
 
 [<Proxy("Fable.Core.JS, Fable.Core")>]
 module internal JSProxy =

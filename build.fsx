@@ -145,5 +145,7 @@ let targets =
 
 "PrePackaging" ==> "WS-Package"
 
+"WS-Package" ==> "CI-Release"
+
 targets
 |> RunTargets

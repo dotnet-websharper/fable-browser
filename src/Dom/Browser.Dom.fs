@@ -1439,10 +1439,6 @@ type [<Global;AllowNullLiteral>] HTMLCanvasElement =
     /// Sets or retrieves the width of the object.
     abstract width: float with get, set
     [<Emit("$0.getContext('2d'{{, $1}})")>]
-    #else 
-    // TODO: check
-    [<WebSharper.Inline("$this.getContext('2d', $contextAttributes)")>]
-    #endif
     abstract getContext_2d: ?contextAttributes: obj -> CanvasRenderingContext2D
     /// Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document. A context object includes information about colors, line widths, fonts, and other graphic parameters that can be drawn on a canvas.
     abstract getContext: contextId: string * ?contextAttributes: obj -> obj

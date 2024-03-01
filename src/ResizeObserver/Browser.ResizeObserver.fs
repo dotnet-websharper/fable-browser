@@ -63,11 +63,7 @@ type ResizeObserverCallback = ResizeObserverEntry array -> ResizeObserverType ->
 
 
 type [<Global>] ResizeObserverCtor =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new ResizeObserverType($callback)")>]
-    #else
     [<Emit("new $0($1...)")>] 
-    #endif
     abstract Create: callback: ResizeObserverCallback -> ResizeObserverType
 
 namespace Browser

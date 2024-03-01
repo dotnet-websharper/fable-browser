@@ -30,11 +30,7 @@ type [<Global;AllowNullLiteral>] Blob =
     abstract text: unit -> Promise<string>
 
 type [<AllowNullLiteral>] BlobType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Blob($blobParts, $options)")>]
-    #else
-    [<Emit("new $0($1...)")>] 
-    #endif
+    [<Emit("new $0($1...)")>]
     abstract Create: ?blobParts: obj[] * ?options: BlobPropertyBag -> Blob
 
 type [<Global;AllowNullLiteral>] FormData =
@@ -51,11 +47,7 @@ type [<Global;AllowNullLiteral>] FormData =
     abstract values: unit -> obj seq
 
 type [<AllowNullLiteral>] FormDataType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new FormData()")>]
-    #else
-    [<Emit("new $0($1...)")>] 
-    #endif
+    [<Emit("new $0($1...)")>]
     abstract Create: unit -> FormData
 
 namespace Browser

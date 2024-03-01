@@ -337,11 +337,7 @@ type [<AllowNullLiteral>] MediaStreamError =
 
 type [<AllowNullLiteral>] MediaStreamErrorType =
     abstract prototype: MediaStreamError with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new MediaStreamError()">]
-    #else
-    [<Emit "new $0($1...)">] 
-    #endif
+    [<Emit "new $0($1...)">]
     abstract Create: unit -> obj
 
 type [<Global>] MediaStream =
@@ -359,17 +355,9 @@ type [<Global>] MediaStream =
     abstract onremovetrack: (MediaStreamTrackEvent->unit) with get, set
 
 type MediaStreamType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new MediaStream($streams)">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: ?streams: MediaStreamTrack array -> MediaStream
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new MediaStream($streams)">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: streams: MediaStream -> MediaStream
 
 type CanvasCaptureMediaStreamTrack =
@@ -399,29 +387,13 @@ type [<Global>] MediaDevices =
 
 
 type MediaStreamConstraintsType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({ video: $video, audio: $audio })")>]
-    #else
     [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #endif
     abstract Create: video : bool * audio : bool -> MediaStreamConstraints
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({ video: $video, audio: $audio })")>]
-    #else
     [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #endif
     abstract Create: video : VideoMediaTrackConstraints * audio : bool -> MediaStreamConstraints
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({ video: $video, audio: $audio })")>]
-    #else
     [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #endif
     abstract Create: video : VideoMediaTrackConstraints * audio : AudioMediaTrackConstraints -> MediaStreamConstraints
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({ video: $video, audio: $audio })")>]
-    #else
     [<Emit("new Object({ video: $1, audio: $2 })")>]
-    #endif
     abstract Create: video : bool * audio : AudioMediaTrackConstraints -> MediaStreamConstraints
 
 type HTMLVideoElement' =
@@ -439,18 +411,10 @@ open Fable.Core
 module MediaStreams =
     open Browser.Types
     type HTMLCanvasElement with
-        #if JAVASCRIPT
-        [<WebSharper.Inline("$this.captureStream($framerate)")>]
-        #else
         [<Emit("$0.captureStream({{$1}})")>]
-        #endif
         member this.captureStream(?framerate:uint32) : MediaStream = failwith ""
 
-    #if JAVASCRIPT
-    [<WebSharper.Inline("navigator.mediaDevices")>] 
-    #else
     [<Emit("navigator.mediaDevices")>] 
-    #endif
     let mediaDevices: MediaDevices = jsNative
 
     let [<Global>] MediaStream: MediaStreamType = jsNative

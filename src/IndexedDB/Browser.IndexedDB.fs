@@ -65,32 +65,16 @@ type [<Global>] [<AbstractClass; AllowNullLiteral>] IDBKeyRange =
     abstract upperOpen: bool with get
     abstract includes: obj -> bool
 
-    #if JAVASCRIPT
-    [<WebSharper.Inline("IDBKeyRange.bound($lower,$upper,$lowerOpen,$upperOpen)")>]
-    #else
     [<Emit("IDBKeyRange.bound($0, $1, $2, $3)")>]
-    #endif
     static member bound(lower: obj, upper: obj, ?lowerOpen: bool, ?upperOpen: bool) = jsNative<IDBKeyRange>
 
-    #if JAVASCRIPT
-    [<WebSharper.Inline("IDBKeyRange.only($only)")>]
-    #else
     [<Emit("IDBKeyRange.only($0)")>]
-    #endif
     static member only(only: obj) = jsNative<IDBKeyRange>
 
-    #if JAVASCRIPT
-    [<WebSharper.Inline("IDBKeyRange.lowerBound($lower,$open)")>]
-    #else
     [<Emit("IDBKeyRange.lowerBound($0, $1)")>]
-    #endif
     static member lowerBound(lower: obj, ?``open``: bool) = jsNative<IDBKeyRange>
 
-    #if JAVASCRIPT
-    [<WebSharper.Inline("IDBKeyRange.upperBound($upper,$open)")>]
-    #else
     [<Emit("IDBKeyRange.upperBound($0, $1)")>]
-    #endif
     static member upperBound(upper: obj, ?``open``: bool) = jsNative<IDBKeyRange>
 
 type [<Global;AllowNullLiteral>] IDBCursor =

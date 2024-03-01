@@ -42,11 +42,7 @@ type [<Global;AllowNullLiteral>] XMLHttpRequest =
     abstract setRequestHeader: header: string * value: string -> unit
 
 type [<AllowNullLiteral>] XMLHttpRequestType =
-#if JAVASCRIPT
-    [<WebSharper.Inline("new XMLHttpRequest()")>] 
-#else
     [<Emit("new $0($1...)")>] 
-#endif
     abstract Create: unit -> XMLHttpRequest
 
 namespace Browser

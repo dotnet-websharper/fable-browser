@@ -12,11 +12,7 @@ type [<Global;AllowNullLiteral>] CSSConditionRule =
 
 type CSSConditionRuleType =
     abstract prototype: CSSConditionRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSConditionRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSConditionRule
 
 type [<Global;AllowNullLiteral>] CSSFontFaceRule =
@@ -25,11 +21,7 @@ type [<Global;AllowNullLiteral>] CSSFontFaceRule =
 
 type CSSFontFaceRuleType =
     abstract prototype: CSSFontFaceRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSFontFaceRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSFontFaceRule
 
 type [<Global;AllowNullLiteral>] CSSGroupingRule =
@@ -40,11 +32,7 @@ type [<Global;AllowNullLiteral>] CSSGroupingRule =
 
 type CSSGroupingRuleType =
     abstract prototype: CSSGroupingRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSGroupingRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSGroupingRule
 
 type [<Global;AllowNullLiteral>] CSSImportRule =
@@ -56,11 +44,7 @@ type [<Global;AllowNullLiteral>] CSSImportRule =
 
 type CSSImportRuleType =
     abstract prototype: CSSImportRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSImportRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSImportRule
 
 type [<Global;AllowNullLiteral>] CSSKeyframeRule =
@@ -70,11 +54,7 @@ type [<Global;AllowNullLiteral>] CSSKeyframeRule =
 
 type CSSKeyframeRuleType =
     abstract prototype: CSSKeyframeRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSKeyframeRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSKeyframeRule
 
 type [<Global;AllowNullLiteral>] CSSKeyframesRule =
@@ -87,11 +67,7 @@ type [<Global;AllowNullLiteral>] CSSKeyframesRule =
 
 type CSSKeyframesRuleType =
     abstract prototype: CSSKeyframesRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSKeyframesRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSKeyframesRule
 
 type [<Global;AllowNullLiteral>] CSSMediaRule =
@@ -101,11 +77,7 @@ type [<Global;AllowNullLiteral>] CSSMediaRule =
 
 type CSSMediaRuleType =
     abstract prototype: CSSMediaRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSMediaRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSMediaRule
 
 type [<Global;AllowNullLiteral>] CSSNamespaceRule =
@@ -115,11 +87,7 @@ type [<Global;AllowNullLiteral>] CSSNamespaceRule =
 
 type CSSNamespaceRuleType =
     abstract prototype: CSSNamespaceRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSNamespaceRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSNamespaceRule
 
 type [<Global;AllowNullLiteral>] CSSPageRule =
@@ -131,11 +99,7 @@ type [<Global;AllowNullLiteral>] CSSPageRule =
 
 type CSSPageRuleType =
     abstract prototype: CSSPageRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSPageRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSPageRule
 
 type [<Global;AllowNullLiteral>] CSSRule =
@@ -170,33 +134,18 @@ type CSSRuleType =
     abstract SUPPORTS_RULE: float with get, set
     abstract UNKNOWN_RULE: float with get, set
     abstract VIEWPORT_RULE: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSRule
 
 type [<Global;AllowNullLiteral>] CSSRuleList =
     abstract length: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "$this[$index]">]
-    abstract Item: index: int -> CSSRule with get
-    [<WebSharper.Inline "$this[$index]=$2">] // TODO: check
-    abstract Item: index: int -> CSSRule with set
-    #else
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> CSSRule with get, set
-    #endif
     abstract item: index: float -> CSSRule
 
 type CSSRuleListType =
     abstract prototype: CSSRuleList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSRuleList()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSRuleList
 
 type [<Global;AllowNullLiteral>] CSSStyleDeclaration =
@@ -562,15 +511,8 @@ type [<Global;AllowNullLiteral>] CSSStyleDeclaration =
     abstract writingMode: string with get, set
     abstract zIndex: string with get, set
     abstract zoom: string with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "$this[$index]">]
-    abstract Item: index: int -> string with get
-    [<WebSharper.Inline "$this[$index]=$2">]
-    abstract Item: index: int -> string with set
-    #else
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> string with get, set
-    #endif
     abstract getPropertyPriority: propertyName: string -> string
     abstract getPropertyValue: propertyName: string -> string
     abstract item: index: float -> string
@@ -579,11 +521,7 @@ type [<Global;AllowNullLiteral>] CSSStyleDeclaration =
 
 type CSSStyleDeclarationType =
     abstract prototype: CSSStyleDeclaration with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSStyleDeclaration()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSStyleDeclaration
 
 type [<Global;AllowNullLiteral>] CSSStyleRule =
@@ -594,11 +532,7 @@ type [<Global;AllowNullLiteral>] CSSStyleRule =
 
 type CSSStyleRuleType =
     abstract prototype: CSSStyleRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSStyleRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSStyleRule
 
 type [<Global;AllowNullLiteral>] CSSStyleSheet =
@@ -640,11 +574,7 @@ type [<Global;AllowNullLiteral>] CSSStyleSheet =
 
 type CSSStyleSheetType =
     abstract prototype: CSSStyleSheet with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSStyleSheet()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSStyleSheet
 
 type [<Global;AllowNullLiteral>] CSSSupportsRule =
@@ -652,11 +582,7 @@ type [<Global;AllowNullLiteral>] CSSSupportsRule =
 
 type CSSSupportsRuleType =
     abstract prototype: CSSSupportsRule with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CSSSupportsRule()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> CSSSupportsRule
 
 type [<Global;AllowNullLiteral>] StyleMedia =
@@ -665,11 +591,7 @@ type [<Global;AllowNullLiteral>] StyleMedia =
 
 type StyleMediaType =
     abstract prototype: StyleMedia with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new StyleMedia()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> StyleMedia
 
 type [<Global;AllowNullLiteral>] StyleSheet =
@@ -684,53 +606,27 @@ type [<Global;AllowNullLiteral>] StyleSheet =
 
 type StyleSheetType =
     abstract prototype: StyleSheet with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new StyleSheet()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> StyleSheet
 
 type [<Global;AllowNullLiteral>] StyleSheetList =
     abstract length: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "$this[$index]">]
-    abstract Item: index: int -> StyleSheet with get
-    [<WebSharper.Inline "$this[$index]=$2">]
-    abstract Item: index: int -> StyleSheet with set
-    #else
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> StyleSheet with get, set
-    #endif
     abstract item: ?index: float -> StyleSheet
 
 type StyleSheetListType =
     abstract prototype: StyleSheetList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new StyleSheetList()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> StyleSheetList
 
 type [<Global;AllowNullLiteral>] StyleSheetPageList =
     abstract length: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "$this[$index]">]
-    abstract Item: index: int -> CSSPageRule with get
-    [<WebSharper.Inline "$this[$index]=$2">]
-    abstract Item: index: int -> CSSPageRule with set
-    #else
     [<Emit("$0[$1]{{=$2}}")>]
     abstract Item: index: int -> CSSPageRule with get, set
-    #endif
     abstract item: index: float -> CSSPageRule
 
 type StyleSheetPageListType =
     abstract prototype: StyleSheetPageList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new StyleSheetPageList()">]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> StyleSheetPageList

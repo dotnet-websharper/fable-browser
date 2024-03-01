@@ -22,11 +22,7 @@ type [<Global;AllowNullLiteral>] WebGLObject =
 
 type [<AllowNullLiteral>] WebGLObjectType =
     abstract prototype: WebGLObject with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLObject()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLObject
 
 type [<Global;AllowNullLiteral>] WEBGL_compressed_texture_s3tc =
@@ -41,11 +37,7 @@ type [<AllowNullLiteral>] WEBGL_compressed_texture_s3tcType =
     abstract COMPRESSED_RGBA_S3TC_DXT3_EXT: float with get, set
     abstract COMPRESSED_RGBA_S3TC_DXT5_EXT: float with get, set
     abstract COMPRESSED_RGB_S3TC_DXT1_EXT: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WEBGL()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WEBGL_compressed_texture_s3tc
 
 type [<Global;AllowNullLiteral>] WEBGL_debug_renderer_info =
@@ -56,11 +48,7 @@ type [<AllowNullLiteral>] WEBGL_debug_renderer_infoType =
     abstract prototype: WEBGL_debug_renderer_info with get, set
     abstract UNMASKED_RENDERER_WEBGL: float with get, set
     abstract UNMASKED_VENDOR_WEBGL: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WEBGL()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WEBGL_debug_renderer_info
 
 type [<Global;AllowNullLiteral>] WEBGL_depth_texture =
@@ -69,11 +57,7 @@ type [<Global;AllowNullLiteral>] WEBGL_depth_texture =
 type [<AllowNullLiteral>] WEBGL_depth_textureType =
     abstract prototype: WEBGL_depth_texture with get, set
     abstract UNSIGNED_INT_24_8_WEBGL: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WEBGL()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WEBGL_depth_texture
 
 type [<Global;AllowNullLiteral>] WebGLActiveInfo =
@@ -83,11 +67,7 @@ type [<Global;AllowNullLiteral>] WebGLActiveInfo =
 
 type [<AllowNullLiteral>] WebGLActiveInfoType =
     abstract prototype: WebGLActiveInfo with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLActiveInfo()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLActiveInfo
 
 type [<Global;AllowNullLiteral>] WebGLBuffer =
@@ -95,11 +75,7 @@ type [<Global;AllowNullLiteral>] WebGLBuffer =
 
 type [<AllowNullLiteral>] WebGLBufferType =
     abstract prototype: WebGLBuffer with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLBuffer()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLBuffer
 
 type [<Global;AllowNullLiteral>] WebGLContextEvent =
@@ -108,11 +84,7 @@ type [<Global;AllowNullLiteral>] WebGLContextEvent =
 
 type [<AllowNullLiteral>] WebGLContextEventType =
     abstract prototype: WebGLContextEvent with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLContextEvent()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLContextEvent
 
 type [<Global;AllowNullLiteral>] WebGLFramebuffer =
@@ -121,11 +93,7 @@ type [<Global;AllowNullLiteral>] WebGLFramebuffer =
 
 type [<AllowNullLiteral>] WebGLFramebufferType =
     abstract prototype: WebGLFramebuffer with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLFramebuffer()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLFramebuffer
 
 type [<Global;AllowNullLiteral>] WebGLProgram =
@@ -133,11 +101,7 @@ type [<Global;AllowNullLiteral>] WebGLProgram =
 
 type [<AllowNullLiteral>] WebGLProgramType =
     abstract prototype: WebGLProgram with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLProgram()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLProgram
 
 type [<Global;AllowNullLiteral>] WebGLRenderbuffer =
@@ -145,11 +109,7 @@ type [<Global;AllowNullLiteral>] WebGLRenderbuffer =
 
 type [<AllowNullLiteral>] WebGLRenderbufferType =
     abstract prototype: WebGLRenderbuffer with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLRenderbuffer()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLRenderbuffer
 
 type [<Global;AllowNullLiteral>] WebGLShader =
@@ -157,11 +117,7 @@ type [<Global;AllowNullLiteral>] WebGLShader =
 
 type [<AllowNullLiteral>] WebGLShaderType =
     abstract prototype: WebGLShader with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLShader()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLShader
 
 type [<Global;AllowNullLiteral>] WebGLShaderPrecisionFormat =
@@ -171,11 +127,7 @@ type [<Global;AllowNullLiteral>] WebGLShaderPrecisionFormat =
 
 type [<AllowNullLiteral>] WebGLShaderPrecisionFormatType =
     abstract prototype: WebGLShaderPrecisionFormat with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLShaderPrecisionFormat()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLShaderPrecisionFormat
 
 type [<Global;AllowNullLiteral>] WebGLTexture =
@@ -183,11 +135,7 @@ type [<Global;AllowNullLiteral>] WebGLTexture =
 
 type [<AllowNullLiteral>] WebGLTextureType =
     abstract prototype: WebGLTexture with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLTexture()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLTexture
 
 type [<Global;AllowNullLiteral>] WebGLUniformLocation =
@@ -195,11 +143,7 @@ type [<Global;AllowNullLiteral>] WebGLUniformLocation =
 
 type [<AllowNullLiteral>] WebGLUniformLocationType =
     abstract prototype: WebGLUniformLocation with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLUniformLocation()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLUniformLocation
 
 type [<Global;AllowNullLiteral>] WebGLRenderingContext =
@@ -947,11 +891,7 @@ type [<AllowNullLiteral>] WebGLRenderingContextType =
     abstract VERTEX_SHADER: float with get, set
     abstract VIEWPORT: float with get, set
     abstract ZERO: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new WebGLRenderingContext()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> WebGLRenderingContext
 
 namespace Browser
@@ -962,11 +902,7 @@ open Fable.Core
 module WebGL =
 
     type HTMLCanvasElement with
-        #if JAVASCRIPT
-        [<WebSharper.Inline("$this.getContext('experimental-webgl')")>]
-        #else
         [<Emit("$0.getContext('experimental-webgl')")>]
-        #endif
         member this.getContext_experimental_webgl(): WebGLRenderingContext = jsNative
 
     let [<Global>] WEBGL_compressed_texture_s3tc: WEBGL_compressed_texture_s3tcType = jsNative

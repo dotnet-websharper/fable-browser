@@ -149,8 +149,12 @@ type EmitMacro() =
                             else
                                 yield c.Arguments[i]
                 ]
-            Core.AST.Expression.Verbatim(parts |> List.ofArray |> List.collect (fun x -> if x = "..." && needsExtraArgs >= 1 then List.replicate (needsExtraArgs - 1) "," else [x]), v, false)
-            |> Core.MacroOk
+            if c.Arguments.Length = 0 then
+                Core.AST.Expression.Verbatim(parts |> List.ofArray |> List.collect (fun x -> if x = "..." then [] else [x]), v, false)
+                |> Core.MacroOk
+            else
+                Core.AST.Expression.Verbatim(parts |> List.ofArray |> List.collect (fun x -> if x = "..." && needsExtraArgs >= 1 then List.replicate (needsExtraArgs - 1) "," else [x]), v, false)
+                |> Core.MacroOk
 
 [<Macro(typeof<EmitMacro>)>]
 type EmitAttribute(i: string) =

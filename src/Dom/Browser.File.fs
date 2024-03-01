@@ -19,22 +19,14 @@ type [<Global;AllowNullLiteral>] File =
     abstract name: string
 
 type [<AllowNullLiteral>] FileType =
-    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
-    #else
-    [<WebSharper.Inline("new File($parts,$filename,$properties)")>]
-    #endif
+
     abstract Create: parts: obj[] * filename: string * ?properties: FilePropertyBag -> File
 
 type [<Global;AllowNullLiteral>] FileList =
     abstract length: int
-    #if !JAVASCRIPT
     [<Emit("$0[$1]{{=$2}}")>] 
     abstract Item: index: int -> File
-    #else
-    [<WebSharper.Inline "$this[$index]">]
-    abstract Item: index: int -> File
-    #endif 
     abstract item: index: int -> File
 
 type [<Global;AllowNullLiteral>] FileReader =
@@ -53,9 +45,6 @@ type [<Global;AllowNullLiteral>] FileReader =
 
 type [<AllowNullLiteral>] FileReaderType =
     abstract prototype: FileReader with get, set
-    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>]
-    #else
-    [<WebSharper.Inline("new FileReader()")>]
-    #endif 
+ 
     abstract Create: unit -> FileReader

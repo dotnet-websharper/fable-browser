@@ -45,11 +45,7 @@ type [<Global;AllowNullLiteral>] IntersectionObserverType =
 type IntersectionObserverCallback = IntersectionObserverEntry[] -> IntersectionObserverType -> unit
 
 type [<Global>] IntersectionObserverCtor =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new IntersectionObserverType($url,$options)")>]
-    #else
     [<Emit("new $0($1...)")>] 
-    #endif
     abstract Create: url: IntersectionObserverCallback  * ?options: IntersectionObserverOptions -> IntersectionObserverType
 
 namespace Browser

@@ -73,11 +73,7 @@ type RTCDataChannelInit =
     abstract priority: RTCPriorityType with get, set
 
 type RTCDataChannelInitType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({ordered:true,protocol:'',negotiated:false,priority:'low'})")>]
-    #else
     [<Emit("new Object({ordered:true,protocol:'',negotiated:false,priority:'low'})")>]
-    #endif
     abstract Create:unit -> RTCDataChannelInit
 
 type [<Global>] RTCDataChannelEvent =
@@ -96,11 +92,7 @@ type RTCIceServer =
     abstract username: string option with get, set
 
 type RTCIceServerType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({urls: $urls, username: $username, credential: $credential, credentialType: $credentialType})")>]
-    #else
     [<Emit "new Object({urls: $1, username: $2, credential: $3, credentialType: $4})">]
-    #endif
     abstract Create: urls:string array * ?username:string * ?credential: string * ?credentialType: RTCIceCredentialType -> RTCIceServer
 
 [<StringEnum>]
@@ -179,11 +171,7 @@ type [<Global>] RTCIceCandidate =
     abstract toJSON : unit -> RTCIceCandidateInit
 
 type RTCIceCandidateInitType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({candidate:$candidate,sdpMid:$sdpMid,sdpMLineIndex:$sdpMLineIndex,usernameFragment:$usernameFragment})")>]
-    #else
     [<Emit("new Object({candidate:$1,sdpMid:$2,sdpMLineIndex:$3,usernameFragment:$4})")>] // TODO: check
-    #endif
     abstract Create: candidate:string * sdpMid:string * sdpMLineIndex:string * ?usernameFragment:string -> RTCIceCandidateInit
 
 type RTCIceCandidateStaticType =
@@ -192,11 +180,7 @@ type RTCIceCandidateStaticType =
     abstract sdpMLineIndex: uint16 with get, set
     abstract usernameFragment: string option with get, set
 
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new RTCIceCandidate.addTrack($0)")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: RTCIceCandidateInit option -> RTCIceCandidate
 
 type RTCIceCandidatePair =
@@ -707,11 +691,7 @@ type RTCRtpCapabilities =
   abstract headerExtensions: ResizeArray<RTCRtpHeaderExtensionCapability>
 
 type RTCRtpReceiverType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("RTCRtpReceiver.getCapabilities($kind)")>]
-    #else
     [<Emit("RTCRtpReceiver.getCapabilities($1)")>]
-    #endif
     abstract getCapabilities: kind:string -> RTCRtpCapabilities option
 
 [<StringEnum>]
@@ -746,20 +726,12 @@ type [<Global>] RTCRtpSender =
     abstract setParameters: parameters:RTCRtpSendParameters -> JS.Promise<unit>
     abstract getParameters: unit -> RTCRtpSendParameters
     abstract replaceTrack: withTrack:#MediaStreamTrack option -> JS.Promise<unit>
-    #if JAVASCRIPT
-    [<WebSharper.Inline("$this.setStreams($streams)")>]
-    #else
     [<Emit("$0.setStreams($1...)")>]
-    #endif
     abstract setStreams: [<ParamArray>] streams:MediaStream [] -> unit
     abstract getStats: unit -> JS.Promise<RTCStatsReport>
 
 type RTCRtpSenderType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("RTCRtpSender.getCapabilities($kind)")>]
-    #else
     [<Emit("RTCRtpSender.getCapabilities($1)")>]
-    #endif
     abstract getCapabilities: kind:string -> RTCRtpCapabilities option
 
 
@@ -805,11 +777,7 @@ type RTCSessionDescriptionInit =
     abstract sdp: string with get, set
 
 type RTCSessionDescriptionInitType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("({type:$type,sdp:$sdp})")>]
-    #else
     [<Emit "({type:$1, sdp:$2})">] 
-    #endif
     abstract Create: ``type``:RTCSdpType * sdp:string  -> RTCSessionDescriptionInit
 
 type [<Global>] RTCSessionDescription =
@@ -818,17 +786,9 @@ type [<Global>] RTCSessionDescription =
     abstract toJSON: unit -> RTCSessionDescriptionInit
 
 type RTCSessionDescriptionType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new RTCSessionDescription($message)")>]
-    #else
     [<Emit "new $0($1...)">] 
-    #endif
     abstract Create: ?message: RTCSessionDescriptionInit -> RTCSessionDescription
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new RTCSessionDescription({sdp:$sdp})")>]
-    #else
     [<Emit "new $0({sdp:$1})">] 
-    #endif
     abstract Create: sdp: string -> RTCSessionDescription
 
 type [<Global>] RTCPeerConnectionIceEvent =
@@ -953,11 +913,7 @@ type [<Global>] RTCPeerConnection =
     abstract getSenders: unit -> ResizeArray<RTCRtpSender>
     abstract getReceivers: unit -> ResizeArray<RTCRtpReceiver>
     abstract getTransceivers: unit -> ResizeArray<RTCRtpTransceiver>
-    #if JAVASCRIPT
-    [<WebSharper.Inline("$this.addTrack($track,$streams)")>]
-    #else
     [<Emit("$0.addTrack($1,$2...)")>]
-    #endif
     abstract addTrack: track:MediaStreamTrack * [<ParamArray>] streams: MediaStream array -> RTCRtpSender
 
     abstract removeTrack: sender:RTCRtpSender -> unit
@@ -973,19 +929,11 @@ type [<Global>] RTCPeerConnection =
 
 type RTCPeerConnectionType =
     abstract getDefaultIceServers: unit -> ResizeArray<RTCIceServer>
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new RTCPeerConnection($configuration)")>]
-    #else
     [<Emit "new $0($1...)">]
-    #endif
     abstract Create: ?configuration: RTCConfiguration -> RTCPeerConnection
 
 type RTCConfigurationType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Object({iceServers: $iceServers})")>]
-    #else
     [<Emit "new Object({iceServers: $1})">]
-    #endif
     abstract Create: iceServers: RTCIceServer [] -> RTCConfiguration
 
 namespace Browser

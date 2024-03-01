@@ -38,11 +38,7 @@ type WorkerOptions =
     abstract name: string with get, set
 
 type WorkerConstructor =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new Worker($url,$options)")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif 
     abstract Create: url: string * ?options: WorkerOptions -> Worker
 
 [<StringEnum>]

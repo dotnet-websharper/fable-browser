@@ -64,9 +64,6 @@ type [<AllowNullLiteral>] DOMExceptionType =
     abstract URL_MISMATCH_ERR: float with get, set
     abstract VALIDATION_ERR: float with get, set
     abstract WRONG_DOCUMENT_ERR: float with get, set
-    #if !JAVASCRIPT
     [<Emit("new $0($1...)")>] 
-    #else
-    [<WebSharper.Inline("new DOMException()")>] 
-    #endif
+
     abstract Create: unit -> DOMException

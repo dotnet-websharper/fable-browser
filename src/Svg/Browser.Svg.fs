@@ -17,11 +17,7 @@ type [<Global;AllowNullLiteral>] SVGAElement =
 
 type [<AllowNullLiteral>] SVGAElementType =
     abstract prototype: SVGAElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAElement
 
 type [<Global;AllowNullLiteral>] SVGAngle =
@@ -44,11 +40,7 @@ type [<AllowNullLiteral>] SVGAngleType =
     abstract SVG_ANGLETYPE_RAD: float with get, set
     abstract SVG_ANGLETYPE_UNKNOWN: float with get, set
     abstract SVG_ANGLETYPE_UNSPECIFIED: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAngle()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAngle
 
 type [<Global;AllowNullLiteral>] SVGAnimatedAngle =
@@ -57,11 +49,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedAngle =
 
 type [<AllowNullLiteral>] SVGAnimatedAngleType =
     abstract prototype: SVGAnimatedAngle with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedAngle()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedAngle
 
 type [<Global;AllowNullLiteral>] SVGAnimatedBoolean =
@@ -70,11 +58,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedBoolean =
 
 type [<AllowNullLiteral>] SVGAnimatedBooleanType =
     abstract prototype: SVGAnimatedBoolean with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedBoolean()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedBoolean
 
 type [<Global;AllowNullLiteral>] SVGAnimatedEnumeration =
@@ -83,11 +67,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedEnumeration =
 
 type [<AllowNullLiteral>] SVGAnimatedEnumerationType =
     abstract prototype: SVGAnimatedEnumeration with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedEnumeration()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedEnumeration
 
 type [<Global;AllowNullLiteral>] SVGAnimatedInteger =
@@ -96,11 +76,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedInteger =
 
 type [<AllowNullLiteral>] SVGAnimatedIntegerType =
     abstract prototype: SVGAnimatedInteger with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedInteger()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedInteger
 
 type [<Global;AllowNullLiteral>] SVGAnimatedLength =
@@ -109,11 +85,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedLength =
 
 type [<AllowNullLiteral>] SVGAnimatedLengthType =
     abstract prototype: SVGAnimatedLength with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedLength()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedLength
 
 type [<Global;AllowNullLiteral>] SVGAnimatedLengthList =
@@ -122,11 +94,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedLengthList =
 
 type [<AllowNullLiteral>] SVGAnimatedLengthListType =
     abstract prototype: SVGAnimatedLengthList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedLengthList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedLengthList
 
 type [<Global;AllowNullLiteral>] SVGAnimatedNumber =
@@ -135,11 +103,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedNumber =
 
 type [<AllowNullLiteral>] SVGAnimatedNumberType =
     abstract prototype: SVGAnimatedNumber with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedNumber()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedNumber
 
 type [<Global;AllowNullLiteral>] SVGAnimatedNumberList =
@@ -148,11 +112,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedNumberList =
 
 type [<AllowNullLiteral>] SVGAnimatedNumberListType =
     abstract prototype: SVGAnimatedNumberList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedNumberList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedNumberList
 
 type [<Global;AllowNullLiteral>] SVGAnimatedPreserveAspectRatio =
@@ -161,11 +121,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedPreserveAspectRatio =
 
 type [<AllowNullLiteral>] SVGAnimatedPreserveAspectRatioType =
     abstract prototype: SVGAnimatedPreserveAspectRatio with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedPreserveAspectRatio()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedPreserveAspectRatio
 
 type [<Global;AllowNullLiteral>] SVGAnimatedRect =
@@ -174,11 +130,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedRect =
 
 type [<AllowNullLiteral>] SVGAnimatedRectType =
     abstract prototype: SVGAnimatedRect with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedRect()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedRect
 
 type [<Global;AllowNullLiteral>] SVGAnimatedString =
@@ -187,11 +139,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedString =
 
 type [<AllowNullLiteral>] SVGAnimatedStringType =
     abstract prototype: SVGAnimatedString with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedString()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedString
 
 type [<Global;AllowNullLiteral>] SVGAnimatedTransformList =
@@ -200,11 +148,7 @@ type [<Global;AllowNullLiteral>] SVGAnimatedTransformList =
 
 type [<AllowNullLiteral>] SVGAnimatedTransformListType =
     abstract prototype: SVGAnimatedTransformList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGAnimatedTransformList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGAnimatedTransformList
 
 type [<Global;AllowNullLiteral>] SVGCircleElement =
@@ -220,11 +164,7 @@ type [<Global;AllowNullLiteral>] SVGCircleElement =
 
 type [<AllowNullLiteral>] SVGCircleElementType =
     abstract prototype: SVGCircleElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGCircleElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGCircleElement
 
 type [<Global;AllowNullLiteral>] SVGClipPathElement =
@@ -239,11 +179,7 @@ type [<Global;AllowNullLiteral>] SVGClipPathElement =
 
 type [<AllowNullLiteral>] SVGClipPathElementType =
     abstract prototype: SVGClipPathElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGClipPathElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGClipPathElement
 
 type [<Global;AllowNullLiteral>] SVGComponentTransferFunctionElement =
@@ -270,11 +206,7 @@ type [<AllowNullLiteral>] SVGComponentTransferFunctionElementType =
     abstract SVG_FECOMPONENTTRANSFER_TYPE_LINEAR: float with get, set
     abstract SVG_FECOMPONENTTRANSFER_TYPE_TABLE: float with get, set
     abstract SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGComponentTransferFunctionElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGComponentTransferFunctionElement
 
 type [<Global;AllowNullLiteral>] SVGDefsElement =
@@ -287,11 +219,7 @@ type [<Global;AllowNullLiteral>] SVGDefsElement =
 
 type [<AllowNullLiteral>] SVGDefsElementType =
     abstract prototype: SVGDefsElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGDefsElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGDefsElement
 
 type [<Global;AllowNullLiteral>] SVGDescElement =
@@ -301,11 +229,7 @@ type [<Global;AllowNullLiteral>] SVGDescElement =
 
 type [<AllowNullLiteral>] SVGDescElementType =
     abstract prototype: SVGDescElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGDescElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGDescElement
 
 type [<Global;AllowNullLiteral>] SVGElement =
@@ -328,11 +252,7 @@ type [<Global;AllowNullLiteral>] SVGElement =
 
 type [<AllowNullLiteral>] SVGElementType =
     abstract prototype: SVGElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGElement
 
 type [<Global;AllowNullLiteral>] SVGElementInstance =
@@ -348,11 +268,7 @@ type [<Global;AllowNullLiteral>] SVGElementInstance =
 
 type [<AllowNullLiteral>] SVGElementInstanceType =
     abstract prototype: SVGElementInstance with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGElementInstance()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGElementInstance
 
 type [<Global;AllowNullLiteral>] SVGElementInstanceList =
@@ -361,11 +277,7 @@ type [<Global;AllowNullLiteral>] SVGElementInstanceList =
 
 type [<AllowNullLiteral>] SVGElementInstanceListType =
     abstract prototype: SVGElementInstanceList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGElementInstanceList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGElementInstanceList
 
 type [<Global;AllowNullLiteral>] SVGEllipseElement =
@@ -382,11 +294,7 @@ type [<Global;AllowNullLiteral>] SVGEllipseElement =
 
 type [<AllowNullLiteral>] SVGEllipseElementType =
     abstract prototype: SVGEllipseElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGEllipseElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGEllipseElement
 
 type [<Global;AllowNullLiteral>] SVGFEBlendElement =
@@ -433,11 +341,7 @@ type [<AllowNullLiteral>] SVGFEBlendElementType =
     abstract SVG_FEBLEND_MODE_SCREEN: float with get, set
     abstract SVG_FEBLEND_MODE_SOFT_LIGHT: float with get, set
     abstract SVG_FEBLEND_MODE_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEBlendElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEBlendElement
 
 type [<Global;AllowNullLiteral>] SVGFEColorMatrixElement =
@@ -460,11 +364,7 @@ type [<AllowNullLiteral>] SVGFEColorMatrixElementType =
     abstract SVG_FECOLORMATRIX_TYPE_MATRIX: float with get, set
     abstract SVG_FECOLORMATRIX_TYPE_SATURATE: float with get, set
     abstract SVG_FECOLORMATRIX_TYPE_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEColorMatrixElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEColorMatrixElement
 
 type [<Global;AllowNullLiteral>] SVGFEComponentTransferElement =
@@ -475,11 +375,7 @@ type [<Global;AllowNullLiteral>] SVGFEComponentTransferElement =
 
 type [<AllowNullLiteral>] SVGFEComponentTransferElementType =
     abstract prototype: SVGFEComponentTransferElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEComponentTransferElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEComponentTransferElement
 
 type [<Global;AllowNullLiteral>] SVGFECompositeElement =
@@ -510,11 +406,7 @@ type [<AllowNullLiteral>] SVGFECompositeElementType =
     abstract SVG_FECOMPOSITE_OPERATOR_OVER: float with get, set
     abstract SVG_FECOMPOSITE_OPERATOR_UNKNOWN: float with get, set
     abstract SVG_FECOMPOSITE_OPERATOR_XOR: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFECompositeElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFECompositeElement
 
 type [<Global;AllowNullLiteral>] SVGFEConvolveMatrixElement =
@@ -544,11 +436,7 @@ type [<AllowNullLiteral>] SVGFEConvolveMatrixElementType =
     abstract SVG_EDGEMODE_NONE: float with get, set
     abstract SVG_EDGEMODE_UNKNOWN: float with get, set
     abstract SVG_EDGEMODE_WRAP: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEConvolveMatrixElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEConvolveMatrixElement
 
 type [<Global;AllowNullLiteral>] SVGFEDiffuseLightingElement =
@@ -563,11 +451,7 @@ type [<Global;AllowNullLiteral>] SVGFEDiffuseLightingElement =
 
 type [<AllowNullLiteral>] SVGFEDiffuseLightingElementType =
     abstract prototype: SVGFEDiffuseLightingElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEDiffuseLightingElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEDiffuseLightingElement
 
 type [<Global;AllowNullLiteral>] SVGFEDisplacementMapElement =
@@ -592,11 +476,7 @@ type [<AllowNullLiteral>] SVGFEDisplacementMapElementType =
     abstract SVG_CHANNEL_G: float with get, set
     abstract SVG_CHANNEL_R: float with get, set
     abstract SVG_CHANNEL_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEDisplacementMapElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEDisplacementMapElement
 
 type [<Global;AllowNullLiteral>] SVGFEDistantLightElement =
@@ -606,11 +486,7 @@ type [<Global;AllowNullLiteral>] SVGFEDistantLightElement =
 
 type [<AllowNullLiteral>] SVGFEDistantLightElementType =
     abstract prototype: SVGFEDistantLightElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEDistantLightElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEDistantLightElement
 
 type [<Global;AllowNullLiteral>] SVGFEFloodElement =
@@ -620,11 +496,7 @@ type [<Global;AllowNullLiteral>] SVGFEFloodElement =
 
 type [<AllowNullLiteral>] SVGFEFloodElementType =
     abstract prototype: SVGFEFloodElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEFloodElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEFloodElement
 
 type [<Global;AllowNullLiteral>] SVGFEFuncAElement =
@@ -633,11 +505,7 @@ type [<Global;AllowNullLiteral>] SVGFEFuncAElement =
 
 type [<AllowNullLiteral>] SVGFEFuncAElementType =
     abstract prototype: SVGFEFuncAElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEFuncAElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEFuncAElement
 
 type [<Global;AllowNullLiteral>] SVGFEFuncBElement =
@@ -646,11 +514,7 @@ type [<Global;AllowNullLiteral>] SVGFEFuncBElement =
 
 type [<AllowNullLiteral>] SVGFEFuncBElementType =
     abstract prototype: SVGFEFuncBElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEFuncBElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEFuncBElement
 
 type [<Global;AllowNullLiteral>] SVGFEFuncGElement =
@@ -659,11 +523,7 @@ type [<Global;AllowNullLiteral>] SVGFEFuncGElement =
 
 type [<AllowNullLiteral>] SVGFEFuncGElementType =
     abstract prototype: SVGFEFuncGElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEFuncGElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEFuncGElement
 
 type [<Global;AllowNullLiteral>] SVGFEFuncRElement =
@@ -672,11 +532,7 @@ type [<Global;AllowNullLiteral>] SVGFEFuncRElement =
 
 type [<AllowNullLiteral>] SVGFEFuncRElementType =
     abstract prototype: SVGFEFuncRElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEFuncRElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEFuncRElement
 
 type [<Global;AllowNullLiteral>] SVGFEGaussianBlurElement =
@@ -690,11 +546,7 @@ type [<Global;AllowNullLiteral>] SVGFEGaussianBlurElement =
 
 type [<AllowNullLiteral>] SVGFEGaussianBlurElementType =
     abstract prototype: SVGFEGaussianBlurElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEGaussianBlurElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEGaussianBlurElement
 
 type [<Global;AllowNullLiteral>] SVGFEImageElement =
@@ -708,11 +560,7 @@ type [<Global;AllowNullLiteral>] SVGFEImageElement =
 
 type [<AllowNullLiteral>] SVGFEImageElementType =
     abstract prototype: SVGFEImageElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEImageElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEImageElement
 
 type [<Global;AllowNullLiteral>] SVGFEMergeElement =
@@ -722,11 +570,7 @@ type [<Global;AllowNullLiteral>] SVGFEMergeElement =
 
 type [<AllowNullLiteral>] SVGFEMergeElementType =
     abstract prototype: SVGFEMergeElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEMergeElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEMergeElement
 
 type [<Global;AllowNullLiteral>] SVGFEMergeNodeElement =
@@ -735,11 +579,7 @@ type [<Global;AllowNullLiteral>] SVGFEMergeNodeElement =
 
 type [<AllowNullLiteral>] SVGFEMergeNodeElementType =
     abstract prototype: SVGFEMergeNodeElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEMergeNodeElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEMergeNodeElement
 
 type [<Global;AllowNullLiteral>] SVGFEMorphologyElement =
@@ -759,11 +599,7 @@ type [<AllowNullLiteral>] SVGFEMorphologyElementType =
     abstract SVG_MORPHOLOGY_OPERATOR_DILATE: float with get, set
     abstract SVG_MORPHOLOGY_OPERATOR_ERODE: float with get, set
     abstract SVG_MORPHOLOGY_OPERATOR_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEMorphologyElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEMorphologyElement
 
 type [<Global;AllowNullLiteral>] SVGFEOffsetElement =
@@ -776,11 +612,7 @@ type [<Global;AllowNullLiteral>] SVGFEOffsetElement =
 
 type [<AllowNullLiteral>] SVGFEOffsetElementType =
     abstract prototype: SVGFEOffsetElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEOffsetElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEOffsetElement
 
 type [<Global;AllowNullLiteral>] SVGFEPointLightElement =
@@ -791,11 +623,7 @@ type [<Global;AllowNullLiteral>] SVGFEPointLightElement =
 
 type [<AllowNullLiteral>] SVGFEPointLightElementType =
     abstract prototype: SVGFEPointLightElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFEPointLightElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFEPointLightElement
 
 type [<Global;AllowNullLiteral>] SVGFESpecularLightingElement =
@@ -811,11 +639,7 @@ type [<Global;AllowNullLiteral>] SVGFESpecularLightingElement =
 
 type [<AllowNullLiteral>] SVGFESpecularLightingElementType =
     abstract prototype: SVGFESpecularLightingElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFESpecularLightingElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFESpecularLightingElement
 
 type [<Global;AllowNullLiteral>] SVGFESpotLightElement =
@@ -831,11 +655,7 @@ type [<Global;AllowNullLiteral>] SVGFESpotLightElement =
 
 type [<AllowNullLiteral>] SVGFESpotLightElementType =
     abstract prototype: SVGFESpotLightElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFESpotLightElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFESpotLightElement
 
 type [<Global;AllowNullLiteral>] SVGFETileElement =
@@ -846,11 +666,7 @@ type [<Global;AllowNullLiteral>] SVGFETileElement =
 
 type [<AllowNullLiteral>] SVGFETileElementType =
     abstract prototype: SVGFETileElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFETileElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFETileElement
 
 type [<Global;AllowNullLiteral>] SVGFETurbulenceElement =
@@ -878,11 +694,7 @@ type [<AllowNullLiteral>] SVGFETurbulenceElementType =
     abstract SVG_TURBULENCE_TYPE_FRACTALNOISE: float with get, set
     abstract SVG_TURBULENCE_TYPE_TURBULENCE: float with get, set
     abstract SVG_TURBULENCE_TYPE_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFETurbulenceElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFETurbulenceElement
 
 type [<Global;AllowNullLiteral>] SVGFilterElement =
@@ -905,11 +717,7 @@ type [<Global;AllowNullLiteral>] SVGFilterElement =
 
 type [<AllowNullLiteral>] SVGFilterElementType =
     abstract prototype: SVGFilterElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGFilterElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGFilterElement
 
 type [<Global;AllowNullLiteral>] SVGForeignObjectElement =
@@ -927,11 +735,7 @@ type [<Global;AllowNullLiteral>] SVGForeignObjectElement =
 
 type [<AllowNullLiteral>] SVGForeignObjectElementType =
     abstract prototype: SVGForeignObjectElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGForeignObjectElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGForeignObjectElement
 
 type [<Global;AllowNullLiteral>] SVGGElement =
@@ -945,11 +749,7 @@ type [<Global;AllowNullLiteral>] SVGGElement =
 
 type [<AllowNullLiteral>] SVGGElementType =
     abstract prototype: SVGGElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGGElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGGElement
 
 type [<Global;AllowNullLiteral>] SVGGradientElement =
@@ -973,11 +773,7 @@ type [<AllowNullLiteral>] SVGGradientElementType =
     abstract SVG_SPREADMETHOD_REFLECT: float with get, set
     abstract SVG_SPREADMETHOD_REPEAT: float with get, set
     abstract SVG_SPREADMETHOD_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGGradientElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGGradientElement
 
 type [<Global;AllowNullLiteral>] SVGImageElement =
@@ -997,11 +793,7 @@ type [<Global;AllowNullLiteral>] SVGImageElement =
 
 type [<AllowNullLiteral>] SVGImageElementType =
     abstract prototype: SVGImageElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGImageElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGImageElement
 
 type [<Global;AllowNullLiteral>] SVGLength =
@@ -1036,11 +828,7 @@ type [<AllowNullLiteral>] SVGLengthType =
     abstract SVG_LENGTHTYPE_PT: float with get, set
     abstract SVG_LENGTHTYPE_PX: float with get, set
     abstract SVG_LENGTHTYPE_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGLength()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGLength
 
 type [<Global;AllowNullLiteral>] SVGLengthList =
@@ -1055,11 +843,7 @@ type [<Global;AllowNullLiteral>] SVGLengthList =
 
 type [<AllowNullLiteral>] SVGLengthListType =
     abstract prototype: SVGLengthList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGLengthList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGLengthList
 
 type [<Global;AllowNullLiteral>] SVGLineElement =
@@ -1077,11 +861,7 @@ type [<Global;AllowNullLiteral>] SVGLineElement =
 
 type [<AllowNullLiteral>] SVGLineElementType =
     abstract prototype: SVGLineElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGLineElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGLineElement
 
 type [<Global;AllowNullLiteral>] SVGLinearGradientElement =
@@ -1093,11 +873,7 @@ type [<Global;AllowNullLiteral>] SVGLinearGradientElement =
 
 type [<AllowNullLiteral>] SVGLinearGradientElementType =
     abstract prototype: SVGLinearGradientElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGLinearGradientElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGLinearGradientElement
 
 type [<Global;AllowNullLiteral>] SVGMarkerElement =
@@ -1131,11 +907,7 @@ type [<AllowNullLiteral>] SVGMarkerElementType =
     abstract SVG_MARKER_ORIENT_ANGLE: float with get, set
     abstract SVG_MARKER_ORIENT_AUTO: float with get, set
     abstract SVG_MARKER_ORIENT_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGMarkerElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGMarkerElement
 
 type [<Global;AllowNullLiteral>] SVGMaskElement =
@@ -1155,11 +927,7 @@ type [<Global;AllowNullLiteral>] SVGMaskElement =
 
 type [<AllowNullLiteral>] SVGMaskElementType =
     abstract prototype: SVGMaskElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGMaskElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGMaskElement
 
 type [<Global;AllowNullLiteral>] SVGMatrix =
@@ -1183,11 +951,7 @@ type [<Global;AllowNullLiteral>] SVGMatrix =
 
 type [<AllowNullLiteral>] SVGMatrixType =
     abstract prototype: SVGMatrix with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGMatrix()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGMatrix
 
 type [<Global;AllowNullLiteral>] SVGMetadataElement =
@@ -1196,11 +960,7 @@ type [<Global;AllowNullLiteral>] SVGMetadataElement =
 
 type [<AllowNullLiteral>] SVGMetadataElementType =
     abstract prototype: SVGMetadataElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGMetadataElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGMetadataElement
 
 type [<Global;AllowNullLiteral>] SVGNumber =
@@ -1208,11 +968,7 @@ type [<Global;AllowNullLiteral>] SVGNumber =
 
 type [<AllowNullLiteral>] SVGNumberType =
     abstract prototype: SVGNumber with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGNumber()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGNumber
 
 type [<Global;AllowNullLiteral>] SVGNumberList =
@@ -1227,11 +983,7 @@ type [<Global;AllowNullLiteral>] SVGNumberList =
 
 type [<AllowNullLiteral>] SVGNumberListType =
     abstract prototype: SVGNumberList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGNumberList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGNumberList
 
 type [<Global;AllowNullLiteral>] SVGPathElement =
@@ -1268,11 +1020,7 @@ type [<Global;AllowNullLiteral>] SVGPathElement =
 
 type [<AllowNullLiteral>] SVGPathElementType =
     abstract prototype: SVGPathElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathElement
 
 type [<Global;AllowNullLiteral>] SVGPathSeg =
@@ -1321,11 +1069,7 @@ type [<AllowNullLiteral>] SVGPathSegType =
     abstract PATHSEG_MOVETO_ABS: float with get, set
     abstract PATHSEG_MOVETO_REL: float with get, set
     abstract PATHSEG_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSeg()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSeg
 
 type [<Global;AllowNullLiteral>] SVGPathSegArcAbs =
@@ -1340,11 +1084,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegArcAbs =
 
 type [<AllowNullLiteral>] SVGPathSegArcAbsType =
     abstract prototype: SVGPathSegArcAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegArcAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegArcAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegArcRel =
@@ -1359,11 +1099,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegArcRel =
 
 type [<AllowNullLiteral>] SVGPathSegArcRelType =
     abstract prototype: SVGPathSegArcRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegArcRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegArcRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegClosePath =
@@ -1372,11 +1108,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegClosePath =
 
 type [<AllowNullLiteral>] SVGPathSegClosePathType =
     abstract prototype: SVGPathSegClosePath with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegClosePath()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegClosePath
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicAbs =
@@ -1390,11 +1122,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicAbs =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicAbsType =
     abstract prototype: SVGPathSegCurvetoCubicAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoCubicAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoCubicAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicRel =
@@ -1408,11 +1136,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicRel =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicRelType =
     abstract prototype: SVGPathSegCurvetoCubicRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoCubicRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoCubicRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothAbs =
@@ -1424,11 +1148,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothAbs =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothAbsType =
     abstract prototype: SVGPathSegCurvetoCubicSmoothAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoCubicSmoothAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoCubicSmoothAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothRel =
@@ -1440,11 +1160,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothRel =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoCubicSmoothRelType =
     abstract prototype: SVGPathSegCurvetoCubicSmoothRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoCubicSmoothRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoCubicSmoothRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticAbs =
@@ -1456,11 +1172,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticAbs =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticAbsType =
     abstract prototype: SVGPathSegCurvetoQuadraticAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoQuadraticAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoQuadraticAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticRel =
@@ -1472,11 +1184,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticRel =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticRelType =
     abstract prototype: SVGPathSegCurvetoQuadraticRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoQuadraticRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoQuadraticRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothAbs =
@@ -1486,11 +1194,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothAbs =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothAbsType =
     abstract prototype: SVGPathSegCurvetoQuadraticSmoothAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoQuadraticSmoothAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoQuadraticSmoothAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothRel =
@@ -1500,11 +1204,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothRel =
 
 type [<AllowNullLiteral>] SVGPathSegCurvetoQuadraticSmoothRelType =
     abstract prototype: SVGPathSegCurvetoQuadraticSmoothRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegCurvetoQuadraticSmoothRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegCurvetoQuadraticSmoothRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegLinetoAbs =
@@ -1514,11 +1214,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegLinetoAbs =
 
 type [<AllowNullLiteral>] SVGPathSegLinetoAbsType =
     abstract prototype: SVGPathSegLinetoAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegLinetoAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegLinetoAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegLinetoHorizontalAbs =
@@ -1527,11 +1223,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegLinetoHorizontalAbs =
 
 type [<AllowNullLiteral>] SVGPathSegLinetoHorizontalAbsType =
     abstract prototype: SVGPathSegLinetoHorizontalAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegLinetoHorizontalAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegLinetoHorizontalAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegLinetoHorizontalRel =
@@ -1540,11 +1232,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegLinetoHorizontalRel =
 
 type [<AllowNullLiteral>] SVGPathSegLinetoHorizontalRelType =
     abstract prototype: SVGPathSegLinetoHorizontalRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegLinetoHorizontalRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegLinetoHorizontalRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegLinetoRel =
@@ -1554,11 +1242,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegLinetoRel =
 
 type [<AllowNullLiteral>] SVGPathSegLinetoRelType =
     abstract prototype: SVGPathSegLinetoRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegLinetoRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegLinetoRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegLinetoVerticalAbs =
@@ -1567,11 +1251,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegLinetoVerticalAbs =
 
 type [<AllowNullLiteral>] SVGPathSegLinetoVerticalAbsType =
     abstract prototype: SVGPathSegLinetoVerticalAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegLinetoVerticalAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegLinetoVerticalAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegLinetoVerticalRel =
@@ -1580,11 +1260,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegLinetoVerticalRel =
 
 type [<AllowNullLiteral>] SVGPathSegLinetoVerticalRelType =
     abstract prototype: SVGPathSegLinetoVerticalRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegLinetoVerticalRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegLinetoVerticalRel
 
 type [<Global;AllowNullLiteral>] SVGPathSegList =
@@ -1599,11 +1275,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegList =
 
 type [<AllowNullLiteral>] SVGPathSegListType =
     abstract prototype: SVGPathSegList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegList
 
 type [<Global;AllowNullLiteral>] SVGPathSegMovetoAbs =
@@ -1613,11 +1285,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegMovetoAbs =
 
 type [<AllowNullLiteral>] SVGPathSegMovetoAbsType =
     abstract prototype: SVGPathSegMovetoAbs with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegMovetoAbs()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegMovetoAbs
 
 type [<Global;AllowNullLiteral>] SVGPathSegMovetoRel =
@@ -1627,11 +1295,7 @@ type [<Global;AllowNullLiteral>] SVGPathSegMovetoRel =
 
 type [<AllowNullLiteral>] SVGPathSegMovetoRelType =
     abstract prototype: SVGPathSegMovetoRel with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPathSegMovetoRel()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPathSegMovetoRel
 
 type [<Global;AllowNullLiteral>] SVGPatternElement =
@@ -1654,11 +1318,7 @@ type [<Global;AllowNullLiteral>] SVGPatternElement =
 
 type [<AllowNullLiteral>] SVGPatternElementType =
     abstract prototype: SVGPatternElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPatternElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPatternElement
 
 type [<Global;AllowNullLiteral>] SVGPoint =
@@ -1668,11 +1328,7 @@ type [<Global;AllowNullLiteral>] SVGPoint =
 
 type [<AllowNullLiteral>] SVGPointType =
     abstract prototype: SVGPoint with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPoint()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPoint
 
 type [<Global;AllowNullLiteral>] SVGPointList =
@@ -1687,11 +1343,7 @@ type [<Global;AllowNullLiteral>] SVGPointList =
 
 type [<AllowNullLiteral>] SVGPointListType =
     abstract prototype: SVGPointList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPointList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPointList
 
 type [<Global;AllowNullLiteral>] SVGPolygonElement =
@@ -1706,11 +1358,7 @@ type [<Global;AllowNullLiteral>] SVGPolygonElement =
 
 type [<AllowNullLiteral>] SVGPolygonElementType =
     abstract prototype: SVGPolygonElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPolygonElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPolygonElement
 
 type [<Global;AllowNullLiteral>] SVGPolylineElement =
@@ -1725,11 +1373,7 @@ type [<Global;AllowNullLiteral>] SVGPolylineElement =
 
 type [<AllowNullLiteral>] SVGPolylineElementType =
     abstract prototype: SVGPolylineElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPolylineElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPolylineElement
 
 type [<Global;AllowNullLiteral>] SVGPreserveAspectRatio =
@@ -1766,11 +1410,7 @@ type [<AllowNullLiteral>] SVGPreserveAspectRatioType =
     abstract SVG_PRESERVEASPECTRATIO_XMINYMAX: float with get, set
     abstract SVG_PRESERVEASPECTRATIO_XMINYMID: float with get, set
     abstract SVG_PRESERVEASPECTRATIO_XMINYMIN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGPreserveAspectRatio()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGPreserveAspectRatio
 
 type [<Global;AllowNullLiteral>] SVGRadialGradientElement =
@@ -1783,11 +1423,7 @@ type [<Global;AllowNullLiteral>] SVGRadialGradientElement =
 
 type [<AllowNullLiteral>] SVGRadialGradientElementType =
     abstract prototype: SVGRadialGradientElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGRadialGradientElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGRadialGradientElement
 
 type [<Global;AllowNullLiteral>] SVGRect =
@@ -1798,11 +1434,7 @@ type [<Global;AllowNullLiteral>] SVGRect =
 
 type [<AllowNullLiteral>] SVGRectType =
     abstract prototype: SVGRect with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGRect()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGRect
 
 type [<Global;AllowNullLiteral>] SVGRectElement =
@@ -1822,11 +1454,7 @@ type [<Global;AllowNullLiteral>] SVGRectElement =
 
 type [<AllowNullLiteral>] SVGRectElementType =
     abstract prototype: SVGRectElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGRectElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGRectElement
 
 type [<Global;AllowNullLiteral>] SVGSVGElement =
@@ -1885,11 +1513,7 @@ type [<Global;AllowNullLiteral>] SVGSVGElement =
 
 type [<AllowNullLiteral>] SVGSVGElementType =
     abstract prototype: SVGSVGElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGSVGElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGSVGElement
 
 type [<Global;AllowNullLiteral>] SVGScriptElement =
@@ -1901,11 +1525,7 @@ type [<Global;AllowNullLiteral>] SVGScriptElement =
 
 type [<AllowNullLiteral>] SVGScriptElementType =
     abstract prototype: SVGScriptElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGScriptElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGScriptElement
 
 type [<Global;AllowNullLiteral>] SVGStopElement =
@@ -1916,11 +1536,7 @@ type [<Global;AllowNullLiteral>] SVGStopElement =
 
 type [<AllowNullLiteral>] SVGStopElementType =
     abstract prototype: SVGStopElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGStopElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGStopElement
 
 type [<Global;AllowNullLiteral>] SVGStringList =
@@ -1935,11 +1551,7 @@ type [<Global;AllowNullLiteral>] SVGStringList =
 
 type [<AllowNullLiteral>] SVGStringListType =
     abstract prototype: SVGStringList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGStringList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGStringList
 
 type [<Global;AllowNullLiteral>] SVGStyleElement =
@@ -1952,11 +1564,7 @@ type [<Global;AllowNullLiteral>] SVGStyleElement =
 
 type [<AllowNullLiteral>] SVGStyleElementType =
     abstract prototype: SVGStyleElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGStyleElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGStyleElement
 
 type [<Global;AllowNullLiteral>] SVGSwitchElement =
@@ -1970,11 +1578,7 @@ type [<Global;AllowNullLiteral>] SVGSwitchElement =
 
 type [<AllowNullLiteral>] SVGSwitchElementType =
     abstract prototype: SVGSwitchElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGSwitchElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGSwitchElement
 
 type [<Global;AllowNullLiteral>] SVGSymbolElement =
@@ -1987,11 +1591,7 @@ type [<Global;AllowNullLiteral>] SVGSymbolElement =
 
 type [<AllowNullLiteral>] SVGSymbolElementType =
     abstract prototype: SVGSymbolElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGSymbolElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGSymbolElement
 
 type [<Global;AllowNullLiteral>] SVGTSpanElement =
@@ -2000,11 +1600,7 @@ type [<Global;AllowNullLiteral>] SVGTSpanElement =
 
 type [<AllowNullLiteral>] SVGTSpanElementType =
     abstract prototype: SVGTSpanElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTSpanElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTSpanElement
 
 type [<Global;AllowNullLiteral>] SVGTextContentElement =
@@ -2034,11 +1630,7 @@ type [<AllowNullLiteral>] SVGTextContentElementType =
     abstract LENGTHADJUST_SPACING: float with get, set
     abstract LENGTHADJUST_SPACINGANDGLYPHS: float with get, set
     abstract LENGTHADJUST_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTextContentElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTextContentElement
 
 type [<Global;AllowNullLiteral>] SVGTextElement =
@@ -2048,11 +1640,7 @@ type [<Global;AllowNullLiteral>] SVGTextElement =
 
 type [<AllowNullLiteral>] SVGTextElementType =
     abstract prototype: SVGTextElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTextElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTextElement
 
 type [<Global;AllowNullLiteral>] SVGTextPathElement =
@@ -2077,11 +1665,7 @@ type [<AllowNullLiteral>] SVGTextPathElementType =
     abstract TEXTPATH_SPACINGTYPE_AUTO: float with get, set
     abstract TEXTPATH_SPACINGTYPE_EXACT: float with get, set
     abstract TEXTPATH_SPACINGTYPE_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTextPathElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTextPathElement
 
 type [<Global;AllowNullLiteral>] SVGTextPositioningElement =
@@ -2094,11 +1678,7 @@ type [<Global;AllowNullLiteral>] SVGTextPositioningElement =
 
 type [<AllowNullLiteral>] SVGTextPositioningElementType =
     abstract prototype: SVGTextPositioningElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTextPositioningElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTextPositioningElement
 
 type [<Global;AllowNullLiteral>] SVGTitleElement =
@@ -2109,11 +1689,7 @@ type [<Global;AllowNullLiteral>] SVGTitleElement =
 
 type [<AllowNullLiteral>] SVGTitleElementType =
     abstract prototype: SVGTitleElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTitleElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTitleElement
 
 type [<Global;AllowNullLiteral>] SVGTransform =
@@ -2143,11 +1719,7 @@ type [<AllowNullLiteral>] SVGTransformType =
     abstract SVG_TRANSFORM_SKEWY: float with get, set
     abstract SVG_TRANSFORM_TRANSLATE: float with get, set
     abstract SVG_TRANSFORM_UNKNOWN: float with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTransform()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTransform
 
 type [<Global;AllowNullLiteral>] SVGTransformList =
@@ -2164,11 +1736,7 @@ type [<Global;AllowNullLiteral>] SVGTransformList =
 
 type [<AllowNullLiteral>] SVGTransformListType =
     abstract prototype: SVGTransformList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGTransformList()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGTransformList
 
 type [<Global;AllowNullLiteral>] SVGUnitTypes =
@@ -2194,11 +1762,7 @@ type [<Global;AllowNullLiteral>] SVGUseElement =
 
 type [<AllowNullLiteral>] SVGUseElementType =
     abstract prototype: SVGUseElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGUseElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGUseElement
 
 type [<Global;AllowNullLiteral>] SVGViewElement =
@@ -2211,11 +1775,7 @@ type [<Global;AllowNullLiteral>] SVGViewElement =
 
 type [<AllowNullLiteral>] SVGViewElementType =
     abstract prototype: SVGViewElement with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGViewElement()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGViewElement
 
 type [<Global;AllowNullLiteral>] SVGZoomAndPan =
@@ -2236,11 +1796,7 @@ type [<Global;AllowNullLiteral>] SVGZoomEvent =
 
 type [<AllowNullLiteral>] SVGZoomEventType =
     abstract prototype: SVGZoomEvent with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new SVGZoomEvent()")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: unit -> SVGZoomEvent
 
 type [<Global;AllowNullLiteral>] SVGAnimatedPathData =

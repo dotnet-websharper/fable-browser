@@ -29,11 +29,7 @@ type [<AllowNullLiteral>] EventInit =
     abstract composed: bool with get, set
 
 type [<AllowNullLiteral>] EventType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new Event($type, $eventInitDict)">]
-    #else
-    [<Emit("new $0($1...)")>] 
-    #endif
+    [<Emit("new $0($1...)")>]
     abstract Create: ``type``: string * ?eventInitDict: EventInit -> Event
     abstract AT_TARGET: float with get, set
     abstract BUBBLING_PHASE: float with get, set
@@ -57,11 +53,7 @@ type [<Global;AllowNullLiteral>] EventTarget =
     abstract removeEventListener: ``type``: string * listener: (Event->unit) * options: RemoveEventListenerOptions -> unit
 
 type [<Global;AllowNullLiteral>] EventTargetType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new EventTarget()")>]
-    #else
-    [<Emit("new $0($1...)")>] 
-    #endif
+    [<Emit("new $0($1...)")>]
     abstract Create: unit -> EventTarget
 
 type [<Global;AllowNullLiteral>] CustomEvent =
@@ -81,17 +73,9 @@ type [<AllowNullLiteral>] CustomEventInit<'T> =
     abstract detail: 'T option with get, set
 
 type [<AllowNullLiteral>] CustomEventType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CustomEvent($typeArg, $eventInitDict)">]
-    #else
-    [<Emit("new $0($1...)")>] 
-    #endif
+    [<Emit("new $0($1...)")>]
     abstract Create : typeArg: string * ?eventInitDict: CustomEventInit -> CustomEvent
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new CustomEvent($typeArg, $eventInitDict)">]
-    #else
-    [<Emit("new $0($1...)")>] 
-    #endif
+    [<Emit("new $0($1...)")>]
     abstract Create : typeArg: string * ?eventInitDict: CustomEventInit<'T> -> CustomEvent<'T>
 
 type [<Global;AllowNullLiteral>] ErrorEvent =
@@ -118,11 +102,7 @@ type GamepadEventType =
 
 type [<Global;AllowNullLiteral>] GamepadEvent =
     inherit Event
-    #if JAVASCRIPT
-    [<WebSharper.Inline "new GamepadEvent($typeArg, $options)">]
-    #else
-    [<Emit("new $0($1...)")>] 
-    #endif
+    [<Emit("new $0($1...)")>]
     abstract Create: typeArg: GamepadEventType * ?options: Gamepad
     
     abstract gamepad: Gamepad

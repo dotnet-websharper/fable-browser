@@ -19,11 +19,7 @@ type [<Global;AllowNullLiteral>] URLSearchParams =
     abstract set: name: string * value: string -> unit
 
 type [<AllowNullLiteral>] URLSearchParamsType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new URLSearchParams($arg)")>] 
-    #else
     [<Emit("new $0($1...)")>] 
-    #endif
     abstract Create: arg: obj -> URLSearchParams
 
 type [<Global;AllowNullLiteral>] URL =
@@ -43,11 +39,7 @@ type [<Global;AllowNullLiteral>] URL =
     abstract toJSON: unit -> string
 
 type [<AllowNullLiteral>] URLType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new URL($url,$base)")>] 
-    #else
     [<Emit("new $0($1...)")>] 
-    #endif
     abstract Create: url: string * ?``base``: string -> URL
     /// Returns a DOMString containing a unique blob URL, that is a URL with blob: as its scheme, followed by an opaque string uniquely identifying the object in the browser.
     abstract createObjectURL: obj -> string

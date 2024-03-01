@@ -12,9 +12,5 @@ type [<Global;AllowNullLiteral>] MediaQueryList =
 
 type [<AllowNullLiteral>] MediaQueryListType =
     abstract prototype: MediaQueryList with get, set
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new MediaQueryList()")>]
-    #else
     [<Emit("new $0($1...)")>] 
-    #endif
     abstract Create: unit -> MediaQueryList

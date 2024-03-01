@@ -16,11 +16,7 @@ type [<Global;AllowNullLiteral>] BlobEvent =
     abstract timecode: DOMHighResTimeStamp
 
 type [<AllowNullLiteral>] BlobEventType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new BlobEvent($data,$timecode)")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: data: Blob * ?timecode: DOMHighResTimeStamp -> BlobEvent
 
 type [<AllowNullLiteral>] MediaRecorderErrorEvent =
@@ -55,11 +51,7 @@ type MediaRecorderOptions =
     abstract bitsPerSecond: uint32 with get, set
 
 type MediaRecorderType =
-    #if JAVASCRIPT
-    [<WebSharper.Inline("new MediaRecorder($stream,$options)")>]
-    #else
     [<Emit("new $0($1...)")>]
-    #endif
     abstract Create: stream: MediaStream * ?options: MediaRecorderOptions -> MediaRecorder
     abstract isTypeSupported: mimeType: string -> bool
 

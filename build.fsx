@@ -71,6 +71,7 @@ tags
 dependencies
     framework: netstandard2.0
         WebSharper ~> LOCKEDVERSION:[3]
+        Fable.Core >= 4.0
 files
     ../websharper/WebSharper.Fable.Core/bin/Release/netstandard2.0/WebSharper.Fable.Core.dll ==> lib/netstandard2.0
     ../websharper/WebSharper.Fable.Attributes/bin/Release/netstandard2.0/WebSharper.Fable.Attributes.dll ==> lib/netstandard2.0

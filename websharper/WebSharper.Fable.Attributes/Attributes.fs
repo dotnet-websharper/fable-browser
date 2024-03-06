@@ -150,10 +150,21 @@ type EmitMacro() =
                                 yield c.Arguments[i]
                 ]
             if c.Arguments.Length = 0 then
-                Core.AST.Expression.Verbatim(parts |> List.ofArray |> List.collect (fun x -> if x = "..." then [] else [x]), v, false)
+                let parts = parts |> List.ofArray |> List.collect (fun x -> if x = "..." then [] else [x])
+                Core.AST.Expression.Verbatim(parts, v, false)
                 |> Core.MacroOk
             else
-                Core.AST.Expression.Verbatim(parts |> List.ofArray |> List.collect (fun x -> if x = "..." && needsExtraArgs >= 1 then List.replicate (needsExtraArgs - 1) "," else [x]), v, false)
+                let parts =
+                    parts |> List.ofArray |> List.collect (fun x -> if x = "..." && needsExtraArgs >= 1 then List.replicate (needsExtraArgs - 1) "," else [x])
+                    |> List.mapi (fun i v ->
+                        if i = 0 then
+                            v + "("
+                        elif i = parts.Length - 1 then
+                            ")" + v
+                        else
+                            ")" + v + "("
+                    )
+                Core.AST.Expression.Verbatim(parts, v, false)
                 |> Core.MacroOk
 
 [<Macro(typeof<EmitMacro>)>]

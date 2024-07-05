@@ -13,4 +13,4 @@ nuget WebSharper.FSharp prerelease
 nuget Fable.Core 3.7.1
 
 group wsbuild
-    git https://github.com/dotnet-websharper/build-script websharper50
+    git https://github.com/dotnet-websharper/build-script websharper80

@@ -8,8 +8,8 @@ storage: none
 
 github fable-compiler/Fable.Expect:main
 
-nuget WebSharper prerelease
-nuget WebSharper.FSharp prerelease
+nuget WebSharper ~> 8.0
+nuget WebSharper.FSharp ~> 8.0
 nuget Fable.Core 3.7.1
 
 group wsbuild

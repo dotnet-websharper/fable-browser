@@ -69,6 +69,7 @@ dependencies
         Fable.Core >= 4.0
 files
     ../websharper/WebSharper.Fable.Core/bin/Release/netstandard2.0/WebSharper.Fable.Core.dll ==> lib/netstandard2.0
+    ../websharper/WebSharper.Fable.Core/bin/Release/netstandard2.0/WebSharper.Fable.Core.websharper ==> lib/netstandard2.0
     ../websharper/WebSharper.Fable.Attributes/bin/Release/netstandard2.0/WebSharper.Fable.Attributes.dll ==> lib/netstandard2.0
 
 references
@@ -95,6 +96,7 @@ dependencies
         Fable.Browser.%TEMP% == %VERSION%
 files
     ../websharper/WebSharper.Browser.%TEMP%/bin/Release/netstandard2.0/WebSharper.Browser.%TEMP%.dll ==> lib/netstandard2.0
+    ../websharper/WebSharper.Browser.%TEMP%/bin/Release/netstandard2.0/WebSharper.Browser.%TEMP%.websharper ==> lib/netstandard2.0
 
 references
     WebSharper.Browser.%TEMP%.dll

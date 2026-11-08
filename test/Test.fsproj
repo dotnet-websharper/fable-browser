@@ -4,10 +4,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Because Fable.Lit has a dependency on Fable.Browser.Dom, we need to reference the sources instead -->
-    <Compile Include="../paket-files/fable-compiler/Fable.Expect/src/Fable.Expect/Expect.fs" />
-    <Compile Include="../paket-files/fable-compiler/Fable.Expect/src/Fable.Expect/Expect.Dom.fs" />
-    <!-- <Compile Include="../paket-files/fable-compiler/Fable.Expect/src/Fable.Expect/Expect.Elmish.fs" /> -->
-    <Compile Include="../paket-files/fable-compiler/Fable.Expect/src/Fable.Expect/WebTestRunner.fs" />
+    <Compile Include="../paket-files/github.com/fable-compiler/Fable.Expect/src/Fable.Expect/Expect.fs" />
+    <Compile Include="../paket-files/github.com/fable-compiler/Fable.Expect/src/Fable.Expect/Expect.Dom.fs" />
+    <!-- <Compile Include="../paket-files/github.com/fable-compiler/Fable.Expect/src/Fable.Expect/Expect.Elmish.fs" /> -->
+    <Compile Include="../paket-files/github.com/fable-compiler/Fable.Expect/src/Fable.Expect/WebTestRunner.fs" />
 
     <Compile Include="EventTest.fs" />
   </ItemGroup>

@@ -14,9 +14,9 @@ NUGET
       System.Reflection.Emit.Lightweight (>= 4.7)
     WebSharper.FSharp (10.1.0.667)
       WebSharper (10.1.0.667)
-GITHUB
-  remote: fable-compiler/Fable.Expect
-    FULLPROJECT (97385282a3030fb35aadf9687810e182c9ad37f4)
+GIT
+  remote: https://github.com/fable-compiler/Fable.Expect.git
+     (97385282a3030fb35aadf9687810e182c9ad37f4)
 GROUP wsbuild
 
 GIT
